@@ -1,0 +1,14 @@
+Page d'accueil 
+Page de panier
+Login
+Panier
+Création de BD
+Catalogue
+Barre de recherche
+(mini-jeux gagner promo)
+Réductions
+Avis
+(s'inscrire comme un particulier)
+Langue changement
+Page produits
+Statistiques
