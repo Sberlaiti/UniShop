@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?PowerDesigner AppLocale="UTF16" ID="{9C46BE41-DD78-4874-A87D-221AC0BA7A25}" Label="" LastModificationDate="1728146873" Name="UniShop_DS" Objects="29" Symbols="31" Target="Java" TargetLink="Reference" Type="{18112060-1A4B-11D1-83D9-444553540000}" signature="CLD_OBJECT_MODEL" version="15.1.0.2850"?>
+<?PowerDesigner AppLocale="UTF16" ID="{9C46BE41-DD78-4874-A87D-221AC0BA7A25}" Label="" LastModificationDate="1728292815" Name="UniShop_Création-compte_DS" Objects="29" Symbols="27" Target="Java" TargetLink="Reference" Type="{18112060-1A4B-11D1-83D9-444553540000}" signature="CLD_OBJECT_MODEL" version="15.1.0.2850"?>
 <!-- Veuillez ne pas modifier ce fichier -->
 
 <Model xmlns:a="attribute" xmlns:c="collection" xmlns:o="object">
@@ -8,12 +8,12 @@
 <c:Children>
 <o:Model Id="o2">
 <a:ObjectID>9C46BE41-DD78-4874-A87D-221AC0BA7A25</a:ObjectID>
-<a:Name>UniShop_DS</a:Name>
-<a:Code>UniShop_DS</a:Code>
+<a:Name>UniShop_Création-compte_DS</a:Name>
+<a:Code>UniShop_Creation_compte_DS</a:Code>
 <a:CreationDate>1728136189</a:CreationDate>
 <a:Creator>Admin</a:Creator>
-<a:ModificationDate>1728146852</a:ModificationDate>
-<a:Modifier>Admin</a:Modifier>
+<a:ModificationDate>1728289975</a:ModificationDate>
+<a:Modifier>saber</a:Modifier>
 <a:PackageOptionsText>[FolderOptions]
 
 [FolderOptions\Class Diagram Objects]
@@ -981,12 +981,12 @@ NameToCode=No</a:ModelOptionsText>
 <c:SequenceDiagrams>
 <o:SequenceDiagram Id="o5">
 <a:ObjectID>DA42FC80-5049-422B-B03A-B367030C25CE</a:ObjectID>
-<a:Name>Création d&#39;un compte</a:Name>
-<a:Code>Creation_d_un_compte</a:Code>
+<a:Name>Se connecter</a:Name>
+<a:Code>Se_connecter</a:Code>
 <a:CreationDate>1728136189</a:CreationDate>
 <a:Creator>Admin</a:Creator>
-<a:ModificationDate>1728146852</a:ModificationDate>
-<a:Modifier>Admin</a:Modifier>
+<a:ModificationDate>1728292617</a:ModificationDate>
+<a:Modifier>saber</a:Modifier>
 <a:DisplayPreferences>[DisplayPreferences]
 
 [DisplayPreferences\SQD]
@@ -1382,9 +1382,9 @@ Shadow=0</a:DisplayPreferences>
 </o:InteractionSymbol>
 <o:MessageSymbol Id="o7">
 <a:CreationDate>1728146852</a:CreationDate>
-<a:ModificationDate>1728146852</a:ModificationDate>
-<a:Rect>((-21487,-21634), (16537,-20088))</a:Rect>
-<a:ListOfPoints>((16537,-21334),(-21487,-21334))</a:ListOfPoints>
+<a:ModificationDate>1728292815</a:ModificationDate>
+<a:Rect>((-21487,-22309), (16537,-20763))</a:Rect>
+<a:ListOfPoints>((16537,-22009),(-21487,-22009))</a:ListOfPoints>
 <a:ArrowStyle>8</a:ArrowStyle>
 <a:LineColor>12615808</a:LineColor>
 <a:ShadowColor>12632256</a:ShadowColor>
@@ -1425,7 +1425,7 @@ ETIM 0 Arial,8,N</a:FontList>
 <o:MessageSymbol Id="o14">
 <a:CreationDate>1728146800</a:CreationDate>
 <a:ModificationDate>1728146800</a:ModificationDate>
-<a:Rect>((31626,-18103), (42650,-16503))</a:Rect>
+<a:Rect>((33538,-18103), (37138,-16503))</a:Rect>
 <a:ListOfPoints>((33538,-16503),(37138,-16503),(37138,-18103),(33538,-18103))</a:ListOfPoints>
 <a:ArrowStyle>8</a:ArrowStyle>
 <a:LineColor>12615808</a:LineColor>
@@ -1467,7 +1467,7 @@ ETIM 0 Arial,8,N</a:FontList>
 <o:MessageSymbol Id="o18">
 <a:CreationDate>1728146586</a:CreationDate>
 <a:ModificationDate>1728146645</a:ModificationDate>
-<a:Rect>((-21487,-11308), (16537,-8788))</a:Rect>
+<a:Rect>((-21487,-11308), (16537,-8787))</a:Rect>
 <a:ListOfPoints>((16537,-11008),(-21487,-11008))</a:ListOfPoints>
 <a:ArrowStyle>8</a:ArrowStyle>
 <a:LineColor>12615808</a:LineColor>
@@ -1574,7 +1574,7 @@ ETIM 0 Arial,8,N</a:FontList>
 <o:MessageSymbol Id="o28">
 <a:CreationDate>1728145557</a:CreationDate>
 <a:ModificationDate>1728145603</a:ModificationDate>
-<a:Rect>((-21487,4523), (16537,7043))</a:Rect>
+<a:Rect>((-21487,4523), (16537,7044))</a:Rect>
 <a:ListOfPoints>((-21487,4823),(16537,4823))</a:ListOfPoints>
 <a:ArrowStyle>8</a:ArrowStyle>
 <a:LineColor>12615808</a:LineColor>
@@ -1595,7 +1595,7 @@ ETIM 0 Arial,8,N</a:FontList>
 <o:MessageSymbol Id="o30">
 <a:CreationDate>1728145438</a:CreationDate>
 <a:ModificationDate>1728145483</a:ModificationDate>
-<a:Rect>((-21487,7748), (16537,10268))</a:Rect>
+<a:Rect>((-21487,7748), (16537,10269))</a:Rect>
 <a:ListOfPoints>((16537,8048),(-21487,8048))</a:ListOfPoints>
 <a:ArrowStyle>8</a:ArrowStyle>
 <a:LineColor>12615808</a:LineColor>
@@ -1616,7 +1616,7 @@ ETIM 0 Arial,8,N</a:FontList>
 <o:MessageSymbol Id="o32">
 <a:CreationDate>1728145357</a:CreationDate>
 <a:ModificationDate>1728145357</a:ModificationDate>
-<a:Rect>((-21487,11423), (16537,13943))</a:Rect>
+<a:Rect>((-21487,11423), (16537,13944))</a:Rect>
 <a:ListOfPoints>((16537,11723),(-21487,11723))</a:ListOfPoints>
 <a:ArrowStyle>8</a:ArrowStyle>
 <a:LineColor>12615808</a:LineColor>
@@ -1825,9 +1825,9 @@ DISPNAME 0 Arial,8,U</a:FontList>
 </o:UMLObjectSequenceSymbol>
 <o:InteractionFragmentSymbol Id="o50">
 <a:CreationDate>1728145132</a:CreationDate>
-<a:ModificationDate>1728146550</a:ModificationDate>
+<a:ModificationDate>1728292805</a:ModificationDate>
 <a:RegionConditionPositionList>((2500,300),(300,300))</a:RegionConditionPositionList>
-<a:Rect>((-23325,-16552), (19425,17149))</a:Rect>
+<a:Rect>((-23325,-19718), (38175,17150))</a:Rect>
 <a:AutoAdjustToText>0</a:AutoAdjustToText>
 <a:LineColor>15257808</a:LineColor>
 <a:LineWidth>1</a:LineWidth>
@@ -1841,6 +1841,7 @@ DISPNAME 0 Arial,8,U</a:FontList>
 <c:AttachedLifelines>
 <o:ActorSequenceSymbol Ref="o9"/>
 <o:UMLObjectSequenceSymbol Ref="o8"/>
+<o:UMLObjectSequenceSymbol Ref="o12"/>
 </c:AttachedLifelines>
 <c:Object>
 <o:InteractionFragment Ref="o51"/>
@@ -1874,9 +1875,9 @@ DISPNAME 0 Arial,8,U</a:FontList>
 <a:ObjectID>663296D7-94D7-454C-8A6B-8582C959F4B0</a:ObjectID>
 <a:CreationDate>1728145182</a:CreationDate>
 <a:Creator>Admin</a:Creator>
-<a:ModificationDate>1728146550</a:ModificationDate>
-<a:Modifier>Admin</a:Modifier>
-<a:Size>11125</a:Size>
+<a:ModificationDate>1728292805</a:ModificationDate>
+<a:Modifier>saber</a:Modifier>
+<a:Size>14292</a:Size>
 <a:FragmentType>opt</a:FragmentType>
 <a:Condition>Si création avec un compte tierce</a:Condition>
 </o:InteractionFragment>

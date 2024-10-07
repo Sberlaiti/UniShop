@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?PowerDesigner AppLocale="UTF16" ID="{1511E15D-2521-4056-A737-DEBD66E9FD73}" Label="" LastModificationDate="1728136593" Name="UniShop_DCU" Objects="70" Symbols="65" Target="Java" TargetLink="Reference" Type="{18112060-1A4B-11D1-83D9-444553540000}" signature="CLD_OBJECT_MODEL" version="15.1.0.2850"?>
+<?PowerDesigner AppLocale="UTF16" ID="{1511E15D-2521-4056-A737-DEBD66E9FD73}" Label="" LastModificationDate="1728321887" Name="UniShop_DCU" Objects="70" Symbols="65" Target="Java" TargetLink="Reference" Type="{18112060-1A4B-11D1-83D9-444553540000}" signature="CLD_OBJECT_MODEL" version="15.1.0.2850"?>
 <!-- Veuillez ne pas modifier ce fichier -->
 
 <Model xmlns:a="attribute" xmlns:c="collection" xmlns:o="object">
@@ -1337,9 +1337,9 @@ Shadow=0</a:DisplayPreferences>
 </o:DependencySymbol>
 <o:DependencySymbol Id="o15">
 <a:CreationDate>1728132728</a:CreationDate>
-<a:ModificationDate>1728134167</a:ModificationDate>
-<a:Rect>((-14605,32359), (8769,33904))</a:Rect>
-<a:ListOfPoints>((8769,32793),(-4079,32793),(-4079,32524),(-14605,32524))</a:ListOfPoints>
+<a:ModificationDate>1728288727</a:ModificationDate>
+<a:Rect>((-14605,32524), (14094,34467))</a:Rect>
+<a:ListOfPoints>((14094,33918),(-4079,33918),(-4079,32524),(-14605,32524))</a:ListOfPoints>
 <a:CornerStyle>1</a:CornerStyle>
 <a:ArrowStyle>8</a:ArrowStyle>
 <a:LineColor>16744576</a:LineColor>
@@ -1420,8 +1420,9 @@ Shadow=0</a:DisplayPreferences>
 </o:UseCaseAssociationSymbol>
 <o:DependencySymbol Id="o26">
 <a:CreationDate>1728133086</a:CreationDate>
-<a:ModificationDate>1728136543</a:ModificationDate>
-<a:Rect>((-18872,6546), (417,21958))</a:Rect>
+<a:ModificationDate>1728321720</a:ModificationDate>
+<a:CenterTextOffset>(0, 8025)</a:CenterTextOffset>
+<a:Rect>((-18872,7133), (417,21958))</a:Rect>
 <a:ListOfPoints>((-16322,21958),(-16322,7133),(417,7133))</a:ListOfPoints>
 <a:CornerStyle>1</a:CornerStyle>
 <a:ArrowStyle>8</a:ArrowStyle>
@@ -1462,9 +1463,10 @@ Shadow=0</a:DisplayPreferences>
 </o:DependencySymbol>
 <o:DependencySymbol Id="o31">
 <a:CreationDate>1728133315</a:CreationDate>
-<a:ModificationDate>1728135434</a:ModificationDate>
-<a:Rect>((-21789,-671), (-14561,9690))</a:Rect>
-<a:ListOfPoints>((-21789,8444),(-16998,8444),(-16998,-671))</a:ListOfPoints>
+<a:ModificationDate>1728321724</a:ModificationDate>
+<a:CenterTextOffset>(375, -5325)</a:CenterTextOffset>
+<a:Rect>((-22614,-671), (-14186,8294))</a:Rect>
+<a:ListOfPoints>((-22614,8294),(-16998,8294),(-16998,-671))</a:ListOfPoints>
 <a:CornerStyle>1</a:CornerStyle>
 <a:ArrowStyle>8</a:ArrowStyle>
 <a:LineColor>16744576</a:LineColor>
@@ -1710,8 +1712,9 @@ Shadow=0</a:DisplayPreferences>
 </o:DependencySymbol>
 <o:DependencySymbol Id="o67">
 <a:CreationDate>1728134889</a:CreationDate>
-<a:ModificationDate>1728135739</a:ModificationDate>
-<a:Rect>((-15218,-23478), (33537,-18587))</a:Rect>
+<a:ModificationDate>1728321887</a:ModificationDate>
+<a:CenterTextOffset>(-12675, -450)</a:CenterTextOffset>
+<a:Rect>((-15218,-23856), (31100,-18587))</a:Rect>
 <a:ListOfPoints>((31100,-18587),(31100,-23478),(-15218,-23478))</a:ListOfPoints>
 <a:CornerStyle>1</a:CornerStyle>
 <a:ArrowStyle>8</a:ArrowStyle>
@@ -1836,8 +1839,9 @@ Shadow=0</a:DisplayPreferences>
 </o:DependencySymbol>
 <o:DependencySymbol Id="o81">
 <a:CreationDate>1728135321</a:CreationDate>
-<a:ModificationDate>1728135321</a:ModificationDate>
-<a:Rect>((19920,-3403), (28047,9123))</a:Rect>
+<a:ModificationDate>1728321860</a:ModificationDate>
+<a:CenterTextOffset>(525, 4125)</a:CenterTextOffset>
+<a:Rect>((20445,-2157), (28047,9123))</a:Rect>
 <a:ListOfPoints>((28047,-2157),(22357,-2157),(22357,9123))</a:ListOfPoints>
 <a:CornerStyle>1</a:CornerStyle>
 <a:ArrowStyle>8</a:ArrowStyle>
@@ -1963,8 +1967,9 @@ Shadow=0</a:DisplayPreferences>
 </o:DependencySymbol>
 <o:DependencySymbol Id="o97">
 <a:CreationDate>1728136526</a:CreationDate>
-<a:ModificationDate>1728136588</a:ModificationDate>
-<a:Rect>((-8139,19915), (-233,23319))</a:Rect>
+<a:ModificationDate>1728321761</a:ModificationDate>
+<a:CenterTextOffset>(0, 1950)</a:CenterTextOffset>
+<a:Rect>((-8139,19915), (2204,23319))</a:Rect>
 <a:ListOfPoints>((-8139,19915),(-233,19915),(-233,23319))</a:ListOfPoints>
 <a:CornerStyle>1</a:CornerStyle>
 <a:ArrowStyle>8</a:ArrowStyle>
@@ -2082,8 +2087,8 @@ LABL 0 Arial,8,N</a:FontList>
 </o:UseCaseSymbol>
 <o:UseCaseSymbol Id="o16">
 <a:CreationDate>1728132476</a:CreationDate>
-<a:ModificationDate>1728133180</a:ModificationDate>
-<a:Rect>((3648,29268), (20343,34667))</a:Rect>
+<a:ModificationDate>1728288727</a:ModificationDate>
+<a:Rect>((8973,30393), (25668,35792))</a:Rect>
 <a:LineColor>16744448</a:LineColor>
 <a:LineWidth>1</a:LineWidth>
 <a:FillColor>16777152</a:FillColor>
@@ -2190,8 +2195,8 @@ LABL 0 Arial,8,N</a:FontList>
 </o:UseCaseSymbol>
 <o:UseCaseSymbol Id="o32">
 <a:CreationDate>1728133296</a:CreationDate>
-<a:ModificationDate>1728135434</a:ModificationDate>
-<a:Rect>((-25594,5949), (-18395,11348))</a:Rect>
+<a:ModificationDate>1728288743</a:ModificationDate>
+<a:Rect>((-26419,5799), (-19220,11198))</a:Rect>
 <a:LineColor>16744448</a:LineColor>
 <a:LineWidth>1</a:LineWidth>
 <a:FillColor>16777152</a:FillColor>
@@ -3005,8 +3010,9 @@ LABL 0 Arial,8,N</a:FontList>
 <a:Code>Dependance_26</a:Code>
 <a:CreationDate>1728136526</a:CreationDate>
 <a:Creator>Admin</a:Creator>
-<a:ModificationDate>1728136526</a:ModificationDate>
+<a:ModificationDate>1728321749</a:ModificationDate>
 <a:Modifier>Admin</a:Modifier>
+<a:Stereotype>extend</a:Stereotype>
 <c:Object1>
 <o:UseCase Ref="o112"/>
 </c:Object1>
@@ -3078,7 +3084,7 @@ LABL 0 Arial,8,N</a:FontList>
 <a:Code>Creation_compte</a:Code>
 <a:CreationDate>1728132689</a:CreationDate>
 <a:Creator>Admin</a:Creator>
-<a:ModificationDate>1728132916</a:ModificationDate>
+<a:ModificationDate>1728321749</a:ModificationDate>
 <a:Modifier>Admin</a:Modifier>
 </o:UseCase>
 <o:UseCase Id="o113">
@@ -3258,7 +3264,7 @@ LABL 0 Arial,8,N</a:FontList>
 <a:Code>Type_compte</a:Code>
 <a:CreationDate>1728136500</a:CreationDate>
 <a:Creator>Admin</a:Creator>
-<a:ModificationDate>1728136508</a:ModificationDate>
+<a:ModificationDate>1728321749</a:ModificationDate>
 <a:Modifier>Admin</a:Modifier>
 </o:UseCase>
 <o:UseCase Id="o133">
