@@ -1,0 +1,23 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: white;
+    color: #333;
+    padding: 0;
+    display: grid;
+    grid-template-areas: "div div";
+}
+
+.image {
+    background-image: url("https://img-cdn.pixlr.com/image-generator/history/65bb506dcb310754719cf81f/ede935de-1138-4f66-8ed7-44bd16efc709/medium.webp");
+    width: 466px;
+    height: 462px;
+    margin-left: 50px;
+    
+}
+h2{
+    background-color: gray;
+    color: white;
+    padding: 5px;
+    border-radius: 0.5px;
+    
+}
