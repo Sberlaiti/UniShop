@@ -1,0 +1,21 @@
+body{
+    background-color: rgb(189, 153, 86);
+    margin: 0;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.affichage-article{
+    display: grid;
+    grid-template-areas: "div div div";
+    text-align: center;
+}
+
+.return-top{
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+    background-color: orange;
+    color :white;
+    padding: 1em;
+}
+
