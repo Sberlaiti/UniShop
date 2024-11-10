@@ -17,12 +17,14 @@
 # https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Getting-Started.gitlab-ci.yml
 
 
-deploy-job:      # This job runs in the deploy stage.
+pages:      # This job runs in the deploy stage.
   stage: deploy  # It only runs when *both* jobs in the test stage complete successfully.
   environment: production
   artifacts :
     paths :
     - src
+    only :
+    - main
   script:
     - echo "Deploying application..."
     - echo "Application successfully deployed."
