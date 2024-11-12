@@ -1,0 +1,48 @@
+img.logo {
+    width: 10%;
+    border-radius: 15px;
+    margin-left: 20px;
+}
+
+.top_Header, .bottom_Header {
+    display: flex;
+    align-items: center;
+}
+
+/* .top_Header {
+    
+} */
+
+nav {
+    width: 700px;
+    margin-left: 50px;
+}
+
+nav > ul {
+    display: flex;;
+    width: 100%;
+}
+
+nav > ul > li {
+    list-style: none;
+    margin-right: 20px;
+    padding: 10px;
+    background-color: rgb(190, 192, 193);
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+nav > ul > li > a{
+    text-decoration: none;
+    font-weight: bold;
+    color: black;
+}
+
+.changeLanguage {
+    margin-left: auto;
+    margin-right: 20px;
+}
+
+.bottom_Header {
+    justify-content: center;
+}
