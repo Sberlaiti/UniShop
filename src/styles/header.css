@@ -1,3 +1,11 @@
+@import url('../fonts/Ranade_Complete/Fonts/WEB/css/ranade.css');
+@import url('../fonts/Tanker_Complete/Fonts/WEB/css/tanker.css');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
 img.logo {
     width: 10%;
     border-radius: 15px;
@@ -9,9 +17,9 @@ img.logo {
     align-items: center;
 }
 
-/* .top_Header {
-    
-} */
+.top_Header {
+    margin-top: 20px;
+}
 
 nav {
     width: 700px;
@@ -26,16 +34,18 @@ nav > ul {
 nav > ul > li {
     list-style: none;
     margin-right: 20px;
-    padding: 10px;
-    background-color: rgb(190, 192, 193);
-    border-radius: 15px;
     cursor: pointer;
 }
 
 nav > ul > li > a{
     text-decoration: none;
-    font-weight: bold;
     color: black;
+    font-family: 'Ranade-Bold', sans-serif;
+}
+
+i {
+    font-size: 10px;
+    padding-bottom: 10px;
 }
 
 .changeLanguage {
