@@ -1,5 +1,4 @@
 { 
-  "public": "src",
   "routes": [
     { "src": "/", "dest": "/index.html" },
     { "src": "/about", "dest": "/about.html" },
