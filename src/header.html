@@ -16,7 +16,7 @@
 
             <nav>
                 <ul>
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="">Home</a></li>
                     <li><a href="">Sale</a></li>
                     <li><a href="">Games</a> <i class="fa-solid fa-chevron-down"></i>  </li>
                     <li><a href="">Others</a> <i class="fa-solid fa-chevron-down"></i> </li>
@@ -24,9 +24,21 @@
             </nav>
             
             <div class="changeLanguage">
-                <button>EN</button>
-                <button>FR</button>
+                
+                <!-- TODO: Créate PHP script to change the language in function of the language option
+                    <img src="./images/frenchFlag.png" alt="French Flag">
+                    <img src="./images/ukFlag.png" alt="UK Flag"> 
+                -->
+                
+                <img class="languageFlag" src="./images/italianFlag.png" alt="Italian Flag">
+                <select name="language" id="language">
+                    <option value="it">IT - EUR</option>
+                    <option value="fr">FR - EUR</option>
+                    <option value="en">EN - GBD</option>
+                </select>
+                <img class="dropdownIcon" src="./images/dropdownIcon.png" alt="Drop Down Arrow">
             </div>
+
         </section>
 
         <section class="bottom_Header">
