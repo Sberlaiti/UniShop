@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 19, 2024 at 04:12 PM
+-- Generation Time: Nov 19, 2024 at 04:22 PM
 -- Server version: 8.3.0
 -- PHP Version: 8.2.18
 
@@ -134,8 +134,10 @@ CREATE TABLE IF NOT EXISTS `produit` (
   `AppartientVendeur` tinyint(1) NOT NULL,
   `IdImage` int NOT NULL,
   `DateCreation` date NOT NULL,
+  `IdUtilisateur` int DEFAULT NULL,
   PRIMARY KEY (`IdProduit`),
-  KEY `fk_produit_image` (`IdImage`)
+  KEY `fk_produit_image` (`IdImage`),
+  KEY `fk_produit_utilisateur` (`IdUtilisateur`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -166,8 +168,16 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `Mail` varchar(400) NOT NULL,
   `Password` varchar(23) NOT NULL,
   `EstVendeur` tinyint(1) NOT NULL,
+  `Admin` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`IdUtilisateur`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `utilisateur`
+--
+
+INSERT INTO `utilisateur` (`IdUtilisateur`, `Nom`, `Prenom`, `Mail`, `Password`, `EstVendeur`, `Admin`) VALUES
+(1, 'Unishop', 'Admin', 'unishop@example.com', 'unishopMDP', 0, 1);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
