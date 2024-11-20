@@ -1,5 +1,8 @@
 @import url('../fonts/Ranade_Complete/Fonts/WEB/css/ranade.css');
 @import url('../fonts/Tanker_Complete/Fonts/WEB/css/tanker.css');
+@import url('../fonts/Pally_Complete/Fonts/WEB/css/pally.css');
+@import url('../fonts/Chillax_Complete/Fonts/WEB/css/chillax.css');
+
 
 * {
     margin: 0;
@@ -8,7 +11,7 @@
 
 img.logo {
     width: 8%;
-    border-radius: 15px;
+    border-radius: 20px;
 }
 
 .top_Header, .bottom_Header {
@@ -17,14 +20,14 @@ img.logo {
 }
 
 .top_Header {
-    height: 100px;
+    height: 70px;
     background-color: blanchedalmond;
-    padding: 10px 30px 10px 30px;
+    padding: 10px 100px 10px 100px;
 }
 
 nav {
     width: 700px;
-    margin-left: 100px;
+    margin-left: 80px;
 }
 
 nav > ul {
@@ -34,14 +37,16 @@ nav > ul {
 
 nav > ul > li {
     list-style: none;
-    margin-right: 20px;
+    margin-right: 50px;
     cursor: pointer;
 }
 
 nav > ul > li > a{
     text-decoration: none;
     color: black;
-    font-family: 'Ranade-Bold', sans-serif;
+    font-family: 'Chillax-Semibold', sans-serif;
+    font-weight: bold;
+    letter-spacing: 1px;
 }
 
 i {
@@ -64,7 +69,7 @@ i {
 }
 
 select#language {
-    font-family: 'Ranade-Bold', sans-serif;
+    font-family: 'Chillax-Semibold', sans-serif;
     border: none;
     background-color: transparent;
     margin-left: 5px;
@@ -87,5 +92,75 @@ select#language:focus {
 }
 
 .bottom_Header {
+    display: flex;
     justify-content: center;
+    align-items: center;
+    margin-top: 20px;
 }
+
+
+.catalogButton > button {
+    width: 100px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #eee;
+    border: none;
+    font-size: 15px;
+    border-radius: 15px;
+    color: lightcoral;
+    box-shadow: 0 0.2rem #dfd9d9;
+    cursor: pointer;
+}
+   
+.catalogButton > button:hover {
+    background: lightcoral;
+    color: white;
+    text-shadow: 0 0.1rem #bcb4b4;
+}
+
+.searchBar {
+    display: flex;
+    align-items: center;
+    margin-left: 15px;
+    border: 1px solid #373737;
+    border-radius: 15px;
+    margin-right: 15px;
+}
+
+.searchBar > input {
+    width: 600px;
+    height: 30px;
+    border: 1px solid #373737;
+    border-radius: 15px;
+    padding: 10px 20px;
+    font-family: 'Ranade-Bold', sans-serif;
+    margin-right: 10px;
+    border: none;
+    outline: none;
+}
+
+.searchBar > button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin-right: 20px;
+    margin-top: 9px
+}
+
+.bagButton > button {
+    margin-right: 10px;
+}
+
+button > i {
+    font-size: 20px;
+}
+
+
+
+
+
+
+
+

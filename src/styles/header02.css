@@ -1,0 +1,136 @@
+@import url('../fonts/Tanker_Complete/Fonts/WEB/css/tanker.css');
+@import url('../fonts/RedHatDisplay_Complete/Fonts/WEB/css/red-hat-display.css');
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.headerContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;  
+    width: 90%;
+    align-items: center;
+
+    border-bottom: 2px solid rgb(226, 222, 222);
+}
+
+h1 {
+    font-size: 30px;
+}
+
+.navSection {
+    display: flex;
+    justify-content: center;
+}
+
+nav {
+    width: auto;
+    height: 40px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    background-color: rgb(226, 222, 222);
+    border-radius: 30px;
+}
+
+nav > ul {
+    display: flex;
+    flex-direction: row;
+    
+    list-style: none;
+    padding: 0;
+}
+
+nav > ul > li {
+    margin: 0 15px;
+}
+
+nav > ul > li:first-child {
+    margin-left: 2px;
+}
+
+nav > ul > li:last-child {
+    margin-right: 2px;
+}
+
+nav > ul > li > a {
+    font-family: 'RedHatDisplay-Bold', sans-serif;
+    font-size: 15px;
+    letter-spacing: 1px;
+    text-decoration: none;
+    color: black;
+    padding: 8px 20px;
+    border-radius: 20px;
+    transition: background-color 0.4s ease, color 0.3s ease;
+}
+
+nav > ul > li > a:hover {
+    background-color: rgb(30, 30, 30);
+    color: white;
+}
+
+.options {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
+.searchBar, .cartButton{
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: rgb(0, 0, 0);
+    color: white;
+    border-radius: 50%;
+}
+
+.searchBar > button, .cartButton > button {
+    border: none;
+    background-color: transparent;
+    font-size: 15px;
+}
+
+.searchBar > button > i {
+    color: white;
+}
+
+.options > a {
+    text-decoration: none;
+}
+
+.accountButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: rgb(226, 222, 222);
+    border-radius: 30px;
+
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.accountButton > img{
+    width: 20px;
+    height: 20px;
+
+    margin-left: 10px;
+    margin-right: 5px;
+    border: 2px solid red;
+    border-radius: 50%;
+}
+
+.accountButton > p {
+    font-family: 'Tanker-Regular', sans-serif;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: black;
+    margin-right: 10px;
+}
+
+
