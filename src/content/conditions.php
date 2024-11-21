@@ -28,27 +28,58 @@
                 L'utilisateur est seul responsable de la confidentialité de ses identifiants et de l'utilisation de son compte.
             </p>
             
-            <h2>2.2 Accès en tant que vendeur</h2>
+            <h3>1.2 Accès en tant que vendeur</h3>
             <p>Pour proposer des produits à la vente, l'utilisateur doit activer le mode vendeur dans son compte et fournir les informations suivantes :</p>
             <ol>
                 <li>Une </li>
             </ol>
             <p>UniShop se réserve le droit de vérifier ces informations et de refuser un accès vendeur en cas de non conformité.</p>
 
-            <h2>3. Prix</h2>
+            <h2>2. Prix</h2>
             <p>Les prix affichés sur le site sont en euros (€) et incluant toutes taxes (TTC). 
                 Les frais de livraisons sont précisées lors de la validation de la commande. 
                 UniShop se réserve le droit de modifier ses prix à tout moment, mais les produits seront facturés sur la base des tarifs en vigueur au moemnt de la validation.
             </p>
             
-            <h2>4. Mise en vente des produits</h2>
-            <h3>4.1 Conditions d'éligibilité des produits</h3>
+            <h2>3. Commandes</h2>
+            <p>Pour passer une commande, l'utilisateur doit :</p>
+            <ul>
+                <li>Sélectionner les produits souhaités et les ajouter au panier.</li>
+                <li>Valider le contenu du panier.</li>
+                <li>Remplir les informations de livraison et de facturation.</li>
+                <li>Choisir un mode de paiement proposé et procéder au paiment.</li>
+            </ul>
+            <p>Toute commande est considérée comme ferme et définitive dès réception du paiement. 
+                UniShop se réserve le droit d'annuler ou de refuser une commande en cas de litige avec le client.
+            </p>
+
+            <h2>4. Paiement</h2>
+            <p>Le paiement peut être effectué par les moyens suivants :</p>
+            <ol>
+                <li>Carte bancaire(Visa, Mastercard, etc...)</li>
+                <li>PayPal</li>
+            </ol>
+            <p>Les transactions sont sécurisées grâce à un protocole de cryptage (SSL) garantissant la confidentialité des données.</p>
+
+            <h2>5. Livraison (pas de livraions juste pour faire genre)</h2>
+            <h3>5.1 Délais de livraison</h3>
+            <p>Les délais de livraison sont indiqués lors de la commande et peuvent varier en fonction du mode de livraison choisi. 
+                UniShop ne surait être tenu responsable des retards causés par le transporteur.
+            </p>
+            
+            <h3>5.2 Frais de livraison</h3>
+            <p>Les frais de livraison sont clairement indiqués avant la validation de la commande.</p>
+
+            <h3>5.3 Réception des produits</h3>
+            <p>Le client doit vérifier l'état des produits lors de leur réception.
+                En cas de dommages ou de produits manquants, le client doit informer UniShop sous 48 heures.
+            </p>
         </section>
 
         <footer>
             <div class="return_top">
                 <p id="retourHaut">Retour en haut</p>
-                <script src="fonction.js"></script>
+                <script src="../script/fonction.js"></script>
             </div>
 
             <div class="logo_langue">

@@ -8,7 +8,8 @@
     //Récupération des données de la table article
     $sql_requete = "SELECT p.IdProduit, p.Nom, u.Nom, p.Prix
                     FROM produit p
-                    JOIN utilisateur u ON u.IdUtilisateur = p.IdUtilisateur";
+                    JOIN utilisateur u ON u.IdUtilisateur = p.IdUtilisateur
+                    JOIN categorie c ON c.IdCategorie = p.IdCategorie";
     $stmt = $pdo->query($sql_requete);
 
     //Récupération des valeurs des catégories dans la BDD
@@ -58,10 +59,10 @@
             <br>
         </section>
 
+        <div class="title_categories">
+            <h2>Explorez par catégories</h2>
+        </div>
         <section class="affichage_categorie">
-            <div class="title_categories">
-                <h2>Explorez par catégories</h2>
-            </div>
 
             <?php
                 //Affichage de chaque catégorie

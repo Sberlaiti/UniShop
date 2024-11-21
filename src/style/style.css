@@ -22,13 +22,27 @@ body{
 
 .affichage_categorie{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: center;
     align-items:  center;
     padding: 1em;
 }
 
+.title_categories{
+    text-align: center;
+}
+
 .categorie{
     text-align: center;
+    margin-right: 30px;
+    padding: 0.5em;
+    border: 1px solid white;
+}
+
+.categorie:hover{
+    border: 1px solid orange;
+    border-radius: 0.2cm;
+    padding: 0.5em;
 }
 
 .image_categorie{
@@ -84,7 +98,6 @@ footer{
     text-align: center;
     background-color: rgb(247, 132, 0);
     color: white;
-    font-weight: bold;
     cursor: pointer;
     padding: 0.2em;
 }
@@ -94,7 +107,8 @@ select{
 }
 
 .return_top:hover{
-    background-color: rgba(247, 132, 0, 50%);
+    background-color: rgb(255, 153, 0);
+    font-weight: bold;
 }
 
 .logo_langue{
