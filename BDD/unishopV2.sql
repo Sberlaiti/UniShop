@@ -10,23 +10,14 @@
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
-
-
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
---
 -- Base de données : `unishop`
---
 
--- --------------------------------------------------------
-
---
 -- Structure de la table `avis`
---
-
 DROP TABLE IF EXISTS `avis`;
 CREATE TABLE IF NOT EXISTS `avis` (
   `IdAvis` int NOT NULL,
@@ -40,20 +31,12 @@ CREATE TABLE IF NOT EXISTS `avis` (
   KEY `IdProduit` (`IdProduit`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Déchargement des données de la table `avis`
---
-
 INSERT INTO `avis` (`IdAvis`, `Contenue`, `IdUtilisateur`, `IdProduit`, `DateCreation`, `note`) VALUES
-(4444, 'nice shoes', 3333, 0, '2024-11-11', 0),
-(5555, 'j\'adore ces chaussure', 3333, 0, '2024-11-11', 0);
+(4444, 'nice shoes', 3333, 0, '2024-11-11', 4),
+(5555, 'j\'adore ces chaussures', 3333, 1, '2024-11-11', 5),
+(6666, 'Très confortable, je recommande.', 3333, 3, '2024-11-12', 5);
 
--- --------------------------------------------------------
-
---
 -- Structure de la table `categorie`
---
-
 DROP TABLE IF EXISTS `categorie`;
 CREATE TABLE IF NOT EXISTS `categorie` (
   `IdCategorie` int NOT NULL,
@@ -61,23 +44,15 @@ CREATE TABLE IF NOT EXISTS `categorie` (
   PRIMARY KEY (`IdCategorie`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Déchargement des données de la table `categorie`
---
-
 INSERT INTO `categorie` (`IdCategorie`, `Nom`) VALUES
 (5555, 'aucun'),
 (5556, 'couverture'),
 (5557, 'soulier'),
-(5558, 'menteau'),
-(5559, 'tapis de souris');
+(5558, 'manteau'),
+(5559, 'tapis de souris'),
+(5560, 'accessoires');
 
--- --------------------------------------------------------
-
---
 -- Structure de la table `commande`
---
-
 DROP TABLE IF EXISTS `commande`;
 CREATE TABLE IF NOT EXISTS `commande` (
   `IdAchat` int NOT NULL,
@@ -91,22 +66,16 @@ CREATE TABLE IF NOT EXISTS `commande` (
   KEY `IdPromo` (`IdPromo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
+INSERT INTO `commande` (`IdAchat`, `IdUtilisateur`, `Date`, `IdPromo`, `Adresse`, `Telephone`) VALUES
+(1001, 3333, '2024-11-11', 0, '123 Rue de Paris', 1234567890);
 
---
 -- Structure de la table `imageproduit`
---
-
 DROP TABLE IF EXISTS `imageproduit`;
 CREATE TABLE IF NOT EXISTS `imageproduit` (
   `IdImage` int NOT NULL,
   `lien` varchar(500) COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`IdImage`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Déchargement des données de la table `imageproduit`
---
 
 INSERT INTO `imageproduit` (`IdImage`, `lien`) VALUES
 (1111, 'chaussu.jpg'),
@@ -115,27 +84,21 @@ INSERT INTO `imageproduit` (`IdImage`, `lien`) VALUES
 (1114, 'preview.jpeg'),
 (1115, 'preview-4.jpeg');
 
--- --------------------------------------------------------
-
---
 -- Structure de la table `panier`
---
-
 DROP TABLE IF EXISTS `panier`;
 CREATE TABLE IF NOT EXISTS `panier` (
   `IdProduit` int NOT NULL,
   `IdUtilisateur` int NOT NULL,
   `Quantitée` int NOT NULL,
-  PRIMARY KEY (`IdUtilisateur`),
+  PRIMARY KEY (`IdUtilisateur`, `IdProduit`),
   KEY `IdProduit` (`IdProduit`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
+INSERT INTO `panier` (`IdProduit`, `IdUtilisateur`, `Quantitée`) VALUES
+(1, 3333, 2),
+(3, 3333, 1);
 
---
 -- Structure de la table `produit`
---
-
 DROP TABLE IF EXISTS `produit`;
 CREATE TABLE IF NOT EXISTS `produit` (
   `IdProduit` int NOT NULL,
@@ -151,23 +114,14 @@ CREATE TABLE IF NOT EXISTS `produit` (
   KEY `idcat` (`idcat`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Déchargement des données de la table `produit`
---
-
 INSERT INTO `produit` (`IdProduit`, `Nom`, `Description`, `Prix`, `delayLivraison`, `IdImage`, `idcat`, `AppartientVendeur`) VALUES
 (0, 'botte', 'une chaussure haute', 36.30, 5, 1112, 5555, 0),
-(1, 'chaussure', 'un soulier tout neuf', 54.35, 2, 1111, 5555, 0),
-(2, 'drap noire', 'pour se couvrire', 13.73, 2, 1113, 5556, 0),
-(3, 'veste sans manche', 'une veste chaud sans manche', 34.05, 1, 1114, 5558, 0),
-(4, 'tapis de sourie unishop', 'un tapis de souris ergonomique a l\'effigie de unishop', 20.99, 5, 1115, 5559, 0);
+(1, 'chaussure', 'un soulier tout neuf', 54.35, 2, 1111, 5557, 0),
+(2, 'drap noir', 'pour se couvrir', 13.73, 2, 1113, 5556, 0),
+(3, 'veste sans manche', 'une veste chaude sans manche', 34.05, 1, 1114, 5558, 0),
+(4, 'tapis de souris unishop', 'un tapis ergonomique à l\'effigie de Unishop', 20.99, 5, 1115, 5559, 0);
 
--- --------------------------------------------------------
-
---
 -- Structure de la table `promotion`
---
-
 DROP TABLE IF EXISTS `promotion`;
 CREATE TABLE IF NOT EXISTS `promotion` (
   `IdPromo` int NOT NULL,
@@ -176,12 +130,11 @@ CREATE TABLE IF NOT EXISTS `promotion` (
   PRIMARY KEY (`IdPromo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
+INSERT INTO `promotion` (`IdPromo`, `Code`, `Coefficient`) VALUES
+(0, 0, 1.0),
+(1, 2024, 0.9);
 
---
 -- Structure de la table `utilisateur`
---
-
 DROP TABLE IF EXISTS `utilisateur`;
 CREATE TABLE IF NOT EXISTS `utilisateur` (
   `IdUtilisateur` int NOT NULL,
@@ -194,45 +147,27 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   PRIMARY KEY (`IdUtilisateur`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Déchargement des données de la table `utilisateur`
---
-
 INSERT INTO `utilisateur` (`IdUtilisateur`, `Nom`, `Prenom`, `Mail`, `Password`, `EstVendeur`, `pseudo`) VALUES
-(3333, 'edward', 'david', 'edwarddavid@gmail.com', '36303630', 0, 'edwin');
+(3333, 'Edward', 'David', 'edwarddavid@gmail.com', '36303630', 0, 'edwin'),
+(4444, 'Alice', 'Smith', 'alice.smith@example.com', 'pass123', 0, 'alice');
 
---
 -- Contraintes pour les tables déchargées
---
-
---
--- Contraintes pour la table `avis`
---
 ALTER TABLE `avis`
   ADD CONSTRAINT `avis_ibfk_1` FOREIGN KEY (`IdUtilisateur`) REFERENCES `utilisateur` (`IdUtilisateur`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   ADD CONSTRAINT `avis_ibfk_2` FOREIGN KEY (`IdProduit`) REFERENCES `produit` (`IdProduit`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
---
--- Contraintes pour la table `commande`
---
 ALTER TABLE `commande`
   ADD CONSTRAINT `commande_ibfk_1` FOREIGN KEY (`IdUtilisateur`) REFERENCES `utilisateur` (`IdUtilisateur`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   ADD CONSTRAINT `commande_ibfk_2` FOREIGN KEY (`IdPromo`) REFERENCES `promotion` (`IdPromo`) ON DELETE RESTRICT ON UPDATE RESTRICT;
-
---
--- Contraintes pour la table `panier`
---
+  
 ALTER TABLE `panier`
   ADD CONSTRAINT `panier_ibfk_1` FOREIGN KEY (`IdProduit`) REFERENCES `produit` (`IdProduit`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
---
--- Contraintes pour la table `produit`
---
 ALTER TABLE `produit`
   ADD CONSTRAINT `produit_ibfk_1` FOREIGN KEY (`IdImage`) REFERENCES `imageproduit` (`IdImage`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   ADD CONSTRAINT `produit_ibfk_2` FOREIGN KEY (`idcat`) REFERENCES `categorie` (`IdCategorie`) ON DELETE RESTRICT ON UPDATE RESTRICT;
-COMMIT;
 
+COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

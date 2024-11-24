@@ -1,8 +1,19 @@
+<?php 
+    session_start();
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+
+    require_once('connection/pdo-conn.php');
+
+?>
+
+
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="./styles/header02.css"/>
+    <link rel="stylesheet" type="text/css" href="./css/header02.css"/>
     <!-- Pour utiliser FontAwesome (Icônes) -->
     <script src="https://kit.fontawesome.com/3b8e4ae998.js" crossorigin="anonymous"></script>
     <title>Header</title>
@@ -36,7 +47,7 @@
                     </div>
                 </a>
 
-                <a href="">
+                <a href="panier.php">
                     <div class="cartButton">
                         <i class="fa-solid fa-shopping-cart"></i>
                     </div>
@@ -45,7 +56,7 @@
         </div>
 
 
-        <script src="./scripts/header.js"></script>
+        <script src="./js/header.js"></script>
     </header>
 </body>
 </html>
