@@ -15,7 +15,7 @@
     ?>
 
     <label for="filtre"> filtre </label>
-    <select id="select" name="option" >
+    <select id="select" name="option" onchange="categorie(this)">
         <?php
             $query = $connexion->prepare("SELECT idCategorie, nom FROM categorie");
             $query->execute();
@@ -36,7 +36,7 @@
         function getid(id) 
         {
             document.cookie = "id = " + id;
-            reload();
+            window.location.href = "../pageprod(quiproco)/pageProduit.php?id=" + id;
         }
 
         function add(i)
@@ -58,6 +58,13 @@
                 reload();
             }
         }
+
+        function categorie(j)
+        {
+            const selectedValue=j.value;
+            document.cookie="selectedValue =" + selectedValue;
+            alert(selectedValue);
+        }
     </script>
     
     <?php
@@ -65,6 +72,12 @@
         {
             $_SESSION['i'] = htmlspecialchars($_COOKIE['i']);
         }
+
+        if (isset($_COOKIE['selectedValue'])) 
+        {
+            $_SESSION['selectedValue'] = htmlspecialchars($_COOKIE['selectedValue']);
+        }
+
         $query = $connexion->prepare("SELECT prix, nom, lien, idProduit FROM produit JOIN imageproduit ON imageproduit.idimage = produit.idimage;");
         $query->execute();
         $i=0;
