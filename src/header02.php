@@ -41,7 +41,7 @@
                     <button><i class="fa-solid fa-magnifying-glass"></i></button>
                 </div>
 
-                <a href="">
+                <a href="profil.php">
                     <div class="accountButton">
                         <img src="./images/italianFlag.png" alt="UserLogo"><p>Ilyas</p>
                     </div>
