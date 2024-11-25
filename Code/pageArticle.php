@@ -1,3 +1,10 @@
+<?php
+    require_once('pdo-conn.php');
+    $stmt = $pdo->prepare("SELECT Nom,Description,Prix,delayLivraison FROM produit WHERE idProduit = 0");
+    $stmt->execute();
+    $produit = $stmt->fetch(PDO::FETCH_ASSOC);
+
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -50,10 +57,14 @@
         </script>
 
         <div class="product-details">
-            <h1 class="product-name">Nom de l'Article</h1>
-            <p class="product-description">Description de l'article ici.</p>
-            <p class="product-price">299,99€</p>
-            <p class="product-delivery">Livraison: Délai et options</p>
+            <?php
+                echo "<h1 class=product-name>" . htmlspecialchars($produit['Nom']) . "</h1>";
+                echo "<p class=product-description>". htmlspecialchars($produit['Description']). "</p>";
+                echo "<p class=product-price>". htmlspecialchars($produit['Prix']). "€". "</p>";
+                echo "<p class=product-delivery>". "Delai de livraison: ". htmlspecialchars($produit['delayLivraison']). " Jours". "</p>";
+            ?>
+            
+            
 
             <div class="product-sizes">
                 <button class="size">XS</button>
