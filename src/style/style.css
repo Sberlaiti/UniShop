@@ -1,13 +1,17 @@
 body{
+    background-color: #ffbf6627;
     margin: 0;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
-.produit{
+.affichage_produit{
     display: grid;
     grid-template-areas: "div div div";
     text-align: center;
-    font-weight: bold;
+}
+
+a{
+    text-decoration: none;
 }
 
 .no_produit{
@@ -36,7 +40,7 @@ body{
     text-align: center;
     margin-right: 30px;
     padding: 0.5em;
-    border: 1px solid white;
+    border: 1px solid #ffbf6627;
 }
 
 .categorie:hover{
@@ -122,5 +126,9 @@ select{
 .droits{
     text-align: center;
     padding: 2em;
+}
+
+span, .footer_lien{
+    color: white;
 }
 /*Fin partie footer*/

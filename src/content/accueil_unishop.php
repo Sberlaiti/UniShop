@@ -1,19 +1,20 @@
 <?php
-    require_once("../connectionBDD/pdo-conn.php");
+    require_once("../connection/pdo-conn.php");
+    //require_once("../header02.php");
 
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
 
     //Récupération des données de la table article
-    $sql_requete = "SELECT p.IdProduit, p.Nom, u.Nom, p.Prix
+    $sql_requete = "SELECT p.IdProduit, p.NomProduit, u.Nom, p.Prix
                     FROM produit p
-                    JOIN utilisateur u ON u.IdUtilisateur = p.IdUtilisateur
-                    JOIN categorie c ON c.IdCategorie = p.IdCategorie";
+                    JOIN utilisateur u ON u.IdUtilisateur = p.IdUtilisateur";
     $stmt = $pdo->query($sql_requete);
+    $produits = $stmt->fetchAll();
 
     //Récupération des valeurs des catégories dans la BDD
-    $sql = "SELECT  categorie.Nom, image.url
+    $sql = "SELECT categorie.Nom, image.lien
             FROM categorie
             JOIN image ON categorie.IdImage = image.IdImage";
     $result = $pdo->query($sql);
@@ -29,23 +30,17 @@
     </head>
 
     <body>
-        <!--section>
-            <select id="categorie">
-                <option value="categorie-0">Toutes les catégories</option>
-            </select>
-
-            <input type="search" name="rechercher" placeholder="Rechercher un produit">
-            <button type="submit">Chercher</button>
-        </section-->
 
         <section class="affichage_produit">
             <?php
-                if($stmt->rowCount() > 0){
-                    while($row_count = $stmt->fetchAll()){
+                if(count($produits) > 0){
+                    foreach($produits as $row_count){
                         echo "<div class='produit'>";
-                            echo "<p>" . htmlspecialchars($row_count['Pseudo']) . "</p>";
-                            echo "<h2>" . htmlspecialchars($row_count['Nom']) . "</h2>";
-                            echo "<p>" . htmlspecialchars($row_count['Prix']) . "</p>";
+                            echo "<a href='' class='lien_produit'>";
+                                echo "<p>" . htmlspecialchars($row_count['Nom']) . "</p>";
+                                echo "<h2>" . htmlspecialchars($row_count['NomProduit']) . "</h2>";
+                                echo "<p>" . htmlspecialchars($row_count['Prix']) . " €</p>";
+                            echo "</a>";
                         echo "</div>";
                     }
                 }
@@ -69,7 +64,7 @@
                 if($result->rowCount() > 0){
                     while($row = $result->fetch(PDO::FETCH_ASSOC)){
                         echo "<div class='categorie'>";
-                            echo "<img class='image_categorie' src='" . $row['url'] . "' alt='Image de la catégorie'/>";
+                            echo "<img class='image_categorie' src='" . $row['lien'] . "' alt='Image de la catégorie'/>";
                             echo "<p class='categories'>" . htmlspecialchars($row['Nom']) . "</p>";
                         echo "</div>";
                     }
@@ -100,8 +95,8 @@
 
             <div class="droits">
                 <div id="liste_droits">
-                    <a href="conditions.php">Conditions générales du site</a>
-                    <a href="">Vos informations personnelles</a>
+                    <a class="footer_lien" href="conditions.php">Conditions générales du site</a>
+                    <a class="footer_lien" href="">Vos informations personnelles</a>
                 </div>
                 <span>© 2024, UniShop</span>
             </div>
