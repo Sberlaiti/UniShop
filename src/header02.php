@@ -6,12 +6,8 @@
 
     require_once('connection/pdo-conn.php');
 
-     // Initialisation des variables de session
-     if(!isset($_SESSION['email_User'])) $_SESSION['email_User'] = null;
-     if(!isset($_SESSION['password_User'])) $_SESSION['password_User']= null;
-     if(!isset($_SESSION['pseudo_User'])) $_SESSION['pseudo_User'] = false;
-     if(!isset($_SESSION['idUser'])) $_SESSION['idUser'] = null;
-     if(!isset($_SESSION['admin'])) $_SESSION['admin'] = false;
+    // Initialisation des variables de session
+    if(!isset($_SESSION['user'])) $_SESSION['user'] = null;
 
 ?>
 
@@ -49,7 +45,7 @@
 
                 
                 <div class="accountButton">
-                    <?php if($_SESSION['email_User'] == null) {?>
+                    <?php if($_SESSION['user'] == null) {?>
                         <a href="login.php">
                             <i class="fa-solid fa-user"></i>
                             <p>Sign In</p>
@@ -62,7 +58,7 @@
 
 
                 <div class="cartButton">
-                    <?php if($_SESSION['email_User'] == null) {?>
+                    <?php if($_SESSION['user'] == null) {?>
                         <a href="login.php">
                     <?php } else { ?>
                         <a href="panier.php"> 

@@ -4,53 +4,48 @@
     error_reporting(E_ALL);
 
     require_once('./header02.php');
+    require_once('./php/signIN_Functions.php');
+    require_once('./php/signUp_Functions.php');
 
 
-    // Transferer ce code dans une fonction PHP qui prend en parametre le mail et le MDP + hachage
-    // Faire la même chose avec la fonction de création de compte
-    // Faire la même chose pour signout
-
-    // On verifie si l'utiilisateur a tapé quelque chose (email et password) et si c'est un mail
-    if(isset($_POST["email"]) && isset($_POST["password"]) && filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
-        $_SESSION['email_User'] = strtolower($_POST["email"]);
-        $_SESSION['password_User'] = $_POST["password"];
-
-        // On cherche si le compte existe
-        $research_email = "SELECT COUNT(*) FROM user WHERE email = '" .$_SESSION['email_User'] ."'";
-        $already_SignUp = $pdo->query($research_email);
-        $already_SignUp = $already_SignUp->fetchColumn();
-                
-        // Si le compte n'existe pas on le crée
-        if (!$already_SignUp) {
-            header('Location: pseudo.php');
+    // On utilise la fonction login pour connecter l'utilisateur
+    $signIN_error= 0;
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['signIN'])) {
+        $email = $_POST['email'];
+        $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    
+        if (login($email, $password, $pdo)) {
+            header('Location: header.php');
+            exit;
         } else {
-            $get_Password = "SELECT mdp FROM user WHERE email = '" .$_SESSION['email_User'] ."'";
-            $get_Password = $pdo->query($get_Password);
-            $get_Password = $get_Password->fetchColumn();
-
-            // On verifie si le mot de passe correspond
-            if($get_Password == $_SESSION['password_User']) {
-                $research_id = "SELECT idUser FROM user WHERE email = '" .$_SESSION['email_User'] ."'";
-                $research_id = $pdo->query($research_id);
-                $research_id = $research_id->fetchColumn();
-                    
-                $_SESSION['idUser'] = $research_id;
-                $_SESSION['login'] = true;
-                    
-                // On verifie si l'utilisateur est admin
-                $admin = "SELECT admin FROM user WHERE email = '" .$_SESSION['email_User'] ."'";
-                $admin = $pdo->query($admin);
-                $admin = $admin->fetchColumn();
-                if($admin) $_SESSION['admin'] = true;
-                    header('Location: index.php');
-                } else {
-                    echo "Mot de passe incorrect";
-                }
-            } 
-        } else if (isset($_POST['email'])) {
-            echo "Veuillez entrer un email valide";
+            $signIN_error = -1;
         }
+    }
 
+    // On utilise la fonction createUser pour créer un utilisateur
+    $signUP_error = 0;
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['signUP'])) {
+        $name = $_POST['name'];
+        $firstname = $_POST['firstname'];
+        $email = $_POST['email'];
+        $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        $pseudo = $_POST['pseudo'];
+    
+        switch (createUser($name, $firstname, $email, $password, $pseudo, $pdo)) {
+            case -1:
+                $signUP_error = -1;
+                break;
+            case -2:
+                $signUP_error = -2;
+                break;
+            case 1:
+                login($email, $password, $pdo);
+                header('Location: header.php');
+        exit;
+        }
+    }
+
+    // TODO: Modifier la base de donnée pour donner una valeur automatique à l'id
 
     // var_dump($panier);
 ?>
@@ -65,15 +60,53 @@
     <title>Panier</title>
 </head>
 <body>
-    <div class="containerLogin">
-        <h1>Sign Up / Sign In</h1>
+    <div class="container_SignIn">
+        <h1>Sign In</h1>
         
-        <div class="containerLoginForm">
+        <div class="container_SignIn_Form">
             <form action="login.php" method="POST">
                 <input id="email-box" class="box" type="text" name="email" required placeholder="E-mail"/> <br />
                 <input id='password-box' class='box' type='password' name="password" required placeholder='Password'/> <br />
-                <input id='button_Seconnecter' class="button" type='submit' value='Sign In'/>
+                <input id='signIN_button' class="button" name="signIN" type='submit' value='Sign In'/>
             </form>
+
+            <div class="error">
+                <?php if($signIN_error == -1) { ?>
+                    <p>Invalid email or password</p>
+                <?php } ?>
+            </div>
+        </div>
+
+        <div class="go_to_SignUp">
+            <button>Don't have an account ?</button>
+        </div>
+    </div>
+
+
+    <div class="container_SignUp">
+        <h1>Sign Up</h1>
+
+        <div class="container_SignUp_Form">
+            <form action="login.php" method="POST">
+                <input id="name-box" class="box" type="text" name="name" required placeholder="Nom"/> <br />
+                <input id="firstname-box" class="box" type="text" name="firstname" required placeholder="First Name"/> <br />
+                <input id="email-box" class="box" type="text" name="email" required placeholder="E-mail"/> <br />
+                <input id='password-box' class='box' type='password' name="password" required placeholder='Password'/> <br />
+                <input id="pseudo-box" class="box" type="text" name="pseudo" required placeholder="Pesudo"/> <br />
+                <input id='signUP_button' class="button" name="signUP" type='submit' value='Sign Up'/>
+            </form>
+        </div>
+        
+        <div class="error">
+                <?php if($signUP_error == -1) { ?>
+                            <p>E-mail déjà utilisé</p>
+                <?php } else if($signUP_error == -2) {?>
+                            <p>Pseudo déjà utilisé</p>
+                <?php } ?>
+            </div>
+
+        <div class="go_to_SignIn">
+            <button>Already have an account ?</button>
         </div>
     </div>
 </body>
