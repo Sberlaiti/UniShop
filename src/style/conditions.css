@@ -39,4 +39,13 @@ select{
     text-align: center;
     padding: 2em;
 }
+
+span, .footer_lien{
+    color: white;
+    text-decoration: none;
+}
+
+.footer_lien:hover{
+    text-decoration: underline;
+}
 /*Fin partie footer*/

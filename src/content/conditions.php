@@ -88,7 +88,7 @@
         <footer>
             <div class="return_top">
                 <p id="retourHaut">Retour en haut</p>
-                <script src="../script/fonction.js"></script>
+                <script src="../js/fonction.js"></script>
             </div>
 
             <div class="logo_langue">
@@ -100,8 +100,8 @@
 
             <div class="droits">
                 <div id="liste_droits">
-                    <a href="conditions.php">Conditions générales du site</a>
-                    <a href="">Vos informations personnelles</a>
+                    <a class="footer_lien" href="conditions.php">Conditions générales du site</a>
+                    <a class="footer_lien" href="">Vos informations personnelles</a>
                 </div>
                 <span>© 2024, UniShop</span>
             </div>

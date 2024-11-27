@@ -4,14 +4,35 @@ body{
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
+#affichage_produit{
+    background-color: white;
+    justify-self: center;
+    padding: 2em;
+    border-radius: 0.5cm;
+}
+
 .affichage_produit{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.affichage_produit2{
+    display: grid;
+    grid-template-areas: "div div";
+}
+
+.affichage_produit3{
     display: grid;
     grid-template-areas: "div div div";
-    text-align: center;
 }
 
 a{
     text-decoration: none;
+}
+
+.lien_produit{
+    color: black;
 }
 
 .no_produit{
@@ -61,13 +82,10 @@ a{
     align-items: center;
 }
 
-/*.img_article{ Taille de l'image de l'article
-    width: 300px;
-    height: 250px;
-}*/
-
-.return_top:hover{
-    background-color: rgb(255, 255, 255);
+.img_produit{/* Taille de l'image de l'article*/
+    width: 250px;
+    height: 150px;
+    border-radius: 0.2cm;
 }
 
 .jeu_promo{
@@ -106,6 +124,10 @@ footer{
     padding: 0.2em;
 }
 
+.return_top:hover{
+    background-color: rgb(255, 255, 255);
+}
+
 select{
     margin-left: 30px;
 }
@@ -130,5 +152,9 @@ select{
 
 span, .footer_lien{
     color: white;
+}
+
+.footer_lien:hover{
+    text-decoration: underline;
 }
 /*Fin partie footer*/

@@ -7,9 +7,10 @@
     error_reporting(E_ALL);
 
     //Récupération des données de la table article
-    $sql_requete = "SELECT p.IdProduit, p.NomProduit, u.Nom, p.Prix
+    $sql_requete = "SELECT p.IdProduit, p.NomProduit, u.Nom, p.Prix, i.lien
                     FROM produit p
-                    JOIN utilisateur u ON u.IdUtilisateur = p.IdUtilisateur";
+                    JOIN utilisateur u ON u.IdUtilisateur = p.IdUtilisateur
+                    JOIN image i ON i.IdImage = p.IdImage";
     $stmt = $pdo->query($sql_requete);
     $produits = $stmt->fetchAll();
 
@@ -30,14 +31,16 @@
     </head>
 
     <body>
+        <script src="../js/fonction.js"></script>
 
-        <section class="affichage_produit">
+        <section class="affichage_produit affichage_produit2 affichage_produit3" id="affichage_produit">
             <?php
                 if(count($produits) > 0){
                     foreach($produits as $row_count){
                         echo "<div class='produit'>";
                             echo "<a href='' class='lien_produit'>";
-                                echo "<p>" . htmlspecialchars($row_count['Nom']) . "</p>";
+                                echo "<img class='img_produit' src='" . $row_count['lien'] . "'/>";
+                                echo "<p> Vendeur : " . htmlspecialchars($row_count['Nom']) . "</p>";
                                 echo "<h2>" . htmlspecialchars($row_count['NomProduit']) . "</h2>";
                                 echo "<p>" . htmlspecialchars($row_count['Prix']) . " €</p>";
                             echo "</a>";
@@ -50,7 +53,6 @@
                         </div>";
                 }
             ?>
-
             <br>
         </section>
 
@@ -83,7 +85,6 @@
         <footer>
             <div class="return_top">
                 <p id="retourHaut">Retour en haut</p>
-                <script src="../script/fonction.js"></script>
             </div>
 
             <div class="logo_langue">
@@ -99,7 +100,7 @@
                     <a class="footer_lien" href="">Vos informations personnelles</a>
                 </div>
                 <span>© 2024, UniShop</span>
-            </div>
+            </div>            
         </footer>
     </body>
 </html>
