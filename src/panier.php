@@ -6,8 +6,8 @@
     require_once('./header02.php');
 
     // Initialisation des variables de session
-    $_SESSION['IdUtilisateur'] = 3333;
 
+    var_dump($_SESSION['user']);
 
     // var_dump($panier);
 ?>
@@ -24,9 +24,9 @@
 <body>
     <?php
         // Recherche des elements dans le panier de l'utilisateur
-        $sql_requete = "SELECT * FROM panier WHERE IdUtilisateur = :IdUtilisateur";
+        $sql_requete = "SELECT * FROM panier WHERE idUtilisateur = :idUtilisateur";
         $stmt = $pdo->prepare($sql_requete);
-        $stmt->execute(['IdUtilisateur' => $_SESSION['IdUtilisateur']]);
+        $stmt->execute(['idUtilisateur' => $_SESSION['user']['idUtilisateur']]);
         $panier = $stmt->fetchAll();
 
         if(count($panier) == 0) {
@@ -36,9 +36,9 @@
                 <div class="cartList">
                     <?php
                         foreach($panier as $produit) {
-                            $sql_requete = "SELECT * FROM produit WHERE IdProduit = :IdProduit";
+                            $sql_requete = "SELECT * FROM produit WHERE idProduit = :idProduit";
                             $stmt = $pdo->prepare($sql_requete);
-                            $stmt->execute(['IdProduit' => $produit['IdProduit']]);
+                            $stmt->execute(['idProduit' => $produit['idProduit']]);
                             $article = $stmt->fetch();
                     ?>
                             <div class="cartItems">
@@ -50,14 +50,14 @@
                                         <!-- Créer un lien vers la page de l'article -->
                                         <a><?php echo $article['Nom']; ?></a>
                                         <!-- Lier le button à la page du vendeur  -->
-                                        <a class="cartItems-infos-seller" href=""><button> Vendeur : <?php echo $article['AppartientVendeur']; ?></button></a>
+                                        <a class="cartItems-infos-seller" href=""><button> Vendeur : <?php echo $article['appartientVendeur']; ?></button></a>
                                         <div class="cartItems-infos-name-ope">
                                             <button class="addFavourites"><i class="fa-duotone fa-solid fa-heart"></i></button>
                                             <button class="delete"><i class="fa-solid fa-trash"></i></button>
                                         </div>
                                     </div>
                     
-                                    <p class="description"><?php echo $article['Description']; ?></p>
+                                    <p class="description"><?php echo $article['description']; ?></p>
                                     
                                     <!-- Verifier la disponibilité du produit -->
                                     <div class="productOptions"> 
@@ -78,7 +78,7 @@
                                             <button class="minus">-</button>
                                             <?php
                                                 // Afficher la quantité de l'article
-                                                echo "<p>".$produit['Quantitée']."</p>";
+                                                echo "<p>".$produit['quantitée']."</p>";
                                             ?>
                                             <button class="plus">+</button>
                                         </div>
