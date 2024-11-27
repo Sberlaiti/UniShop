@@ -12,8 +12,8 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../style/conditions.css">
-        <link rel="icon" href="../../logos/logo-png.png" type="image/icon">
+        <link rel="stylesheet" href="./css/conditions.css">
+        <link rel="icon" href="../logos/logo-png.png" type="image/icon">
         <title>Coditions générales d'utilisation et de vente - Service client UniShop</title>
     </head>
 
@@ -92,7 +92,7 @@
             </div>
 
             <div class="logo_langue">
-                <a href="accueil_unishop.php"><img src="../../logos/logo-png.png" width="80" height="50"></a>
+                <a href="index.php"><img src="../logos/logo-png.png" width="80" height="50"></a>
                 <select>
                     <option>Français</option>
                 </select>

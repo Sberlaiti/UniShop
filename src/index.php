@@ -1,6 +1,5 @@
 <?php
-    require_once("../connection/pdo-conn.php");
-    //require_once("../header02.php");
+    require_once("../header02.php");
 
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
@@ -25,13 +24,13 @@
 <html>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="../style/style.css">
-        <link rel="icon" href="../../logos/logo-png.png" type="image/icon">
+        <link rel="stylesheet" href="./css/index.css">
+        <link rel="icon" href="../logos/logo-png.png" type="image/icon">
         <title>UniShop</title>
     </head>
 
     <body>
-        <script src="../js/fonction.js"></script>
+        <script src="./js/fonction.js"></script>
 
         <section class="affichage_produit affichage_produit2 affichage_produit3" id="affichage_produit">
             <?php
@@ -88,7 +87,7 @@
             </div>
 
             <div class="logo_langue">
-                <a href="accueil_unishop.php"><img src="../../logos/logo-png.png" width="80" height="50" alt="Logo du site"></a>
+                <a href="index.php"><img src="../logos/logo-png.png" width="80" height="50" alt="Logo du site"></a>
                 <select>
                     <option>Français</option>
                 </select>
