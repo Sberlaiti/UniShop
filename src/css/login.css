@@ -1,0 +1,128 @@
+@import url('../fonts/RedHatDisplay_Complete/Fonts/WEB/css/red-hat-display.css');
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 50px;
+}
+
+.container_img > img {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+}
+
+.container_SignUp, .container_SignIn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background-color: #ffecd74c;
+    border-radius: 15px;
+
+    padding: 20px;
+
+    box-shadow: 0 0 10px 0 rgba(123, 122, 122, 0.1);
+}
+
+h1 {
+    font-family: 'RedHatDisplay-Bold', sans-serif;;
+    font-size: 30px;
+
+    margin: 20px;
+    margin-bottom: 10px;
+}
+
+.signUP_Button, .signIN_Button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.signUP_Button > p, .signIN_Button > p {
+    font-family: 'RedHatDisplay-Regular', sans-serif;
+    font-size: 13px;
+    margin-right: 5px;
+}
+
+.signUP_Button > a, .signIN_Button > a, .conditions > a {
+    font-family: 'RedHatDisplay-Bold', sans-serif;
+    font-size: 13px;
+    color: #F7AF60;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.container_SignIn_Form, .container_SignUp_Form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input {
+    width: 400px;
+    height: 50px;
+    margin: 5px 0px 5px 0px;
+    padding-left: 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: #ffffffa9;
+}
+
+input:focus {
+    outline: 1px solid #F7AF60;
+}
+
+.container_SignUp {
+    display: none;
+}
+
+.container_SignUp_Form > form .row {
+    display: flex;
+    justify-content: space-between;
+}
+
+#firstname-box, #lastname-box {
+    width: 195px;
+    grid-row: 1 / 2;
+}
+
+.container_SignUp > input {
+    margin-bottom: 10px;
+}
+
+.conditions {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.conditions > #terms {
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+}
+
+.conditions > label {
+    font-size: 13px;
+    margin: 0px 5px 0px 5px;
+}
+
+.error > p {
+    font-family: 'RedHatDisplay-SemiBold', sans-serif;
+    font-size: 13px;
+    color: red;
+    margin: 0;
+    margin-top: 5px;
+}
+
+#signUP_Button, #signIN_Button {
+    background-color: #EA6615;
+    color: white;
+    font-family: 'RedHatDisplay-Bold', sans-serif;
+    font-size: 15px;
+    margin-top: 40px;
+    cursor: pointer;
+}

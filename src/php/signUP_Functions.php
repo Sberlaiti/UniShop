@@ -5,14 +5,14 @@
 
     // Fonction qui permet de créer un utilisateur
     // Renvoi les informations de l'utilisateur si la création a réussi et une erruer sinon
-    function createUser($name, $firstname, $email, $password, $pseudo, $pdo) {
+    function createUser($lastname, $firstname, $email, $password, $pseudo, $pdo) {
         if (!verif_email($email, $pdo)) {
-            return -1; // - 1 si l'email est déjà utilisé
+            return -1; // - 1 si l'email est déjà utilisé ou invalide
         } else if (!verif_pseudo($pseudo, $pdo)) {
             return -2; // -2 si le pseudo est déjà utilisé
         } else {
             $stmt = $pdo->prepare("INSERT INTO utilisateur (Nom, Prenom, Mail, Password, pseudo) VALUES (:nom, :prenom, :email, :password, :pseudo)");
-            $stmt->execute(['nom' => $name, 'prenom' => $firstname, 'email' => $email, 'password' => password_hash($password, PASSWORD_DEFAULT), 'pseudo' => $pseudo]);
+            $stmt->execute(['nom' => $lastname, 'prenom' => $firstname, 'email' => $email, 'password' => password_hash($password, PASSWORD_DEFAULT), 'pseudo' => $pseudo]);
             return 1; // 1 si la création a réussi
         }
     }
@@ -24,10 +24,10 @@
         $stmt->execute(['email' => $email]);
         $user_Data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if($user_Data) {
-            return false;
+        if(!$user_Data && filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            return true;
         }
-        return true;
+        return false;
     }
 
     // Fonction qui permet de vérifier si un pseudo est déjà utilisé
@@ -37,10 +37,10 @@
         $stmt->execute(['pseudo' => $pseudo]);
         $user_Data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if($user_Data) {
-            return false;
+        if(!$user_Data) {
+            return true;
         }
-        return true;
+        return false;
     }
 
 ?>

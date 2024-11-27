@@ -1,10 +1,5 @@
 @import url('../fonts/RedHatDisplay_Complete/Fonts/WEB/css/red-hat-display.css');
 
-body {
-    background-color: #ffbf6627;
-    font-family: 'RedHatDisplay-Regular', sans-serif;
-}
-
 .container {
     display: grid;
     grid-template-columns: 2fr 1fr;
