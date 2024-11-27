@@ -1,9 +1,19 @@
 <?php
     require_once('pdo-conn.php');
-    $stmt = $pdo->prepare("SELECT Nom,Description,Prix,delayLivraison FROM produit WHERE idProduit = 0");
-    $stmt->execute();
+    $idProduit = $_GET['idProduit'];
+    $stmt = $pdo->prepare("SELECT Nom,Description,Prix,delayLivraison
+                        FROM produit 
+                        WHERE idProduit = ?");
+    $stmt->execute([$idProduit]);
     $produit = $stmt->fetch(PDO::FETCH_ASSOC);
 
+    /*$stmt = $pdo->prepare("SELECT contenu
+                       FROM avis
+                       WHERE idProduit = 1");
+    $stmt->execute();
+    $avis = $stmt->fetchAll();*/
+
+    
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -14,6 +24,7 @@
     <title>Détail du Produit</title>
 </head>
 <body>
+    <script src = ""></script>
     <div class="product-container">
         <div class="left-section">
             <div class="image-gallery">
@@ -22,14 +33,18 @@
                     <img src="../articles/preview-2.jpeg" alt="Angle 2" class="thumbnail">
                     <img src="../articles/preview-3.jpeg" alt="Angle 3" class="thumbnail">
                     <img src="../articles/preview-4.jpeg" alt="Angle 4" class="thumbnail">
+                    <img src="../articles/preview-5.jpeg" alt="Angle 5" class="thumbnail">
                 </div>
                 <div class="main-image">
                     <img src="../articles/preview-5.jpeg" alt="Photo article">
                 </div>
             </div>
 
+            <?php /*
+                $nombreAvis= count($avis);
+            */?>
             <div class="review-section">
-                <span class="review-count">5000 Avis</span>
+                <span class="review-count"><?php /* echo $nombreAvis . ' avis'; */?>500</span>
                 <!--<span class="rating">5 / 5</span>-->
                 <div class="star-rating">
                     <span class="star" data-value="1">&#9733;</span>
@@ -40,6 +55,41 @@
                 </div>
                 <div class="review-bar"></div>
             </div>
+            <script>
+                const thumbnails = document.querySelectorAll('.thumbnail-list .thumbnail');
+                const mainImage = document.querySelector('.main-image img');
+
+                thumbnails.forEach(thumbnail => {
+                    thumbnail.addEventListener('click', () => {
+                        mainImage.src = thumbnail.src;
+                        mainImage.alt = thumbnail.alt;
+                    });
+                });
+            </script>
+
+            <!--div class= "avis">
+                <?php /*if ($nombreCommentaires > 0): ?>
+                    <?php foreach ($commentaires as $commentaire): ?>
+                        <div class="comment">
+                            <strong class ="author"><i class ="icon-user"></i><?php echo $produit['nom']; ?></strong>
+                            <p><?php echo $avis['contenu']; ?></p>
+                            <?php if($_SESSION['idUtilisateur'] == 2){
+                                echo'
+                                <div class = del-button>
+                                    <form action="pageArticle" method ="GET">
+                                        <button type="submit">Supprimer</button>
+                                    </form>
+                                </div>';
+                            }?>
+                        </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <p>Aucun commentaire pour cet article.</p>
+                <?php endif; */?>
+            </div-->
+
+
+
         </div>
         <script>
             const productRating = 1;
