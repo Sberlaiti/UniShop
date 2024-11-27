@@ -94,7 +94,11 @@ nav > ul > li > a:hover {
     border-radius: 30px;
 }
 
+<<<<<<< HEAD
 .searchBar > button, .cartButton > a >  button {
+=======
+.searchBar > button, .cartButton > a > button {
+>>>>>>> page_login
     border: none;
     background-color: transparent;
     font-size: 15px;
@@ -141,7 +145,11 @@ a {
     text-decoration: none;
 }
 
+<<<<<<< HEAD
 .accountButton a {
+=======
+.accountButton > a {
+>>>>>>> page_login
     display: flex;
     justify-content: center;
     align-items: center;
@@ -149,6 +157,7 @@ a {
     background-color: #F7AF60;
     border-radius: 30px;
 
+    text-decoration: none;
     padding: 0 10px;
     margin-left: 10px;
     margin-right: 10px;
@@ -179,7 +188,11 @@ a {
     margin-right: 10px;
 }
 
+<<<<<<< HEAD
 .cartButton a {
+=======
+.cartButton > a{
+>>>>>>> page_login
     width: 40px;
     height: 40px;
 
