@@ -1,22 +1,22 @@
 <?php
-    require_once("../header02.php");
+    require_once("header02.php");
 
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
 
     //Récupération des données de la table article
-    $sql_requete = "SELECT p.IdProduit, p.NomProduit, u.Nom, p.Prix, i.lien
+    $sql_requete = "SELECT p.idProduit, p.nomProduit, u.nom, p.prix, i.lien
                     FROM produit p
-                    JOIN utilisateur u ON u.IdUtilisateur = p.IdUtilisateur
-                    JOIN image i ON i.IdImage = p.IdImage";
+                    JOIN utilisateur u ON u.idUtilisateur = p.idUtilisateur
+                    JOIN image i ON i.idImage = p.idImage";
     $stmt = $pdo->query($sql_requete);
     $produits = $stmt->fetchAll();
 
     //Récupération des valeurs des catégories dans la BDD
-    $sql = "SELECT categorie.Nom, image.lien
+    $sql = "SELECT categorie.nomCategorie, image.lien
             FROM categorie
-            JOIN image ON categorie.IdImage = image.IdImage";
+            JOIN image ON categorie.idImage = image.idImage";
     $result = $pdo->query($sql);
 ?>
 
@@ -39,9 +39,9 @@
                         echo "<div class='produit'>";
                             echo "<a href='' class='lien_produit'>";
                                 echo "<img class='img_produit' src='" . $row_count['lien'] . "'/>";
-                                echo "<p> Vendeur : " . htmlspecialchars($row_count['Nom']) . "</p>";
-                                echo "<h2>" . htmlspecialchars($row_count['NomProduit']) . "</h2>";
-                                echo "<p>" . htmlspecialchars($row_count['Prix']) . " €</p>";
+                                echo "<p> Vendeur : " . htmlspecialchars($row_count['nom']) . "</p>";
+                                echo "<h2>" . htmlspecialchars($row_count['nomProduit']) . "</h2>";
+                                echo "<p>" . htmlspecialchars($row_count['prix']) . " €</p>";
                             echo "</a>";
                         echo "</div>";
                     }
@@ -66,7 +66,7 @@
                     while($row = $result->fetch(PDO::FETCH_ASSOC)){
                         echo "<div class='categorie'>";
                             echo "<img class='image_categorie' src='" . $row['lien'] . "' alt='Image de la catégorie'/>";
-                            echo "<p class='categories'>" . htmlspecialchars($row['Nom']) . "</p>";
+                            echo "<p class='categories'>" . htmlspecialchars($row['nomCategorie']) . "</p>";
                         echo "</div>";
                     }
                 }

@@ -42,13 +42,13 @@ INSERT INTO `avis` (`idAvis`, `contenu`, `dateCreation`, `idUtilisateur`, `idPro
 DROP TABLE IF EXISTS `categorie`;
 CREATE TABLE IF NOT EXISTS `categorie` (
   `idCategorie` int NOT NULL AUTO_INCREMENT,
-  `nom` varchar(130) NOT NULL,
+  `nomCategorie` varchar(130) NOT NULL,
   `idImage` int NOT NULL,
   PRIMARY KEY (`idCategorie`),
   KEY `fk_categorie_image` (`idImage`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO `categorie` (`idCategorie`, `nom`, `idImage`) VALUES
+INSERT INTO `categorie` (`idCategorie`, `nomCategorie`, `idImage`) VALUES
 (1, 'Animalerie', 1),
 (2, 'Beauté et parfum', 0),
 (3, 'Téléphonie', 2),
@@ -84,8 +84,8 @@ CREATE TABLE IF NOT EXISTS `image` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `image` (`idImage`, `lien`) VALUES
-(1, '../images/animaux.jpg'),
-(2, '../images/telephonie.jpg');
+(1, './images/animaux.jpg'),
+(2, './images/telephonie.jpg');
 
 -- Table `panier`
 DROP TABLE IF EXISTS `panier`;
@@ -105,7 +105,7 @@ INSERT INTO `panier` (`quantitee`, `idProduit`, `idUtilisateur`) VALUES
 DROP TABLE IF EXISTS `produit`;
 CREATE TABLE IF NOT EXISTS `produit` (
   `idProduit` int NOT NULL AUTO_INCREMENT,
-  `nom` varchar(130) NOT NULL,
+  `nomProduit` varchar(130) NOT NULL,
   `description` varchar(500) NOT NULL,
   `prix` double NOT NULL,
   `delayLivraison` int NOT NULL,
@@ -120,7 +120,7 @@ CREATE TABLE IF NOT EXISTS `produit` (
   KEY `fk_produit_categorie` (`IdCategorie`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO `produit` (`idProduit`, `nom`, `description`, `prix`, `delayLivraison`, `appartientVendeur`, `idImage`, `dateCreation`, `idUtilisateur`, `IdCategorie`) VALUES
+INSERT INTO `produit` (`idProduit`, `nomProduit`, `description`, `prix`, `delayLivraison`, `appartientVendeur`, `idImage`, `dateCreation`, `idUtilisateur`, `IdCategorie`) VALUES
 (4, 'Botte', 'Une chaussure haute', 36.3, 5, 0, 1112, '2024-11-01', 0, 5555);
 
 -- Table `promotion`
