@@ -35,13 +35,10 @@
             case -1:
                 $signUP_error = -1;
                 break;
-            case -2:
-                $signUP_error = -2;
-                break;
             case 1:
                 login($email, $password, $pdo);
                 header('Location: header.php');
-        exit;
+                exit;
         }
     }
 

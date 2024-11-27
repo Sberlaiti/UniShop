@@ -8,11 +8,9 @@
     function createUser($lastname, $firstname, $email, $password, $pseudo, $pdo) {
         if (!verif_email($email, $pdo)) {
             return -1; // - 1 si l'email est déjà utilisé ou invalide
-        } else if (!verif_pseudo($pseudo, $pdo)) {
-            return -2; // -2 si le pseudo est déjà utilisé
         } else {
-            $stmt = $pdo->prepare("INSERT INTO utilisateur (Nom, Prenom, Mail, Password, pseudo) VALUES (:nom, :prenom, :email, :password, :pseudo)");
-            $stmt->execute(['nom' => $lastname, 'prenom' => $firstname, 'email' => $email, 'password' => password_hash($password, PASSWORD_DEFAULT), 'pseudo' => $pseudo]);
+            $stmt = $pdo->prepare("INSERT INTO utilisateur (nom, prenom, mail, password) VALUES (:nom, :prenom, :email, :password)");
+            $stmt->execute(['nom' => $lastname, 'prenom' => $firstname, 'email' => $email, 'password' => password_hash($password, PASSWORD_DEFAULT)]);
             return 1; // 1 si la création a réussi
         }
     }
@@ -20,7 +18,7 @@
     // Fonction qui permet de vérifier si un email est déjà utilisé
     // Renvoi true si l'email n'est pas utilisé et false sinon
     function verif_email($email, $pdo) {
-        $stmt = $pdo->prepare("SELECT * FROM utilisateur WHERE Mail = :email");
+        $stmt = $pdo->prepare("SELECT * FROM utilisateur WHERE mail = :email");
         $stmt->execute(['email' => $email]);
         $user_Data = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -30,17 +28,17 @@
         return false;
     }
 
-    // Fonction qui permet de vérifier si un pseudo est déjà utilisé
-    // Renvoi true si le pseudo n'est pas utilisé et false sinon
-    function verif_pseudo($pseudo, $pdo) {
-        $stmt = $pdo->prepare("SELECT * FROM utilisateur WHERE Pseudo = :pseudo");
-        $stmt->execute(['pseudo' => $pseudo]);
-        $user_Data = $stmt->fetch(PDO::FETCH_ASSOC);
+    // // Fonction qui permet de vérifier si un pseudo est déjà utilisé
+    // // Renvoi true si le pseudo n'est pas utilisé et false sinon
+    // function verif_pseudo($pseudo, $pdo) {
+    //     $stmt = $pdo->prepare("SELECT * FROM utilisateur WHERE pseudo = :pseudo");
+    //     $stmt->execute(['pseudo' => $pseudo]);
+    //     $user_Data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if(!$user_Data) {
-            return true;
-        }
-        return false;
-    }
+    //     if(!$user_Data) {
+    //         return true;
+    //     }
+    //     return false;
+    // }
 
 ?>
