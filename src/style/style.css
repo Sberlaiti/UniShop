@@ -1,0 +1,160 @@
+body{
+    background-color: #ffbf6627;
+    margin: 0;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+#affichage_produit{
+    background-color: white;
+    justify-self: center;
+    padding: 2em;
+    border-radius: 0.5cm;
+}
+
+.affichage_produit{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.affichage_produit2{
+    display: grid;
+    grid-template-areas: "div div";
+}
+
+.affichage_produit3{
+    display: grid;
+    grid-template-areas: "div div div";
+}
+
+a{
+    text-decoration: none;
+}
+
+.lien_produit{
+    color: black;
+}
+
+.no_produit{
+    margin: 0 auto;
+    width: 250px;
+    text-align: center;
+    font-weight: bold;
+    background-color: orange;
+    padding: 0.2em;
+    border-radius: 0.2cm;
+}
+
+.affichage_categorie{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items:  center;
+    padding: 1em;
+}
+
+.title_categories{
+    text-align: center;
+}
+
+.categorie{
+    text-align: center;
+    margin-right: 30px;
+    padding: 0.5em;
+    border: 1px solid #ffbf6627;
+}
+
+.categorie:hover{
+    border: 1px solid orange;
+    border-radius: 0.2cm;
+    padding: 0.5em;
+}
+
+.image_categorie{
+    width: 160px;
+    height: 160px;
+    border-radius: 2cm;
+}
+
+.no_categories{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img_produit{/* Taille de l'image de l'article*/
+    width: 250px;
+    height: 150px;
+    border-radius: 0.2cm;
+}
+
+.jeu_promo{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 100px;
+    height: 100px;
+    background-color: rgb(247, 132, 0);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    transition: transform 0.5s ease;
+}
+
+.jeu_promo:hover{
+    transform: scale(1.1);
+    background-color: rgb(180, 104, 17);
+}
+
+/*Partie footer*/
+footer{
+    background-color: rgb(180, 104, 17);
+}
+
+.return_top{
+    display: block;
+    text-align: center;
+    background-color: rgb(247, 132, 0);
+    color: white;
+    cursor: pointer;
+    padding: 0.2em;
+}
+
+.return_top:hover{
+    background-color: rgb(255, 255, 255);
+}
+
+select{
+    margin-left: 30px;
+}
+
+.return_top:hover{
+    background-color: rgb(255, 153, 0);
+    font-weight: bold;
+}
+
+.logo_langue{
+    padding: 2em;
+    background-color: rgb(252, 151, 37);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.droits{
+    text-align: center;
+    padding: 2em;
+}
+
+span, .footer_lien{
+    color: white;
+}
+
+.footer_lien:hover{
+    text-decoration: underline;
+}
+/*Fin partie footer*/

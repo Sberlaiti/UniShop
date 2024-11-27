@@ -1,0 +1,51 @@
+body{
+    background-color: #ffbf6627;
+    margin: 0 auto;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+/*Partie footer*/
+footer{
+    background-color: rgb(180, 104, 17);
+}
+
+.return_top{
+    display: block;
+    text-align: center;
+    background-color: rgb(247, 132, 0);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0.2em;
+}
+
+select{
+    margin-left: 30px;
+}
+
+.return_top:hover{
+    background-color: rgba(247, 132, 0, 50%);
+}
+
+.logo_langue{
+    padding: 2em;
+    background-color: rgb(252, 151, 37);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.droits{
+    text-align: center;
+    padding: 2em;
+}
+
+span, .footer_lien{
+    color: white;
+    text-decoration: none;
+}
+
+.footer_lien:hover{
+    text-decoration: underline;
+}
+/*Fin partie footer*/
