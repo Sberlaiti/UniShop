@@ -5,7 +5,7 @@ body {
     min-height: 100vh;
 }
 
-.product-container {
+.product_container {
     display: flex;
     gap: 20px;
     padding: 20px;
@@ -14,12 +14,11 @@ body {
 }
 
 
-/* Section des images */
-.image-gallery {
+.image_gallery {
     display: flex;
 }
 
-.thumbnail-list {
+.thumbnail_list {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -32,56 +31,56 @@ body {
     cursor: pointer;
 }
 
-.main-image {
+.main_image {
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.main-image img {
+.main_image img {
     width: 500px;
     height: 540px;
     margin-bottom: 10px; 
 }
 
-/* Section des avis */
-.review-section {
+
+.review_section {
     width: 100%;
     text-align: center;
     margin-top: 10px;
 }
 
-.review-count {
+.review_count {
     display: block;
     font-weight: bold;
 }
 
-.star-rating {
-    color: #ddd;
+.star {
+    color: #3a3636;
     font-size: 18px;
 }
 
-.star-rating .star.filled {
+.star.filled {
     color: #f8d64e;
 }
 
-.review-bar {
+.review_bar {
     width: 80%;
     height: 5px;
     background-color: #ddd;
     margin: 10px auto;
 }
 
-/* Section des détails du produit */
-.product-details {
+
+.product_details {
     flex: 1;
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-.product-name {
+.product_name {
     font-size: 24px;
     font-weight: bold;
     background-color: #f2f2f2;
@@ -90,12 +89,12 @@ body {
     text-align: center;
 }
 
-.product-description {
+.product_description {
     font-size: 16px;
     color: gray;
 }
 
-.product-price {
+.product_price {
     font-size: 22px;
     color: #333;
     font-weight: bold;
@@ -104,13 +103,24 @@ body {
     border-radius: 8px;
     text-align: center;
 }
+.size {
+    padding: 10px;
+    border: 1px solid #f8871d;
+    cursor: pointer;
+}
 
-.product-delivery {
+.size.selected {
+    background-color: #f3bb43ec;
+    color: white;
+    border-color: #f8871d;
+}
+
+.product_delivery {
     color: #555;
 }
 
-/* Boutons de taille */
-.product-sizes {
+
+.product_sizes {
     display: flex;
     gap: 10px;
     margin-top: 10px;
@@ -129,14 +139,14 @@ body {
     background-color: #e0e0e0;
 }
 
-/* Boutons d'action */
-.action-buttons {
+
+.action_buttons {
     display: flex;
     gap: 10px;
     margin: 15px 0;
 }
 
-.buy-button, .cart-button {
+.buy_button, .cart_button {
     padding: 10px 15px;
     font-size: 16px;
     cursor: pointer;
@@ -144,7 +154,7 @@ body {
     transition: background-color 0.3s ease;
 }
 
-.buy-button {
+.buy_button {
     background-color: #4CAF50;
     color: white;
     border: none;
@@ -154,23 +164,23 @@ body {
     background-color: #45a049;
 }
 
-.cart-button {
+.cart_button {
     background-color: #f0c14b;
     color: black;
     border: 1px solid #a88734;
 }
 
-.cart-button:hover {
+.cart_button:hover {
     background-color: #e6b93f;
 }
 
-.extra-options {
+.extra_options {
     display: flex;
     gap: 10px;
     margin-top: 20px;
 }
 
-.more-options, .share-button, .favorite-button {
+.more_options, .share_button, .favorite_button {
     padding: 8px 12px;
     font-size: 16px;
     cursor: pointer;
@@ -180,23 +190,84 @@ body {
     transition: background-color 0.3s ease;
 }
 
-.more-options:hover, .share-button:hover, .favorite-button:hover {
+.more_options:hover, .share_button:hover, .favorite_button:hover {
     background-color: #e0e0e0;
+}
+
+.comments {
+    margin-top: 20px;
+}
+
+.comment {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.author {
+    font-weight: bold;
+    color: #333;
+}
+
+.add_comment_form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.add_comment_form textarea {
+    width: 100%;
+    height: 80px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    resize: none;
+}
+
+.add_comment_form button {
+    align-self: flex-end;
+    padding: 10px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add_comment_form button:hover {
+    background-color: #45a049;
+}
+.del_button button {
+    background-color: #dc3545; 
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.del_button button:hover {
+    background-color: #c82333;
 }
 
 /* Responsive design */
 @media (max-width: 768px) {
-    .product-container {
+    .product_container {
         flex-direction: column;
         align-items: center;
     }
 
-    .product-details {
+    .product_details {
         padding-left: 0;
         text-align: center;
     }
 
-    .action-buttons, .product-sizes, .extra-options {
+    .action_buttons, .product_sizes, .extra_options {
         justify-content: center;
     }
 }
