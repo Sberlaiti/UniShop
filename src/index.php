@@ -31,6 +31,7 @@
 
     <body>
         <script src="./js/fonction.js"></script>
+        <br>
 
         <section class="affichage_produit affichage_produit2 affichage_produit3" id="affichage_produit">
             <?php

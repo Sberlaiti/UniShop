@@ -1,6 +1,5 @@
 <?
-    require_once("../connection/pdo-conn.php");
-    //require_once("../header02.php");
+    require_once("header02.php");
 
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
@@ -83,6 +82,25 @@
             <p>Le client doit vérifier l'état des produits lors de leur réception.
                 En cas de dommages ou de produits manquants, le client doit informer UniShop sous 48 heures.
             </p>
+
+            <h2>6. Droit de rétraction</h2>
+            <p>
+                Conformément à la législation en vigueur (Code de la consommation, article L221-18), le client dispose d'un délai de 14 jours à compter de la réception des produits pour exercer son droit de rétraction, 
+                sauf exceptions prévues par la loi (produits personnalisés, périssables, etc...). 
+                Pour exercer ce droit, le client doit informer UniShop par écrit (email ou courrier) et retourner les produits dans leur état d'origine à ses frais. Un remboursement sera effectué sous 14 jours après réception des produits retournés.
+            </p>
+
+            <h2>7. Garantie</h2>
+            <p>Les produits bénéficient de la garantie légale de conformité (articles L217-4 et suivants du Code de la consommation) et de la garantie contre les vices cachés (article 1641 et suivants du Code civil). 
+                En cas de défaut ou non-conformité, le client peut contacter UniShop pour une réparation, un remplacement ou un remboursement, selon les cas.
+            </p>
+
+            <h2>8. Responsabilité</h2>
+            <p>
+                UniShop ne peut être tenu responsable des dommages indirects liés à l'utilisation des produits. En cas de force majeur, UniShop ne saurait être tenu responsable de l'inexécution des obligations prévues par les CGV.
+            </p>
+
+            
         </section>
 
         <footer>

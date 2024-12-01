@@ -18,12 +18,12 @@
     <link rel="stylesheet" type="text/css" href="./css/header02.css"/>
     <!-- Pour utiliser FontAwesome (Icônes) -->
     <script src="https://kit.fontawesome.com/3b8e4ae998.js" crossorigin="anonymous"></script>
-    <title>Header</title>
+    <title>UniShop</title>
 </head>
 <body>
     <header>
         <div class="headerContainer">
-            <h1> UniShop </h1>
+            <a href="index.php"><h1> UniShop </h1></a>
 
             <section class="navSection">
                 <nav>

@@ -8,6 +8,10 @@ body {
     background-color: #ffbf6627;
 }
 
+a h1{
+    color: black;
+}
+
 header {
     display: flex;
     justify-content: center;
