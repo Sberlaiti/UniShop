@@ -12,6 +12,10 @@ a h1{
     color: black;
 }
 
+a h1:hover{
+    color: orange;
+}
+
 header {
     display: flex;
     justify-content: center;

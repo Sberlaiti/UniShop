@@ -1,9 +1,10 @@
+//fonction qui permet de revenir au tout début de la page
 function retourhaut(){
     document.documentElement.scrollTop = 0;
     console.log("en marche");
 }
-
 document.addEventListener('click', retourhaut);
+
 
 //modification de la classe pour l'affichage des produits
 function choixClasse() {
@@ -28,6 +29,26 @@ function choixClasse() {
         console.log("1 produit ou aucun produit affiché.");
     }
 }
-
 // Exécuter la fonction dès que le DOM est chargé
 document.addEventListener("DOMContentLoaded", choixClasse);
+
+/*
+const leftBtn = document.querySelector('.left_btn');
+const rightBtn = document.querySelector('.right_btn');
+const categories = document.querySelector('.categorie');
+const wrapper = document.querySelector('.categories_wrapper');
+
+let scrollPosition = 0;
+
+const scrollAmount = wrapper.offsetWidth; // Taille d'un déplacement
+
+leftBtn.addEventListener('click', () => {
+    scrollPosition = Math.max(scrollPosition - scrollAmount, 0);
+    categories.style.transform = `translateX(-${scrollPosition}px)`;
+});
+
+rightBtn.addEventListener('click', () => {
+    const maxScroll = categories.scrollWidth - wrapper.offsetWidth;
+    scrollPosition = Math.min(scrollPosition + scrollAmount, maxScroll);
+    categories.style.transform = `translateX(-${scrollPosition}px)`;
+});*/

@@ -30,7 +30,6 @@
     </head>
 
     <body>
-        <script src="./js/fonction.js"></script>
         <br>
 
         <section class="affichage_produit affichage_produit2 affichage_produit3" id="affichage_produit">
@@ -41,7 +40,7 @@
                             echo "<a href='' class='lien_produit'>";
                                 echo "<img class='img_produit' src='" . $row_count['lien'] . "'/>";
                                 echo "<p> Vendeur : " . htmlspecialchars($row_count['nom']) . "</p>";
-                                echo "<h2>" . htmlspecialchars($row_count['nomProduit']) . "</h2>";
+                                echo "<h3>" . htmlspecialchars($row_count['nomProduit']) . "</h3>";
                                 echo "<p>" . htmlspecialchars($row_count['prix']) . " €</p>";
                             echo "</a>";
                         echo "</div>";
@@ -60,7 +59,9 @@
             <h2>Explorez par catégories</h2>
         </div>
         <section class="affichage_categorie">
-
+            
+            <!--button class="nav_btn left_btn">←</button>
+            <div class="categories_wrapper"-->
             <?php
                 //Affichage de chaque catégorie
                 if($result->rowCount() > 0){
@@ -75,8 +76,10 @@
                     echo "<p class='no_categories'>Aucune catégorie disponible</p>";
                 }
             ?>
-
+            </div>
+            <!--button class="nav_btn right_btn">→</button-->
         </section>
+        <br>
 
         <div class="jeu_promo">
             <p>Jouer au jeu !</p>
@@ -102,5 +105,6 @@
                 <span>© 2024, UniShop</span>
             </div>            
         </footer>
+        <script src="./js/index.js"></script>
     </body>
 </html>

@@ -13,17 +13,17 @@
 
 <html lang="fr">
 <head>
+    <link rel="icon" href="../logos/logo-png.png" type="image/icon">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="./css/header02.css"/>
     <!-- Pour utiliser FontAwesome (Icônes) -->
     <script src="https://kit.fontawesome.com/3b8e4ae998.js" crossorigin="anonymous"></script>
-    <title>UniShop</title>
 </head>
 <body>
     <header>
         <div class="headerContainer">
-            <a href="index.php"><h1> UniShop </h1></a>
+            <a href="index.php"><h1>UniShop</h1></a>
 
             <section class="navSection">
                 <nav>
