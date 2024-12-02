@@ -18,6 +18,9 @@
             FROM categorie
             JOIN image ON categorie.idImage = image.idImage";
     $result = $pdo->query($sql);
+
+
+    // TODO: créer du texte defilant pour les categories
 ?>
 
 <!DOCTYPE html>

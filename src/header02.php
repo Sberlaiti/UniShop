@@ -18,12 +18,11 @@
     <link rel="stylesheet" type="text/css" href="./css/header02.css"/>
     <!-- Pour utiliser FontAwesome (Icônes) -->
     <script src="https://kit.fontawesome.com/3b8e4ae998.js" crossorigin="anonymous"></script>
-    <title>Header</title>
 </head>
 <body>
     <header>
         <div class="headerContainer">
-            <h1> UniShop </h1>
+            <h1> <a href="index.php">UniShop</a></h1>
 
             <section class="navSection">
                 <nav>
@@ -50,7 +49,7 @@
                             <i class="fa-solid fa-user"></i>
                             <p>Sign In</p>
                     <?php } else { ?>
-                        <a href="profil.php">
+                        <a href="profile.php">
                             <img src="./images/italianFlag.png" alt="UserLogo"><p><?php echo $_SESSION['user']['nom'] ?></p>
                     <?php } ?>
                     </a>

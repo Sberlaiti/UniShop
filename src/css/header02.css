@@ -26,6 +26,12 @@ h1 {
     font-size: 30px;
 }
 
+h1 > a {
+    font-family: 'RedHatDisplay-Bold', sans-serif;
+    color: #000;
+    text-decoration: none;
+}
+
 .navSection {
     display: flex;
     justify-content: center;

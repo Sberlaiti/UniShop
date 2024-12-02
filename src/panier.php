@@ -7,7 +7,7 @@
 
     // Initialisation des variables de session
 
-    var_dump($_SESSION['user']);
+    //var_dump($_SESSION['user']);
 
     // var_dump($panier);
 ?>
@@ -30,7 +30,10 @@
         $panier = $stmt->fetchAll();
 
         if(count($panier) == 0) {
+            echo "<div class='container_emptyCart'>";
+            echo "<img src='./images/empty_cart.png' alt='Panier vide'>";
             echo "<h1>Votre panier est vide</h1>";
+            echo "</div>";
         } else { ?>
             <div class="container">
                 <div class="cartList">
