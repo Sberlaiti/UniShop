@@ -1,13 +1,18 @@
-function retourhaut(){
-    document.documentElement.scrollTop = 0;
-}
+//fonction qui permet de défiler au tout début de la page
+const retourhaut = document.querySelector("#retourHaut");
+retourhaut.addEventListener('click', function() {
+    window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'instant' //défilement instantané
+    });
 
-document.querySelector("#retourHaut").addEventListener('click', retourhaut);
+});
 
 
 const titre_acces = document.querySelectorAll(".titre_acces");
-titre_acces.forEach((titre_acces) =>{
-    titre_acces.addEventListener('click', () =>{
+titre_acces.forEach((titre_acces) => {
+    titre_acces.addEventListener('click', function() {
         // Récupère l'ID cible à partir de l'attribut "data-target"
         const targetId = titre_acces.getAttribute("data-target");
         const targetElement = document.getElementById(targetId);

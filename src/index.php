@@ -34,25 +34,32 @@
 
         <section class="affichage_produit affichage_produit2 affichage_produit3" id="affichage_produit">
             <?php
+                $maxProduits = 6;
+                $produitsAffiches = 0;
+
                 if(count($produits) > 0){
                     foreach($produits as $row_count){
-                        echo "<div class='produit'>";
-                            echo "<a href='' class='lien_produit'>";
-                                echo "<img class='img_produit' src='" . $row_count['lien'] . "'/>";
-                                echo "<p> Vendeur : " . htmlspecialchars($row_count['nom']) . "</p>";
-                                echo "<h3>" . htmlspecialchars($row_count['nomProduit']) . "</h3>";
-                                echo "<p>" . htmlspecialchars($row_count['prix']) . " €</p>";
-                            echo "</a>";
-                        echo "</div>";
+                        if($produitsAffiches < $maxProduits){              
+                            echo "<div class='produit'>";
+                                echo "<a href='' class='lien_produit'>";
+                                    echo "<img class='img_produit' src='" . htmlspecialchars($row_count['lien']) . "'/>";
+                                    echo "<p> Vendeur : " . htmlspecialchars($row_count['nom']) . "</p>";
+                                    echo "<h3>" . htmlspecialchars($row_count['nomProduit']) . "</h3>";
+                                    echo "<p>" . htmlspecialchars($row_count['prix']) . " €</p>";
+                                echo "</a>";
+                            echo "</div>";
+                            $produitsAffiches++;
+                        }
                     }
-                }
-                else{
+                    if(count($produits) > $maxProduits){
+                        echo "<div class='voir_plus'><a href='produits.php'>Voir plus</a></div>";
+                    }
+                } else {
                     echo "<div class='no_produit'>
                             <p>Aucun produit disponible. Revenez un prochain jour !</p>
                         </div>";
                 }
             ?>
-            <br>
         </section>
 
         <div class="title_categories">

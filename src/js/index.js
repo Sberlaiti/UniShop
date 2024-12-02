@@ -1,9 +1,13 @@
 //fonction qui permet de revenir au tout début de la page
-function retourhaut(){
-    document.documentElement.scrollTop = 0;
-    console.log("en marche");
-}
-document.addEventListener('click', retourhaut);
+const retourhaut = document.querySelector("#retourHaut");
+retourhaut.addEventListener('click', function() {
+    window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'instant'
+    });
+
+});
 
 
 //modification de la classe pour l'affichage des produits
@@ -20,13 +24,10 @@ function choixClasse() {
     // Ajouter une classe en fonction du nombre de produits
     if (produits.length >= 3) {
         section.classList.add("affichage_produit3");
-        console.log("Plus de 3 produits affichés.");
     } else if (produits.length >= 2) {
         section.classList.add("affichage_produit2");
-        console.log("2 ou 3 produits affichés.");
     } else {
         section.classList.add("affichage_produit");
-        console.log("1 produit ou aucun produit affiché.");
     }
 }
 // Exécuter la fonction dès que le DOM est chargé

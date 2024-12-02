@@ -197,7 +197,7 @@
                 </div>
                 <span>© 2024, UniShop</span>
             </div>
-        </footer>
-        <script src="./js/conditions.js"></script>
+        </footer>  
+        <script src="./js/conditions.js"></script>      
     </body>
 </html>

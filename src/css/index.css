@@ -20,19 +20,40 @@ body{
 .affichage_produit2{
     display: grid;
     grid-template-areas: "div div";
+    gap : 20px;
 }
 
 .affichage_produit3{
     display: grid;
     grid-template-areas: "div div div";
-}
-
-.produit{
-    margin-right: 15px;
+    gap: 20px;
 }
 
 a{
     text-decoration: none;
+}
+
+.voir_plus{
+    margin-top: 15px;
+}
+
+.voir_plus a{
+    background-color: #ffbf66;
+    color: black;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 10px 20px;
+    transition: 0.5s;
+}
+
+.voir_plus a:hover{
+    background-color: orange;
+    text-decoration: underline;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 10px 20px;
+    transition: 0.5s;
 }
 
 .lien_produit{

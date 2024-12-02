@@ -25,6 +25,11 @@ body{
     background-color: orange;
     border-radius: 0.2cm;
     width: 300px;
+    position: fixed;
+}
+
+.affichage{
+    margin-left: 8cm;
 }
 
 .titre_acces{
