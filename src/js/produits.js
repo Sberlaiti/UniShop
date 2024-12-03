@@ -9,7 +9,6 @@ retourhaut.addEventListener('click', function() {
 
 });
 
-
 //modification de la classe pour l'affichage des produits
 function choixClasse() {
     // Récupérer la section contenant les produits
@@ -27,29 +26,18 @@ function choixClasse() {
     } else if (produits.length >= 2) {
         section.classList.add("affichage_produit2");
     } else {
-        section.classList.add("affichage_produit");
+        section.classList.add("affichage_produit");        
     }
 }
 // Exécuter la fonction dès que le DOM est chargé
 document.addEventListener("DOMContentLoaded", choixClasse);
 
-/*
-const leftBtn = document.querySelector('.left_btn');
-const rightBtn = document.querySelector('.right_btn');
-const categories = document.querySelector('.categorie');
-const wrapper = document.querySelector('.categories_wrapper');
 
-let scrollPosition = 0;
-
-const scrollAmount = wrapper.offsetWidth; // Taille d'un déplacement
-
-leftBtn.addEventListener('click', () => {
-    scrollPosition = Math.max(scrollPosition - scrollAmount, 0);
-    categories.style.transform = `translateX(-${scrollPosition}px)`;
+document.querySelectorAll('input[name="categorie"]').forEach(function(radio) {
+    radio.addEventListener('change', function() {
+        const idCategorie = this.value;
+        const url = new URL(window.location.href);
+        url.searchParams.set('idCategorie', idCategorie); // Ajoute ou met à jour le paramètre
+        window.location.href = url.toString(); // Recharge la page avec la nouvelle URL
+    });
 });
-
-rightBtn.addEventListener('click', () => {
-    const maxScroll = categories.scrollWidth - wrapper.offsetWidth;
-    scrollPosition = Math.min(scrollPosition + scrollAmount, maxScroll);
-    categories.style.transform = `translateX(-${scrollPosition}px)`;
-});*/

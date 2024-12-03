@@ -14,7 +14,7 @@
     $produits = $stmt->fetchAll();
 
     //Récupération des valeurs des catégories dans la BDD
-    $sql = "SELECT categorie.nomCategorie, image.lien
+    $sql = "SELECT categorie.nomCategorie, image.lien, categorie.idCategorie
             FROM categorie
             JOIN image ON categorie.idImage = image.idImage";
     $result = $pdo->query($sql);
@@ -32,6 +32,9 @@
     <body>
         <br>
 
+        <div class="title_categories">
+            <h2>Les derniers produits</h2>
+        </div>
         <section class="affichage_produit affichage_produit2 affichage_produit3" id="affichage_produit">
             <?php
                 $maxProduits = 6;
@@ -41,7 +44,7 @@
                     foreach($produits as $row_count){
                         if($produitsAffiches < $maxProduits){              
                             echo "<div class='produit'>";
-                                echo "<a href='pageArticle.php?idProduit=". $row_count['idProduit'] . " class='lien_produit'>";
+                                echo "<a href='pageArticle.php?idProduit=". $row_count['idProduit'] . " id='lien_produit'>";
                                     echo "<img class='img_produit' src='" . htmlspecialchars($row_count['lien']) . "'/>";
                                     echo "<p> Vendeur : " . htmlspecialchars($row_count['nom']) . "</p>";
                                     echo "<h3>" . htmlspecialchars($row_count['nomProduit']) . "</h3>";
@@ -62,6 +65,34 @@
             ?>
         </section>
 
+        <br>
+
+        <section class="affichage_externe">
+
+            <div class="jeu">
+                <img src="" alt="Image du jeu"/>
+                <p>Le jeu du jour</p>
+            </div>
+
+            <div class="jeu">
+                <img src="" alt="Image du jeu"/>
+                <p>Le jeu du jour</p>
+            </div>
+
+            <div class="jeu">
+                <img src="" alt="Image du jeu"/>
+                <p>Le jeu du jour</p>
+            </div>
+
+            <div class="abonnement">
+                <img src="" alt="Image du jeu"/>
+                <p>Prener votre abonnement</p>
+            </div>
+
+        </section>
+
+        <br>
+
         <div class="title_categories">
             <h2>Explorez par catégories</h2>
         </div>
@@ -74,8 +105,10 @@
                 if($result->rowCount() > 0){
                     while($row = $result->fetch(PDO::FETCH_ASSOC)){
                         echo "<div class='categorie'>";
-                            echo "<img class='image_categorie' src='" . $row['lien'] . "' alt='Image de la catégorie'/>";
-                            echo "<p class='categories'>" . htmlspecialchars($row['nomCategorie']) . "</p>";
+                            echo "<a href='produits.php?idCategorie=" . $row['idCategorie'] . "' class='lien_produit'>";
+                                echo "<img class='image_categorie' src='" . $row['lien'] . "' alt='Image de la catégorie'/>";
+                                echo "<p class='categories'>" . htmlspecialchars($row['nomCategorie']) . "</p>";
+                            echo "</a>";
                         echo "</div>";
                     }
                 }

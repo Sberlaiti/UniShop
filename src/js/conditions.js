@@ -4,7 +4,7 @@ retourhaut.addEventListener('click', function() {
     window.scrollTo({
         top: 0,
         left: 0,
-        behavior: 'instant' //défilement instantané
+        behavior: 'smooth' //défilement fluide
     });
 
 });
