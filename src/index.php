@@ -41,7 +41,7 @@
                     foreach($produits as $row_count){
                         if($produitsAffiches < $maxProduits){              
                             echo "<div class='produit'>";
-                                echo "<a href='' class='lien_produit'>";
+                                echo "<a href='pageArticle.php?idProduit=". $row_count['idProduit'] . " class='lien_produit'>";
                                     echo "<img class='img_produit' src='" . htmlspecialchars($row_count['lien']) . "'/>";
                                     echo "<p> Vendeur : " . htmlspecialchars($row_count['nom']) . "</p>";
                                     echo "<h3>" . htmlspecialchars($row_count['nomProduit']) . "</h3>";
