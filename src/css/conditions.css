@@ -4,6 +4,10 @@ body{
     font-family: 'RedHatDisplay-Bold', sans-serif;
 }
 
+#title_acces{
+    text-align: center;
+}
+
 .main_section {
     display: flex; 
     flex-direction: row; 
@@ -89,3 +93,7 @@ span, .footer_lien{
     text-decoration: underline;
 }
 /*Fin partie footer*/
+
+#confiance{
+    text-align: center;
+}
