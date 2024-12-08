@@ -31,10 +31,17 @@
     $stmt->execute([$idProduit]);
     $produit = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    $stmt = $pdo->prepare("SELECT lien FROM image WHERE idImage <= 5 "); // Limiter à 5 images
-    $stmt->execute();
-    $images = $stmt->fetchAll(PDO::FETCH_COLUMN);
+    // Récupérer l'image principale du produit
+    $idImage = $produit['idImage'];
+    $stmt = $pdo->prepare("SELECT lien FROM image WHERE idImage = ?");
+    $stmt->execute([$idImage]);
+    $imagePrincipale = $stmt->fetchColumn();
 
+    // Récupérer les autres images du produit
+    $stmt = $pdo->prepare("SELECT lien FROM image WHERE idImage != ? LIMIT 5");
+    $stmt->execute([$idImage]);
+    $images = $stmt->fetchAll(PDO::FETCH_COLUMN);
+    
     $stmt = $pdo->prepare("
     SELECT utilisateur.nom, avis.contenu, avis.idAvis, avis.note
     FROM avis
@@ -98,12 +105,12 @@
             <div class="left_section">
                 <div class="image_gallery">
                     <div class="thumbnail_list">
-                        <?php foreach ($images as $image): ?>
+                    <?php foreach ($images as $image): ?>
                             <img src="<?php echo htmlspecialchars($image);?>" alt="Image produit" class="thumbnail">
                         <?php endforeach; ?>
                     </div>
                     <div class="main_image">
-                        <img src="<?php echo htmlspecialchars($images[0] ?? ''); ?>" alt="Photo principale du produit">
+                        <img src="<?php echo htmlspecialchars($imagePrincipale); ?>" alt="Photo principale du produit">
                     </div>
                 </div>
 
