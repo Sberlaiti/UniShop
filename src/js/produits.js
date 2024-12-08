@@ -1,5 +1,5 @@
 //fonction qui permet de revenir au tout début de la page
-const retourhaut = document.querySelector("#retourHaut");
+const retourhaut = document.querySelector(".return_top");
 retourhaut.addEventListener('click', function() {
     window.scrollTo({
         top: 0,

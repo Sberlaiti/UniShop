@@ -90,10 +90,15 @@ a, #lien_produit{
     justify-content: center;
     align-items: center;
     padding: 1em;
-    width: 50%;
+    width: 65%;
     background-color: orange;
     margin: 0 auto;
     gap: 20px;
+}
+
+.img_jeu{
+    width: 250px;
+    height: 170px;
 }
 
 .jeu, .abonnement{

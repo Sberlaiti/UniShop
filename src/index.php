@@ -67,25 +67,28 @@
 
         <br>
 
+        <div class="title_categories">
+            <h2>Jouer aux jeux pour avoir un code de réduction !</h2>
+        </div>
         <section class="affichage_externe">
 
             <div class="jeu">
-                <img src="" alt="Image du jeu"/>
-                <p>Le jeu du jour</p>
+                <img class="img_jeu" src="" alt="Image du jeu"/>
+                <p>Démineur</p>
             </div>
 
             <div class="jeu">
-                <img src="" alt="Image du jeu"/>
-                <p>Le jeu du jour</p>
+                <img class="img_jeu" src="./images/solitaire.jpg" alt="Image du jeu"/>
+                <p>Solitaire</p>
             </div>
 
             <div class="jeu">
-                <img src="" alt="Image du jeu"/>
-                <p>Le jeu du jour</p>
+                <img class="img_jeu" src="" alt="Image du jeu"/>
+                <p>Roue de la fortune</p>
             </div>
 
             <div class="abonnement">
-                <img src="" alt="Image du jeu"/>
+                <img class="img_jeu" src="" alt="Image du jeu"/>
                 <p>Prener votre abonnement</p>
             </div>
 
@@ -116,7 +119,7 @@
                     echo "<p class='no_categories'>Aucune catégorie disponible</p>";
                 }
             ?>
-            </div>
+            <!--/div-->
             <!--button class="nav_btn right_btn">→</button-->
         </section>
         <br>
@@ -140,7 +143,7 @@
             <div class="droits">
                 <div id="liste_droits">
                     <a class="footer_lien" href="conditions.php">Conditions générales du site</a>
-                    <a class="footer_lien" href="">Vos informations personnelles</a>
+                    <a class="footer_lien" href="informations.php">Vos informations personnelles</a>
                 </div>
                 <span>© 2024, UniShop</span>
             </div>            
