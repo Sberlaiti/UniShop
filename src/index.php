@@ -84,11 +84,11 @@
 
             <div class="jeu">
                 <img class="img_jeu" src="" alt="Image du jeu"/>
-                <p>Le jeu du jour</p>
+                <p>Roue de la fortune</p>
             </div>
 
             <div class="abonnement">
-                <img src="" alt="Image du jeu"/>
+                <img class="img_jeu" src="" alt="Image du jeu"/>
                 <p>Prener votre abonnement</p>
             </div>
 
