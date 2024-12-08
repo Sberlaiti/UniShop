@@ -1,6 +1,29 @@
 <?php
     require_once('header02.php');
 
+    $_SESSION['IdUtilisateur'] = 3333;
+
+    $idUtilisateur = $_SESSION['idUtilisateur'];
+    $stmt = $pdo->prepare("SELECT estVendeur FROM utilisateur WHERE idUtilisateur = ?");
+    $stmt->execute([$idUtilisateur]);
+    $utilisateur = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
+        $idProduit = $_POST['idProduit'];
+    
+        // Vérifier si le produit est déjà dans le panier
+        if (!isset($_SESSION['panier'])) {
+            $_SESSION['panier'] = [];
+        }
+    
+        if (!in_array($idProduit, $_SESSION['panier'])) {
+            $_SESSION['panier'][$idProduit] = 1;
+            echo "Produit ajouté au panier.";
+        } else {
+            echo "Ce produit est déjà dans votre panier.";
+        }
+    }
+
     $idProduit = $_GET['idProduit'];
     $stmt = $pdo->prepare("SELECT nomProduit,description,prix,delayLivraison,idImage
                         FROM produit 
@@ -8,7 +31,7 @@
     $stmt->execute([$idProduit]);
     $produit = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    $stmt = $pdo->prepare("SELECT lien FROM image WHERE idImage <= 5"); // Limiter à 5 images
+    $stmt = $pdo->prepare("SELECT lien FROM image WHERE idImage <= 5 "); // Limiter à 5 images
     $stmt->execute();
     $images = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
@@ -173,11 +196,21 @@
 
                 <div class="action_buttons">
                     <button class="buy_button">Acheter</button>
-                    <button class="cart_button">Ajouter au Panier</button>
+                    <form action="" method="POST">
+                        <input type="hidden" name="idProduit" value="<?php echo htmlspecialchars($_GET['idProduit']); ?>">
+                        <button type="submit" name="add_to_cart" class="cart_button">Ajouter au Panier</button>
+                    </form>
                 </div>
 
                 <div class="extra_options">
                     <button class="more_options">...</button>
+                    <div class="more_options_menu">
+                        <?php if ($utilisateur['estVendeur'] == 1): ?>
+                            <button class="edit_info_button" onclick="window.location.href='pageModifInfoArticle.php?idProduit=<?php echo $_GET['idProduit']; ?>'">Modifier les infos de l'article</button>
+                        <?php endif; ?>
+                        <button class="view_cart_button" onclick="window.location.href='panier.php'">Voir panier</button>
+                        <!-- Ajoutez d'autres options ici -->
+                    </div>
                     <button class="share_button">Partager</button>
                 </div>
             </div>

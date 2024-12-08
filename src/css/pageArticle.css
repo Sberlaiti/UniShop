@@ -181,11 +181,47 @@ body {
 }
 
 .extra_options {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
+    position: relative;
 }
 
+.more_options {
+    padding: 10px;
+    border: none;
+    background-color: #6c757d;
+    color: rgb(19, 18, 18);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.more_options:hover {
+    background-color: #5a6268;
+}
+
+.more_options_menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.more_options_menu button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background: none;
+    text-align: left;
+    cursor: pointer;
+}
+
+.more_options_menu button:hover {
+    background-color: #f0f0f0;
+}
 .more_options, .share_button, .favorite_button {
     padding: 8px 12px;
     font-size: 16px;
@@ -309,6 +345,63 @@ span, .footer_lien{
     text-decoration: underline;
 }
 /*Fin partie footer*/
+
+/* Styles spécifiques pour pageModifInfoArticle.php */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.formulaire {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.formulaire label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.formulaire input[type="text"],
+.formulaire input[type="number"],
+.formulaire input[type="file"],
+.formulaire textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.formulaire textarea {
+    resize: none;
+    height: 150px;
+}
+
+.formulaire .button {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.formulaire .button button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.formulaire .button button:hover {
+    background-color: #0056b3;
+}
+
 
 /* Responsive design */
 @media (max-width: 768px) {

@@ -42,3 +42,19 @@ sizeButtons.forEach(button => {
         button.classList.add('selected');
     });
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const moreOptionsButton = document.querySelector('.more_options');
+    const moreOptionsMenu = document.querySelector('.more_options_menu');
+
+    moreOptionsButton.addEventListener('click', () => {
+        moreOptionsMenu.style.display = moreOptionsMenu.style.display === 'block' ? 'none' : 'block';
+    });
+
+    // Fermer le menu si on clique en dehors
+    document.addEventListener('click', (event) => {
+        if (!moreOptionsButton.contains(event.target) && !moreOptionsMenu.contains(event.target)) {
+            moreOptionsMenu.style.display = 'none';
+        }
+    });
+});
