@@ -96,6 +96,11 @@ a, #lien_produit{
     gap: 20px;
 }
 
+.img_jeu{
+    width: 250px;
+    height: 170px;
+}
+
 .jeu, .abonnement{
     background-color: white;
     padding: 0.5em;

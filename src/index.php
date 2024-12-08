@@ -67,20 +67,23 @@
 
         <br>
 
+        <div class="title_categories">
+            <h2>Jouer aux jeux pour avoir un code de réduction !</h2>
+        </div>
         <section class="affichage_externe">
 
             <div class="jeu">
-                <img src="" alt="Image du jeu"/>
-                <p>Le jeu du jour</p>
+                <img class="img_jeu" src="" alt="Image du jeu"/>
+                <p>Démineur</p>
             </div>
 
             <div class="jeu">
-                <img src="" alt="Image du jeu"/>
-                <p>Le jeu du jour</p>
+                <img class="img_jeu" src="./images/solitaire.jpg" alt="Image du jeu"/>
+                <p>Solitaire</p>
             </div>
 
             <div class="jeu">
-                <img src="" alt="Image du jeu"/>
+                <img class="img_jeu" src="" alt="Image du jeu"/>
                 <p>Le jeu du jour</p>
             </div>
 
