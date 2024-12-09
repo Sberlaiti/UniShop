@@ -1,0 +1,198 @@
+@import url('../fonts/Tanker_Complete/Fonts/WEB/css/tanker.css');
+@import url('../fonts/RedHatDisplay_Complete/Fonts/WEB/css/red-hat-display.css');
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'RedHatDisplay-Regular', sans-serif;
+    background-color: #ffbf6627;
+}
+
+a h1{
+    color: black;
+}
+
+a h1:hover{
+    color: orange;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.headerContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 90%;
+    align-items: center;
+
+    border-bottom: 2px solid rgb(226, 222, 222);
+}
+
+h1 {
+    font-size: 30px;
+}
+
+.navSection {
+    display: flex;
+    justify-content: center;
+}
+
+nav {
+    width: auto;
+    height: 40px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    background-color: #F7AF60;
+    border-radius: 30px;
+}
+
+nav > ul {
+    display: flex;
+    flex-direction: row;
+    
+    list-style: none;
+    padding: 0;
+}
+
+nav > ul > li {
+    margin: 0 15px;
+}
+
+nav > ul > li:first-child {
+    margin-left: 2px;
+}
+
+nav > ul > li:last-child {
+    margin-right: 2px;
+}
+
+nav > ul > li > a {
+    font-family: 'RedHatDisplay-Bold', sans-serif;
+    font-size: 15px;
+    letter-spacing: 1px;
+    text-decoration: none;
+    color: black;
+    padding: 8px 20px;
+    border-radius: 20px;
+    transition: background-color 0.4s ease, color 0.3s ease;
+}
+
+nav > ul > li > a:hover {
+    background-color: #EA6615;
+    color: white;
+}
+
+.options {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
+.searchBar, .cartButton > a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #EA6615;
+    padding: 0 10px;
+    border-radius: 30px;
+}
+
+.searchBar > button, .cartButton > a > button {
+    border: none;
+    background-color: transparent;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.searchBar {
+    min-width: 40px;
+    height: 40px;
+    border: none;
+}
+
+.searchBar > button {
+    border-radius: 50%;
+}
+
+.searchBar > input {
+    display: none;
+    height: 100%;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 30px;
+    background-color: transparent;
+}
+
+.searchBar > input:focus {
+    font-family: 'RedHatDisplay-Bold', sans-serif;
+    color: white;
+    outline: none;
+   max-width: 143px;
+}
+
+.searchBar > input::placeholder {
+    font-family: 'RedHatDisplay-Bold', sans-serif;
+    letter-spacing: 1px;
+    color: white;
+}
+
+.searchBar > button > i {
+    color: white;
+}
+
+a {
+    text-decoration: none;
+}
+
+.accountButton > a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #F7AF60;
+    border-radius: 30px;
+
+    text-decoration: none;
+    padding: 0 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.accountButton > a > i {
+    color: black;
+    margin-right: 5px;
+    margin-left: 10px;
+}
+
+.accountButton > a > img{
+    width: 20px;
+    height: 20px;
+
+    margin-left: 10px;
+    margin-right: 5px;
+    border: 2px solid red;
+    border-radius: 50%;
+}
+
+/* Verifier la taille du nom*/
+.accountButton > a > p {
+    font-family: 'Tanker-Regular', sans-serif;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: black;
+    margin-right: 10px;
+}
+
+.cartButton > a{
+    width: 40px;
+    height: 40px;
+
+    color: white;
+}
+
+
