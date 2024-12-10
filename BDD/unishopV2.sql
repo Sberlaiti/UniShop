@@ -80,16 +80,18 @@ DROP TABLE IF EXISTS `image`;
 CREATE TABLE IF NOT EXISTS `image` (
   `idImage` int NOT NULL AUTO_INCREMENT,
   `lien` varchar(1000) NOT NULL,
-  PRIMARY KEY (`idImage`)
+  `idProduit` int NOT NULL,
+  PRIMARY KEY (`idImage`),
+  KEY `fk_image_produit` (`idProduit`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO `image` (`idImage`, `lien`) VALUES
-(1, './images/animaux.jpg'),
-(2, './images/telephonie.jpg'),
-(3, '../articles/preview-2.jpeg'),
-(4, '../articles/preview-5.jpeg'),
-(5, '../articles/preview-4.jpeg'),
-(6, '../articles/preview-3.jpeg');
+INSERT INTO `image` (`idImage`, `lien`,`idProduit`) VALUES
+(1, './images/animaux.jpg',4),
+(2, './images/telephonie.jpg',4),
+(3, '../articles/preview-2.jpeg',4),
+(4, '../articles/preview-5.jpeg',4),
+(5, '../articles/preview-4.jpeg',4),
+(6, '../articles/preview-3.jpeg',4);
 
 -- Table `panier`
 DROP TABLE IF EXISTS `panier`;

@@ -1,23 +1,28 @@
 <?php
     require_once('header02.php');
 
-    $_SESSION['IdUtilisateur'] = 3333;
+    $idUtilisateur = $_SESSION['user']['idUtilisateur'];
 
-    $idUtilisateur = $_SESSION['idUtilisateur'];
+    
+
     $stmt = $pdo->prepare("SELECT estVendeur FROM utilisateur WHERE idUtilisateur = ?");
     $stmt->execute([$idUtilisateur]);
     $utilisateur = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
         $idProduit = $_POST['idProduit'];
-    
+        $idUtilisateur = $_SESSION['user']['idUtilisateur'];
+        $quatite = 1;
         // Vérifier si le produit est déjà dans le panier
         if (!isset($_SESSION['panier'])) {
             $_SESSION['panier'] = [];
         }
     
         if (!in_array($idProduit, $_SESSION['panier'])) {
-            $_SESSION['panier'][$idProduit] = 1;
+            $stmt = $pdo->prepare("INSERT INTO panier (idProduit, idUtilisateur, quantite) VALUES (?, ?, ?)");
+            $stmt->execute([$idProduit, $idUtilisateur, $quatite]);
+            
+
             echo "Produit ajouté au panier.";
         } else {
             echo "Ce produit est déjà dans votre panier.";
@@ -38,8 +43,14 @@
     $imagePrincipale = $stmt->fetchColumn();
 
     // Récupérer les autres images du produit
-    $stmt = $pdo->prepare("SELECT lien FROM image WHERE idImage != ? LIMIT 5");
-    $stmt->execute([$idImage]);
+
+    $stmt = $pdo->prepare("
+    SELECT lien 
+    FROM image
+    JOIN produit ON image.idProduit = produit.idProduit 
+    WHERE image.idProduit = ?  
+    LIMIT 5");
+    $stmt->execute([$idProduit]);
     $images = $stmt->fetchAll(PDO::FETCH_COLUMN);
     
     $stmt = $pdo->prepare("
@@ -56,7 +67,7 @@
         
         $nouveauAvis = $_POST['new_comment'];
         $idProduit = $_GET['idProduit'];
-        $idUtilisateur = $_SESSION['idUtilisateur'];
+        $idUtilisateur = $_SESSION['user']['idUtilisateur'];
         $note = $_POST['note'];
     
         
@@ -69,7 +80,7 @@
     }
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['del_comment'])) {
         $idAvis = $_POST['idAvis'];
-        $idUtilisateur = $_SESSION['idUtilisateur']; 
+        $idUtilisateur = $_SESSION['user']['idUtilisateur']; 
     
         
         $stmt = $pdo->prepare("SELECT idUtilisateur FROM avis WHERE idAvis = ?");
@@ -153,7 +164,7 @@
                                                 }
                                             ?>
                                         </div>
-                                        <?php if ($_SESSION['idUtilisateur'] == 3333 && isset($avisItem['idAvis'])): ?>
+                                        <?php if ($_SESSION['user']['idUtilisateur'] == $idUtilisateur && isset($avisItem['idAvis'])): ?>
                                             <div class="del_button">
                                                 <form action="" method="POST">
                                                     <input type="hidden" name="idAvis" value="<?php echo htmlspecialchars($avisItem['idAvis']); ?>">
