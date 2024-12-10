@@ -6,10 +6,7 @@ function highlight(element) {
 var info_Profile_1 = document.querySelector('.info_Profile_1');
 var btn_logout = info_Profile_1.querySelector('button');
 
-info_Profile_1.addEventListener('click', function() {
+btn_logout.addEventListener('click', function() {
     fetch("./php/log_out.php", { method: "POST" })
-    .then(response => response.text())
-    .then(data => {
-        console.log(data);
-    });
+    window.location.href = "index.php";
 });

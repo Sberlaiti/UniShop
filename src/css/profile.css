@@ -73,8 +73,11 @@
 .info_Profile_1 > img {
     width: 50px;
     height: 50px;
+
+    border: 3px solid #f7af60;
     border-radius: 50%;
 }
+
 
 .info_Profile_1 > p {
     font-family: 'RedHatDisplay-Bold', sans-serif;
@@ -94,7 +97,20 @@
     cursor: pointer;
 }
 
+.firstName_Zone, .lastName_Zone, .email_Zone {
+    width: 100%;
+    height: 10%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
 
+.firstName_Zone > h2, .lastName_Zone > h2, .email_Zone > h2 {
+    font-family: 'RedHatDisplay-Bold', sans-serif;
+    font-size: 1rem;
+    color: hsl(0, 0%, 0%);
+    margin-right: 10px;
+}
 
 
 

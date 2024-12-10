@@ -38,10 +38,6 @@
                         <a href="admin.php" class="menu_Admin"><i class="fa-solid fa-user-tie"></i>Admin</a>
                     </div>
                 <?php } ?>
-
-                <div class="menu_Logout" onclick="highlight(this)">
-                    <a href="logout.php" class="menu_Logout"><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
-                </div>
         </div>
 
         <div class="container_Info">
@@ -52,9 +48,15 @@
                     <button>Log Out</button>
                 </div>
                 <div class="info_Profile_2">
-                    <p>First Name: <?php echo $_SESSION['user']['prenom'] ?></p>
-                    <p>Last Name: <?php echo $_SESSION['user']['nom'] ?></p>
-                    <p>Email: <?php echo $_SESSION['user']['mail'] ?></p>
+                    <div class="firstName_Zone">
+                        <h2>First Name : </h2>  <p><?php echo $_SESSION['user']['prenom'] ?></p>
+                    </div>
+                    <div class="lastName_Zone">
+                        <h2>Last Name : </h2> <p><?php echo $_SESSION['user']['nom'] ?></p>
+                    </div>
+                    <div class="email_Zone">
+                        <h2>Email : </h2> <p> <?php echo $_SESSION['user']['mail'] ?> </p>
+                    </div>
                 </div>
             </div>
         <?php } else {?>

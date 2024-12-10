@@ -8,11 +8,6 @@
         $stmt->execute(['mail' => $email]);
         $user_Data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        var_dump($user_Data);
-        var_dump($password);
-
-        $hashed_password = password_hash('b', PASSWORD_DEFAULT);
-
         if($user_Data && password_verify($password, $user_Data['password'])) {
             echo "Connection réussie";
             $_SESSION['user'] = $user_Data;
