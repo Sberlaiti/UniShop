@@ -81,11 +81,11 @@ CREATE TABLE IF NOT EXISTS `image` (
   `idImage` int NOT NULL AUTO_INCREMENT,
   `lien` varchar(1000) NOT NULL,
   `idProduit` int NOT NULL,
-  PRIMARY KEY (`idImage`)
+  PRIMARY KEY (`idImage`),
   KEY `fk_image_produit` (`idProduit`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO `image` (`idImage`, `lien`) VALUES
+INSERT INTO `image` (`idImage`, `lien`,`idProduit`) VALUES
 (1, './images/animaux.jpg',4),
 (2, './images/telephonie.jpg',4),
 (3, '../articles/preview-2.jpeg',4),
