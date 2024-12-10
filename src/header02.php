@@ -23,7 +23,7 @@
 <body>
     <header>
         <div class="headerContainer">
-            <a href="index.php"><h1>UniShop</h1></a>
+            <h1> <a href="index.php">UniShop</a></h1>
 
             <section class="navSection">
                 <nav>
@@ -50,7 +50,7 @@
                             <i class="fa-solid fa-user"></i>
                             <p>Sign In</p>
                     <?php } else { ?>
-                        <a href="profil.php">
+                        <a href="profile.php">
                             <img src="./images/italianFlag.png" alt="UserLogo"><p><?php echo $_SESSION['user']['nom'] ?></p>
                     <?php } ?>
                     </a>

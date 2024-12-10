@@ -194,3 +194,16 @@
     padding: 10px 20px;
     cursor: pointer;
 }
+
+.container_emptyCart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    margin-top: 60px;
+}
+
+.container_emptyCart > img {
+    width: 200px;
+}

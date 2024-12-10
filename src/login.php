@@ -9,16 +9,12 @@
 
 
     // On utilise la fonction login pour connecter l'utilisateur
-    $signIN_error= 0;
+    $signIN_error = 0;
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['signIN'])) {
-        $email = $_POST['email'];
-        $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-    
-        if (login($email, $password, $pdo)) {
-            header('Location: index.php');
+        $signIN_error = login($_POST['email'], $_POST['password'], $pdo);
+        if ($signIN_error == 0) {
+            header('Location: ./index.php');
             exit;
-        } else {
-            $signIN_error = -1;
         }
     }
 
