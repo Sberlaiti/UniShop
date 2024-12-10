@@ -4,11 +4,20 @@ body{
     font-family: 'RedHatDisplay-Bold', sans-serif;
 }
 
+.main_section{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
 /* Partie affichage des catégories */
 #liste_categories {
     background-color: #ffbf66;
     padding: 20px;
     width: 300px;
+    border-radius: 0.5cm;
+    margin-left: 0.5cm;
 }
 /* Fin de la partie affichage des catégories */
 
@@ -16,9 +25,9 @@ body{
 /* Partie affichage des produits */
 #affichage_produit{
     background-color: white;
-    justify-self: center;
     padding: 2em;
-    border-radius: 0.5cm;    
+    border-radius: 0.5cm; 
+    margin: 0 auto;
 }
 
 .affichage_produit{

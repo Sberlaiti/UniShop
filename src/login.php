@@ -9,16 +9,12 @@
 
 
     // On utilise la fonction login pour connecter l'utilisateur
-    $signIN_error= 0;
+    $signIN_error = 0;
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['signIN'])) {
-        $email = $_POST['email'];
-        $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-    
-        if (login($email, $password, $pdo)) {
-            header('Location: header.php');
+        $signIN_error = login($_POST['email'], $_POST['password'], $pdo);
+        if ($signIN_error == 0) {
+            header('Location: ./index.php');
             exit;
-        } else {
-            $signIN_error = -1;
         }
     }
 
@@ -37,7 +33,6 @@
                 break;
             case 1:
                 login($email, $password, $pdo);
-                header('Location: header.php');
                 exit;
         }
     }
@@ -67,7 +62,7 @@
             </div>
             
             <div class="container_SignIn_Form">
-                <form action="login.php" method="POST">
+                <form method="POST">
                     <input id="email-box" class="box" type="text" name="email" required placeholder="E-mail"/> <br />
                     <input id='password-box' class='box' type='password' name="password" required placeholder='Password'/> <br />
                     <input id='signIN_button' class="button" name="signIN" type='submit' value='Sign In'/>
@@ -91,7 +86,7 @@
             </div>
 
             <div class="container_SignUp_Form">
-                <form action="login.php" method="POST">
+                <form method="POST">
                     <div class="row">
                         <input id="firstname-box" class="box" type="text" name="firstname" required placeholder="First Name"/>
                         <input id="lastname-box" class="box" type="text" name="lastname" required placeholder="Last Name"/>

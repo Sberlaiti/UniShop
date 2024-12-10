@@ -116,7 +116,7 @@
             <div class="droits">
                 <div id="liste_droits">
                     <a class="footer_lien" href="conditions.php">Conditions générales du site</a>
-                    <a class="footer_lien" href="">Vos informations personnelles</a>
+                    <a class="footer_lien" href="informations.php">Vos informations personnelles</a>
                 </div>
                 <span>© 2024, UniShop</span>
             </div>            

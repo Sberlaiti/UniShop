@@ -10,7 +10,7 @@
             return -1; // - 1 si l'email est déjà utilisé ou invalide
         } else {
             $stmt = $pdo->prepare("INSERT INTO utilisateur (nom, prenom, mail, password) VALUES (:nom, :prenom, :email, :password)");
-            $stmt->execute(['nom' => $lastname, 'prenom' => $firstname, 'email' => $email, 'password' => password_hash($password, PASSWORD_DEFAULT)]);
+            $stmt->execute(['nom' => $lastname, 'prenom' => $firstname, 'email' => $email, 'password'=> $password]);
             return 1; // 1 si la création a réussi
         }
     }
