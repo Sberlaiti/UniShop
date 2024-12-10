@@ -1,7 +1,48 @@
 body{
     background-color: #ffbf6627;
     margin: 0 auto;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-family: 'RedHatDisplay-Bold', sans-serif;
+}
+
+#title_acces{
+    text-align: center;
+}
+
+.main_section {
+    display: flex; 
+    flex-direction: row; 
+    justify-content: space-between; 
+    align-items: flex-start; 
+    width: 90%; 
+    padding: 0 20px; 
+    box-sizing: border-box; 
+    overflow-x: auto;
+}
+
+#acces_rapide, .affichage{
+    width: 100%; 
+    padding: 20px; 
+    box-sizing: border-box; 
+}
+
+#acces_rapide{
+    background-color: orange;
+    border-radius: 0.2cm;
+    width: 300px;
+    position: fixed;
+}
+
+.affichage{
+    margin-left: 8cm;
+}
+
+.titre_acces{
+    cursor: pointer;
+}
+
+.titre_acces:hover{
+    color: white;
+    text-decoration: underline;
 }
 
 /*Partie footer*/
@@ -14,9 +55,12 @@ footer{
     text-align: center;
     background-color: rgb(247, 132, 0);
     color: white;
-    font-weight: bold;
     cursor: pointer;
     padding: 0.2em;
+}
+
+.return_top:hover{
+    background-color: rgb(255, 255, 255);
 }
 
 select{
@@ -24,7 +68,8 @@ select{
 }
 
 .return_top:hover{
-    background-color: rgba(247, 132, 0, 50%);
+    background-color: rgb(255, 153, 0);
+    font-weight: bold;
 }
 
 .logo_langue{
@@ -42,10 +87,13 @@ select{
 
 span, .footer_lien{
     color: white;
-    text-decoration: none;
 }
 
 .footer_lien:hover{
     text-decoration: underline;
 }
 /*Fin partie footer*/
+
+#confiance{
+    text-align: center;
+}

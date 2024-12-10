@@ -85,7 +85,11 @@ CREATE TABLE IF NOT EXISTS `image` (
 
 INSERT INTO `image` (`idImage`, `lien`) VALUES
 (1, './images/animaux.jpg'),
-(2, './images/telephonie.jpg');
+(2, './images/telephonie.jpg'),
+(3, '../articles/preview-2.jpeg'),
+(4, '../articles/preview-5.jpeg'),
+(5, '../articles/preview-4.jpeg'),
+(6, '../articles/preview-3.jpeg');
 
 -- Table `panier`
 DROP TABLE IF EXISTS `panier`;
