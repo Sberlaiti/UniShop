@@ -1,9 +1,9 @@
 <?php
-    require_once("header02.php");
-
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
+
+    require_once("header02.php");
 ?>
 
 <!DOCTYPE html>
@@ -19,14 +19,14 @@
     <body>
         <br>
         <section class="main_section">
-            <section id="acces_rapide">
-                <h3>Accès rapide</h3>
+            <div id="acces_rapide">
+                <h2 id="title_acces">Accès rapide</h2>
                 <p class="titre_acces" data-target="cgu">Conditions générales d'utilisation</p>
                 <p class="titre_acces" data-target="cgv">Conditions générales de vente</p>
-            </section>
+            </div>
 
-            <section class="affichage">
-                <h1 id="cgu">Conditions générales d'utilisation</h1>
+            <div class="affichage">
+                <h1 id="cgu">Conditions générales d'utilisation - UniShop</h1>
                 <p>Dernière mise à jour le ...</p>
 
                 <p>Bienvenue sur UniShop</p>
@@ -115,7 +115,7 @@
                 <hr>
                 <br>
 
-                <h1 id="cgv">Conditions générales de vente</h1>
+                <h1 id="cgv">Conditions générales de vente - UniShop</h1>
 
                 <h2>1. Inscriptions et accès</h2>
                 <h3>1.1. Création de compte</h3>
@@ -175,7 +175,7 @@
                     Toutefois, certains produits peuvent être exclus du droit de rétractation (produits personnalisés, numériques, etc...). 
                     Le vendeur devra traiter les demandes de retour dans un délai raisonnable.
                 </p>
-            </section>
+            </div>
         </section>
 
         <footer>
@@ -193,7 +193,7 @@
             <div class="droits">
                 <div id="liste_droits">
                     <a class="footer_lien" href="conditions.php">Conditions générales du site</a>
-                    <a class="footer_lien" href="">Vos informations personnelles</a>
+                    <a class="footer_lien" href="informations.php">Vos informations personnelles</a>
                 </div>
                 <span>© 2024, UniShop</span>
             </div>
