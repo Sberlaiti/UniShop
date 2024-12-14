@@ -8,11 +8,11 @@ body {
     background-color: #ffbf6627;
 }
 
-a h1{
+h1 a{
     color: black;
 }
 
-a h1:hover{
+h1 a:hover{
     color: orange;
 }
 
@@ -30,8 +30,45 @@ header {
     border-bottom: 2px solid rgb(226, 222, 222);
 }
 
+.liste_deroulante{
+    display: none;
+    position: absolute;
+    background-color: #F7AF60;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    z-index: 1000;
+}
+
+.liste_deroulante ul {
+    list-style: none;
+    margin: 1px;
+    padding: 1em;
+}
+
+.liste_deroulante ul .liste:hover{
+    color: white;
+    background-color: #EA6615;
+    border-radius: 2cm;
+    transition: background-color 0.4s ease, color 0.3s ease;
+}
+
+.liste{
+    padding: 0.2em;
+}
+
+.liste a:hover{
+    color: white;
+}
+
 h1 {
     font-size: 30px;
+}
+
+h1 > a {
+    font-family: 'RedHatDisplay-Bold', sans-serif;
+    color: #000;
+    text-decoration: none;
 }
 
 .navSection {

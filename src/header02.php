@@ -9,6 +9,11 @@
     // Initialisation des variables de session
     if(!isset($_SESSION['user'])) $_SESSION['user'] = null;
 
+    //Récupération des valeurs des catégories dans la BDD
+    $sql = "SELECT nomCategorie, idCategorie
+            FROM categorie";
+    $result = $pdo->query($sql);
+
 ?>
 
 <html lang="fr">
@@ -23,14 +28,31 @@
 <body>
     <header>
         <div class="headerContainer">
-            <a href="index.php"><h1>UniShop</h1></a>
+            <h1><a href="index.php">UniShop</a></h1>
 
             <section class="navSection">
                 <nav>
                     <ul>
-                        <li><a href="">Catalog</a></li>
+                        <li id="menu_item">
+                            <a href="">Catalog</a>
+                            <div class="liste_deroulante">
+                                <ul>
+                                    <?php
+                                        foreach($result as $row){
+                                            echo "<li class='liste'><a href='produits.php?idCategorie=" . $row['idCategorie'] . "'>" . $row['nomCategorie'] . "</a></li>";
+                                        }
+                                    ?>
+                                </ul>
+                            </div>
+                        </li>
                         <li><a href="">Sale</a></li>
-                        <li><a href="">Games</a></li>
+                        <?php if($_SESSION['user'] != null) { ?>
+                                <li><a href="game.php">Games</a></li>
+                        <?php }
+                            else{
+                                echo '<li><a href="login.php">Games</a></li>';
+                            }
+                        ?>
                         <li><a href="">Contact</a></li>
                         <li><a href="">Others</a></li>
                     </ul>
@@ -50,8 +72,8 @@
                             <i class="fa-solid fa-user"></i>
                             <p>Sign In</p>
                     <?php } else { ?>
-                        <a href="profil.php">
-                            <img src="./images/italianFlag.png" alt="UserLogo"><p>Ilyas</p>
+                        <a href="profile.php">
+                            <img src="./images/italianFlag.png" alt="UserLogo"><p><?php echo $_SESSION['user']['nom'] ?></p>
                     <?php } ?>
                     </a>
                 </div>

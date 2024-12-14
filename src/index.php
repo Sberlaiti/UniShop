@@ -1,6 +1,9 @@
 <?php
     require_once("header02.php");
 
+    // Initialisation des variables de session
+    if(!isset($_SESSION['user'])) $_SESSION['user'] = null;
+
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
@@ -44,7 +47,7 @@
                     foreach($produits as $row_count){
                         if($produitsAffiches < $maxProduits){              
                             echo "<div class='produit'>";
-                                echo "<a href='pageArticle.php?idProduit=". $row_count['idProduit'] . " id='lien_produit'>";
+                                echo "<a href='pageArticle.php?idProduit=". $row_count['idProduit'] . "' id='lien_produit'>";
                                     echo "<img class='img_produit' src='" . htmlspecialchars($row_count['lien']) . "'/>";
                                     echo "<p> Vendeur : " . htmlspecialchars($row_count['nom']) . "</p>";
                                     echo "<h3>" . htmlspecialchars($row_count['nomProduit']) . "</h3>";
@@ -68,14 +71,29 @@
         <br>
 
         <div class="title_categories">
-            <h2>Jouer aux jeux pour avoir un code de réduction !</h2>
+            <h2>! Jouer aux jeux pour avoir un code de réduction !</h2>
         </div>
         <section class="affichage_externe">
-
-            <div class="jeu">
-                <img class="img_jeu" src="" alt="Image du jeu"/>
-                <p>Roue de la fortune</p>
-            </div>
+            <?php
+                if($_SESSION['user']!=null){
+                    ?>
+                    <div class="jeu">
+                        <a href="game.php">
+                            <img class="img_jeu" src="" alt="Image du jeu"/>
+                            <p>Roue de la fortune</p>
+                        </a>
+                    </div>
+                    <?php
+                }
+                else{
+                    echo '<div class="jeu">
+                            <a href="login.php">
+                                <img class="img_jeu" src="" alt="Image du jeu"/>
+                                <p>Roue de la fortune</p>
+                            </a>
+                        </div>';
+                }
+            ?>
 
             <div class="abonnement">
                 <img class="img_jeu" src="" alt="Image du jeu"/>
@@ -113,10 +131,6 @@
             <!--button class="nav_btn right_btn">→</button-->
         </section>
         <br>
-
-        <div class="jeu_promo">
-            <p>Jouer au jeu !</p>
-        </div>
 
         <footer>
             <div class="return_top">
