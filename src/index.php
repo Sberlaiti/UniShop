@@ -74,16 +74,6 @@
 
             <div class="jeu">
                 <img class="img_jeu" src="" alt="Image du jeu"/>
-                <p>Démineur</p>
-            </div>
-
-            <div class="jeu">
-                <img class="img_jeu" src="./images/solitaire.jpg" alt="Image du jeu"/>
-                <p>Solitaire</p>
-            </div>
-
-            <div class="jeu">
-                <img class="img_jeu" src="" alt="Image du jeu"/>
                 <p>Roue de la fortune</p>
             </div>
 
