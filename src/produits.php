@@ -16,7 +16,21 @@
         <meta http-equiv="content-type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="./css/produits.css">
         <link rel="icon" href="../logos/logo-png.png" type="image/icon">
-        <title>Tous les produits - UniShop</title>
+        <title><?php
+        //Titre de la page en fonction de la catégorie sélectionnée 
+            if(isset($_GET['idCategorie']) && $_GET['idCategorie'] != "0"){
+                $idCategorie = $_GET['idCategorie'];
+                $sql_requete = "SELECT nomCategorie
+                                FROM categorie
+                                WHERE idCategorie = :idCategorie";
+                $stmt = $pdo->prepare($sql_requete);
+                $stmt->execute(['idCategorie' => $idCategorie]);
+                $categorie = $stmt->fetch();
+                echo htmlspecialchars($categorie['nomCategorie']);
+            } else {
+                echo "Tous les produits";
+            }
+        ?> - UniShop</title>
     </head>
 
     <body>
@@ -98,7 +112,7 @@
         <br>
 
         <div class="jeu_promo">
-            <p>Jouer au jeu !</p>
+            <a href="game.php"><p>Jouer au jeu !</p></a>
         </div>
 
         <footer>

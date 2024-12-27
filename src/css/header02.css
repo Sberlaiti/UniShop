@@ -12,6 +12,11 @@ h1 a{
     color: black;
 }
 
+.liste a{
+    color: black;
+    font-weight: bold;
+}
+
 h1 a:hover{
     color: orange;
 }
@@ -38,6 +43,7 @@ header {
     border-radius: 4px;
     overflow: hidden;
     z-index: 1000;
+    margin-top: 8px;
 }
 
 .liste_deroulante ul {
