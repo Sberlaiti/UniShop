@@ -134,9 +134,9 @@ DROP TABLE IF EXISTS `promotion`;
 CREATE TABLE IF NOT EXISTS `promotion` (
   `idPromo` int NOT NULL AUTO_INCREMENT,
   `codePromo` varchar(5) NOT NULL,
-  `coefficient` double NOT NULL,
+  `coefficient` double(5,2) NOT NULL,
   PRIMARY KEY (`idPromo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Table `utilisateur`
 DROP TABLE IF EXISTS `utilisateur`;
