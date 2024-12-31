@@ -90,9 +90,10 @@ a, #lien_produit{
     width: fit-content;
     margin: 0 auto;
     gap: 20px;
+    border-radius: 0.2cm;
 }
 
-.img_jeu{
+.img_jeu{/* Taille de l'image du jeu*/
     width: 250px;
     height: 170px;
 }
@@ -111,6 +112,15 @@ a, #lien_produit{
     justify-content: center;
     align-items:  center;
     padding: 1em;
+    background-color: rgb(238, 225, 225);
+}
+
+.affichage_categorie2{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-auto-rows: auto;
+    gap: 10px;
+    background-color: rgb(238, 225, 225);
 }
 
 .title_categories{
@@ -140,6 +150,11 @@ a, #lien_produit{
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
+    color: black;
+    background-color: orange;
+    padding: 1em;
+    border-radius: 0.2cm;
 }
 /*Fin partie affichage des catégories*/
 

@@ -110,8 +110,19 @@
         <section class="affichage_categorie">
             
             <?php
-                //Affichage de chaque catégorie
-                if($result->rowCount() > 0){
+                //Affichage de chaque catégorie avec défilement
+                if($result->rowCount() > 8){
+                    while($row = $result->fetch(PDO::FETCH_ASSOC)){
+                        echo "<div class='categorie'>";
+                            echo "<a href='produits.php?idCategorie=" . $row['idCategorie'] . "' class='lien_produit'>";
+                                echo "<img class='image_categorie' src='" . $row['lien'] . "' alt='Image de la catégorie'/>";
+                                echo "<p class='categories'>" . htmlspecialchars($row['nomCategorie']) . "</p>";
+                            echo "</a>";
+                        echo "</div>";
+                    }
+                }
+                //Affichage de chaque catégorie sans défilement
+                else if($result->rowCount() > 0){
                     while($row = $result->fetch(PDO::FETCH_ASSOC)){
                         echo "<div class='categorie'>";
                             echo "<a href='produits.php?idCategorie=" . $row['idCategorie'] . "' class='lien_produit'>";
@@ -122,7 +133,7 @@
                     }
                 }
                 else{
-                    echo "<p class='no_categories'>Aucune catégorie disponible</p>";
+                    echo "<p class='no_categories'>Aucune catégorie disponible<br>! Merci de bien vouloir patienter le temps de régler le soucis !</p>";
                 }
             ?>
         </section>

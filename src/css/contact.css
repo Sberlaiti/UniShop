@@ -1,0 +1,140 @@
+body{
+    background-color: #ffbf6627;
+    margin: 0;
+    font-family: 'RedHatDisplay-Bold', sans-serif;
+}
+
+/*Partie affichage du formulaire*/
+#description{
+    color: #45a049;
+    text-align: center;
+    font-size: 20px;
+}
+
+#description:hover{
+    color: green;
+}
+
+.contact_container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+    width: fit-content;
+    margin: 0 auto;
+    background-color: #ffecd74c;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 0 10px 0 rgba(123, 122, 122, 0.1);
+}
+
+h1{
+    text-align: center;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input {
+    width: 400px;
+    height: 50px;
+    margin: 5px 0px 5px 0px;
+    padding-left: 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: #ffffffa9;
+}
+
+textarea{
+    width: 400px;
+    height: 50px;
+    margin: 5px 0px 5px 0px;
+    padding-left: 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: #ffffffa9;
+}
+
+textarea:focus {
+    outline: 1px solid #F7AF60;
+}
+
+.contact > form .row {
+    display: flex;
+    justify-content: space-between;
+}
+
+input:focus {
+    outline: 1px solid #F7AF60;
+}
+
+#prenom, #nom {
+    width: 195px;
+    grid-row: 1 / 2;
+}
+
+#envoyer {
+    background-color: #EA6615;
+    color: white;
+    font-family: 'RedHatDisplay-Bold', sans-serif;
+    font-size: 15px;
+    margin-top: 40px;
+    cursor: pointer;
+    width: 400px;
+    height: 50px;
+    border: none;
+    border-radius: 5px;
+}
+/*Fin partie affichage du formulaire*/
+
+/*Partie footer*/
+footer{
+    background-color: rgb(180, 104, 17);
+}
+
+.return_top{
+    display: block;
+    text-align: center;
+    background-color: rgb(247, 132, 0);
+    color: white;
+    cursor: pointer;
+    padding: 0.2em;
+}
+
+.return_top:hover{
+    background-color: rgb(255, 255, 255);
+}
+
+select{
+    margin-left: 30px;
+}
+
+.return_top:hover{
+    background-color: rgb(255, 153, 0);
+    font-weight: bold;
+}
+
+.logo_langue{
+    padding: 2em;
+    background-color: rgb(252, 151, 37);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.droits{
+    text-align: center;
+    padding: 2em;
+}
+
+span, .footer_lien{
+    color: white;
+}
+
+.footer_lien:hover{
+    text-decoration: underline;
+}
+/*Fin partie footer*/

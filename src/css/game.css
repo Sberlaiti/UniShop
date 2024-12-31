@@ -44,7 +44,7 @@ body {
 
 #point{
     position: absolute;
-    top: 61%;
+    top: 60%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 10;
@@ -88,7 +88,7 @@ body {
     text-align: center;
     left: 148px;
     border: 2px solid black;
-    color: white;
+    color: black;
 }
 
 .wheel #one{
@@ -124,11 +124,11 @@ body {
 }
 
 .winning_segment {
-    background-color: green;
+    background-color: #ffbf66;
 }
 
 .segment{
-    background-color: red;
+    background-color: orange;
 }
 
 #spin {

@@ -45,7 +45,16 @@
                                 </ul>
                             </div>
                         </li>
-                        <li><a href="">Sale</a></li>
+                        <li>
+                            <?php
+                            $sql_requete = "SELECT idCategorie
+                                            FROM categorie
+                                            WHERE nomCategorie = 'Promotions'";
+                            $stmt = $pdo->query($sql_requete);
+
+                            echo "<a href='produits.php?idCategorie=" . $stmt->fetch()['idCategorie'] . "'>Sale</a>";
+                            ?>
+                        </li>
                         <?php if($_SESSION['user'] != null) { ?>
                                 <li><a href="game.php">Games</a></li>
                         <?php }
@@ -53,7 +62,7 @@
                                 echo '<li><a href="login.php">Games</a></li>';
                             }
                         ?>
-                        <li><a href="">Contact</a></li>
+                        <li><a href="contact.php">Contact</a></li>
                         <li><a href="">Others</a></li>
                     </ul>
                 </nav>

@@ -10,9 +10,10 @@
     error_reporting(E_ALL);
 
     $sql_requete = "SELECT *
-                    FROM promotion";
+                    FROM promotion
+                    ORDER BY RAND() LIMIT 1";
     $stmt = $pdo->query($sql_requete);
-    $promotions = $stmt->fetchAll();
+    $promotions = $stmt->fetch(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
