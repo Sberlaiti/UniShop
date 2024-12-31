@@ -109,8 +109,6 @@
         </div>
         <section class="affichage_categorie">
             
-            <!--button class="nav_btn left_btn">←</button>
-            <div class="categories_wrapper"-->
             <?php
                 //Affichage de chaque catégorie
                 if($result->rowCount() > 0){
@@ -127,8 +125,6 @@
                     echo "<p class='no_categories'>Aucune catégorie disponible</p>";
                 }
             ?>
-            <!--/div-->
-            <!--button class="nav_btn right_btn">→</button-->
         </section>
         <br>
 

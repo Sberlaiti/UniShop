@@ -30,7 +30,7 @@
         <p id="description">
             ! Tournez la roue pour gagner une promotion !
             <br>
-            ! Vous avez 3 chances pour gagner une promotion. !
+            ! Vous avez 3 chances pour gagner une promotion !
         </p>
         <?php
             if(isset($_SESSION['user'])){
@@ -39,14 +39,21 @@
         ?>
 
         <section class="affichage_jeu">
+            <div id="point"></div>
             <?php
                 if(count($promotions) > 2){
+                    echo "<div class='pointer'></div>";
                     echo "<div class='wheel' id='wheel'>";
-                    foreach($promotions as $index => $row_count){
-                        $class = ($index % 2 == 0) ? 'segment winning-segment' : 'segment';
-                        $text = ($index % 2 == 0) ? htmlspecialchars($row_count['codePromo']) : 'Vide';
-                        echo "<div class='" . $class . "'>" . $text. "</div>";
-                    }
+                        ?>
+                        <div class="winning_segment" id="one">Gagnant</div>
+                        <div class="segment" id="two">Perdant</div>
+                        <div class="winning_segment" id="three">Gagnant</div>
+                        <div class="segment" id="four">Perdant</div>
+                        <div class="winning_segment" id="five">Gagnant</div>
+                        <div class="segment" id="six">Perdant</div>
+                        <div class="winning_segment" id="seven">Gagnant</div>
+                        <div class="segment" id="eight">Perdant</div>
+                        <?php
                     echo "</div>";
                     ?>
                     <button id="spin">Jouer</button>
