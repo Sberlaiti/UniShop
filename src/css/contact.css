@@ -26,9 +26,10 @@ body{
     border-radius: 15px;
     padding: 20px;
     box-shadow: 0 0 10px 0 rgba(123, 122, 122, 0.1);
+    margin-bottom: 4px;
 }
 
-h1{
+.title{
     text-align: center;
 }
 
@@ -60,11 +61,6 @@ textarea{
 
 textarea:focus {
     outline: 1px solid #F7AF60;
-}
-
-.contact > form .row {
-    display: flex;
-    justify-content: space-between;
 }
 
 input:focus {

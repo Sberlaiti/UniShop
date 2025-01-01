@@ -10,10 +10,9 @@
     error_reporting(E_ALL);
 
     $sql_requete = "SELECT *
-                    FROM promotion
-                    ORDER BY RAND() LIMIT 1";
+                    FROM promotion";
     $stmt = $pdo->query($sql_requete);
-    $promotions = $stmt->fetch(PDO::FETCH_ASSOC);
+    $promotions = $stmt->fetchAll(PDO::FETCH_ASSOC);   
 ?>
 
 <!DOCTYPE html>
@@ -33,16 +32,14 @@
             <br>
             ! Vous avez 3 chances pour gagner une promotion !
         </p>
-        <?php
-            if(isset($_SESSION['user'])){
-                echo "<p id='nb_coups'>Nombre de coups restants : " . $_SESSION['nb_coups'] ."</p>";
-            }
-        ?>
 
         <section class="affichage_jeu">
-            <div id="point"></div>
             <?php
-                if(count($promotions) > 2){
+                if($promotions !== false && count($promotions) > 0){
+                    if(isset($_SESSION['user'])){
+                        echo "<p id='nb_coups'>Nombre de coups restants : " . $_SESSION['nb_coups'] ."</p>";
+                    }
+                    echo '<div id="point"></div>';
                     echo "<div class='pointer'></div>";
                     echo "<div class='wheel' id='wheel'>";
                         ?>

@@ -46,14 +46,16 @@ startButton.addEventListener('click', () => {
                 segment.classList.contains('winning_segment')
             );
             // Simuler l'appel à une API ou serveur pour obtenir une promotion
-            fetch('../src/game.php')
-                .then(response => response.json())
-                .then(data => {
+            fetch("../game.php")
+                .then(function(response){
+                    return response.json();
+                })
+                .then(function(data){
+                    console.log(data.codePromo);
                     resultat.textContent = 'Bravo vous avez gagné un code promo : ' + data.codePromo;
                 })
                 .catch(error => {
                     resultat.textContent = ' Erreur lors de la récupération de la promotion.';
-                    console.error('Erreur:', error);
                 });
         } else {
             lossStreak++; // Augmenter le compteur de pertes
