@@ -79,7 +79,7 @@
                     ?>
                     <div class="jeu">
                         <a href="game.php">
-                            <img class="img_jeu" src="" alt="Image du jeu"/>
+                            <img class="img_jeu" src="./images/roue_fortune.jpg" alt="Image du jeu"/>
                             <p>Roue de la fortune</p>
                         </a>
                     </div>

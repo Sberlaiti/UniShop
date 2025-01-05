@@ -57,12 +57,13 @@
                         </li>
                         <?php if($_SESSION['user'] != null) { ?>
                                 <li><a href="game.php">Games</a></li>
+                                <li><a href="contact.php">Contact</a></li>
                         <?php }
                             else{
                                 echo '<li><a href="login.php">Games</a></li>';
+                                echo '<li><a href="login.php">Contact</a></li>';
                             }
                         ?>
-                        <li><a href="contact.php">Contact</a></li>
                         <li><a href="">Others</a></li>
                     </ul>
                 </nav>

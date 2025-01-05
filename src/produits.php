@@ -5,6 +5,9 @@
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
 
+    // Initialisation des variables de session
+    if(!isset($_SESSION['user'])) $_SESSION['user'] = null;
+
     //Récupération des valeurs des catégories dans la BDD
     $sql = "SELECT nomCategorie, idCategorie
             FROM categorie";
@@ -112,7 +115,11 @@
         <br>
 
         <div class="jeu_promo">
-            <a href="game.php"><p>Jouer au jeu !</p></a>
+            <?php if($_SESSION['user'] != null): ?>
+                <a href="game.php"><p>Envie de gagner un code promo ?<br>Jouer au jeu !</p></a>
+            <?php else: ?>
+                <a href="login.php"><p>Envie de gagner un code promo ?<br>Jouer au jeu !</p></a>
+            <?php endif; ?>
         </div>
 
         <footer>
