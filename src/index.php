@@ -1,6 +1,9 @@
 <?php
     require_once("header02.php");
 
+    // Initialisation des variables de session
+    if(!isset($_SESSION['user'])) $_SESSION['user'] = null;
+
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
@@ -16,11 +19,9 @@
     //Récupération des valeurs des catégories dans la BDD
     $sql = "SELECT categorie.nomCategorie, image.lien, categorie.idCategorie
             FROM categorie
-            JOIN image ON categorie.idImage = image.idImage";
+            JOIN image ON categorie.idImage = image.idImage
+            ORDER BY categorie.nomCategorie";
     $result = $pdo->query($sql);
-
-
-    // TODO: créer du texte defilant pour les categories
 ?>
 
 <!DOCTYPE html>
@@ -47,11 +48,11 @@
                     foreach($produits as $row_count){
                         if($produitsAffiches < $maxProduits){              
                             echo "<div class='produit'>";
-                                echo "<a href='pageArticle.php?idProduit=". $row_count['idProduit'] . " id='lien_produit'>";
+                                echo "<a href='pageArticle.php?idProduit=". $row_count['idProduit'] . "' id='lien_produit'>";
                                     echo "<img class='img_produit' src='" . htmlspecialchars($row_count['lien']) . "'/>";
-                                    echo "<p> Vendeur : " . htmlspecialchars($row_count['nom']) . "</p>";
-                                    echo "<h3>" . htmlspecialchars($row_count['nomProduit']) . "</h3>";
-                                    echo "<p>" . htmlspecialchars($row_count['prix']) . " €</p>";
+                                    echo "<p class='titre_vendeur'> Vendeur : " . htmlspecialchars($row_count['nom']) . "</p>";
+                                    echo "<h3 class'titre_produit'>" . htmlspecialchars($row_count['nomProduit']) . "</h3>";
+                                    echo "<p class='prix_produit'>" . htmlspecialchars($row_count['prix']) . " €</p>";
                                 echo "</a>";
                             echo "</div>";
                             $produitsAffiches++;
@@ -71,30 +72,29 @@
         <br>
 
         <div class="title_categories">
-            <h2>Jouer aux jeux pour avoir un code de réduction !</h2>
+            <h2>! Jouer aux jeux pour avoir un code de réduction !</h2>
         </div>
         <section class="affichage_externe">
-
-            <div class="jeu">
-                <img class="img_jeu" src="" alt="Image du jeu"/>
-                <p>Démineur</p>
-            </div>
-
-            <div class="jeu">
-                <img class="img_jeu" src="./images/solitaire.jpg" alt="Image du jeu"/>
-                <p>Solitaire</p>
-            </div>
-
-            <div class="jeu">
-                <img class="img_jeu" src="" alt="Image du jeu"/>
-                <p>Roue de la fortune</p>
-            </div>
-
-            <div class="abonnement">
-                <img class="img_jeu" src="" alt="Image du jeu"/>
-                <p>Prener votre abonnement</p>
-            </div>
-
+            <?php
+                if($_SESSION['user']!=null){
+                    ?>
+                    <div class="jeu">
+                        <a href="game.php">
+                            <img class="img_jeu" src="./images/roue_fortune.jpg" alt="Image du jeu"/>
+                            <p>Roue de la fortune</p>
+                        </a>
+                    </div>
+                    <?php
+                }
+                else{
+                    echo '<div class="jeu">
+                            <a href="login.php">
+                                <img class="img_jeu" src="./images/roue_fortune.jpg" alt="Image du jeu"/>
+                                <p>Roue de la fortune</p>
+                            </a>
+                        </div>';
+                }
+            ?>
         </section>
 
         <br>
@@ -104,11 +104,20 @@
         </div>
         <section class="affichage_categorie">
             
-            <!--button class="nav_btn left_btn">←</button>
-            <div class="categories_wrapper"-->
             <?php
-                //Affichage de chaque catégorie
-                if($result->rowCount() > 0){
+                //Affichage de chaque catégorie avec défilement
+                if($result->rowCount() > 8){
+                    while($row = $result->fetch(PDO::FETCH_ASSOC)){
+                        echo "<div class='categorie'>";
+                            echo "<a href='produits.php?idCategorie=" . $row['idCategorie'] . "' class='lien_produit'>";
+                                echo "<img class='image_categorie' src='" . $row['lien'] . "' alt='Image de la catégorie'/>";
+                                echo "<p class='categories'>" . htmlspecialchars($row['nomCategorie']) . "</p>";
+                            echo "</a>";
+                        echo "</div>";
+                    }
+                }
+                //Affichage de chaque catégorie sans défilement
+                else if($result->rowCount() > 0){
                     while($row = $result->fetch(PDO::FETCH_ASSOC)){
                         echo "<div class='categorie'>";
                             echo "<a href='produits.php?idCategorie=" . $row['idCategorie'] . "' class='lien_produit'>";
@@ -119,17 +128,11 @@
                     }
                 }
                 else{
-                    echo "<p class='no_categories'>Aucune catégorie disponible</p>";
+                    echo "<p class='no_categories'>Aucune catégorie disponible<br>! Merci de bien vouloir patienter le temps de régler le soucis !</p>";
                 }
             ?>
-            <!--/div-->
-            <!--button class="nav_btn right_btn">→</button-->
         </section>
         <br>
-
-        <div class="jeu_promo">
-            <p>Jouer au jeu !</p>
-        </div>
 
         <footer>
             <div class="return_top">

@@ -15,7 +15,7 @@ body{
 #liste_categories {
     background-color: #ffbf66;
     padding: 20px;
-    width: 300px;
+    width: 250px;
     border-radius: 0.5cm;
     margin-left: 0.5cm;
 }
@@ -68,12 +68,13 @@ a, #lien_produit{
 }
 /* Fin de la partie affichage des produits */
 
+/* Partie bouton du jeu */
 .jeu_promo{
     position: fixed;
     bottom: 20px;
     right: 20px;
-    width: 100px;
-    height: 100px;
+    width: 130px;
+    height: 130px;
     background-color: rgb(247, 132, 0);
     color: white;
     border-radius: 50%;
@@ -89,6 +90,11 @@ a, #lien_produit{
     transform: scale(1.1);
     background-color: rgb(180, 104, 17);
 }
+
+.jeu_promo a{
+    color : white;
+}
+/* Fin de la partie bouton du jeu */
 
 
 /*Partie footer*/

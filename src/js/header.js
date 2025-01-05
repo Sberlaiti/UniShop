@@ -12,3 +12,16 @@ function display_SearchBar() {
         searchInput.style.display = 'block';
     }
 }
+
+//affichage des catégories lors du survol
+document.querySelectorAll('#menu_item').forEach(item => {
+    item.addEventListener('mouseover', () => {
+      const dropdown = item.querySelector('.liste_deroulante');
+      dropdown.style.display = 'block';
+    });
+  
+    item.addEventListener('mouseleave', () => {
+      const dropdown = item.querySelector('.liste_deroulante');
+      dropdown.style.display = 'none';
+    });
+  });

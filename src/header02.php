@@ -9,6 +9,12 @@
     // Initialisation des variables de session
     if(!isset($_SESSION['user'])) $_SESSION['user'] = null;
 
+    //Récupération des valeurs des catégories dans la BDD
+    $sql = "SELECT nomCategorie, idCategorie
+            FROM categorie
+            ORDER BY nomCategorie";
+    $result = $pdo->query($sql);
+
 ?>
 
 <html lang="fr">
@@ -23,15 +29,42 @@
 <body>
     <header>
         <div class="headerContainer">
-            <h1> <a href="index.php">UniShop</a></h1>
+            <h1><a href="index.php">UniShop</a></h1>
 
             <section class="navSection">
                 <nav>
                     <ul>
-                        <li><a href="">Catalog</a></li>
-                        <li><a href="">Sale</a></li>
-                        <li><a href="">Games</a></li>
-                        <li><a href="">Contact</a></li>
+                        <li id="menu_item">
+                            <a href="produits.php">Catalog</a>
+                            <div class="liste_deroulante">
+                                <ul>
+                                    <?php
+                                        foreach($result as $row){
+                                            echo "<li class='liste'><a href='produits.php?idCategorie=" . $row['idCategorie'] . "'>" . $row['nomCategorie'] . "</a></li>";
+                                        }
+                                    ?>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <?php
+                            $sql_requete = "SELECT idCategorie
+                                            FROM categorie
+                                            WHERE nomCategorie = 'Promotions'";
+                            $stmt = $pdo->query($sql_requete);
+
+                            echo "<a href='produits.php?idCategorie=" . $stmt->fetch()['idCategorie'] . "'>Sale</a>";
+                            ?>
+                        </li>
+                        <?php if($_SESSION['user'] != null) { ?>
+                                <li><a href="game.php">Games</a></li>
+                                <li><a href="contact.php">Contact</a></li>
+                        <?php }
+                            else{
+                                echo '<li><a href="login.php">Games</a></li>';
+                                echo '<li><a href="login.php">Contact</a></li>';
+                            }
+                        ?>
                         <li><a href="">Others</a></li>
                     </ul>
                 </nav>
