@@ -19,7 +19,8 @@
     //Récupération des valeurs des catégories dans la BDD
     $sql = "SELECT categorie.nomCategorie, image.lien, categorie.idCategorie
             FROM categorie
-            JOIN image ON categorie.idImage = image.idImage";
+            JOIN image ON categorie.idImage = image.idImage
+            ORDER BY categorie.nomCategorie";
     $result = $pdo->query($sql);
 ?>
 
@@ -49,9 +50,9 @@
                             echo "<div class='produit'>";
                                 echo "<a href='pageArticle.php?idProduit=". $row_count['idProduit'] . "' id='lien_produit'>";
                                     echo "<img class='img_produit' src='" . htmlspecialchars($row_count['lien']) . "'/>";
-                                    echo "<p> Vendeur : " . htmlspecialchars($row_count['nom']) . "</p>";
-                                    echo "<h3>" . htmlspecialchars($row_count['nomProduit']) . "</h3>";
-                                    echo "<p>" . htmlspecialchars($row_count['prix']) . " €</p>";
+                                    echo "<p class='titre_vendeur'> Vendeur : " . htmlspecialchars($row_count['nom']) . "</p>";
+                                    echo "<h3 class'titre_produit'>" . htmlspecialchars($row_count['nomProduit']) . "</h3>";
+                                    echo "<p class='prix_produit'>" . htmlspecialchars($row_count['prix']) . " €</p>";
                                 echo "</a>";
                             echo "</div>";
                             $produitsAffiches++;
@@ -88,18 +89,12 @@
                 else{
                     echo '<div class="jeu">
                             <a href="login.php">
-                                <img class="img_jeu" src="" alt="Image du jeu"/>
+                                <img class="img_jeu" src="./images/roue_fortune.jpg" alt="Image du jeu"/>
                                 <p>Roue de la fortune</p>
                             </a>
                         </div>';
                 }
             ?>
-
-            <div class="abonnement">
-                <img class="img_jeu" src="" alt="Image du jeu"/>
-                <p>Prener votre abonnement</p>
-            </div>
-
         </section>
 
         <br>

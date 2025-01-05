@@ -62,12 +62,14 @@
 
     <body>
         <?php if($messageEnvoye): ?>
-            <h1 class="title">Service client</h1>
-            <p class="reussite">
-                Votre message a bien été envoyé et nous vous répondrons dans les plus brefs délais<br>
-                Nous apprécions votre patience et votre confiance en notre service.<br>
-                Cordialement, l'équipe UniShop.
-            </p>
+            <div class="container_reussite">
+                <h1 class="title">Service client</h1>
+                <p class="reussite">
+                    Votre message a bien été envoyé et nous vous répondrons dans les plus brefs délais.<br>
+                    Nous apprécions votre patience et votre confiance en notre service.<br>
+                    Cordialement, l'équipe UniShop.
+                </p>
+            </div>
         <?php else: ?>
             <p id="description">! Veuiller remplir ce formulaire afin de répondre à votre question ou bien votre réclamation dans de bonnes conditions et dans les meilleurs délais !</p>    
             <div class="contact_container">

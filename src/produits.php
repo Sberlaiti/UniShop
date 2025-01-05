@@ -10,7 +10,8 @@
 
     //Récupération des valeurs des catégories dans la BDD
     $sql = "SELECT nomCategorie, idCategorie
-            FROM categorie";
+            FROM categorie
+            ORDER BY nomCategorie";
     $result = $pdo->query($sql);
 ?>
 <!DOCTYPE html>

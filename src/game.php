@@ -9,10 +9,20 @@
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
 
-    $sql_requete = "SELECT *
-                    FROM promotion";
+    $sql_requete = "SELECT codePromo
+                    FROM promotion
+                    ORDER BY RAND()
+                    LIMIT 1";
     $stmt = $pdo->query($sql_requete);
-    $promotions = $stmt->fetchAll(PDO::FETCH_ASSOC);   
+    $promotions = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // if (!isset($_SESSION['nb_coups']) || $_SESSION['nb_coups'] <= 0) {
+    //     echo json_encode(['Plus de coups disponibles. Revenez demain !']);
+    //     exit;
+    // }
+    
+    // // Mise à jour du nombre de coups restants
+    // $_SESSION['nb_coups']--;
 ?>
 
 <!DOCTYPE html>
@@ -55,7 +65,7 @@
                     echo "</div>";
                     ?>
                     <button id="spin">Jouer</button>
-                    <div id="result"></div>
+                    <div id="result"><?php foreach($promotions as $promotion){echo $promotion['codePromo'];}?></div>
                     <?php
                 }
                 else{

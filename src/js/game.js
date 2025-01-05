@@ -18,7 +18,7 @@ let nbCoups = parseInt(document.querySelector('#nb_coups')?.textContent.split(':
 let lossStreak = 0; // Compteur de pertes consécutives
 
 startButton.addEventListener('click', () => {
-    // Ajouter plusieurs tours complets avant de calculer l'angle final
+    // Ajout de plusieurs tours complets avant de calculer l'angle final
     const extraSpins = 5; // Nombre de tours complets supplémentaires
     const finalRotation = number + extraSpins * 360; // Calculer la rotation totale
 
@@ -32,7 +32,7 @@ startButton.addEventListener('click', () => {
 
     // Calcul de l'indice du segment gagnant
     const segmentAngle = 360 / totalSegments; // Angle de chaque segment
-    const winningIndex = Math.floor(finalAngle / segmentAngle); // Index du segment final
+    Math.floor(finalAngle / segmentAngle); // Index du segment final
 
     setTimeout(() => {
         // **Nouvelle logique pour un tirage équitable**
@@ -42,17 +42,17 @@ startButton.addEventListener('click', () => {
         if (shouldWin) {
             lossStreak = 0; // Réinitialiser le compteur de pertes
             // Trouver le prochain segment gagnant
-            const winningSegment = Array.from(segments).find(segment =>
+            Array.from(segments).find(segment =>
                 segment.classList.contains('winning_segment')
             );
-            // Simuler l'appel à une API ou serveur pour obtenir une promotion
-            fetch("../game.php")
+            // Simulation appel à une API ou serveur pour obtenir une promotion
+            fetch("../src/game.php")
                 .then(function(response){
                     return response.json();
                 })
                 .then(function(data){
                     console.log(data.codePromo);
-                    resultat.textContent = 'Bravo vous avez gagné un code promo : ' + data.codePromo;
+                    //resultat.textContent = 'Bravo vous avez gagné un code promo : ' + data.codePromo;
                 })
                 .catch(error => {
                     resultat.textContent = ' Erreur lors de la récupération de la promotion.';
