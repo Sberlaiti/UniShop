@@ -1,0 +1,142 @@
+@import url('../fonts/RedHatDisplay_Complete/Fonts/WEB/css/red-hat-display.css');
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+
+h1 {
+    font-family: 'RedHatDisplay-Bold', sans-serif;
+    font-size: 25px;
+}
+
+.container_payment {
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #ffecd74c;
+    box-shadow: 0 0 10px 0 rgba(123, 122, 122, 0.1);
+}
+
+.container_payment > p {
+    font-family: 'RedHatDisplay-SemiBold', sans-serif;
+    font-size: 15px;
+}
+
+.container_paymentMethod_other {
+    display: flex;
+    flex-direction: row;
+}
+
+.paymentMethod {
+    width: 200px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 3px;
+    border-radius: 10px;
+    border: 1px solid #9595955d;
+}
+
+.paymentMethod > i {
+    font-size: 28px;
+}
+
+#paypal > i {
+    font-size: 20px;
+}
+
+.container_paymentMethod_card {
+    padding : 15px;
+    border-radius: 10px;
+    border: 1px solid #9595955d;
+}
+
+form {
+    display: grid;
+    grid-template-columns: 3fr 2fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 5px 10px ;
+}
+
+form > div > label {
+    font-family: 'RedHatDisplay-SemiBold', sans-serif;
+    font-size: 13px;
+}
+
+.card_name {
+    display: flex;
+    flex-direction: column;
+    grid-column: 1 / 4;
+}
+
+.card_number > input {
+    width: 100%;
+}
+
+input {
+    height: 35px;
+    border-radius: 8px;
+    border: 1px solid #9595955d;
+    margin: 5px 0;
+    padding: 0 10px;
+    font-size: 13px;
+    border: 0.2px solid #9595955d;
+    background-color: #ffffffa9;
+}
+
+input::placeholder {
+    color: #b3b3b3;
+    opacity: 1;
+}
+
+input:focus {
+    outline: 1px solid #EA6615;
+}
+
+.error {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.error_message {
+    display: none;
+    font-family: 'RedHatDisplay-SemiBold', sans-serif;
+    font-size: 13px;
+    color: red;
+}
+
+hr {
+    width: 100%;
+    border: 0.5px solid #9595955d;
+    margin: 25px 0px 10px 0px;
+}
+
+.subtotal {
+    display: flex;
+    justify-content: space-between;
+}
+
+button {
+    font-family: 'RedHatDisplay-Bold', sans-serif;
+    font-size: 15px;
+    padding: 10px;
+    background-color: #EA6615;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.active {
+    background-color: #EA6615;
+    color: white;
+}
