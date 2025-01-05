@@ -1,5 +1,6 @@
 <?php
     require_once("header02.php");
+    require_once("php/verify_craditCard.php");
 
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
@@ -20,6 +21,11 @@
         $stmt->execute(['idProduit' => $produit['idProduit']]);
         $article = $stmt->fetch();
         $total += $article['prix'] * $produit['quantitee'];
+    }
+
+    $payment_error = 1;
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['payment_button'])) {
+        $payment_error = verif_card($_POST['cardName'], $_POST['cardNumber'], $_POST['cardDate'], $_POST['cardCVV']);
     }
 ?>
 
@@ -51,42 +57,47 @@
             <p>ou utilisez votre carte bleu</p>
             <div class="container_paymentMethod_card">
                 <form method="POST">
-                    <div class="card_name">
-                        <label for="cardName">Nom dans la carte</label>
-                        <input type="text" name="cardName" class="cardInput" placeholder="John Doe">
-                    </div>
+                    <div class="container_card">
+                        <div class="card_name">
+                            <label for="cardName">Nom dans la carte</label>
+                            <input type="text" name="cardName" class="cardInput" placeholder="John Doe">
+                        </div>
 
-                    <div class="card_number">
-                        <label for="cardNumber">Numéro de la carte</label>
-                        <input type="text" name="cardNumber" class="cardInput" placeholder="1234 5678 9101 1121" maxlength="19" inputmode="numeric" pattern="[0-9]{4} [0-9]{4} [0-9]{4} [0-9]{4}">
-                    </div>
+                        <div class="card_number">
+                            <label for="cardNumber">Numéro de la carte</label>
+                            <input type="text" name="cardNumber" class="cardInput" placeholder="1234 5678 9101 1121" maxlength="19" inputmode="numeric" pattern="[0-9]{4} [0-9]{4} [0-9]{4} [0-9]{4}">
+                        </div>
 
-                    <div class="card_date">
-                        <label for="cardDate">Date d'expiration</label>
-                        <input type="text" name="cardDate" class="cardInput" placeholder="MM/YY" maxlength="5">
-                    </div>
+                        <div class="card_date">
+                            <label for="cardDate">Date d'expiration</label>
+                            <input type="text" name="cardDate" class="cardInput" placeholder="MM/YY" maxlength="5" inputmode="numeric" pattern="[0-9]{2}/[0-9]{2}">
+                        </div>
 
-                    <div class="card_cvv">
-                        <label for="cardCVV">CVV</label>
-                        <input type="text" name="cardCVV" class="cardInput" placeholder="123" maxlength="3">
-                    </div>             
+                        <div class="card_cvv">
+                            <label for="cardCVV">CVV</label>
+                            <input type="text" name="cardCVV" class="cardInput" placeholder="123" maxlength="3" inputmode="numeric" pattern="[0-9]{3}">
+                        </div>
+                    </div>
+                    <div class="error">
+                        <?php if ($payment_error < 0) { echo $payment_error;?>
+                            <p class="error_message">Erreur : Les champs ne sont pas bien remplis</p>
+                        <?php } ?>
+                    </div>
+                    <hr>
+                    <div class="subtotal">
+                        <p>Subtotal</p>
+                        <p><?php 
+                            if (isset($_POST['total']) && $_POST['total'] != null) {
+                                $_SESSION['total'] = $_POST['total'];
+                                echo $_SESSION['total'];
+                            } else {
+                                echo $_SESSION['total'];
+                            }
+                        ?></p>
+                    </div>
+                    <button id="payment_button" type="submit" name="payment_button">Payer</button>            
                 </form>
-                <div class="error">
-                    <p class="error_message">Erreur : Date pas valide!!</p>
-                </div>
             </div>
-            <hr>
-            <div class="subtotal">
-                <p>Subtotal</p>
-                <p><?php 
-                    if ($_POST['total'] != null) {
-                        echo $_POST['total'];
-                    } else {
-                        echo $total;
-                    }
-                 ?></p>
-            </div>
-            <button>Confirm</button>
         </div>
     </div>
     <script src="./js/paiement.js"></script>

@@ -22,8 +22,8 @@ cardInput.forEach(function (element) {
     });
 });
 
+// On rajoute les espaces dans le numéro de carte et ne permet pas de mettre plus de 16 chiffres
 const cardNumber_input = document.querySelector('.card_number > input');
-
 cardNumber_input.addEventListener('input', (e) => {
     let value = e.target.value.replace(/\D/g, '');
     value = value.slice(0, 16);
@@ -32,8 +32,9 @@ cardNumber_input.addEventListener('input', (e) => {
 });
 
 
+// On change le format de la date d'expiration
 const expirationDateInput = document.querySelector('.card_date > input');
-const errorMessage = document.querySelector('.error_message');
+const errorMessage_date = document.querySelector('.error_message_date');
 
 expirationDateInput.addEventListener('input', (e) => {
     let value = e.target.value.replace(/\D/g, '');
@@ -43,22 +44,10 @@ expirationDateInput.addEventListener('input', (e) => {
     e.target.value = value.slice(0, 5);
 });
 
-expirationDateInput.addEventListener('blur', () => {
-    const [month, year] = expirationDateInput.value.split('/').map(Number);
-
-    const currentDate = new Date();
-    const currentMonth = currentDate.getMonth() + 1;
-    const currentYear = currentDate.getFullYear() % 100;
-
-    if (
-        !month || !year || 
-        month < 1 || month > 12 || 
-        year < currentYear || 
-        (year === currentYear && month < currentMonth) 
-    ) {
-        errorMessage.style.display = 'inline'; 
-    } else {
-        errorMessage.style.display = 'none';
-    }
+// On ne permet pas de mettre plus de 3 chiffres dans le cvv et des lettres
+const cvvInput = document.querySelector('.card_cvv > input');
+cvvInput.addEventListener('input', (e) => {
+    let value = e.target.value.replace(/\D/g, '');
+    value = value.slice(0, 3);
+    e.target.value = value;
 });
-

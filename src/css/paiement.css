@@ -59,7 +59,7 @@ h1 {
     border: 1px solid #9595955d;
 }
 
-form {
+.container_card {
     display: grid;
     grid-template-columns: 3fr 2fr 1fr;
     grid-template-rows: 1fr 1fr;
@@ -125,7 +125,8 @@ hr {
     justify-content: space-between;
 }
 
-button {
+#payment_button {
+    width: 100%;
     font-family: 'RedHatDisplay-Bold', sans-serif;
     font-size: 15px;
     padding: 10px;
