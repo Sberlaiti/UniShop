@@ -3,21 +3,6 @@
 
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);
-
-    //Récupération des données de la table article
-    $sql_requete = "SELECT p.idProduit, p.nomProduit, u.nom, p.prix, i.lien
-                    FROM produit p
-                    JOIN utilisateur u ON u.idUtilisateur = p.idUtilisateur
-                    JOIN image i ON i.idImage = p.idImage";
-    $stmt = $pdo->query($sql_requete);
-    $produits = $stmt->fetchAll();
-
-    //Récupération des valeurs des catégories dans la BDD
-    $sql = "SELECT categorie.nomCategorie, image.lien, categorie.idCategorie
-            FROM categorie
-            JOIN image ON categorie.idImage = image.idImage";
-    $result = $pdo->query($sql);
 ?>
 
 <!DOCTYPE html>
@@ -117,25 +102,8 @@
         <h1 id="confiance">UniShop - La confiance au coeur de vos transactions !</h1>
 
         <footer>
-            <div class="return_top">
-                <p id="retourHaut">Retour en haut</p>
-            </div>
-
-            <div class="logo_langue">
-                <a href="index.php"><img src="../logos/logo-png.png" width="80" height="50" alt="Logo du site"></a>
-                <select>
-                    <option>Français</option>
-                </select>
-            </div>
-
-            <div class="droits">
-                <div id="liste_droits">
-                    <a class="footer_lien" href="conditions.php">Conditions générales du site</a>
-                    <a class="footer_lien" href="informations.php">Vos informations personnelles</a>
-                </div>
-                <span>© 2024, UniShop</span>
-            </div>   
-            <script src="./js/conditions.js"></script>         
+            <?php require_once("footer.php"); ?>       
         </footer>
+        <script src="./js/conditions.js"></script>  
     </body>
 </html>

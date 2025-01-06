@@ -65,7 +65,7 @@
                                 echo '<li><a href="login.php">Contact</a></li>';
                             }
                         ?>
-                        <li><a href="">Others</a></li>
+                        <li><a href="others.php">Others</a></li>
                     </ul>
                 </nav>
             </section>

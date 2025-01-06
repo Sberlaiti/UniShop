@@ -15,9 +15,15 @@ const resultat = document.querySelector('#result');
 const segments = document.querySelectorAll('.segment, .winning_segment'); // Tous les segments
 const totalSegments = segments.length; // Nombre total de segments
 let nbCoups = parseInt(document.querySelector('#nb_coups')?.textContent.split(': ')[1]) || 3; // Coups restants
-let lossStreak = 0; // Compteur de pertes consécutives
+const validerButton = document.createElement('button');
+validerButton.classList.add('valider');
+validerButton.textContent = "Valider";
+let hasWon = false; // Indicateur de victoire
 
 startButton.addEventListener('click', () => {
+    // Désactiver le bouton pendant que la roue tourne
+    startButton.disabled = true;
+
     // Ajout de plusieurs tours complets avant de calculer l'angle final
     const extraSpins = 5; // Nombre de tours complets supplémentaires
     const finalRotation = number + extraSpins * 360; // Calculer la rotation totale
@@ -35,30 +41,46 @@ startButton.addEventListener('click', () => {
     Math.floor(finalAngle / segmentAngle); // Index du segment final
 
     setTimeout(() => {
-        // **Nouvelle logique pour un tirage équitable**
-        const randomValue = Math.random();
-        const shouldWin = lossStreak >= 2 || randomValue < 0.5; // 50% de chance de gagner ou garantie après 2 pertes
+        const segmentIndex = Math.floor(finalAngle / segmentAngle); // Index du segment final
+        const shouldWin = segments[segmentIndex]; // Vérifier si le segment est gagnant
 
-        if (shouldWin) {
-            lossStreak = 0; // Réinitialiser le compteur de pertes
+         // Déterminer si le joueur gagne de manière aléatoire
+         const winProbability = 0.5; // Probabilité de gagner (50%)
+         const randomWin = Math.random() < winProbability;
+
+        if (shouldWin.classList.contains('winning_segment') && !hasWon && randomWin) {
+            hasWon = true;
             // Trouver le prochain segment gagnant
-            Array.from(segments).find(segment =>
-                segment.classList.contains('winning_segment')
-            );
-            // Simulation appel à une API ou serveur pour obtenir une promotion
-            fetch("../src/game.php")
-                .then(function(response){
-                    return response.json();
+            const codePromo = 'UNI' + Math.floor(Math.random() * 100);
+            resultat.innerHTML = "Félicitations ! Vous avez gagné un code promo : <strong>" + codePromo + "</strong>";
+            document.querySelector('.affichage_jeu').appendChild(validerButton);
+
+            validerButton.style.display = 'block';
+            validerButton.addEventListener('click', () => {
+                fetch('../src/php/insert_code.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ codePromo})
                 })
-                .then(function(data){
-                    console.log(data.codePromo);
-                    //resultat.textContent = 'Bravo vous avez gagné un code promo : ' + data.codePromo;
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    if (data.success) {
+                        resultat.innerHTML = "Code promo validé !";
+                        startButton.disabled = true;
+                        startButton.style.backgroundColor = "gray";
+                        validerButton.style.display = 'none';
+                    } else {
+                        resultat.innerHTML = "Code promo déjà utilisé !";
+                    }
                 })
-                .catch(error => {
-                    resultat.textContent = ' Erreur lors de la récupération de la promotion.';
-                });
+                .catch(error => console.error(error));
+            });
+        } else if (hasWon) {
+            resultat.textContent = "Vous avez déjà gagné !";
         } else {
-            lossStreak++; // Augmenter le compteur de pertes
             resultat.textContent = "Vous avez perdu. Réessayez !";
         }
 
@@ -67,7 +89,9 @@ startButton.addEventListener('click', () => {
         document.querySelector('#nb_coups').textContent = 'Nombre de coups restants : ' + nbCoups;
 
         // Vérification si l'utilisateur a épuisé ses coups
-        if (nbCoups === 0) {
+        if (nbCoups > 0) {
+            startButton.disabled = false;
+        } else {
             startButton.disabled = true;
             startButton.style.backgroundColor = "gray";
             resultat.innerHTML += "<br>Plus de coups disponibles. Revenez demain !";

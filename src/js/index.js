@@ -26,21 +26,9 @@ function choixClasse() {
         section.classList.add("affichage_produit3");
     } else if (produits.length >= 2) {
         section.classList.add("affichage_produit2");
-    } else {
+    } else if (produits.length >= 1) {
         section.classList.add("affichage_produit");
     }
 }
 // Exécuter la fonction dès que le DOM est chargé
 document.addEventListener("DOMContentLoaded", choixClasse);
-
-
-//fonction qui permet de changer la classe si le nombre de catégories est supérieur ou égal à 8
-const categories = document.querySelectorAll(".categorie");
-const affichage_categories = document.querySelector(".affichage_categorie");
-const container = document.querySelector(".categorie_container");
-document.addEventListener("DOMContentLoaded", function() {
-    if(categories.length >= 8){
-        affichage_categories.classList.add("affichage_categorie2");
-        affichage_categories.classList.remove("affichage_categorie");
-    }
-});

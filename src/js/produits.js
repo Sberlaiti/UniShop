@@ -25,8 +25,8 @@ function choixClasse() {
         section.classList.add("affichage_produit3");
     } else if (produits.length >= 2) {
         section.classList.add("affichage_produit2");
-    } else {
-        section.classList.add("affichage_produit");        
+    } else if (produits.length >= 1) {
+        section.classList.add("affichage_produit");
     }
 }
 // Exécuter la fonction dès que le DOM est chargé

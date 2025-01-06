@@ -7,7 +7,7 @@ body{
 .main_section{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     align-items: flex-start;
 }
 
@@ -24,7 +24,6 @@ body{
 
 /* Partie affichage des produits */
 #affichage_produit{
-    background-color: white;
     padding: 2em;
     border-radius: 0.5cm; 
     margin: 0 auto;
@@ -34,18 +33,21 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: center;
+    background-color: white;
 }
 
 .affichage_produit2{
     display: grid;
     grid-template-areas: "div div";
     gap : 20px;
+    background-color: white;
 }
 
 .affichage_produit3{
     display: grid;
     grid-template-areas: "div div div";
     gap: 20px;
+    background-color: white;
 }
 
 .img_produit{/* Taille de l'image de l'article*/
@@ -65,6 +67,7 @@ a, #lien_produit{
     background-color: orange;
     padding: 0.2em;
     border-radius: 0.2cm;
+    margin-top: 3cm;
 }
 /* Fin de la partie affichage des produits */
 
@@ -95,53 +98,3 @@ a, #lien_produit{
     color : white;
 }
 /* Fin de la partie bouton du jeu */
-
-
-/*Partie footer*/
-footer{
-    background-color: rgb(180, 104, 17);
-}
-
-.return_top{
-    display: block;
-    text-align: center;
-    background-color: rgb(247, 132, 0);
-    color: white;
-    cursor: pointer;
-    padding: 0.2em;
-}
-
-.return_top:hover{
-    background-color: rgb(255, 255, 255);
-}
-
-select{
-    margin-left: 30px;
-}
-
-.return_top:hover{
-    background-color: rgb(255, 153, 0);
-    font-weight: bold;
-}
-
-.logo_langue{
-    padding: 2em;
-    background-color: rgb(252, 151, 37);
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
-
-.droits{
-    text-align: center;
-    padding: 2em;
-}
-
-span, .footer_lien{
-    color: white;
-}
-
-.footer_lien:hover{
-    text-decoration: underline;
-}
-/*Fin partie footer*/
