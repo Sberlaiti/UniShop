@@ -99,8 +99,10 @@ a, #lien_produit{
 }
 
 .jeu_promo:hover{
-    transform: scale(1.1);
+    transform: scale(1.2);
     background-color: rgb(180, 104, 17);
+    animation: none;
+    transition: transform 0.5s ease;
 }
 
 @keyframes borderPulse{

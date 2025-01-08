@@ -20,10 +20,30 @@
 
     <body>
         <br>
-        <h1 id="title">La roue de la fortune</h1>
+
         <?php
-            //if (!isset($_SESSION['date_gagnant'])){
-            ?>
+            if (isset($_SESSION['user'])) {
+                $stmt = $pdo->prepare("SELECT date_gagnantPromo FROM utilisateur WHERE idUtilisateur = ?");
+                $stmt->execute([$_SESSION['user']['idUtilisateur']]);
+                $user = $stmt->fetch(PDO::FETCH_ASSOC);
+            
+                if ($user && $user['date_gagnantPromo']) {
+                    $dateGagnant = new DateTime($user['date_gagnantPromo']);
+                    $dateActuelle = new DateTime();
+                    $interval = $dateGagnant->diff($dateActuelle);
+            
+                    if ($interval->days < 7) {
+                        echo '<h1 id="title">La roue de la fortune</h1>';
+                        echo "<h2 id='already'>Vous avez déjà joué une fois, attendez la semaine prochaine pour pouvoir rejouer.</h2>";
+                        echo "<footer>";
+                            require_once("footer.php");
+                        echo "</footer>";
+                        exit;
+                    }
+                }
+            }
+        ?>
+        <h1 id="title">La roue de la fortune</h1>
                 <p id="description">
                     ! Tournez la roue pour gagner une promotion de -15 %!
                     <br>
@@ -52,21 +72,6 @@
                     </div>
                     <button id="spin">Jouer</button>
                     <div id="result"></div>
-                    <?php
-            /*}
-            else{
-                $dateGagnant = new DateTime($_SESSION['date_gagnant']);
-                $dateActuelle = new DateTime(date('Y-m-d H:i:s'));
-                $interval = $dateGagnant->diff($dateActuelle);
-                if ($interval->days < 7) {
-                    ?>
-                    <h2 id="already">Vous avez déjà joué une fois, attendez la semaine prochaine.</h2>
-                    <?php
-                    require_once("footer.php");
-                    exit;
-                }
-            }*/
-            ?>
         </section>
 
         <footer>

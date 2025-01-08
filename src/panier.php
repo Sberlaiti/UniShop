@@ -133,6 +133,9 @@
             </div>
 
         <?php }
+        echo "<footer>";
+            require_once('footer.php');
+        echo "</footer>";
     ?>
 
 </body>

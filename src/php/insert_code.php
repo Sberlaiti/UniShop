@@ -17,6 +17,10 @@
         try{
             $sql_requete = $pdo->prepare("INSERT INTO promotion (codePromo, coefficient, idUtilisateur) VALUES (?, 15.00, ?)");
             $sql_requete->execute([$codePromo, $userId]);
+            
+            //Update de la date de la dernière promotion gagnée
+            $updateDate = $pdo->prepare("UPDATE utilisateur SET date_gagnantPromo = NOW() WHERE idUtilisateur = ?");
+            $updateDate->execute([$userId]);
             $_SESSION['date_gagnant'] = date('Y-m-d H:i:s');
             echo json_encode(['message' => 'Code promo ajouté avec succès.']);
         } catch(PDOException $e){
