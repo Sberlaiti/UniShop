@@ -100,9 +100,9 @@
 
         <div class="jeu_promo">
             <?php if($_SESSION['user'] != null): ?>
-                <a href="game.php"><p>Envie de gagner un code promo ?<br>Jouer au jeu !</p></a>
+                <a href="game.php"><p>Jouer au jeu !</p></a>
             <?php else: ?>
-                <a href="login.php"><p>Envie de gagner un code promo ?<br>Jouer au jeu !</p></a>
+                <a href="login.php"><p>Jouer au jeu !</p></a>
             <?php endif; ?>
         </div>
 

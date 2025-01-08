@@ -21,6 +21,28 @@
         <h1 class="title_autres">Autres</h1>
         <section class="bloc_affichage">
             <div class="bloc">
+                <?php
+                    if(isset($_SESSION['user']) != null){
+                        ?>
+                        <a class="lien_service" href="profile.php">
+                            <img src="./images/profile.png" alt="Profile" class="logo_service">
+                            <h3>Mon compte</h3>
+                            <p>Consultez votre profil et vos informations personnelles.</p>
+                        </a><?php
+                    }
+                    else{
+                        ?>
+                        <a class="lien_service" href="login.php">
+                            <img src="./images/profile.png" alt="Profile" class="logo_service">
+                            <h3>Mon compte</h3>
+                            <p>Consultez votre profil et vos informations personnelles.</p>
+                        </a>
+                        <?php
+                    }
+                ?>
+            </div>
+
+            <div class="bloc">
                <?php
                     if($_SESSION['user'] != null){
                         ?> 
@@ -58,6 +80,14 @@
                 </a>
             </div>
         </section>
+
+        <div class="jeu_promo">
+            <?php if($_SESSION['user'] != null): ?>
+                <a href="game.php"><p>Jouer au jeu !</p></a>
+            <?php else: ?>
+                <a href="login.php"><p>Jouer au jeu !</p></a>
+            <?php endif; ?>
+        </div>
 
         <footer>
             <?php require_once("footer.php"); ?>

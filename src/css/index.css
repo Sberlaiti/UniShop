@@ -84,8 +84,8 @@ a, #lien_produit{
     position: fixed;
     bottom: 20px;
     right: 20px;
-    width: 130px;
-    height: 130px;
+    width: 85px;
+    height: 85px;
     background-color: rgb(247, 132, 0);
     color: white;
     border-radius: 50%;
@@ -95,11 +95,27 @@ a, #lien_produit{
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
     text-align: center;
     transition: transform 0.5s ease;
+    animation: borderPulse 1s infinite;
 }
 
 .jeu_promo:hover{
     transform: scale(1.1);
     background-color: rgb(180, 104, 17);
+}
+
+@keyframes borderPulse{
+    0%{
+        border: 3px solid rgb(231, 60, 60);
+        transform: translateY(0px);
+    }
+    50%{
+        border: 3px solid rgba(255, 166, 0, 0);
+        transform: translateY(-10px);
+    }
+    100%{
+        border: 3px solid rgb(231, 60, 60);
+       transform: translateY(0px);
+    }
 }
 
 .jeu_promo a{
@@ -115,6 +131,8 @@ a, #lien_produit{
     position: relative;
     overflow: hidden;
     font-size: 65%;
+    margin-top: 15px;
+    padding: 10px;
 }
 
 .bloc_categorie{
@@ -153,6 +171,7 @@ a, #lien_produit{
 
 .nom_categorie{
     font-size: 140%;
+    margin-bottom: 0;
 }
 
 .image_categorie{/* Taille de l'image de la catégorie*/

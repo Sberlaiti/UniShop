@@ -46,6 +46,14 @@ footer{
 
 select{
     margin-left: 30px;
+    font-weight: bold;
+    background-color: #ffbf66;
+    border: 2px solid orange;
+    border-radius: 0.5cm;
+}
+
+select:focus{
+    border: 2px solid orange;
 }
 
 .return_top:hover{

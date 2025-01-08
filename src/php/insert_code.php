@@ -12,13 +12,15 @@
     
     if(isset($input['codePromo']) && !empty($input['codePromo'])){
         $codePromo = htmlspecialchars($input['codePromo']);
-        $userId = $_SESSION['user'];
+        $userId = $_SESSION['user']['idUtilisateur'];
 
         try{
-            $sql_requete = $pdo->prepare("INSERT INTO promotion (codePromo, idUtilisateur) VALUES (?, ?)");
+            $sql_requete = $pdo->prepare("INSERT INTO promotion (codePromo, coefficient, idUtilisateur) VALUES (?, 15.00, ?)");
             $sql_requete->execute([$codePromo, $userId]);
+            $_SESSION['date_gagnant'] = date('Y-m-d H:i:s');
+            echo json_encode(['message' => 'Code promo ajouté avec succès.']);
         } catch(PDOException $e){
-            echo json_encode(['message' => 'Erreur lors de l\'ajout du code promo.']);
+            echo json_encode($e->getMessage());
         }
     }
     else {

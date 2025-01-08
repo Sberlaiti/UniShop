@@ -40,7 +40,7 @@
                                 <ul>
                                     <?php
                                         foreach($result as $row){
-                                            echo "<li class='liste'><a href='produits.php?idCategorie=" . $row['idCategorie'] . "'>" . $row['nomCategorie'] . "</a></li>";
+                                            echo "<a href='produits.php?idCategorie=" . $row['idCategorie'] . "'><li class='liste'>" . $row['nomCategorie'] . "</li></a>";
                                         }
                                     ?>
                                 </ul>

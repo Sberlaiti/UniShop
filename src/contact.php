@@ -8,6 +8,13 @@
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\Exception;
 
+    if(!isset($_SESSION['user'])) $_SESSION['user'] = null;
+
+    $sql_requete = "SELECT mail FROM utilisateur WHERE idUtilisateur = ?";
+    $stmt = $pdo->prepare($sql_requete);
+    $stmt->execute([$_SESSION['user']['idUtilisateur']]);
+    $userMail = $stmt->fetch(PDO::FETCH_ASSOC)['mail'];
+
     require './PHPMailer-master/src/Exception.php';
     require './PHPMailer-master/src/PHPMailer.php';
     require './PHPMailer-master/src/SMTP.php';
@@ -34,7 +41,7 @@
             $mail->Port = 587;
     
             // Destinataires
-            $mail->setFrom($email, $nom . ' ' . $prenom);
+            $mail->setFrom($userMail, $nom . ' ' . $prenom, $userMail); // Adresse de l'expéditeur
             $mail->addAddress('aunishop786@gmail.com'); // Adresse de destination
     
             // Contenu de l'email
@@ -67,7 +74,7 @@
                 <p class="reussite">
                     Votre message a bien été envoyé et nous vous répondrons dans les plus brefs délais.<br>
                     Nous apprécions votre patience et votre confiance en notre service.<br>
-                    Cordialement, l'équipe UniShop.
+                    Cordialement, l'équipe UniShop. <?php echo $userMail; ?>
                 </p>
             </div>
         <?php else: ?>
@@ -83,7 +90,7 @@
 
                         <input type="text" id="objet" name="objet" required placeholder="Title of your object"/>
 
-                        <input type="email" id="email" name="email" required placeholder="Email"/>
+                        <input type="email" id="email" name="email" required placeholder="Your email address"/>
 
                         <textarea id="message" name="message" required placeholder="Your message..."></textarea>
 

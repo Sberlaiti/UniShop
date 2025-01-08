@@ -62,24 +62,27 @@ startButton.addEventListener('click', () => {
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ codePromo})
+                    body: JSON.stringify({ codePromo })
                 })
-                .then(response => response.json())
+                .then(response =>{ 
+                    if(!response.ok){
+                        throw new Error('Erreur lors de la requête !' + response.statusText);
+                    }
+                    return response.json();
+                })
                 .then(data => {
                     console.log(data);
-                    if (data.success) {
-                        resultat.innerHTML = "Code promo validé !";
-                        startButton.disabled = true;
-                        startButton.style.backgroundColor = "gray";
-                        validerButton.style.display = 'none';
-                    } else {
-                        resultat.innerHTML = "Code promo déjà utilisé !";
-                    }
+                    resultat.innerHTML = "Code promo validé !<br>";
+                    startButton.disabled = true;
+                    startButton.style.backgroundColor = "gray";
+                    validerButton.style.display = 'none';
                 })
                 .catch(error => console.error(error));
             });
         } else if (hasWon) {
-            resultat.textContent = "Vous avez déjà gagné !";
+            resultat.textContent = "Vous avez déjà gagné ! Vous ne pouvez pas gagner deux fois.";
+            startButton.disabled = true;
+            startButton.style.backgroundColor = "gray";
         } else {
             resultat.textContent = "Vous avez perdu. Réessayez !";
         }
@@ -91,10 +94,11 @@ startButton.addEventListener('click', () => {
         // Vérification si l'utilisateur a épuisé ses coups
         if (nbCoups > 0) {
             startButton.disabled = false;
-        } else {
+        }
+        else {
             startButton.disabled = true;
             startButton.style.backgroundColor = "gray";
-            resultat.innerHTML += "<br>Plus de coups disponibles. Revenez demain !";
+            resultat.innerHTML += "<br>Plus de coups disponibles. Revenez la semaine prochaine !";
         }
     }, 4000); // Attente pour terminer la rotation
 });
