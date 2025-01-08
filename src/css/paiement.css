@@ -34,6 +34,11 @@ h1 {
     flex-direction: row;
 }
 
+.container_paymentMethod_other > button {
+    background-color: transparent;
+    border: none;
+}
+
 .paymentMethod {
     width: 200px;
     height: 35px;
@@ -43,6 +48,7 @@ h1 {
     margin: 0 3px;
     border-radius: 10px;
     border: 1px solid #9595955d;
+    cursor: pointer;
 }
 
 .paymentMethod > i {
@@ -53,17 +59,15 @@ h1 {
     font-size: 20px;
 }
 
-.container_paymentMethod_card {
-    padding : 15px;
-    border-radius: 10px;
-    border: 1px solid #9595955d;
-}
-
 .container_card {
     display: grid;
     grid-template-columns: 3fr 2fr 1fr;
     grid-template-rows: 1fr 1fr;
     gap: 5px 10px ;
+
+    padding : 15px;
+    border-radius: 10px;
+    border: 1px solid #9595955d;
 }
 
 form > div > label {
@@ -108,7 +112,6 @@ input:focus {
 }
 
 .error_message {
-    display: none;
     font-family: 'RedHatDisplay-SemiBold', sans-serif;
     font-size: 13px;
     color: red;

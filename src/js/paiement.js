@@ -51,3 +51,8 @@ cvvInput.addEventListener('input', (e) => {
     value = value.slice(0, 3);
     e.target.value = value;
 });
+
+
+function selectPaymentMethod(method) {
+    document.getElementById('selectedPaymentMethod').value = method;
+}
