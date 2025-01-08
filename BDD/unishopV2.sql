@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `avis` (
   PRIMARY KEY (`idAvis`),
   KEY `fk_avis_utilisateur` (`idUtilisateur`),
   KEY `fk_avis_produit` (`idProduit`)
-) ENGINE=InnoDB AUTO_INCREMENT=6667 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6667;
 
 --
 -- Dumping data for table `avis`
@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `categorie` (
   `idImage` int NOT NULL,
   PRIMARY KEY (`idCategorie`),
   KEY `fk_categorie_image` (`idImage`)
-) ENGINE=InnoDB AUTO_INCREMENT=94 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=94;
 
 --
 -- Dumping data for table `categorie`
@@ -102,7 +102,7 @@ CREATE TABLE IF NOT EXISTS `commande` (
   KEY `fk_commande_utilisateur` (`idUtilisateur`),
   KEY `fk_commande_promo` (`idPromo`),
   KEY `fk_produit_commande` (`idProduit`)
-) ENGINE=InnoDB AUTO_INCREMENT=1002 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1002;
 
 --
 -- Dumping data for table `commande`
@@ -124,7 +124,7 @@ CREATE TABLE IF NOT EXISTS `image` (
   `idProduit` int NOT NULL,
   PRIMARY KEY (`idImage`),
   KEY `fk_image_produit` (`idProduit`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28;
 
 --
 -- Dumping data for table `image`
@@ -171,15 +171,14 @@ CREATE TABLE IF NOT EXISTS `panier` (
   `idUtilisateur` int NOT NULL,
   KEY `fk_produit_panier` (`idProduit`),
   KEY `fk_panier_utilisateur` (`idUtilisateur`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 --
 -- Dumping data for table `panier`
 --
 
 INSERT INTO `panier` (`quantitee`, `idProduit`, `idUtilisateur`) VALUES
-(2, 1, 3333),
-(1, 3, 3333);
+(2, 4, 3333);
 
 -- --------------------------------------------------------
 
@@ -203,7 +202,7 @@ CREATE TABLE IF NOT EXISTS `produit` (
   KEY `fk_produit_image` (`idImage`),
   KEY `fk_produit_utilisateur` (`idUtilisateur`),
   KEY `fk_produit_categorie` (`IdCategorie`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5;
 
 --
 -- Dumping data for table `produit`
@@ -224,7 +223,7 @@ CREATE TABLE IF NOT EXISTS `promotion` (
   `codePromo` varchar(5) NOT NULL,
   `coefficient` double(5,2) NOT NULL,
   PRIMARY KEY (`idPromo`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12;
 
 --
 -- Dumping data for table `promotion`
@@ -255,7 +254,7 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `estVendeur` tinyint(1) NOT NULL DEFAULT '0',
   `admin` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`idUtilisateur`)
-) ENGINE=InnoDB AUTO_INCREMENT=3336 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3336;
 
 --
 -- Dumping data for table `utilisateur`
