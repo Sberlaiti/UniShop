@@ -4,12 +4,8 @@
     error_reporting(E_ALL);
 
     require_once('./header02.php');
-
-    // Initialisation des variables de session
-
-    //var_dump($_SESSION['user']);
-
-    // var_dump($panier);
+    require_once('./php/fetchCart.php');
+    $panier = get_cart($pdo);
 ?>
 
 <html lang="fr">
@@ -23,12 +19,6 @@
 </head>
 <body>
     <?php
-        // Recherche des elements dans le panier de l'utilisateur
-        $sql_requete = "SELECT * FROM panier WHERE idUtilisateur = :idUtilisateur";
-        $stmt = $pdo->prepare($sql_requete);
-        $stmt->execute(['idUtilisateur' => $_SESSION['user']['idUtilisateur']]);
-        $panier = $stmt->fetchAll();
-
         if(count($panier) == 0) {
             echo "<div class='container_emptyCart'>";
             echo "<img src='./images/empty_cart.png' alt='Panier vide'>";

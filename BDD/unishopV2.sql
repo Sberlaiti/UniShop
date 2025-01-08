@@ -166,10 +166,9 @@ INSERT INTO `image` (`idImage`, `lien`, `idProduit`) VALUES
 
 DROP TABLE IF EXISTS `panier`;
 CREATE TABLE IF NOT EXISTS `panier` (
-  `quantitee` int NOT NULL,
-  `idProduit` int NOT NULL,
+  `idPanier` int NOT NULL AUTO_INCREMENT,
   `idUtilisateur` int NOT NULL,
-  KEY `fk_produit_panier` (`idProduit`),
+  PRIMARY KEY (`idPanier`),
   KEY `fk_panier_utilisateur` (`idUtilisateur`)
 ) ENGINE=InnoDB;
 
@@ -177,8 +176,32 @@ CREATE TABLE IF NOT EXISTS `panier` (
 -- Dumping data for table `panier`
 --
 
-INSERT INTO `panier` (`quantitee`, `idProduit`, `idUtilisateur`) VALUES
-(2, 4, 3333);
+INSERT INTO `panier` (`idUtilisateur`) VALUES
+(3333);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `produitsPanier`
+--
+
+DROP TABLE IF EXISTS `produitsPanier`;
+CREATE TABLE IF NOT EXISTS `produitsPanier` (
+  `idProduit` int NOT NULL,
+  `idPanier` int NOT NULL,
+  `quantitee` int NOT NULL,
+  PRIMARY KEY (`idPanier`, `idProduit`),
+  KEY `fk_produitsPanier_produit` (`idProduit`),
+  KEY `fk_produitsPanier_panier` (`idPanier`)
+) ENGINE=InnoDB;
+
+--
+-- Dumping data for table `produitsPanier`
+--
+
+INSERT INTO `produitsPanier` (`idProduit`, `idPanier`, `quantitee`) VALUES
+(4, 1, 3);
+
 
 -- --------------------------------------------------------
 
@@ -249,6 +272,7 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `idUtilisateur` int NOT NULL AUTO_INCREMENT,
   `nom` varchar(130) NOT NULL,
   `prenom` varchar(130) NOT NULL,
+  `pseudo` varchar(130) NOT NULL,
   `mail` varchar(400) NOT NULL,
   `password` varchar(255) NOT NULL,
   `estVendeur` tinyint(1) NOT NULL DEFAULT '0',
@@ -260,10 +284,10 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
 -- Dumping data for table `utilisateur`
 --
 
-INSERT INTO `utilisateur` (`idUtilisateur`, `nom`, `prenom`, `mail`, `password`, `estVendeur`, `admin`) VALUES
-(1, 'UniShop', 'Admin', 'aunishop786@gmail.com', '$2y$10$NSVDfJMSV6cX0XX6cMCDMORUBkDM77q5fM6hZ.pd44l1xshYioCNq', 0, 1),
-(3333, 'Edward', 'David', 'edwarddavid@gmail.com', '36303630', 0, 0),
-(3334, 'Saber', 'LAITI BEN AYYAD', 'abdelybouchra@gmail.com', '$2y$10$yTp3Y7.SbxVgqewAYsYUX.PivMyoKO2oe.2JGXRmAIVFuZqsK8kDa', 0, 0);
+INSERT INTO `utilisateur` (`idUtilisateur`, `nom`, `prenom`, `pseudo`, `mail`, `password`, `estVendeur`, `admin`) VALUES
+(1, 'UniShop', 'Admin', 'admin', 'aunishop786@gmail.com', '$2y$10$NSVDfJMSV6cX0XX6cMCDMORUBkDM77q5fM6hZ.pd44l1xshYioCNq', 0, 1),
+(3333, 'Edward', 'David', 'eddy', 'edwarddavid@gmail.com', '36303630', 0, 0),
+(3334, 'Saber', 'LAITI BEN AYYAD', 'sayber', 'abdelybouchra@gmail.com', '$2y$10$yTp3Y7.SbxVgqewAYsYUX.PivMyoKO2oe.2JGXRmAIVFuZqsK8kDa', 0, 0);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
