@@ -6,23 +6,6 @@
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
 
-
-    // On recuperer les elements du panier de l'utilisateur
-    $sql_requete = "SELECT * FROM panier WHERE idUtilisateur = :idUtilisateur";
-    $stmt = $pdo->prepare($sql_requete);
-    $stmt->execute(['idUtilisateur' => $_SESSION['user']['idUtilisateur']]);
-    $panier = $stmt->fetchAll();
-
-    // On calcule le total du panier
-    $total = 0;
-    foreach($panier as $produit) {
-        $sql_requete = "SELECT * FROM produit WHERE idProduit = :idProduit";
-        $stmt = $pdo->prepare($sql_requete);
-        $stmt->execute(['idProduit' => $produit['idProduit']]);
-        $article = $stmt->fetch();
-        $total += $article['prix'] * $produit['quantitee'];
-    }
-
     $payment_error = 1;
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['payment_button'])) {
         $payment_error = verif_card($_POST['cardName'], $_POST['cardNumber'], $_POST['cardDate'], $_POST['cardCVV']);
@@ -63,7 +46,7 @@
                     <div class="container_card">
                         <div class="card_name">
                             <label for="cardName">Nom dans la carte</label>
-                            <input type="text" name="cardName" class="cardInput" placeholder="John Doe">
+                            <input type="text" name="cardName" class="cardInput" placeholder="Randrianomenjanahary Andry">
                         </div>
 
                         <div class="card_number">

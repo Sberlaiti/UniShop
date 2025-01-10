@@ -24,15 +24,6 @@
         if (strlen($cardCVV) < 3) {
             return -4;
         }
-
-        $currentDate = date('Y-m-d');
-
-        // Gérer le problème de l'adresse de livraison + telephone + liste produits
-        $sql_request = "INSERT INTO commande (dateAchat, cardNumber, cardDate, cardCVV) VALUES ('$currentDate', '$cardNumber', '$cardDate', '$cardCVV')";
-
-        // Il faut supprimes les produits de la table panier
-
-        unset($_SESSION['total']);
     } 
 
 

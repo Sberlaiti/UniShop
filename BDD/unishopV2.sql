@@ -92,24 +92,41 @@ INSERT INTO `categorie` (`idCategorie`, `nomCategorie`, `idImage`) VALUES
 DROP TABLE IF EXISTS `commande`;
 CREATE TABLE IF NOT EXISTS `commande` (
   `idCommande` int NOT NULL AUTO_INCREMENT,
+  `idUtilisateur` int NOT NULL,
   `dateAchat` date NOT NULL,
   `adresse` varchar(130) NOT NULL,
   `telephone` varchar(15) NOT NULL,
-  `idUtilisateur` int NOT NULL,
+  `total` double DEFAULT NULL,
   `idPromo` int DEFAULT NULL,
-  `idProduit` int NOT NULL,
   PRIMARY KEY (`idCommande`),
   KEY `fk_commande_utilisateur` (`idUtilisateur`),
-  KEY `fk_commande_promo` (`idPromo`),
-  KEY `fk_produit_commande` (`idProduit`)
+  KEY `fk_commande_promo` (`idPromo`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1002;
 
 --
 -- Dumping data for table `commande`
 --
 
-INSERT INTO `commande` (`idCommande`, `dateAchat`, `adresse`, `telephone`, `idUtilisateur`, `idPromo`, `idProduit`) VALUES
-(1001, '2024-11-11', '123 Rue de Paris', '1234567890', 3333, NULL, 0);
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `produitsCommande`
+--
+
+DROP TABLE IF EXISTS `produitsCommande`;
+CREATE TABLE IF NOT EXISTS `produitsCommande` (
+  `idProduit` int NOT NULL,
+  `idCommande` int NOT NULL,
+  `quantitee` int NOT NULL,
+  `prixUnitaire` double NOT NULL,
+  PRIMARY KEY (`idCommande`),
+  KEY `fk_produitsCommande_commande` (`idCommande`),
+  KEY `fk_produitsCommande_produit` (`idProduit`)
+) ENGINE=InnoDB AUTO_INCREMENT=1002;
+
+--
+-- Dumping data for table `produitsCommande`
+--
 
 -- --------------------------------------------------------
 
@@ -221,6 +238,7 @@ CREATE TABLE IF NOT EXISTS `produit` (
   `dateCreation` date DEFAULT NULL,
   `idUtilisateur` int NOT NULL,
   `IdCategorie` int NOT NULL,
+  `quantiteeRestante` int DEFAULT NULL,
   PRIMARY KEY (`idProduit`),
   KEY `fk_produit_image` (`idImage`),
   KEY `fk_produit_utilisateur` (`idUtilisateur`),
@@ -231,8 +249,8 @@ CREATE TABLE IF NOT EXISTS `produit` (
 -- Dumping data for table `produit`
 --
 
-INSERT INTO `produit` (`idProduit`, `nomProduit`, `description`, `prix`, `delayLivraison`, `appartientVendeur`, `idImage`, `dateCreation`, `idUtilisateur`, `IdCategorie`) VALUES
-(4, 'Botte', 'Une chaussure haute', 36.3, 5, 0, 1, '2024-11-01', 1, 5);
+INSERT INTO `produit` (`idProduit`, `nomProduit`, `description`, `prix`, `delayLivraison`, `appartientVendeur`, `idImage`, `dateCreation`, `idUtilisateur`, `IdCategorie`, quantiteeRestante) VALUES
+(4, 'Botte', 'Une chaussure haute', 36.3, 5, 0, 1, '2024-11-01', 1, 5, 10);
 
 -- --------------------------------------------------------
 
@@ -275,6 +293,8 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `pseudo` varchar(130) NOT NULL,
   `mail` varchar(400) NOT NULL,
   `password` varchar(255) NOT NULL,
+  `telephone` varchar(10) DEFAULT NULL,
+  `adresseLivraison` varchar(130) DEFAULT NULL,
   `estVendeur` tinyint(1) NOT NULL DEFAULT '0',
   `admin` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`idUtilisateur`)
