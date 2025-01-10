@@ -13,6 +13,12 @@
             FROM categorie
             ORDER BY nomCategorie";
     $result = $pdo->query($sql);
+
+    //Récupération de l'id du panier de l'utilisateur
+    $idPanier = "SELECT idPanier
+                FROM panier
+                WHERE idUtilisateur = " . $_SESSION['user']['idUtilisateur'];
+    $stmtPanier = $pdo->query($idPanier);
 ?>
 <!DOCTYPE html>
 <html>
@@ -103,7 +109,11 @@
                                     echo "<h3>" . htmlspecialchars($row_count['nomProduit']) . "</h3>";
                                     echo "<p>" . htmlspecialchars($row_count['prix']) . " €</p>";
                                 echo "</a>";
+                                echo "<button class='ajout_panier'>Ajouter au panier</button>";
                             echo "</div>";
+                            $requete = $pdo->prepare("INSERT INTO panier (idUtilisateur) VALUES (?);
+                            INSERT INTO produitsPanier (idProduit, idPanier, quantitee) VALUES (?, ?, 1);");
+                            $requete->execute([$_SESSION['user']['idUtilisateur'], $row_count['idProduit'], $stmtPanier->fetch()['idPanier']]);
                         }
                     } else {
                         echo "<div class='no_produit'>

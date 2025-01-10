@@ -19,7 +19,7 @@
             $sql_requete->execute([$codePromo, $userId]);
             
             //Update de la date de la dernière promotion gagnée
-            $updateDate = $pdo->prepare("UPDATE utilisateur SET date_gagnantPromo = NOW() WHERE idUtilisateur = ?");
+            $updateDate = $pdo->prepare("UPDATE utilisateur SET date_gagnantPromo = NOW(), date_last_played = NOW() WHERE idUtilisateur = ?");
             $updateDate->execute([$userId]);
             $_SESSION['date_gagnant'] = date('Y-m-d H:i:s');
             echo json_encode(['message' => 'Code promo ajouté avec succès.']);
@@ -28,6 +28,6 @@
         }
     }
     else {
-        echo json_encode(['message' => 'Veuillez renseigner un code promo.']);
+        echo json_encode(['message' => 'Vous avez déjà joué une fois, attendez la semaine prochaine pour pouvoir rejouer.']);
     }
 ?>

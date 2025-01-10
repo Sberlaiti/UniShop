@@ -9,7 +9,7 @@
     error_reporting(E_ALL);
 
     //Récupération des données de la table article
-    $sql_requete = "SELECT p.idProduit, p.nomProduit, u.nom, p.prix, i.lien
+    $sql_requete = "SELECT p.idProduit, p.nomProduit, u.pseudo, p.prix, i.lien
                     FROM produit p
                     JOIN utilisateur u ON u.idUtilisateur = p.idUtilisateur
                     JOIN image i ON i.idImage = p.idImage";
@@ -79,7 +79,7 @@
                             echo "<div class='produit'>";
                                 echo "<a href='pageArticle.php?idProduit=". $row_count['idProduit'] . "' id='lien_produit'>";
                                     echo "<img class='img_produit' src='" . htmlspecialchars($row_count['lien']) . "'/>";
-                                    echo "<p class='titre_vendeur'> Vendeur : " . htmlspecialchars($row_count['nom']) . "</p>";
+                                    echo "<p class='titre_vendeur'> Vendeur : " . htmlspecialchars($row_count['pseudo']) . "</p>";
                                     echo "<h3 class'titre_produit'>" . htmlspecialchars($row_count['nomProduit']) . "</h3>";
                                     echo "<p class='prix_produit'>" . htmlspecialchars($row_count['prix']) . " €</p>";
                                 echo "</a>";

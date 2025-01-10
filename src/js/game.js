@@ -53,6 +53,8 @@ startButton.addEventListener('click', () => {
             // Trouver le prochain segment gagnant
             const codePromo = 'UNI' + Math.floor(Math.random() * 100);
             resultat.innerHTML = "Félicitations ! Vous avez gagné un code promo : <strong>" + codePromo + "</strong>";
+            startButton.disabled = true;
+            startButton.style.backgroundColor = "gray";
             document.querySelector('.affichage_jeu').appendChild(validerButton);
 
             validerButton.style.display = 'block';
@@ -91,14 +93,37 @@ startButton.addEventListener('click', () => {
         nbCoups--;
         document.querySelector('#nb_coups').textContent = 'Nombre de coups restants : ' + nbCoups;
 
-        // Vérification si l'utilisateur a épuisé ses coups
-        if (nbCoups > 0) {
-            startButton.disabled = false;
-        }
-        else {
-            startButton.disabled = true;
-            startButton.style.backgroundColor = "gray";
-            resultat.innerHTML += "<br>Plus de coups disponibles. Revenez la semaine prochaine !";
-        }
+        fetch('../src/php/update_coups.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ nbCoups })
+        })
+        .then(response =>{
+            if(!response.ok){
+                throw new Error('Erreur lors de la requête !' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data);
+            if (data.redirect) {
+                window.location.href = 'game.php';
+            } else if (nbCoups > 0) {
+                startButton.disabled = false;
+            }
+        })
+        .catch(error => console.error(error));
+
+        // // Vérification si l'utilisateur a épuisé ses coups
+        // if (nbCoups > 0) {
+        //     startButton.disabled = false;
+        // }
+        // else {
+        //     startButton.disabled = true;
+        //     startButton.style.backgroundColor = "gray";
+        //     resultat.innerHTML += "<br>Plus de coups disponibles. Revenez la semaine prochaine !";
+        // }
     }, 4000); // Attente pour terminer la rotation
 });
