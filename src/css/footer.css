@@ -23,7 +23,7 @@ footer{
     justify-content: center;
     align-items: center;
     padding: 1em;
-    background-color: rgb(221, 138, 44);
+    background-color: rgb(252, 151, 37);
 }
 
 .bloc_image{
@@ -35,6 +35,10 @@ footer{
 .img_paiement{
     height: 32px;
     border-radius: 8px;
+}
+
+.title_paiement{
+    margin-top: 0;
 }
 
 #liste_droits{
@@ -68,6 +72,7 @@ select:focus{
     display: flex;
     flex-direction: row;
     justify-content: center;
+    border-bottom: 2px solid rgba(128, 128, 128, 0.575);
 }
 
 .droits{
@@ -75,8 +80,12 @@ select:focus{
     padding: 1em;
 }
 
-span, .footer_lien{
+.copyright, .footer_lien{
     color: white;
+}
+
+.copyright{
+    margin: 0;
 }
 
 .footer_lien:hover{

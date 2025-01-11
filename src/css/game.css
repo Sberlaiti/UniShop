@@ -24,7 +24,6 @@ body {
     color: rgb(204, 33, 33);
     width: fit-content;
     justify-self: center;
-    margin-bottom: 7.6cm;
 }
 
 #already:hover {
@@ -187,3 +186,10 @@ body {
     transition: background-color 0.3s ease;
 }
 /*Fin de la partie affichage du jeu*/
+
+
+/*Partie jeu terminé*/
+.main_section{
+    margin-top: 5cm;
+    margin-bottom: 3.79cm;
+}

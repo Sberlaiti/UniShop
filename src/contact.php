@@ -10,25 +10,19 @@
 
     if(!isset($_SESSION['user'])) $_SESSION['user'] = null;
 
-    $sql_requete = "SELECT mail FROM utilisateur WHERE idUtilisateur = ?";
-    $stmt = $pdo->prepare($sql_requete);
-    $stmt->execute([$_SESSION['user']['idUtilisateur']]);
-    $userMail = $stmt->fetch(PDO::FETCH_ASSOC)['mail'];
-
     require './PHPMailer-master/src/Exception.php';
     require './PHPMailer-master/src/PHPMailer.php';
     require './PHPMailer-master/src/SMTP.php';
 
-    $prenom = filter_input(INPUT_POST, 'prenom', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    $nom = filter_input(INPUT_POST, 'nom', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    $objet = filter_input(INPUT_POST, 'objet', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    $message = filter_input(INPUT_POST, 'message', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    $btn = filter_input(INPUT_POST, 'envoyer', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-
     $messageEnvoye = false;
 
-    if(isset($btn)) {
+    if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['envoyer'])){
+        $prenom = $_POST['prenom'];
+        $nom = $_POST['nom'];
+        $email = $_POST['email'];
+        $objet = $_POST['objet'];
+        $message = $_POST['message'];
+
         $mail = new PHPMailer(true);
         try {
             // Configuration du serveur SMTP
@@ -41,8 +35,9 @@
             $mail->Port = 587;
     
             // Destinataires
-            $mail->setFrom($userMail, $nom . ' ' . $prenom, $userMail); // Adresse de l'expéditeur
+            $mail->setFrom($email, $nom . ' ' . $prenom); // Adresse de l'expéditeur
             $mail->addAddress('aunishop786@gmail.com'); // Adresse de destination
+            $mail->addReplyTo($email, $nom . ' ' . $prenom); // Adresse de réponse
     
             // Contenu de l'email
             $mail->isHTML(false);
@@ -74,7 +69,7 @@
                 <p class="reussite">
                     Votre message a bien été envoyé et nous vous répondrons dans les plus brefs délais.<br>
                     Nous apprécions votre patience et votre confiance en notre service.<br>
-                    Cordialement, l'équipe UniShop. <?php echo $userMail; ?>
+                    Cordialement, l'équipe UniShop.
                 </p>
             </div>
         <?php else: ?>

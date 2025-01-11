@@ -25,7 +25,7 @@
     </div>
 
     <div class="bloc_paiement">
-        <h3>Moyen de paiement possible avec :</h3>
+        <h3 class="title_paiement">Moyen de paiement possible avec :</h3>
 
         <div class="bloc_image">
             <img class="img_paiement" src="./images/logo-cb.jpg" alt="Logo des moyens de paiement">
@@ -51,6 +51,6 @@
                 }
             ?>
         </div>
-        <span>© 2024-2025, UniShop</span>
+        <p class="copyright">© 2024-2025, UniShop</p>
     </div>
 </html>

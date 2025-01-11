@@ -49,7 +49,7 @@ body{
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 1em 0px;
+    padding-top: 1em;
 }
 
 a{
@@ -106,6 +106,25 @@ a, #lien_produit{
     padding: 0.2em;
     border-radius: 0.2cm;
 }
+
+.average_star_rating{
+    display: flex;
+    align-items: center;
+}
+
+.star{
+    color: #3a3636;
+}
+
+.star.filled {
+    color: #f8d64e;
+}
+
+.review_count{
+    margin-left: 10px;
+    font-size: 10px;
+    color: #828080;
+}
 /* Fin partie affichage des produits */
 
 
@@ -124,15 +143,14 @@ a, #lien_produit{
     align-items: center;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
     text-align: center;
-    transition: transform 0.5s ease;
+    transition: transform 0.5s ease, background-color 0.5s ease;
     animation: borderPulse 1s infinite;
 }
 
 .jeu_promo:hover{
-    transform: scale(1.2);
+    transform: scale(1.5);
     background-color: rgb(180, 104, 17);
-    animation: none;
-    transition: transform 0.5s ease;
+    animation-play-state: paused;
 }
 
 @keyframes borderPulse{
@@ -169,7 +187,10 @@ a, #lien_produit{
 
 .bloc_categorie{
     display: flex;
+    justify-content: center;
+    align-items: center;
     animation: scroll 20s linear infinite;
+    white-space: nowrap;
 }
 
 .bloc_categorie:hover{
@@ -194,6 +215,7 @@ a, #lien_produit{
     text-align: center;
     margin-right: 30px;
     border: 1px solid #ffbf6600;
+    padding: 1em;
 }
 
 .categorie:hover{

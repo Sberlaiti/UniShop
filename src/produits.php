@@ -21,6 +21,14 @@
                     WHERE idUtilisateur = " . $_SESSION['user']['idUtilisateur'];
         $stmtPanier = $pdo->query($idPanier);
     }
+
+    //Récupération des avis
+    $requete = "SELECT avis.note
+            FROM avis
+            JOIN produit ON avis.idProduit = produit.idProduit
+            WHERE produit.idProduit = avis.idProduit";
+    $stmt = $pdo->query($requete);
+    $avis = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html>
@@ -111,6 +119,25 @@
                                         echo "<h3>" . htmlspecialchars($row_count['nomProduit']) . "</h3>";
                                         echo "<a class='cartItems-infos-seller' href=''><button>Vendeur: " . htmlspecialchars($row_count['pseudo']). "</button></a>";
                                     echo "</div>";
+                                    ?>
+                                    <div class="average_star_rating">
+                                        <?php
+                                            $nombreAvis = count($avis);                                    
+                                            $noteMoyenne = 0;
+                                            if ($nombreAvis > 0) {
+                                                $totalNotes = array_sum(array_column($avis, 'note'));
+                                                $noteMoyenne = $totalNotes / $nombreAvis;
+                                            }
+                                            
+                                            for ($i = 1; $i <= 5; $i++) {
+                                                $filled = $i <= $noteMoyenne ? 'filled' : '';
+                                                echo "<span class='star $filled' data-value='$i'>&#9733;</span>";
+                                                echo "<!-- Classe appliquée: star $filled -->";
+                                            }
+                                            echo "<p class='review_count'>" . $nombreAvis . ' avis' . "</p>";
+                                        ?>
+                                    </div>
+                                    <?php
                                     echo "<p class='prix_produit'>" . htmlspecialchars($row_count['prix']) . " €</p>";
                                 echo "</a>";
                                 if($_SESSION['user'] != null){
@@ -147,8 +174,11 @@
                             $requete->execute([$idUser]);
                             $idPanier = $pdo->lastInsertId();
                         }
-                        $requeteSQL = $pdo->prepare("INSERT INTO produitsPanier(idPanier, idProduit, quantitee) VALUES(?, ?, 1)");
+                        $requeteSQL = $pdo->prepare("INSERT INTO produitsPanier(idPanier, idProduit, quantitee) VALUES(?, ?, 1) ON DUPLICATE KEY UPDATE quantitee = quantitee + 1");
                         $requeteSQL->execute([$idPanier, $idProduit]);
+                        ?>
+                        <div class="message_panier">Produit ajouté au panier</div>
+                        <?php
                     }
                 ?>
             </section>

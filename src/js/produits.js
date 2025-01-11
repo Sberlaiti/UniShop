@@ -28,6 +28,13 @@ function choixClasse() {
     } else if (produits.length >= 1) {
         section.classList.add("affichage_produit");
     }
+
+    const noProduit = document.querySelector(".no_produit");
+    const mainSection = document.querySelector(".main_section");
+    if(noProduit){
+        mainSection.style.marginTop = "1cm";
+        mainSection.style.marginBottom = "1.75cm";
+    }
 }
 // Exécuter la fonction dès que le DOM est chargé
 document.addEventListener("DOMContentLoaded", choixClasse);
@@ -43,10 +50,29 @@ document.querySelectorAll('input[name="categorie"]').forEach(function(radio) {
     });
 });
 
-const bouton = document.querySelector(".ajout_panier");
-bouton.addEventListener('click', function() {
-    const div = document.createElement("div");
-    div.classList.add("message_panier");
-    div.textContent = "Produit ajouté au panier";
-    document.body.appendChild(div);
+document.addEventListener('DOMContentLoaded', () => {
+    const messagePanier = document.querySelector('.message_panier');
+    // Fonction pour afficher le message
+    function showMessage() {
+        if (messagePanier) {
+            messagePanier.classList.add('show');
+            setTimeout(() => {
+                messagePanier.classList.remove('show');
+            }, 3000); // Masquer après 3 secondes
+        }
+    }
+
+    // Appeler la fonction pour afficher le message (par exemple, après l'ajout au panier)
+    showMessage();
+});
+
+// Fonction pour changer la couleur des étoiles en fonction de la note
+const userStarsForm = document.querySelectorAll('.user_star_rating_form .star');
+userStarsForm.forEach(star => {
+    const starValue = parseFloat(star.getAttribute('data-value'));
+    if (starValue <= rating) {
+        star.classList.add('filled');
+    } else {
+        star.classList.remove('filled');
+    }
 });

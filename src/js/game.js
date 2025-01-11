@@ -33,12 +33,11 @@ startButton.addEventListener('click', () => {
     wheel.style.transform = "rotate(" + finalRotation + "deg)";
 
     // Calcul de l'angle final
-    const finalAngle = finalRotation % 360; // Angle final entre 0 et 360
+    const finalAngle = 0; // Angle final
     number += Math.ceil(Math.random() * 1000); // Préparation de l'angle suivant
 
     // Calcul de l'indice du segment gagnant
     const segmentAngle = 360 / totalSegments; // Angle de chaque segment
-    Math.floor(finalAngle / segmentAngle); // Index du segment final
 
     setTimeout(() => {
         const segmentIndex = Math.floor(finalAngle / segmentAngle); // Index du segment final
@@ -73,11 +72,11 @@ startButton.addEventListener('click', () => {
                     return response.json();
                 })
                 .then(data => {
-                    console.log(data);
+                    //console.log(data);
                     resultat.innerHTML = "Code promo validé !<br>";
                     startButton.disabled = true;
                     startButton.style.backgroundColor = "gray";
-                    //validerButton.style.display = 'none';
+                    validerButton.style.display = 'none';
                 })
                 .catch(error => console.error(error));
             });
@@ -107,23 +106,28 @@ startButton.addEventListener('click', () => {
             return response.json();
         })
         .then(data => {
-            console.log(data);
-            if (data.redirect) {
-                window.location.href = 'game.php';
-            } else if (nbCoups > 0) {
+            //console.log(data);
+            if(nbCoups > 0 && !hasWon){
                 startButton.disabled = false;
+            }
+            else if(hasWon){
+                startButton.disabled = true;
+                startButton.style.backgroundColor = "gray";
+            }
+            else{
+                resultat.innerHTML += "<br>Vous avez épuisé tous vos coups. Réessayez plus tard.";
+                startButton.disabled = true;
             }
         })
         .catch(error => console.error(error));
-
-        // // Vérification si l'utilisateur a épuisé ses coups
-        // if (nbCoups > 0) {
-        //     startButton.disabled = false;
-        // }
-        // else {
-        //     startButton.disabled = true;
-        //     startButton.style.backgroundColor = "gray";
-        //     resultat.innerHTML += "<br>Plus de coups disponibles. Revenez la semaine prochaine !";
-        // }
     }, 4000); // Attente pour terminer la rotation
 });
+
+
+// const mainSection = document.querySelector('.main_section');
+// if (mainSection) {
+//     document.addEventListener("DOMContentLoaded", () => {
+//         mainSection.style.marginTop = "1cm";
+//         mainSection.style.marginBottom = "1.75cm";
+//     });
+// }

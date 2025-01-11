@@ -128,7 +128,7 @@
 
         <?php }
         echo "<footer>";
-        require_once('./footer.php');
+            require_once('./footer.php');
         echo "</footer>";
     ?>
 

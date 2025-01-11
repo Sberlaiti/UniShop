@@ -34,12 +34,14 @@
                     $_SESSION['nb_coups'] = $user['coupPlayed'];
         
                     if ($dateGagnant && $dateGagnant->diff($dateActuelle)->days < 7) {
-                        echo '<h1 id="title">La roue de la fortune</h1>';
-                        echo "<h2 id='already'>
-                            Vous avez déjà gagné une fois, attendez la semaine prochaine pour pouvoir rejouer.
-                            <br>
-                            Equipe UniShop.
-                        </h2>";
+                        echo "<div class='main_section'>";
+                            echo '<h1 id="title">La roue de la fortune</h1>';
+                            echo "<h2 id='already'>
+                                Vous avez déjà gagné une fois, attendez la semaine prochaine pour pouvoir rejouer.
+                                <br>
+                                Equipe UniShop.
+                            </h2>";
+                        echo "</div>";
                         echo "<footer>";
                             require_once("footer.php");
                         echo "</footer>";
@@ -48,8 +50,10 @@
                     if ($dateLastPlayed && $dateLastPlayed->diff($dateActuelle)->days < 7 && $_SESSION['nb_coups'] <= 0) {
                         $stmtUpdate = $pdo->prepare("UPDATE utilisateur SET date_last_played = NOW() WHERE idUtilisateur = ?");
                         $stmtUpdate->execute([$_SESSION['user']['idUtilisateur']]);
-                        echo '<h1 id="title">La roue de la fortune</h1>';
-                        echo "<h2 id='already'>Vous avez déjà utilisé tous vos coups, attendez la semaine prochaine pour pouvoir rejouer.</h2>";
+                        echo "<div class='main_section'>";
+                            echo '<h1 id="title">La roue de la fortune</h1>';
+                            echo "<h2 id='already'>Vous avez déjà utilisé tous vos coups, attendez la semaine prochaine pour pouvoir rejouer.<br>Equipe UniShop.</h2>";
+                        echo "</div>";
                         echo "<footer>";
                             require_once("footer.php");
                         echo "</footer>";

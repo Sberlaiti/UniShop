@@ -45,9 +45,10 @@ body{
 
 .affichage_produit3{
     display: grid;
-    grid-template-areas: "div div div";
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     background-color: white;
+    justify-content: center;
 }
 
 .img_produit{/* Taille de l'image de l'article*/
@@ -71,7 +72,6 @@ a, #lien_produit{
     border: none;
     border-radius: 30px;
     padding: 2px 7px;
-
     cursor: pointer;
 }
 
@@ -79,7 +79,7 @@ a, #lien_produit{
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 1em 0px;
+    padding-top: 1em;
 }
 
 .prix_produit{
@@ -118,18 +118,45 @@ a, #lien_produit{
     text-decoration: underline;
     transition: 0.5s;
 }
+
+.average_star_rating{
+    display: flex;
+    align-items: center;
+}
+
+.star{
+    color: #3a3636;
+}
+
+.star.filled {
+    color: #f8d64e;
+}
+
+.review_count{
+    margin-left: 10px;
+    font-size: 10px;
+    color: #828080;
+}
 /* Fin de la partie affichage des produits */
 
 
 /*Partie message d'ajout panier*/
-.message_panier{
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #ffbf66;
-    color: black;
-    padding: 1em;
-    border-radius: 0.2cm;
+.message_panier {
+    display: none; /* Masquer par défaut */
+    background-color: #ffbf66; /* Couleur de fond */
+    color: black; /* Couleur du texte */
+    padding: 15px; /* Espacement interne */
+    position: fixed; /* Position fixe */
+    right: 20px; /* Position à droite */
+    z-index: 1000; /* Au-dessus des autres éléments */
+    border-radius: 5px; /* Coins arrondis */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* Ombre */
+    transition: opacity 0.5s ease; /* Transition pour l'opacité */
+}
+
+.message_panier.show {
+    display: block; /* Afficher le message */
+    opacity: 1; /* Opacité pleine */
 }
 /*Fin de la partie message d'ajout panier*/
 
@@ -149,13 +176,14 @@ a, #lien_produit{
     align-items: center;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
     text-align: center;
-    transition: transform 0.5s ease;
+    transition: transform 0.5s ease, background-color 0.5s ease;
     animation: borderPulse 1s infinite;
 }
 
 .jeu_promo:hover{
-    transform: scale(1.1);
+    transform: scale(1.5);
     background-color: rgb(180, 104, 17);
+    animation-play-state: paused;
 }
 
 @keyframes borderPulse{

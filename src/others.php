@@ -18,70 +18,73 @@
     </head>
 
     <body>
-        <h1 class="title_autres">Autres</h1>
-        <section class="bloc_affichage">            
-            <?php
-                if(isset($_SESSION['user']) != null){
-                    ?>
-                    <div class="bloc">
-                        <a class="lien_service" href="profile.php">
-                            <i class="fa-solid fa-user logo_compte"></i>
-                            <h3>Mon compte</h3>
-                            <p>Consultez votre profil et vos informations personnelles.</p>
-                        </a>
-                    </div>
-                    <?php
-                }
-                else{
-                    ?>
-                    <div class="bloc">
-                        <a class="lien_service" href="login.php">
-                            <i class="logo_service fa-user"></i>
-                            <h3>Mon compte</h3>
-                            <p>Consultez votre profil et vos informations personnelles.</p>
-                        </a>
-                    </div>
-                    <?php
-                }
+        <section class="main_bloc"> 
+            <h1 class="title_autres">Autres</h1>
+            
+            <div class="bloc_affichage">
+                <?php
+                    if(isset($_SESSION['user']) != null){
+                        ?>
+                        <div class="bloc">
+                            <a class="lien_service" href="profile.php">
+                                <i class="fa-solid fa-user logo_compte"></i>
+                                <h3>Mon compte</h3>
+                                <p>Consultez votre profil et vos informations personnelles.</p>
+                            </a>
+                        </div>
+                        <?php
+                    }
+                    else{
+                        ?>
+                        <div class="bloc">
+                            <a class="lien_service" href="login.php">
+                                <i class="logo_service fa-user"></i>
+                                <h3>Mon compte</h3>
+                                <p>Consultez votre profil et vos informations personnelles.</p>
+                            </a>
+                        </div>
+                        <?php
+                    }
 
-                if($_SESSION['user'] != null){
-                    ?>
-                    <div class="bloc">
-                        <a class="lien_service" href="contact.php">
-                            <img src="./images/contact.png" alt="Contact" class="logo_service">
-                            <h3>Prendre contact ?</h3>
-                            <p>Pour prendre contact, veuillez entre ici !</p>
-                        </a>
-                    </div>
-                    <?php
-                } else {
-                    ?>
-                    <div class="bloc">
-                        <a class="lien_service" href="login.php">
-                            <img src="./images/contact.png" alt="Contact" class="logo_service">
-                            <h3>Prendre contact ?</h3>
-                            <p>Pour prendre contact, veuillez vous connecter !</p>
-                        </a>
-                    </div>
-                    <?php
-                }
-            ?>
+                    if($_SESSION['user'] != null){
+                        ?>
+                        <div class="bloc">
+                            <a class="lien_service" href="contact.php">
+                                <img src="./images/contact.png" alt="Contact" class="logo_service">
+                                <h3>Prendre contact ?</h3>
+                                <p>Pour prendre contact, veuillez entre ici !</p>
+                            </a>
+                        </div>
+                        <?php
+                    } else {
+                        ?>
+                        <div class="bloc">
+                            <a class="lien_service" href="login.php">
+                                <img src="./images/contact.png" alt="Contact" class="logo_service">
+                                <h3>Prendre contact ?</h3>
+                                <p>Pour prendre contact, veuillez vous connecter !</p>
+                            </a>
+                        </div>
+                        <?php
+                    }
+                ?>
 
-            <a class="lien_service" href="conditions.php">
-                <div class="bloc">
-                    <img src="./images/conditions.png" alt="Contact" class="logo_service">
-                    <h3>Conditions générales</h3>
-                    <p>Consultez les conditions générales d'utilisation du site.</p>
-                </div>
-            </a>
+                <a class="lien_service" href="conditions.php">
+                    <div class="bloc">
+                        <img src="./images/conditions.png" alt="Contact" class="logo">
+                        <h3>Conditions générales</h3>
+                        <p>Consultez les conditions générales d'utilisation du site.</p>
+                    </div>
+                </a>
 
-            <a class="lien_service" href="informations.php">
-                <div class="bloc">
-                    <img src="./images/conditions.png" alt="Contact" class="logo_service">
-                    <h3>Vos informations personnelles</h3>
-                    <p>Consultez les droits sur les informations personnelles dont vous disposez.</p>
-                </div>
-            </a>
+                <a class="lien_service" href="informations.php">
+                    <div class="bloc">
+                        <img src="./images/conditions.png" alt="Contact" class="logo">
+                        <h3>Vos informations personnelles</h3>
+                        <p>Consultez les droits sur les informations personnelles dont vous disposez.</p>
+                    </div>
+                </a>
+            </div>
         </section>
 
         <div class="jeu_promo">

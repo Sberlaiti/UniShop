@@ -8,6 +8,13 @@ retourhaut.addEventListener('click', function() {
     });
 });
 
+//Dupliquer le contenu de la catégorie
+document.addEventListener('DOMContentLoaded', () => {
+    const blocCategorie = document.querySelector('.bloc_categorie');
+    const content = blocCategorie.innerHTML;
+    blocCategorie.innerHTML += content; // Dupliquer le contenu
+});
+
 
 //modification de la classe pour l'affichage des produits
 function choixClasse() {
@@ -31,3 +38,14 @@ function choixClasse() {
 }
 // Exécuter la fonction dès que le DOM est chargé
 document.addEventListener("DOMContentLoaded", choixClasse);
+
+// Fonction pour changer la couleur des étoiles en fonction de la note
+const userStarsForm = document.querySelectorAll('.user_star_rating_form .star');
+userStarsForm.forEach(star => {
+    const starValue = parseFloat(star.getAttribute('data-value'));
+    if (starValue <= rating) {
+        star.classList.add('filled');
+    } else {
+        star.classList.remove('filled');
+    }
+});
