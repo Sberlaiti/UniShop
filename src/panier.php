@@ -4,12 +4,8 @@
     error_reporting(E_ALL);
 
     require_once('./header02.php');
-
-    // Initialisation des variables de session
-
-    //var_dump($_SESSION['user']);
-
-    // var_dump($panier);
+    require_once('./php/fetchCart.php');
+    $panier = get_cart($pdo);
 ?>
 
 <html lang="fr">
@@ -23,12 +19,6 @@
 </head>
 <body>
     <?php
-        // Recherche des elements dans le panier de l'utilisateur
-        $sql_requete = "SELECT * FROM panier WHERE idUtilisateur = :idUtilisateur";
-        $stmt = $pdo->prepare($sql_requete);
-        $stmt->execute(['idUtilisateur' => $_SESSION['user']['idUtilisateur']]);
-        $panier = $stmt->fetchAll();
-
         if(count($panier) == 0) {
             echo "<div class='container_emptyCart'>";
             echo "<img src='./images/empty_cart.png' alt='Panier vide'>";
@@ -51,7 +41,7 @@
                                     <!-- Créer javascript pour ajouter au favoris et supprimer du panier -->
                                     <div class="cartItems-infos-name">
                                         <!-- Créer un lien vers la page de l'article -->
-                                        <a><?php echo $article['Nom']; ?></a>
+                                        <a><?php echo $article['nomProduit']; ?></a>
                                         <!-- Lier le button à la page du vendeur  -->
                                         <a class="cartItems-infos-seller" href=""><button> Vendeur : <?php echo $article['appartientVendeur']; ?></button></a>
                                         <div class="cartItems-infos-name-ope">
@@ -76,12 +66,12 @@
                                     
                                     <!-- Modifier le prix en fonction de la quantité -->
                                     <div class="cartItems-infos-price">
-                                        <p><?php echo $article['Prix']; ?> €</p>
+                                        <p><?php echo $article['prix']; ?> €</p>
                                         <div class="amount">
                                             <button class="minus">-</button>
                                             <?php
                                                 // Afficher la quantité de l'article
-                                                echo "<p>".$produit['quantitée']."</p>";
+                                                echo "<p>".$produit['quantitee']."</p>";
                                             ?>
                                             <button class="plus">+</button>
                                         </div>
@@ -97,11 +87,11 @@
                         <?php 
                             $total = 0;
                             foreach($panier as $produit) {
-                                $sql_requete = "SELECT * FROM produit WHERE IdProduit = :IdProduit";
+                                $sql_requete = "SELECT * FROM produit WHERE idProduit = :idProduit";
                                 $stmt = $pdo->prepare($sql_requete);
-                                $stmt->execute(['IdProduit' => $produit['IdProduit']]);
+                                $stmt->execute(['idProduit' => $produit['idProduit']]);
                                 $article = $stmt->fetch();
-                                $total += $article['Prix'] * $produit['Quantitée'];
+                                $total += $article['prix'] * $produit['quantitee'];
                             }
                             echo "<p>Sous-total : </p> 
                                     <p>".$total." €</p>";
@@ -122,19 +112,23 @@
                         <p>Total : </p>
                         <p><?php 
                             $total = $total - ($total * 0.18);
+                            $total = number_format($total, 2);
                             echo $total; 
                             ?> €</p>
                     </div>
 
                     <div class="cartSummery_Button">
-                        <button class="cartInfos_Validate">Valider</button>
+                        <form action="paiement.php" method="POST">
+                            <input type="hidden" name="total" value="<?php echo $total; ?>">
+                            <a href="./paiement.php"><button class="cartInfos_Paiement">Paiement</button></a>
+                        </form>
                     </div>
                 </div>
             </div>
 
         <?php }
         echo "<footer>";
-            require_once('footer.php');
+        require_once('./footer.php');
         echo "</footer>";
     ?>
 

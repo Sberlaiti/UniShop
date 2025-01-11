@@ -24,6 +24,7 @@ body {
     color: rgb(204, 33, 33);
     width: fit-content;
     justify-self: center;
+    margin-bottom: 7.6cm;
 }
 
 #already:hover {

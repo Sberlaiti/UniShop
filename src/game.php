@@ -35,7 +35,11 @@
         
                     if ($dateGagnant && $dateGagnant->diff($dateActuelle)->days < 7) {
                         echo '<h1 id="title">La roue de la fortune</h1>';
-                        echo "<h2 id='already'>Vous avez déjà gagné une fois, attendez la semaine prochaine pour pouvoir rejouer.</h2>";
+                        echo "<h2 id='already'>
+                            Vous avez déjà gagné une fois, attendez la semaine prochaine pour pouvoir rejouer.
+                            <br>
+                            Equipe UniShop.
+                        </h2>";
                         echo "<footer>";
                             require_once("footer.php");
                         echo "</footer>";

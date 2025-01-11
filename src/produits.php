@@ -15,10 +15,12 @@
     $result = $pdo->query($sql);
 
     //Récupération de l'id du panier de l'utilisateur
-    $idPanier = "SELECT idPanier
-                FROM panier
-                WHERE idUtilisateur = " . $_SESSION['user']['idUtilisateur'];
-    $stmtPanier = $pdo->query($idPanier);
+    if($_SESSION['user'] != null){
+        $idPanier = "SELECT idPanier
+                    FROM panier
+                    WHERE idUtilisateur = " . $_SESSION['user']['idUtilisateur'];
+        $stmtPanier = $pdo->query($idPanier);
+    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -82,7 +84,7 @@
                     if(isset($_GET['idCategorie']) && $_GET['idCategorie'] != "0"){
                         // On cherche par catégorie
                         $idCategorie = $_GET['idCategorie'];
-                        $sql_requete = "SELECT p.idProduit, p.nomProduit, u.nom, p.prix, i.lien
+                        $sql_requete = "SELECT p.idProduit, p.nomProduit, p.prix, i.lien, u.pseudo
                                         FROM produit p
                                         JOIN utilisateur u ON u.idUtilisateur = p.idUtilisateur
                                         JOIN image i ON i.idImage = p.idImage
@@ -92,7 +94,7 @@
                         $produits = $stmt->fetchAll();
                     } else {
                         // Aucun filtre
-                        $sql_requete = "SELECT p.idProduit, p.nomProduit, u.nom, p.prix, i.lien
+                        $sql_requete = "SELECT p.idProduit, p.nomProduit, u.pseudo, p.prix, i.lien
                                         FROM produit p
                                         JOIN utilisateur u ON u.idUtilisateur = p.idUtilisateur
                                         JOIN image i ON i.idImage = p.idImage";
@@ -103,22 +105,50 @@
                     if(count($produits) > 0){
                         foreach($produits as $row_count){              
                             echo "<div class='produit'>";
-                                echo "<a href='pageArticle.php?idProduit=". $row_count['idProduit'] . " id='lien_produit'>";
+                                echo "<a href='pageArticle.php?idProduit=". $row_count['idProduit'] . "' id='lien_produit'>";
                                     echo "<img class='img_produit' src='" . htmlspecialchars($row_count['lien']) . "'/>";
-                                    echo "<p> Vendeur : " . htmlspecialchars($row_count['nom']) . "</p>";
-                                    echo "<h3>" . htmlspecialchars($row_count['nomProduit']) . "</h3>";
-                                    echo "<p>" . htmlspecialchars($row_count['prix']) . " €</p>";
+                                    echo "<div class='infos_produit'>";
+                                        echo "<h3>" . htmlspecialchars($row_count['nomProduit']) . "</h3>";
+                                        echo "<a class='cartItems-infos-seller' href=''><button>Vendeur: " . htmlspecialchars($row_count['pseudo']). "</button></a>";
+                                    echo "</div>";
+                                    echo "<p class='prix_produit'>" . htmlspecialchars($row_count['prix']) . " €</p>";
                                 echo "</a>";
-                                echo "<button class='ajout_panier'>Ajouter au panier</button>";
+                                if($_SESSION['user'] != null){
+                                    ?>
+                                    <form method="POST" action="">
+                                        <input type="hidden" name="idProduit" value="<?php echo $row_count['idProduit']; ?>">
+                                        <button class="ajout_panier" type="submit" name="ajout_panier">Ajouter au panier</button>
+                                    </form>
+                                    <?php
+                                }
+                                else{
+                                    echo "<button class='ajout_panier' onclick='window.location.href=\"login.php\"'>Ajouter au panier</button>";
+                                }
                             echo "</div>";
-                            $requete = $pdo->prepare("INSERT INTO panier (idUtilisateur) VALUES (?);
-                            INSERT INTO produitsPanier (idProduit, idPanier, quantitee) VALUES (?, ?, 1);");
-                            $requete->execute([$_SESSION['user']['idUtilisateur'], $row_count['idProduit'], $stmtPanier->fetch()['idPanier']]);
                         }
                     } else {
                         echo "<div class='no_produit'>
                                 <p>Aucun produit disponible. Revenez un prochain jour !</p>
                             </div>";
+                    }
+
+                    if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['ajout_panier'])){
+                        $idProduit = $_POST['idProduit'];
+                        $idUser = $_SESSION['user']['idUtilisateur'];
+
+                        $requete = $pdo->prepare("SELECT idPanier FROM panier WHERE idUtilisateur = ?");
+                        $requete->execute([$idUser]);
+                        $panierSQL = $requete->fetch();
+
+                        if($panierSQL){
+                            $idPanier = $panierSQL['idPanier'];
+                        } else {
+                            $requete = $pdo->prepare("INSERT INTO panier(idUtilisateur) VALUES(?)");
+                            $requete->execute([$idUser]);
+                            $idPanier = $pdo->lastInsertId();
+                        }
+                        $requeteSQL = $pdo->prepare("INSERT INTO produitsPanier(idPanier, idProduit, quantitee) VALUES(?, ?, 1)");
+                        $requeteSQL->execute([$idPanier, $idProduit]);
                     }
                 ?>
             </section>

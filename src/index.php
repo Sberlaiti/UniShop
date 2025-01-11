@@ -79,8 +79,10 @@
                             echo "<div class='produit'>";
                                 echo "<a href='pageArticle.php?idProduit=". $row_count['idProduit'] . "' id='lien_produit'>";
                                     echo "<img class='img_produit' src='" . htmlspecialchars($row_count['lien']) . "'/>";
-                                    echo "<p class='titre_vendeur'> Vendeur : " . htmlspecialchars($row_count['pseudo']) . "</p>";
-                                    echo "<h3 class'titre_produit'>" . htmlspecialchars($row_count['nomProduit']) . "</h3>";
+                                    echo "<div class='infos_produit'>";
+                                        echo "<h3>" . htmlspecialchars($row_count['nomProduit']) . "</h3>";
+                                        echo "<a class='cartItems-infos-seller' href=''><button>Vendeur: " . htmlspecialchars($row_count['pseudo']). "</button></a>";
+                                    echo "</div>";
                                     echo "<p class='prix_produit'>" . htmlspecialchars($row_count['prix']) . " €</p>";
                                 echo "</a>";
                             echo "</div>";

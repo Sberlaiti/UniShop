@@ -77,7 +77,7 @@ startButton.addEventListener('click', () => {
                     resultat.innerHTML = "Code promo validé !<br>";
                     startButton.disabled = true;
                     startButton.style.backgroundColor = "gray";
-                    validerButton.style.display = 'none';
+                    //validerButton.style.display = 'none';
                 })
                 .catch(error => console.error(error));
             });

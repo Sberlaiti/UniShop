@@ -33,6 +33,7 @@ function choixClasse() {
 document.addEventListener("DOMContentLoaded", choixClasse);
 
 
+// Fonction pour changer l'url en fonction de la catégorie sélectionnée
 document.querySelectorAll('input[name="categorie"]').forEach(function(radio) {
     radio.addEventListener('change', function() {
         const idCategorie = this.value;
@@ -40,4 +41,12 @@ document.querySelectorAll('input[name="categorie"]').forEach(function(radio) {
         url.searchParams.set('idCategorie', idCategorie); // Ajoute ou met à jour le paramètre
         window.location.href = url.toString(); // Recharge la page avec la nouvelle URL
     });
+});
+
+const bouton = document.querySelector(".ajout_panier");
+bouton.addEventListener('click', function() {
+    const div = document.createElement("div");
+    div.classList.add("message_panier");
+    div.textContent = "Produit ajouté au panier";
+    document.body.appendChild(div);
 });
