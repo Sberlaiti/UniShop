@@ -1,6 +1,8 @@
+@import url('../fonts/RedHatDisplay_Complete/Fonts/WEB/css/red-hat-display.css');
 body {
     margin: 0;
     padding: 0;
+    font-family: 'Red Hat Display', sans-serif;
 }
 
 .page_content {
@@ -49,7 +51,7 @@ body {
     margin-bottom: 10px; 
 }
 
-
+/* Styles pour la section des avis */
 .review_section {
     width: 100%;
     text-align: center;
@@ -57,8 +59,29 @@ body {
 }
 
 .review_count {
-    display: block;
+    font-size: 16px;
     font-weight: bold;
+    margin-right: 10px;
+    color: #000; /* Couleur du texte en noir */
+}
+.average_star_rating {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.average_star_rating .star {
+    font-size: 30px; 
+    margin: 0 2px;
+}
+
+.note_moyenne {
+    font-size: 35; 
+    margin-top: 10px;
+    margin-left: 10px; 
+    font-weight: bold; 
+    color: #000; 
 }
 
 .star {
@@ -148,35 +171,46 @@ body {
 .action_buttons {
     display: flex;
     gap: 10px;
-    margin: 15px 0;
+    justify-content: space-between; 
+    align-items: center;
+    width: 100%;
 }
 
-.buy_button, .cart_button {
+.buy_button, .cart_button,.cart_button_delete  {
     padding: 10px 15px;
     font-size: 16px;
     cursor: pointer;
     border-radius: 8px;
     transition: background-color 0.3s ease;
+    box-sizing: border-box;
+    font-family: 'Red Hat Display';
+    
 }
 
 .buy_button {
     background-color: #4CAF50;
     color: white;
-    border: none;
 }
 
-.buy-button:hover {
+.buy_button:hover {
     background-color: #45a049;
 }
-
 .cart_button {
-    background-color: #f0c14b;
+    background-color: #f0c14b; /* Couleur du thème actuel */
     color: black;
-    border: 1px solid #a88734;
 }
 
 .cart_button:hover {
-    background-color: #e6b93f;
+    background-color: #e6b93f; /* Couleur du thème actuel au survol */
+}
+
+.cart_button_delete {
+    background-color: #dc3545; /* Couleur rouge */
+    color: white;
+}
+
+.cart_button_delete:hover {
+    background-color: #c82333; /* Couleur rouge foncée */
 }
 
 .extra_options {
@@ -235,43 +269,106 @@ body {
     background-color: #e0e0e0;
 }
 
-.comments {
-    margin-top: 20px;
+/* Styles pour les commentaires */
+.comment {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+    color: #000; 
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 15px; 
+    background-color: rgba(255, 230, 102, 0.2);
+
 }
 
-.comment {
-    border: 1px solid #ddd;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
+.comment_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #000; /* Couleur du texte en noir */
 }
 
 .author {
     font-weight: bold;
-    color: #333;
+    margin-right: 10px;
+    color: #000; /* Couleur du texte en noir */
+    display: flex;
+    align-items: center;
+}
+
+.user_star_rating {
+    display: flex;
+    align-items: center;
+    margin-left: 10px; /* Espace entre le nom et les étoiles */
+}
+
+
+.comment_date {
+    font-size: 12px;
+    color: #000; /* Couleur du texte en noir */
+}
+
+.comment_text {
+    margin: 10px 0;
+    font-size: 14px;
+    color: #000; /* Couleur du texte en noir */
+}
+
+.del_button {
+    margin-top: 10px;
+}
+
+.del_button button {
+    background-color: #dc3545; /* Couleur rouge */
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 12px;
+    transition: background-color 0.3s ease;
+}
+
+.del_button button:hover {
+    background-color: #c82333; /* Couleur rouge foncée */
 }
 
 .add_comment_form {
     margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
 }
 
 .add_comment_form textarea {
     width: 100%;
-    height: 80px;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 14px;
     resize: none;
+    height: 100px;
+    color: #000; /* Couleur du texte en noir */
+}
+
+.add_comment_form .user_star_rating_form {
+    display: flex;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.add_comment_form .user_star_rating_form .star {
+    font-size: 20px;
+    cursor: pointer;
+    color: #3a3636;
+}
+
+.add_comment_form .user_star_rating_form .star.filled {
+    color: #f8d64e;
 }
 
 .add_comment_form button {
-    align-self: flex-end;
-    padding: 10px 15px;
-    background-color: #4CAF50;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #007bff;
     color: white;
     border: none;
     border-radius: 5px;
@@ -280,20 +377,21 @@ body {
 }
 
 .add_comment_form button:hover {
-    background-color: #45a049;
-}
-.del_button button {
-    background-color: #dc3545; 
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 16px;
+    background-color: #0056b3;
 }
 
-.del_button button:hover {
-    background-color: #c82333;
+/* Styles pour le message popup */
+.message_panier {
+    display: none;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #4CAF50; /* Couleur de fond verte */
+    color: black;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
 }
 
 /*Partie footer*/
@@ -347,59 +445,68 @@ span, .footer_lien{
 
 /* Styles spécifiques pour pageModifInfoArticle.php */
 .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f9f9f9;
+    max-width: 1400px; 
+    margin: 20px auto;
+    background-color: #fff;
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 30px; 
 }
 
 .formulaire {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+    display: grid;
+    grid-template-columns: 1fr 2fr; /* Informations à droite, image à gauche */
+    gap: 40px;
 }
 
 .formulaire label {
+    display: block;
+    margin-bottom: 8px;
     font-weight: bold;
-    margin-bottom: 5px;
+    color: #333;
 }
 
 .formulaire input[type="text"],
 .formulaire input[type="number"],
-.formulaire input[type="file"],
-.formulaire textarea {
+.formulaire textarea,
+.formulaire input[type="file"] {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
     font-size: 14px;
+    background-color: #f9f9f9;
 }
 
-.formulaire textarea {
-    resize: none;
-    height: 150px;
+textarea {
+    resize: vertical;
+    height: 120px;
 }
 
-.formulaire .button {
-    display: flex;
-    justify-content: flex-end;
+.button {
+    grid-column: 1 / -1;
+    text-align: center;
 }
 
-.formulaire .button button {
+.button button {
+    background-color: #28a745;
+    color: #fff;
     padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
+    font-size: 16px;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s;
 }
 
-.formulaire .button button:hover {
-    background-color: #0056b3;
+.button button:hover {
+    background-color: #218838;
 }
+
+.image {
+    align-self: start;
+}
+
 
 
 /* Responsive design */

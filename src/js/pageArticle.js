@@ -23,6 +23,14 @@ if (noteInput) {
 
     updateUserStars(parseFloat(noteInput.value));
 }
+const existingNote = parseFloat(noteInput.value);
+if (existingNote > 0) {
+    
+    updateUserStars(existingNote);
+    userStarsForm.forEach(star => {
+        star.style.pointerEvents = 'none';
+    });
+}
 
 const thumbnails = document.querySelectorAll('.thumbnail_list .thumbnail');
 const mainImage = document.querySelector('.main_image img');
@@ -58,3 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+
+/*<button type="submit" name="ajout_panier" class="cart_button" id="cart_button">Ajouter au Panier</button>
+*/

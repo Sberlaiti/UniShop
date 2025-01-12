@@ -4,7 +4,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-require_once('./connection/pdo-conn_iut.php');
+require_once('./connection/pdo-conn.php');
 
 // Vérifier que l'utilisateur est connecté
 if (!isset($_SESSION['user']['idUtilisateur'])) {
@@ -24,7 +24,7 @@ $stmt = $pdo->prepare("SELECT idUtilisateur FROM produit WHERE idProduit = ?");
 $stmt->execute([$idProduit]);
 $produit = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if ($utilisateur['estVendeur'] != 1 || $produit['idUtilisateur'] != $idUtilisateur) {
+if ($utilisateur['estVendeur'] != 0 || $produit['idUtilisateur'] != $idUtilisateur) {
     echo "Vous n'êtes pas autorisé à modifier cet article.";
     exit();
 }
@@ -92,39 +92,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <h1>Modifier les informations de l'article</h1>
 
     <div class="container">
-        <section class="formulaire">
-            <form action="" method="POST" enctype="multipart/form-data">
-                <div class="title">
-                    <label for="nomProduit">Nom du produit</label>
-                    <input type="text" name="nomProduit" id="nomProduit" value="<?php echo htmlspecialchars($article['nomProduit']); ?>" required maxlength="200"/>
-                </div>
+        <form method="post" enctype="multipart/form-data" class="formulaire">
+            <div class="image">
+                <label for="images">Images du produit (5 maximum) :</label>
+                <input type="file" name="images[]" id="images" multiple accept="image/*">
+            </div>
+            <div class="infos">
+                <label for="nomProduit">Nom du produit :</label>
+                <input type="text" id="nomProduit" name="nomProduit" required>
 
-                <div class="description">
-                    <label for="description">Description</label>
-                    <textarea name="description" id="description" required maxlength="5000"><?php echo htmlspecialchars($article['description']); ?></textarea>
-                </div>
+                <label for="description">Description :</label>
+                <textarea id="description" name="description" required></textarea>
 
-                <div class="price">
-                    <label for="prix">Prix</label>
-                    <input type="number" name="prix" id="prix" value="<?php echo htmlspecialchars($article['prix']); ?>" required step="0.01"/>
-                </div>
+                <label for="prix">Prix :</label>
+                <input type="number" step="0.01" id="prix" name="prix" required>
 
-                <div class="delivery">
-                    <label for="delayLivraison">Délai de livraison (jours)</label>
-                    <input type="number" name="delayLivraison" id="delayLivraison" value="<?php echo htmlspecialchars($article['delayLivraison']); ?>" required/>
-                </div>
-
-                <div class="image">
-                    <label for="image">Image de l'article</label>
-                    <input type="file" name="image" id="image"/>
-                </div>
+                <label for="delayLivraison">Délai de livraison (jours) :</label>
+                <input type="number" id="delayLivraison" name="delayLivraison" required>
 
                 <div class="button">
-                    <button type="submit">Mettre à jour l'article</button>
+                    <button type="submit">Ajouter le produit</button>
                 </div>
-            </form>
-        </section>
+            </div>
+        </form>
     </div>
+    
 
     <footer>
         <div class="return_top">

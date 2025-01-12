@@ -4,7 +4,7 @@
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
 
-    require_once('connection/pdo-conn_iut.php');
+    require_once('connection/pdo-conn.php');
 
     // Initialisation des variables de session
     if(!isset($_SESSION['user'])) $_SESSION['user'] = null;
@@ -84,7 +84,7 @@
                             <p>Sign In</p>
                     <?php } else { ?>
                         <a href="profile.php">
-                            <img src="./images/italianFlag.png" alt="UserLogo"><p><?php echo $_SESSION['user']['pseudo'] ?></p>
+                            <img src="./images/italianFlag.png" alt="UserLogo"><p><?php echo $_SESSION['user']['nom'] ?></p>
                     <?php } ?>
                     </a>
                 </div>

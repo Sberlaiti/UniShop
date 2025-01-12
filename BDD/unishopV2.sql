@@ -115,7 +115,6 @@ CREATE TABLE IF NOT EXISTS `image` (
   `idProduit` int NOT NULL,
   PRIMARY KEY (`idImage`),
   KEY `fk_image_produit` (`idProduit`)
-<<<<<<< HEAD
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `image` (`idImage`, `lien`,`idProduit`) VALUES
@@ -125,47 +124,6 @@ INSERT INTO `image` (`idImage`, `lien`,`idProduit`) VALUES
 (4, '../articles/preview-5.jpeg',4),
 (5, '../articles/preview-4.jpeg',4),
 (6, '../articles/preview-3.jpeg',4);
-=======
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Dumping data for table `image`
---
-
-INSERT INTO `image` (`idImage`, `lien`, `idProduit`) VALUES
-(1, './images/animaux.jpg', 4),
-(2, './images/telephonie.jpg', 4),
-(3, '../articles/preview-2.jpeg', 4),
-(4, '../articles/preview-5.jpeg', 4),
-(5, '../articles/preview-4.jpeg', 4),
-(6, '../articles/preview-3.jpeg', 4),
-(7, '../articles/preview.jpeg', 0),
-(8, '../articles/preview-6.jpeg', 0),
-(9, '../articles/preview-7.jpeg', 0),
-(10, '../articles/preview-8.jpeg', 0),
-(11, '../articles/preview-9.jpeg', 0),
-(12, '../articles/preview-10.jpeg', 0),
-(13, '../articles/preview-11.jpeg', 0),
-(14, '../articles/preview-12.jpeg', 0),
-(15, '../articles/preview-13.jpeg', 0),
-(16, '../logos/logo-png.png', 0),
-(17, './images/promotion.jpg', 0),
-(18, './images/auto.jpg', 0),
-(19, './images/bricolage.jpg', 0),
-(20, './images/bureau.jpg', 0),
-(21, './images/cuisine.jpg', 0),
-(22, './images/jardin.jpg', 0),
-(23, './images/jeux.jpg', 0),
-(24, './images/livre.jpg', 0),
-(25, './images/parfum.jpg', 0),
-(26, './images/sneaker.jpeg', 0);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `panier`
---
->>>>>>> main
 
 DROP TABLE IF EXISTS `panier`;
 CREATE TABLE IF NOT EXISTS `panier` (

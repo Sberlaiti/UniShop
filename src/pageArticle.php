@@ -9,25 +9,6 @@
     $stmt->execute([$idUtilisateur]);
     $utilisateur = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
-        $idProduit = $_POST['idProduit'];
-        $idUtilisateur = $_SESSION['user']['idUtilisateur'];
-        $quatite = 1;
-        // Vérifier si le produit est déjà dans le panier
-        if (!isset($_SESSION['panier'])) {
-            $_SESSION['panier'] = [];
-        }
-    
-        if (!in_array($idProduit, $_SESSION['panier'])) {
-            $stmt = $pdo->prepare("INSERT INTO panier (idProduit, idUtilisateur, quantite) VALUES (?, ?, ?)");
-            $stmt->execute([$idProduit, $idUtilisateur, $quatite]);
-            
-
-            echo "Produit ajouté au panier.";
-        } else {
-            echo "Ce produit est déjà dans votre panier.";
-        }
-    }
 
     $idProduit = $_GET['idProduit'];
     $stmt = $pdo->prepare("SELECT nomProduit,description,prix,delayLivraison,idImage
@@ -100,6 +81,35 @@
             echo "Action non autorisée.";
         }
     }
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $idProduit = $_POST['idProduit'];
+        $idUser = $_SESSION['user']['idUtilisateur'];
+
+        $requete = $pdo->prepare("SELECT idPanier FROM panier WHERE idUtilisateur = ?");
+        $requete->execute([$idUser]);
+        $panierSQL = $requete->fetch();
+
+        if ($panierSQL) {
+            $idPanier = $panierSQL['idPanier'];
+        } else {
+            $requete = $pdo->prepare("INSERT INTO panier(idUtilisateur) VALUES(?)");
+            $requete->execute([$idUser]);
+            $idPanier = $pdo->lastInsertId();
+        }
+
+        if (isset($_POST['ajout_panier'])) {
+            $requeteSQL = $pdo->prepare("INSERT INTO produitsPanier(idPanier, idProduit, quantitee) VALUES(?, ?, 1) ON DUPLICATE KEY UPDATE quantitee = quantitee + 1");
+            $requeteSQL->execute([$idPanier, $idProduit]);
+            echo "<script>showMessage('Produit ajouté au panier');</script>";
+        } else if (isset($_POST['enlever_panier'])) {
+            $requeteSQL = $pdo->prepare("DELETE FROM produitsPanier WHERE idPanier = ? AND idProduit = ?");
+            $requeteSQL->execute([$idPanier, $idProduit]);
+            echo "<script>showMessage('Produit enlevé du panier');</script>";
+        }
+        echo "<script>window.location.href = window.location.href;</script>";
+        exit();
+    }
 ?>
 
 <!DOCTYPE html>
@@ -146,24 +156,33 @@
                                 echo "<!-- Classe appliquée: star $filled -->";
                             }
                         ?>
+                        <span class="note_moyenne"><?php echo number_format($noteMoyenne, 1); ?></span>
                     </div>
                     <div class="review_bar"></div>
                         <div class="comments">
-                            <?php if ($nombreAvis > 0): ?>
+                            <?php 
+                            $requeteCommentaire = $pdo->prepare("SELECT note FROM avis WHERE idUtilisateur = ? AND idProduit = ?");
+                            $requeteCommentaire->execute([$idUtilisateur, $idProduit]);
+                            $commentaireExistant = $requeteCommentaire->fetch();
+                            $noteExistant = $commentaireExistant ? $commentaireExistant['note'] : 0;
+                            if ($nombreAvis > 0): 
+                            ?>
                                 <?php foreach ($avis as $avisItem): ?>
                                     <div class="comment">
-                                        <strong class="author"></i><?php echo htmlspecialchars($avisItem['nom']); ?></strong>
-                                        <p><?php echo htmlspecialchars($avisItem['contenu']); ?></p>
-                                        <div class="user_star_rating">
-                                            <?php
-                                                // Afficher les étoiles en fonction de la note de l'utilisateur
-                                                for ($i = 1; $i <= 5; $i++) {
-                                                    $filled = $i <= $avisItem['note'] ? 'filled' : '';
-                                                    echo "<span class='star $filled' data-value='$i'>&#9733;</span>";
-                                                    echo "<!-- Classe appliquée: star $filled -->";
-                                                }
-                                            ?>
-                                        </div>
+                                        <strong class="author">
+                                            </i><?php echo htmlspecialchars($avisItem['nom']); ?>
+                                            <div class="user_star_rating">
+                                                <?php
+                                                    // Afficher les étoiles en fonction de la note de l'utilisateur
+                                                    for ($i = 1; $i <= 5; $i++) {
+                                                        $filled = $i <= $noteExistant ? 'filled' : '';
+                                                        echo "<span class='star $filled' data-value='$i'>&#9733;</span>";
+                                                        echo "<!-- Classe appliquée: star $filled -->";
+                                                    }
+                                                ?>
+                                            </div>
+                                        </strong>
+                                        <p class="comment_text"><?php echo htmlspecialchars($avisItem['contenu']); ?></p>
                                         <?php if ($_SESSION['user']['idUtilisateur'] == $idUtilisateur && isset($avisItem['idAvis'])): ?>
                                             <div class="del_button">
                                                 <form action="" method="POST">
@@ -176,11 +195,13 @@
                                 <?php endforeach; ?>
                             <?php else: ?>
                                 <p>Aucun avis pour cet article.</p>
-                            <?php endif; ?>
+                            <?php endif;
+                            ?>
                         
                             <form action="" method="POST" class="add_comment_form">
                                 <textarea name="new_comment" placeholder="Ajoutez votre avis..." required></textarea>
-                                <input type="hidden" name="note" id="note" value="0">
+                                <input type="hidden" name="note" id="note" value="<?php echo htmlspecialchars($noteExistant); ?>">
+                                <?php if (!$commentaireExistant): ?>
                                 <div class="user_star_rating_form">
                                     <span class="star" data-value="1">&#9733;</span>
                                     <span class="star" data-value="2">&#9733;</span>
@@ -188,8 +209,23 @@
                                     <span class="star" data-value="4">&#9733;</span>
                                     <span class="star" data-value="5">&#9733;</span>
                                 </div>
+                                <?php endif; ?>
                                 <button type="submit" >Publier</button>
                             </form>
+                            <?php
+                            if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['new_comment'])) {
+                                $newComment = $_POST['new_comment'];
+                                $note = $commentaireExistant ? $commentaireExistant['note'] : $_POST['note'];
+
+                                // Insérer le nouveau commentaire dans la base de données
+                                $requete = $pdo->prepare("INSERT INTO commentaires (idUtilisateur, idProduit, contenu, note) VALUES (?, ?, ?, ?)");
+                                $requete->execute([$idUser, $idProduit, $newComment, $note]);
+
+                                // Recharger la page pour afficher le nouveau commentaire
+                                echo "<script>window.location.href = window.location.href;</script>";
+                                exit();
+                            }
+                            ?>
                         </div>
                 </div>
             </div>
@@ -213,17 +249,36 @@
                 </div>
 
                 <div class="action_buttons">
-                    <button class="buy_button">Acheter</button>
-                    <form action="" method="POST">
+                    <button class="buy_button" onclick="window.location.href='paiement.php'">Acheter</button>
+                    <form action="" method="POST" id="cart_form">
                         <input type="hidden" name="idProduit" value="<?php echo htmlspecialchars($_GET['idProduit']); ?>">
-                        <button type="submit" name="add_to_cart" class="cart_button">Ajouter au Panier</button>
+                        <?php
+                        $idUser = $_SESSION['user']['idUtilisateur'];
+                        $idProduit = $_GET['idProduit'];
+
+                        // Vérifier si le produit est déjà dans le panier
+                        $requete = $pdo->prepare("SELECT pp.idProduit FROM produitsPanier pp JOIN panier p ON pp.idPanier = p.idPanier WHERE p.idUtilisateur = ? AND pp.idProduit = ?");
+                        $requete->execute([$idUser, $idProduit]);
+                        $produitDansPanier = $requete->fetch();
+
+                        if ($produitDansPanier) {
+                            // Si le produit est dans le panier, afficher le bouton "Enlever du Panier"
+                            echo '<button type="submit" name="enlever_panier" class="cart_button_delete" id="cart_button">Enlever du Panier</button>';
+                        } else {
+                            // Si le produit n'est pas dans le panier, afficher le bouton "Ajouter au Panier"
+                            echo '<button type="submit" name="ajout_panier" class="cart_button" id="cart_button">Ajouter au Panier</button>';
+                        }
+                        ?>
                     </form>
                 </div>
-
+                <div id="message_panier" class="message_panier"></div>
+                <?php
+                
+                ?>                       
                 <div class="extra_options">
                     <button class="more_options">...</button>
                     <div class="more_options_menu">
-                        <?php if ($utilisateur['estVendeur'] == 1): ?>
+                        <?php if ($utilisateur['estVendeur'] == 0): ?>
                             <button class="edit_info_button" onclick="window.location.href='pageModifInfoArticle.php?idProduit=<?php echo $_GET['idProduit']; ?>'">Modifier les infos de l'article</button>
                         <?php endif; ?>
                         <button class="view_cart_button" onclick="window.location.href='panier.php'">Voir panier</button>
