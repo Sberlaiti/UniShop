@@ -33,23 +33,14 @@ function choixClasse() {
 // Exécuter la fonction dès que le DOM est chargé
 document.addEventListener("DOMContentLoaded", choixClasse);
 
-/*
-const leftBtn = document.querySelector('.left_btn');
-const rightBtn = document.querySelector('.right_btn');
-const categories = document.querySelector('.categorie');
-const wrapper = document.querySelector('.categories_wrapper');
 
-let scrollPosition = 0;
-
-const scrollAmount = wrapper.offsetWidth; // Taille d'un déplacement
-
-leftBtn.addEventListener('click', () => {
-    scrollPosition = Math.max(scrollPosition - scrollAmount, 0);
-    categories.style.transform = `translateX(-${scrollPosition}px)`;
+//fonction qui permet de changer la classe si le nombre de catégories est supérieur ou égal à 8
+const categories = document.querySelectorAll(".categorie");
+const affichage_categories = document.querySelector(".affichage_categorie");
+const container = document.querySelector(".categorie_container");
+document.addEventListener("DOMContentLoaded", function() {
+    if(categories.length >= 8){
+        affichage_categories.classList.add("affichage_categorie2");
+        affichage_categories.classList.remove("affichage_categorie");
+    }
 });
-
-rightBtn.addEventListener('click', () => {
-    const maxScroll = categories.scrollWidth - wrapper.offsetWidth;
-    scrollPosition = Math.min(scrollPosition + scrollAmount, maxScroll);
-    categories.style.transform = `translateX(-${scrollPosition}px)`;
-});*/

@@ -49,7 +49,7 @@
     <link rel="stylesheet" type="text/css" href="./css/login.css"/>
     <!-- Pour utiliser FontAwesome (Icônes) -->
     <script src="https://kit.fontawesome.com/3b8e4ae998.js" crossorigin="anonymous"></script>
-    <title>Panier</title>
+    <title>Se connecter - UniShop</title>
 </head>
 <body>
     <div class="container">

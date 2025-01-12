@@ -30,10 +30,6 @@ body{
     gap: 20px;
 }
 
-/*.produit:nth-of-type(2n){ /* Pour les produits pairs */
-   /* background-color: #ffbf66;
-}*/
-
 a{
     text-decoration: none;
 }
@@ -90,13 +86,14 @@ a, #lien_produit{
     justify-content: center;
     align-items: center;
     padding: 1em;
-    width: 65%;
-    background-color: orange;
+    background-color: #ffbf66;
+    width: fit-content;
     margin: 0 auto;
     gap: 20px;
+    border-radius: 0.2cm;
 }
 
-.img_jeu{
+.img_jeu{/* Taille de l'image du jeu*/
     width: 250px;
     height: 170px;
 }
@@ -115,6 +112,15 @@ a, #lien_produit{
     justify-content: center;
     align-items:  center;
     padding: 1em;
+    background-color: rgb(238, 225, 225);
+}
+
+.affichage_categorie2{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-auto-rows: auto;
+    gap: 10px;
+    background-color: rgb(238, 225, 225);
 }
 
 .title_categories{
@@ -126,12 +132,6 @@ a, #lien_produit{
     margin-right: 30px;
     padding: 0.5em;
     border: 1px solid #ffbf6600;
-    /*display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    grid-auto-rows: 0fr;
-    gap: 10px;
-    transform: translateX(0);
-    transition: transform 0.3s ease-in-out;*/
 }
 
 .categorie:hover{
@@ -150,31 +150,13 @@ a, #lien_produit{
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
+    color: black;
+    background-color: orange;
+    padding: 1em;
+    border-radius: 0.2cm;
 }
 /*Fin partie affichage des catégories*/
-
-
-.jeu_promo{
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 100px;
-    height: 100px;
-    background-color: rgb(247, 132, 0);
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
-    text-align: center;
-    transition: transform 0.5s ease;
-}
-
-.jeu_promo:hover{
-    transform: scale(1.1);
-    background-color: rgb(180, 104, 17);
-}
 
 
 /*Partie footer*/

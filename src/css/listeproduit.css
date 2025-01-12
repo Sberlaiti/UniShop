@@ -1,0 +1,89 @@
+body
+{
+    display: grid;
+    grid-template-columns: 15em 1fr;
+}
+
+.product
+{
+    width: 355px;
+    height: 440px;
+    border: 2px solid black;
+    border-radius: 10px;
+    margin: 10px 0px 0px 10px;
+    background-color: lightgrey;
+}
+
+button
+{
+    background-color: white;
+    border:none;
+    border-radius: 10px;
+    font-size: 22px;
+    font-family: "Gill Sans", sans-serif;
+    margin-left: 5px;
+}
+
+p
+{
+    padding-left: 5px;
+}
+
+button:hover
+{
+    background-color: #EA6615;
+}
+
+img
+{
+    height: 12em;
+    width: 100%;
+    border-bottom: 3px solid black;
+    border-top-left-radius: 9px;
+    border-top-right-radius: 9px;
+}
+
+select
+{
+    margin-top: 10px;
+    height: 25px;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+label
+{
+    margin-top: 10px;
+}
+
+.product button:first-of-type
+{
+    width: 25px;
+}
+
+#prod
+{
+    grid-column: 2 / 3;
+    display:flex;
+    flex-wrap: wrap;
+    font-size: 22px;
+    font-family: "Gill Sans", sans-serif;
+}
+
+#filtre
+{
+    grid-column: 1 / 2;
+    font-size: 22px;
+    font-family: "Gill Sans", sans-serif;
+}
+
+#header
+{
+    grid-column: 1 / 3;
+}
+
+#filtre button:last-child
+{
+    border: 2px solid black;
+    margin: 0px;
+}

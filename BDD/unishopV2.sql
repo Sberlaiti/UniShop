@@ -1,9 +1,9 @@
--- phpMyadmin SQL Dump
+-- phpMyAdmin SQL Dump
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 25, 2024 at 07:56 AM
+-- Generation Time: Jan 10, 2025 at 12:17 PM
 -- Server version: 8.3.0
 -- PHP Version: 8.2.18
 
@@ -11,15 +11,22 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
--- Charset initial
+
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
--- Base de données : `unishop`
+--
+-- Database: `unishop`
+--
 
--- Table `avis`
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `avis`
+--
+
 DROP TABLE IF EXISTS `avis`;
 CREATE TABLE IF NOT EXISTS `avis` (
   `idAvis` int NOT NULL AUTO_INCREMENT,
@@ -31,14 +38,14 @@ CREATE TABLE IF NOT EXISTS `avis` (
   PRIMARY KEY (`idAvis`),
   KEY `fk_avis_utilisateur` (`idUtilisateur`),
   KEY `fk_avis_produit` (`idProduit`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=6667 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-INSERT INTO `avis` (`idAvis`, `contenu`, `dateCreation`, `idUtilisateur`, `idProduit`, `note`) VALUES
-(4444, 'nice shoes', '2024-11-11', 3333, 0, 4),
-(5555, 'j\'adore ces chaussures', '2024-11-11', 3333, 1, 5),
-(6666, 'Très confortable, je recommande.', '2024-11-12', 3333, 3, 5);
+-- --------------------------------------------------------
 
--- Table `categorie`
+--
+-- Table structure for table `categorie`
+--
+
 DROP TABLE IF EXISTS `categorie`;
 CREATE TABLE IF NOT EXISTS `categorie` (
   `idCategorie` int NOT NULL AUTO_INCREMENT,
@@ -46,17 +53,33 @@ CREATE TABLE IF NOT EXISTS `categorie` (
   `idImage` int NOT NULL,
   PRIMARY KEY (`idCategorie`),
   KEY `fk_categorie_image` (`idImage`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=94 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `categorie`
+--
 
 INSERT INTO `categorie` (`idCategorie`, `nomCategorie`, `idImage`) VALUES
 (1, 'Animalerie', 1),
-(2, 'Beauté et parfum', 0),
+(2, 'Beauté et parfum', 25),
 (3, 'Téléphonie', 2),
-(4, 'Accessoires UniShop', 0),
-(5, 'Bricolage', 0),
-(6, 'Auto & moto', 0);
+(4, 'Produits UniShop', 16),
+(5, 'Bricolage', 19),
+(6, 'Auto & moto', 18),
+(7, 'Promotions', 17),
+(8, 'Cuisine & Maison', 21),
+(9, 'Jeux vidéos', 23),
+(10, 'Sneakers', 26),
+(11, 'Fournitures de bureau', 20),
+(12, 'Jardin', 22),
+(13, 'Livres', 24);
 
--- Table `commande`
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `commande`
+--
+
 DROP TABLE IF EXISTS `commande`;
 CREATE TABLE IF NOT EXISTS `commande` (
   `idCommande` int NOT NULL AUTO_INCREMENT,
@@ -70,12 +93,21 @@ CREATE TABLE IF NOT EXISTS `commande` (
   KEY `fk_commande_utilisateur` (`idUtilisateur`),
   KEY `fk_commande_promo` (`idPromo`),
   KEY `fk_produit_commande` (`idProduit`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=1002 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `commande`
+--
 
 INSERT INTO `commande` (`idCommande`, `dateAchat`, `adresse`, `telephone`, `idUtilisateur`, `idPromo`, `idProduit`) VALUES
 (1001, '2024-11-11', '123 Rue de Paris', '1234567890', 3333, NULL, 0);
 
--- Table `image`
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `image`
+--
+
 DROP TABLE IF EXISTS `image`;
 CREATE TABLE IF NOT EXISTS `image` (
   `idImage` int NOT NULL AUTO_INCREMENT,
@@ -83,6 +115,7 @@ CREATE TABLE IF NOT EXISTS `image` (
   `idProduit` int NOT NULL,
   PRIMARY KEY (`idImage`),
   KEY `fk_image_produit` (`idProduit`)
+<<<<<<< HEAD
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `image` (`idImage`, `lien`,`idProduit`) VALUES
@@ -92,22 +125,62 @@ INSERT INTO `image` (`idImage`, `lien`,`idProduit`) VALUES
 (4, '../articles/preview-5.jpeg',4),
 (5, '../articles/preview-4.jpeg',4),
 (6, '../articles/preview-3.jpeg',4);
+=======
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Table `panier`
+--
+-- Dumping data for table `image`
+--
+
+INSERT INTO `image` (`idImage`, `lien`, `idProduit`) VALUES
+(1, './images/animaux.jpg', 4),
+(2, './images/telephonie.jpg', 4),
+(3, '../articles/preview-2.jpeg', 4),
+(4, '../articles/preview-5.jpeg', 4),
+(5, '../articles/preview-4.jpeg', 4),
+(6, '../articles/preview-3.jpeg', 4),
+(7, '../articles/preview.jpeg', 0),
+(8, '../articles/preview-6.jpeg', 0),
+(9, '../articles/preview-7.jpeg', 0),
+(10, '../articles/preview-8.jpeg', 0),
+(11, '../articles/preview-9.jpeg', 0),
+(12, '../articles/preview-10.jpeg', 0),
+(13, '../articles/preview-11.jpeg', 0),
+(14, '../articles/preview-12.jpeg', 0),
+(15, '../articles/preview-13.jpeg', 0),
+(16, '../logos/logo-png.png', 0),
+(17, './images/promotion.jpg', 0),
+(18, './images/auto.jpg', 0),
+(19, './images/bricolage.jpg', 0),
+(20, './images/bureau.jpg', 0),
+(21, './images/cuisine.jpg', 0),
+(22, './images/jardin.jpg', 0),
+(23, './images/jeux.jpg', 0),
+(24, './images/livre.jpg', 0),
+(25, './images/parfum.jpg', 0),
+(26, './images/sneaker.jpeg', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `panier`
+--
+>>>>>>> main
+
 DROP TABLE IF EXISTS `panier`;
 CREATE TABLE IF NOT EXISTS `panier` (
-  `quantitee` int NOT NULL,
-  `idProduit` int NOT NULL,
+  `idPanier` int NOT NULL AUTO_INCREMENT,
   `idUtilisateur` int NOT NULL,
-  KEY `fk_produit_panier` (`idProduit`),
+  PRIMARY KEY (`idPanier`),
   KEY `fk_panier_utilisateur` (`idUtilisateur`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-INSERT INTO `panier` (`quantitee`, `idProduit`, `idUtilisateur`) VALUES
-(2, 1, 3333),
-(1, 3, 3333);
+-- --------------------------------------------------------
 
--- Table `produit`
+--
+-- Table structure for table `produit`
+--
+
 DROP TABLE IF EXISTS `produit`;
 CREATE TABLE IF NOT EXISTS `produit` (
   `idProduit` int NOT NULL AUTO_INCREMENT,
@@ -124,36 +197,112 @@ CREATE TABLE IF NOT EXISTS `produit` (
   KEY `fk_produit_image` (`idImage`),
   KEY `fk_produit_utilisateur` (`idUtilisateur`),
   KEY `fk_produit_categorie` (`IdCategorie`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `produit`
+--
 
 INSERT INTO `produit` (`idProduit`, `nomProduit`, `description`, `prix`, `delayLivraison`, `appartientVendeur`, `idImage`, `dateCreation`, `idUtilisateur`, `IdCategorie`) VALUES
-(4, 'Botte', 'Une chaussure haute', 36.3, 5, 0, 1112, '2024-11-01', 0, 5555);
+(4, 'Botte', 'Une chaussure haute', 36.3, 5, 0, 1, '2024-11-01', 1, 5);
 
--- Table `promotion`
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `produitscommande`
+--
+
+DROP TABLE IF EXISTS `produitscommande`;
+CREATE TABLE IF NOT EXISTS `produitscommande` (
+  `idProduit` int NOT NULL,
+  `idCommande` int NOT NULL,
+  `quantitee` int NOT NULL,
+  `prixUnitaire` double NOT NULL,
+  PRIMARY KEY (`idCommande`),
+  KEY `fk_produitsCommande_commande` (`idCommande`),
+  KEY `fk_produitsCommande_produit` (`idProduit`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `produitspanier`
+--
+
+DROP TABLE IF EXISTS `produitspanier`;
+CREATE TABLE IF NOT EXISTS `produitspanier` (
+  `idProduit` int NOT NULL,
+  `idPanier` int NOT NULL,
+  `quantitee` int NOT NULL,
+  PRIMARY KEY (`idPanier`,`idProduit`),
+  KEY `fk_produitsPanier_produit` (`idProduit`),
+  KEY `fk_produitsPanier_panier` (`idPanier`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `promotion`
+--
+
 DROP TABLE IF EXISTS `promotion`;
 CREATE TABLE IF NOT EXISTS `promotion` (
   `idPromo` int NOT NULL AUTO_INCREMENT,
   `codePromo` varchar(5) NOT NULL,
-  `coefficient` double NOT NULL,
-  PRIMARY KEY (`idPromo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `coefficient` double(5,2) NOT NULL,
+  `idUtilisateur` int NOT NULL,
+  PRIMARY KEY (`idPromo`),
+  KEY `fk_promotion_user` (`idUtilisateur`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Table `utilisateur`
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `utilisateur`
+--
+
 DROP TABLE IF EXISTS `utilisateur`;
 CREATE TABLE IF NOT EXISTS `utilisateur` (
   `idUtilisateur` int NOT NULL AUTO_INCREMENT,
   `nom` varchar(130) NOT NULL,
   `prenom` varchar(130) NOT NULL,
+  `pseudo` varchar(130) NOT NULL,
   `mail` varchar(400) NOT NULL,
   `password` varchar(255) NOT NULL,
   `estVendeur` tinyint(1) NOT NULL DEFAULT '0',
   `admin` tinyint(1) NOT NULL DEFAULT '0',
+  `date_gagnantPromo` datetime DEFAULT NULL,
+  `date_last_played` datetime DEFAULT NULL,
+  `coupPlayed` int DEFAULT '3',
   PRIMARY KEY (`idUtilisateur`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3336 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-INSERT INTO `utilisateur` (`idUtilisateur`, `nom`, `prenom`, `mail`, `password`, `estVendeur`, `admin`) VALUES
-(1, 'Unishop', 'Admin', 'unishop@example.com', 'unishopMDP', 0, 1),
-(3333, 'Edward', 'David', 'edwarddavid@gmail.com', '36303630', 0, 0);
+--
+-- Dumping data for table `utilisateur`
+--
+
+INSERT INTO `utilisateur` (`idUtilisateur`, `nom`, `prenom`, `pseudo`, `mail`, `password`, `estVendeur`, `admin`, `date_gagnantPromo`, `date_last_played`, `coupPlayed`) VALUES
+(1, 'UniShop', 'Admin', 'admin', 'aunishop786@gmail.com', '$2y$10$NSVDfJMSV6cX0XX6cMCDMORUBkDM77q5fM6hZ.pd44l1xshYioCNq', 0, 1, NULL, NULL, 3),
+(3333, 'Edward', 'David', 'eddy', 'edwarddavid@gmail.com', '36303630', 0, 0, NULL, NULL, 3),
+(3334, 'Saber', 'LAITI BEN AYYAD', 'sayber', 'abdelybouchra@gmail.com', '$2y$10$yTp3Y7.SbxVgqewAYsYUX.PivMyoKO2oe.2JGXRmAIVFuZqsK8kDa', 0, 0, NULL, NULL, 3);
+
+DELIMITER $$
+--
+-- Events
+--
+DROP EVENT IF EXISTS `clear_promotion_date`$$
+CREATE DEFINER=`root`@`localhost` EVENT `clear_promotion_date` ON SCHEDULE EVERY 1 DAY STARTS '2025-01-09 13:11:56' ON COMPLETION NOT PRESERVE ENABLE DO UPDATE utilisateur
+  SET date_gagnantPromo = NULL
+  WHERE date_gagnantPromo IS NOT NULL
+  AND DATE_ADD(date_gagnantPromo, INTERVAL 7 DAY) <= NOW()$$
+
+DROP EVENT IF EXISTS `clear_dateLastPlayed`$$
+CREATE DEFINER=`root`@`localhost` EVENT `clear_dateLastPlayed` ON SCHEDULE EVERY 1 DAY STARTS '2025-01-09 13:30:29' ON COMPLETION NOT PRESERVE ENABLE DO UPDATE utilisateur
+    SET date_last_played = NULL
+    WHERE date_last_played IS NOT NULL
+    AND DATE_ADD(date_last_played, INTERVAL 7 DAY) <= NOW()$$
+
+DELIMITER ;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
