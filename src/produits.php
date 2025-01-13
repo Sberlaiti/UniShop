@@ -23,7 +23,7 @@
     }
 
     //Récupération des avis
-    $requete = "SELECT avis.note
+    $requete = "SELECT avis.note, avis.idProduit
             FROM avis
             JOIN produit ON avis.idProduit = produit.idProduit
             WHERE produit.idProduit = avis.idProduit";
@@ -122,19 +122,22 @@
                                     ?>
                                     <div class="average_star_rating">
                                         <?php
-                                            $nombreAvis = count($avis);                                    
-                                            $noteMoyenne = 0;
-                                            if ($nombreAvis > 0) {
-                                                $totalNotes = array_sum(array_column($avis, 'note'));
-                                                $noteMoyenne = $totalNotes / $nombreAvis;
-                                            }
-                                            
-                                            for ($i = 1; $i <= 5; $i++) {
-                                                $filled = $i <= $noteMoyenne ? 'filled' : '';
-                                                echo "<span class='star $filled' data-value='$i'>&#9733;</span>";
-                                                echo "<!-- Classe appliquée: star $filled -->";
-                                            }
-                                            echo "<p class='review_count'>" . $nombreAvis . ' avis' . "</p>";
+                                        $avisProduit = array_filter($avis, function($row_avis) use ($row_count) {
+                                            return $row_avis['idProduit'] == $row_count['idProduit'];
+                                        });
+
+                                        $nombreAvis = count($avisProduit);                                    
+                                        $noteMoyenne = 0;
+                                        if ($nombreAvis > 0) {
+                                            $totalNotes = array_sum(array_column($avisProduit, 'note'));
+                                            $noteMoyenne = $totalNotes / $nombreAvis;
+                                        }
+                                        
+                                        for ($i = 1; $i <= 5; $i++) {
+                                            $filled = $i <= $noteMoyenne ? 'filled' : '';
+                                            echo "<span class='star $filled' data-value='$i'>&#9733;</span>";
+                                        }
+                                        echo "<p class='review_count'>" . $nombreAvis . ' avis' . "</p>";
                                         ?>
                                     </div>
                                     <?php
