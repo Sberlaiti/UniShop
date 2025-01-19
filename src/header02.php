@@ -71,10 +71,10 @@
             </section>
 
             <section class="options">
-                <div class="searchBar">
-                    <input type="text" placeholder="Search...">
-                    <button><i class="fa-solid fa-magnifying-glass"></i></button>
-                </div>
+                <form action="listeproduit.php" method="GET" class="searchBar collapsed">
+                    <input type="text" name="query" placeholder="Search...">
+                    <button type="button" id="searchButton"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
 
                 
                 <div class="accountButton">
