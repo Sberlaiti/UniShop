@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jan 10, 2025 at 12:17 PM
+-- Generation Time: Jan 10, 2025 at 07:58 PM
 -- Server version: 8.3.0
 -- PHP Version: 8.2.18
 
@@ -39,6 +39,16 @@ CREATE TABLE IF NOT EXISTS `avis` (
   KEY `fk_avis_utilisateur` (`idUtilisateur`),
   KEY `fk_avis_produit` (`idProduit`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6667 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `avis`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `categorie`
+--
 
 -- --------------------------------------------------------
 
@@ -115,15 +125,45 @@ CREATE TABLE IF NOT EXISTS `image` (
   `idProduit` int NOT NULL,
   PRIMARY KEY (`idImage`),
   KEY `fk_image_produit` (`idProduit`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-INSERT INTO `image` (`idImage`, `lien`,`idProduit`) VALUES
-(1, './images/animaux.jpg',4),
-(2, './images/telephonie.jpg',4),
-(3, '../articles/preview-2.jpeg',4),
-(4, '../articles/preview-5.jpeg',4),
-(5, '../articles/preview-4.jpeg',4),
-(6, '../articles/preview-3.jpeg',4);
+--
+-- Dumping data for table `image`
+--
+
+INSERT INTO `image` (`idImage`, `lien`, `idProduit`) VALUES
+(1, './images/animaux.jpg', 4),
+(2, './images/telephonie.jpg', 4),
+(3, '../articles/preview-2.jpeg', 4),
+(4, '../articles/preview-5.jpeg', 4),
+(5, '../articles/preview-4.jpeg', 4),
+(6, '../articles/preview-3.jpeg', 4),
+(7, '../articles/preview.jpeg', 0),
+(8, '../articles/preview-6.jpeg', 0),
+(9, '../articles/preview-7.jpeg', 0),
+(10, '../articles/preview-8.jpeg', 0),
+(11, '../articles/preview-9.jpeg', 0),
+(12, '../articles/preview-10.jpeg', 0),
+(13, '../articles/preview-11.jpeg', 0),
+(14, '../articles/preview-12.jpeg', 0),
+(15, '../articles/preview-13.jpeg', 0),
+(16, '../logos/logo-png.png', 0),
+(17, './images/promotion.jpg', 0),
+(18, './images/auto.jpg', 0),
+(19, './images/bricolage.jpg', 0),
+(20, './images/bureau.jpg', 0),
+(21, './images/cuisine.jpg', 0),
+(22, './images/jardin.jpg', 0),
+(23, './images/jeux.jpg', 0),
+(24, './images/livre.jpg', 0),
+(25, './images/parfum.jpg', 0),
+(26, './images/sneaker.jpeg', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `panier`
+--
 
 DROP TABLE IF EXISTS `panier`;
 CREATE TABLE IF NOT EXISTS `panier` (
@@ -131,7 +171,7 @@ CREATE TABLE IF NOT EXISTS `panier` (
   `idUtilisateur` int NOT NULL,
   PRIMARY KEY (`idPanier`),
   KEY `fk_panier_utilisateur` (`idUtilisateur`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=118 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -155,14 +195,21 @@ CREATE TABLE IF NOT EXISTS `produit` (
   KEY `fk_produit_image` (`idImage`),
   KEY `fk_produit_utilisateur` (`idUtilisateur`),
   KEY `fk_produit_categorie` (`IdCategorie`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `produit`
 --
 
 INSERT INTO `produit` (`idProduit`, `nomProduit`, `description`, `prix`, `delayLivraison`, `appartientVendeur`, `idImage`, `dateCreation`, `idUtilisateur`, `IdCategorie`) VALUES
-(4, 'Botte', 'Une chaussure haute', 36.3, 5, 0, 1, '2024-11-01', 1, 5);
+(4, 'Botte', 'Une chaussure haute', 1000000.3, 5, 0, 1, '2024-11-01', 1, 5),
+(11, 'Botte', 'Une chaussure haute', 36.3, 5, 0, 1, '2024-11-01', 1, 5),
+(12, 'Botte', 'Une chaussure haute', 36.3, 5, 0, 1, '2024-11-01', 1, 5),
+(13, 'Botte', 'Une chaussure haute', 36.3, 5, 0, 1, '2024-11-01', 1, 5),
+(14, 'Botte', 'Une chaussure haute', 36.3, 5, 0, 1, '2024-11-01', 1, 5),
+(15, 'Botte', 'Une chaussure haute', 36.3, 5, 0, 1, '2024-11-01', 1, 5),
+(16, 'Chat à vendre', 'Une chaussure haute', 36.3, 5, 0, 1, '2024-11-01', 1, 5),
+(17, 'Botte', 'Une chaussure haute', 36.3, 5, 0, 1, '2024-11-01', 1, 5);
 
 -- --------------------------------------------------------
 
@@ -211,7 +258,14 @@ CREATE TABLE IF NOT EXISTS `promotion` (
   `idUtilisateur` int NOT NULL,
   PRIMARY KEY (`idPromo`),
   KEY `fk_promotion_user` (`idUtilisateur`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `promotion`
+--
+
+INSERT INTO `promotion` (`idPromo`, `codePromo`, `coefficient`, `idUtilisateur`) VALUES
+(14, 'UNI15', 15.00, 3337);
 
 -- --------------------------------------------------------
 
@@ -233,16 +287,17 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `date_last_played` datetime DEFAULT NULL,
   `coupPlayed` int DEFAULT '3',
   PRIMARY KEY (`idUtilisateur`)
-) ENGINE=InnoDB AUTO_INCREMENT=3336 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3338 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `utilisateur`
 --
 
 INSERT INTO `utilisateur` (`idUtilisateur`, `nom`, `prenom`, `pseudo`, `mail`, `password`, `estVendeur`, `admin`, `date_gagnantPromo`, `date_last_played`, `coupPlayed`) VALUES
-(1, 'UniShop', 'Admin', 'admin', 'aunishop786@gmail.com', '$2y$10$NSVDfJMSV6cX0XX6cMCDMORUBkDM77q5fM6hZ.pd44l1xshYioCNq', 0, 1, NULL, NULL, 3),
+(1, 'UniShop', 'Admin', 'UniShop', 'aunishop786@gmail.com', '$2y$10$NSVDfJMSV6cX0XX6cMCDMORUBkDM77q5fM6hZ.pd44l1xshYioCNq', 0, 1, NULL, '2025-01-10 10:25:14', 0),
 (3333, 'Edward', 'David', 'eddy', 'edwarddavid@gmail.com', '36303630', 0, 0, NULL, NULL, 3),
-(3334, 'Saber', 'LAITI BEN AYYAD', 'sayber', 'abdelybouchra@gmail.com', '$2y$10$yTp3Y7.SbxVgqewAYsYUX.PivMyoKO2oe.2JGXRmAIVFuZqsK8kDa', 0, 0, NULL, NULL, 3);
+(3334, 'Saber', 'LAITI BEN AYYAD', 'sayber', 'abdelybouchra@gmail.com', '$2y$10$yTp3Y7.SbxVgqewAYsYUX.PivMyoKO2oe.2JGXRmAIVFuZqsK8kDa', 0, 0, NULL, NULL, 3),
+(3336, 'Saber', 'LAITI BEN AYYAD', 'Saber', 'saberlaitibenayyad30@gmail.com', '$2y$10$zMdHw1PWzft3vt4Nj0XWHuYjEYeh5GjLDu9MCtz/S4BngsmP06.AC', 0, 0, NULL, NULL, 3);
 
 DELIMITER $$
 --
