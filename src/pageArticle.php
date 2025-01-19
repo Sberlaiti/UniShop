@@ -1,7 +1,9 @@
 <?php
     require_once('header02.php');
 
-    $idUtilisateur = $_SESSION['user']['idUtilisateur'];
+    // Vérifier que l'utilisateur est connecté
+    $idUtilisateur = isset($_SESSION['user']['idUtilisateur']) ? $_SESSION['user']['idUtilisateur'] : null;
+    
 
     
 
@@ -118,7 +120,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/pageArticle.css">
-    <title>Détail du Produit</title>
+    <title><?php echo htmlspecialchars($produit['nomProduit']); ?></title>
 </head>
 <body>
     <div class = "page_content">
@@ -198,6 +200,7 @@
                             <?php endif;
                             ?>
                         
+                        <?php if (isset($_SESSION['user']['idUtilisateur'])): ?>
                             <form action="" method="POST" class="add_comment_form">
                                 <textarea name="new_comment" placeholder="Ajoutez votre avis..." required></textarea>
                                 <input type="hidden" name="note" id="note" value="<?php echo htmlspecialchars($noteExistant); ?>">
@@ -210,8 +213,11 @@
                                     <span class="star" data-value="5">&#9733;</span>
                                 </div>
                                 <?php endif; ?>
-                                <button type="submit" >Publier</button>
+                                <button type="submit">Publier</button>
                             </form>
+                        <?php else: ?>
+                            <p><a href="login.php">Connectez-vous</a> pour ajouter un commentaire.</p>
+                        <?php endif; ?>
                             <?php
                             if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['new_comment'])) {
                                 $newComment = $_POST['new_comment'];
@@ -253,20 +259,25 @@
                     <form action="" method="POST" id="cart_form">
                         <input type="hidden" name="idProduit" value="<?php echo htmlspecialchars($_GET['idProduit']); ?>">
                         <?php
-                        $idUser = $_SESSION['user']['idUtilisateur'];
-                        $idProduit = $_GET['idProduit'];
-
-                        // Vérifier si le produit est déjà dans le panier
-                        $requete = $pdo->prepare("SELECT pp.idProduit FROM produitsPanier pp JOIN panier p ON pp.idPanier = p.idPanier WHERE p.idUtilisateur = ? AND pp.idProduit = ?");
-                        $requete->execute([$idUser, $idProduit]);
-                        $produitDansPanier = $requete->fetch();
-
-                        if ($produitDansPanier) {
-                            // Si le produit est dans le panier, afficher le bouton "Enlever du Panier"
-                            echo '<button type="submit" name="enlever_panier" class="cart_button_delete" id="cart_button">Enlever du Panier</button>';
+                        if (isset($_SESSION['user']['idUtilisateur'])) {
+                            $idUser = $_SESSION['user']['idUtilisateur'];
+                            $idProduit = $_GET['idProduit'];
+                
+                            // Vérifier si le produit est déjà dans le panier
+                            $requete = $pdo->prepare("SELECT pp.idProduit FROM produitsPanier pp JOIN panier p ON pp.idPanier = p.idPanier WHERE p.idUtilisateur = ? AND pp.idProduit = ?");
+                            $requete->execute([$idUser, $idProduit]);
+                            $produitDansPanier = $requete->fetch();
+                
+                            if ($produitDansPanier) {
+                                // Si le produit est dans le panier, afficher le bouton "Enlever du Panier"
+                                echo '<button type="submit" name="enlever_panier" class="cart_button_delete" id="cart_button">Enlever du Panier</button>';
+                            } else {
+                                // Si le produit n'est pas dans le panier, afficher le bouton "Ajouter au Panier"
+                                echo '<button type="submit" name="ajout_panier" class="cart_button" id="cart_button">Ajouter au Panier</button>';
+                            }
                         } else {
-                            // Si le produit n'est pas dans le panier, afficher le bouton "Ajouter au Panier"
-                            echo '<button type="submit" name="ajout_panier" class="cart_button" id="cart_button">Ajouter au Panier</button>';
+                            // Si l'utilisateur n'est pas connecté, afficher un message ou rediriger vers la page de connexion
+                            echo '<button type="button" class="cart_button" onclick="window.location.href=\'login.php\'">Connectez-vous pour ajouter au panier</button>';
                         }
                         ?>
                     </form>
