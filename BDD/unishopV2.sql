@@ -3,11 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
-<<<<<<< HEAD
 -- Generation Time: Jan 10, 2025 at 07:58 PM
-=======
--- Generation Time: Jan 10, 2025 at 12:17 PM
->>>>>>> page_article
 -- Server version: 8.3.0
 -- PHP Version: 8.2.18
 
