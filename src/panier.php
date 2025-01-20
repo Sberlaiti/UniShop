@@ -6,6 +6,7 @@
     require_once('./header02.php');
     require_once('./php/fetchCart.php');
     $panier = get_cart($pdo);
+
 ?>
 
 <html lang="fr">
@@ -37,7 +38,6 @@
                             <div class="cartItems">
                                 <img src="./images/frenchFlag.png" alt="Image de l'article">
                                 <div class="cartItems-infos">
-                                    
                                     <!-- Créer javascript pour ajouter au favoris et supprimer du panier -->
                                     <div class="cartItems-infos-name">
                                         <!-- Créer un lien vers la page de l'article -->
@@ -45,8 +45,8 @@
                                         <!-- Lier le button à la page du vendeur  -->
                                         <a class="cartItems-infos-seller" href=""><button> Vendeur : <?php echo $article['appartientVendeur']; ?></button></a>
                                         <div class="cartItems-infos-name-ope">
-                                            <button class="addFavourites"><i class="fa-duotone fa-solid fa-heart"></i></button>
-                                            <button class="delete"><i class="fa-solid fa-trash"></i></button>
+                                                <button class="addFavourites" data-id=<?php echo $article['idProduit']?>><i class="fa-duotone fa-solid fa-heart"></i></button>
+                                                <button class="delete" data-id=<?php echo $article['idProduit']?>><i class="fa-solid fa-trash"></i></button>
                                         </div>
                                     </div>
                     
@@ -68,12 +68,12 @@
                                     <div class="cartItems-infos-price">
                                         <p><?php echo $article['prix']; ?> €</p>
                                         <div class="amount">
-                                            <button class="minus">-</button>
+                                            <button class="minus" data-id=<?php echo $article['idProduit']?>>-</button>
                                             <?php
                                                 // Afficher la quantité de l'article
                                                 echo "<p>".$produit['quantitee']."</p>";
                                             ?>
-                                            <button class="plus">+</button>
+                                            <button class="plus" data-id=<?php echo $article['idProduit']?>>+</button>
                                         </div>
                                     </div>
                                 </div>
@@ -128,6 +128,6 @@
 
         <?php }
     ?>
-
+    <script src="./js/panier.js"></script>
 </body>
 </html>
