@@ -4,7 +4,7 @@ body {
     font-family: 'RedHatDisplay-Bold', sans-serif;
 }
 
-#title, #description {
+#title, #description, #already {
     text-align: center;
 }
 
@@ -14,13 +14,20 @@ body {
 
 #description {
     color:#45a049;
-    transition: 0.5s;
 }
 
 #description:hover {
     color: green;
-    font-weight: bold;
-    transition: color 0.5s;
+}
+
+#already {
+    color: rgb(204, 33, 33);
+    width: fit-content;
+    justify-self: center;
+}
+
+#already:hover {
+    color: red;
 }
 
 /*Partie affichage du jeu*/
@@ -30,7 +37,7 @@ body {
 
 .pointer{
     position: absolute;
-    top: 25%;
+    top: 27%;
     left: 50%;
     transform: translateX(-50%);
     color: red;
@@ -43,7 +50,7 @@ body {
 
 #point{
     position: absolute;
-    top: 60%;
+    top: 62%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 10;
@@ -160,54 +167,29 @@ body {
     margin-top: 20px;
     text-align: center;
 }
+
+.valider{
+    color: white;
+    background-color: #45a049;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    display: block;
+    margin: 20px auto;
+    font-size: 1.2em;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.valider:hover{
+    background-color: green;
+    transition: background-color 0.3s ease;
+}
 /*Fin de la partie affichage du jeu*/
 
 
-/*Partie footer*/
-footer {
-    background-color: rgb(180, 104, 17);
-    margin-top: 20px;
-}
-
-.return_top {
-    display: block;
-    text-align: center;
-    background-color: rgb(247, 132, 0);
-    color: white;
-    cursor: pointer;
-    padding: 0.2em;
-}
-
-.return_top:hover {
-    background-color: rgb(255, 255, 255);
-}
-
-select {
-    margin-left: 30px;
-}
-
-.return_top:hover {
-    background-color: rgb(255, 153, 0);
-    font-weight: bold;
-}
-
-.logo_langue {
-    padding: 2em;
-    background-color: rgb(252, 151, 37);
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
-
-.droits {
-    text-align: center;
-    padding: 2em;
-}
-
-span, .footer_lien {
-    color: white;
-}
-
-.footer_lien:hover {
-    text-decoration: underline;
+/*Partie jeu terminé*/
+.main_section{
+    margin-top: 5cm;
+    margin-bottom: 3.79cm;
 }

@@ -9,7 +9,7 @@
     error_reporting(E_ALL);
 
     //Récupération des données de la table article
-    $sql_requete = "SELECT p.idProduit, p.nomProduit, u.nom, p.prix, i.lien
+    $sql_requete = "SELECT p.idProduit, p.nomProduit, u.pseudo, p.prix, i.lien
                     FROM produit p
                     JOIN utilisateur u ON u.idUtilisateur = p.idUtilisateur
                     JOIN image i ON i.idImage = p.idImage";
@@ -22,6 +22,14 @@
             JOIN image ON categorie.idImage = image.idImage
             ORDER BY categorie.nomCategorie";
     $result = $pdo->query($sql);
+
+    //Récupération des avis
+    $requete = "SELECT avis.note, avis.idProduit
+                FROM avis
+                JOIN produit ON avis.idProduit = produit.idProduit
+                WHERE produit.idProduit = avis.idProduit";
+    $stmt = $pdo->query($requete);
+    $avis = $stmt->fetchAll();
 ?>
 
 <!DOCTYPE html>
@@ -34,7 +42,26 @@
     </head>
 
     <body>
-        <br>
+        <section class="affichage_categorie">            
+            <div class="bloc_categorie">
+            <?php
+                //Affichage des catégories
+                if($result->rowCount() > 0){
+                    while($row = $result->fetch(PDO::FETCH_ASSOC)){
+                        echo "<a href='produits.php?idCategorie=" . $row['idCategorie'] . "' class='lien_produit'>";
+                            echo "<div class='categorie'>";                            
+                                echo "<img class='image_categorie' src='" . $row['lien'] . "' alt='Image de la catégorie'/>";
+                                echo "<p class='nom_categorie'>" . htmlspecialchars($row['nomCategorie']) . "</p>";                     
+                            echo "</div>";
+                        echo "</a>";
+                    }
+                }
+                else{
+                    echo "<p class='no_categorie'>Aucune catégorie disponible<br>! Merci de bien vouloir patienter le temps de régler le soucis !</p>";
+                }
+            ?>
+            </div>
+        </section>
 
         <div class="title_categories">
             <h2>Les derniers produits</h2>
@@ -50,8 +77,32 @@
                             echo "<div class='produit'>";
                                 echo "<a href='pageArticle.php?idProduit=". $row_count['idProduit'] . "' id='lien_produit'>";
                                     echo "<img class='img_produit' src='" . htmlspecialchars($row_count['lien']) . "'/>";
-                                    echo "<p class='titre_vendeur'> Vendeur : " . htmlspecialchars($row_count['nom']) . "</p>";
-                                    echo "<h3 class'titre_produit'>" . htmlspecialchars($row_count['nomProduit']) . "</h3>";
+                                    echo "<div class='infos_produit'>";
+                                        echo "<h3>" . htmlspecialchars($row_count['nomProduit']) . "</h3>";
+                                        echo "<a class='cartItems-infos-seller' href=''><button>Vendeur: " . htmlspecialchars($row_count['pseudo']). "</button></a>";
+                                    echo "</div>";
+                                    ?>
+                                    <div class="average_star_rating">
+                                        <?php
+                                        $avisProduit = array_filter($avis, function($row_avis) use ($row_count) {
+                                            return $row_avis['idProduit'] == $row_count['idProduit'];
+                                        });
+
+                                        $nombreAvis = count($avisProduit);                                    
+                                        $noteMoyenne = 0;
+                                        if ($nombreAvis > 0) {
+                                            $totalNotes = array_sum(array_column($avisProduit, 'note'));
+                                            $noteMoyenne = $totalNotes / $nombreAvis;
+                                        }
+                                        
+                                        for ($i = 1; $i <= 5; $i++) {
+                                            $filled = $i <= $noteMoyenne ? 'filled' : '';
+                                            echo "<span class='star $filled' data-value='$i'>&#9733;</span>";
+                                        }
+                                        echo "<p class='review_count'>" . $nombreAvis . ' avis' . "</p>";
+                                        ?>
+                                    </div>
+                                    <?php
                                     echo "<p class='prix_produit'>" . htmlspecialchars($row_count['prix']) . " €</p>";
                                 echo "</a>";
                             echo "</div>";
@@ -69,90 +120,18 @@
             ?>
         </section>
 
-        <br>
-
-        <div class="title_categories">
-            <h2>! Jouer aux jeux pour avoir un code de réduction !</h2>
+        <div class="jeu_promo">
+            <?php if($_SESSION['user'] != null): ?>
+                <a href="game.php"><p>Jouer au jeu !</p></a>
+            <?php else: ?>
+                <a href="login.php"><p>Jouer au jeu !</p></a>
+            <?php endif; ?>
         </div>
-        <section class="affichage_externe">
-            <?php
-                if($_SESSION['user']!=null){
-                    ?>
-                    <div class="jeu">
-                        <a href="game.php">
-                            <img class="img_jeu" src="./images/roue_fortune.jpg" alt="Image du jeu"/>
-                            <p>Roue de la fortune</p>
-                        </a>
-                    </div>
-                    <?php
-                }
-                else{
-                    echo '<div class="jeu">
-                            <a href="login.php">
-                                <img class="img_jeu" src="./images/roue_fortune.jpg" alt="Image du jeu"/>
-                                <p>Roue de la fortune</p>
-                            </a>
-                        </div>';
-                }
-            ?>
-        </section>
 
-        <br>
-
-        <div class="title_categories">
-            <h2>Explorez par catégories</h2>
-        </div>
-        <section class="affichage_categorie">
-            
-            <?php
-                //Affichage de chaque catégorie avec défilement
-                if($result->rowCount() > 8){
-                    while($row = $result->fetch(PDO::FETCH_ASSOC)){
-                        echo "<div class='categorie'>";
-                            echo "<a href='produits.php?idCategorie=" . $row['idCategorie'] . "' class='lien_produit'>";
-                                echo "<img class='image_categorie' src='" . $row['lien'] . "' alt='Image de la catégorie'/>";
-                                echo "<p class='categories'>" . htmlspecialchars($row['nomCategorie']) . "</p>";
-                            echo "</a>";
-                        echo "</div>";
-                    }
-                }
-                //Affichage de chaque catégorie sans défilement
-                else if($result->rowCount() > 0){
-                    while($row = $result->fetch(PDO::FETCH_ASSOC)){
-                        echo "<div class='categorie'>";
-                            echo "<a href='produits.php?idCategorie=" . $row['idCategorie'] . "' class='lien_produit'>";
-                                echo "<img class='image_categorie' src='" . $row['lien'] . "' alt='Image de la catégorie'/>";
-                                echo "<p class='categories'>" . htmlspecialchars($row['nomCategorie']) . "</p>";
-                            echo "</a>";
-                        echo "</div>";
-                    }
-                }
-                else{
-                    echo "<p class='no_categories'>Aucune catégorie disponible<br>! Merci de bien vouloir patienter le temps de régler le soucis !</p>";
-                }
-            ?>
-        </section>
         <br>
 
         <footer>
-            <div class="return_top">
-                <p id="retourHaut">Retour en haut</p>
-            </div>
-
-            <div class="logo_langue">
-                <a href="index.php"><img src="../logos/logo-png.png" width="80" height="50" alt="Logo du site"></a>
-                <select>
-                    <option>Français</option>
-                </select>
-            </div>
-
-            <div class="droits">
-                <div id="liste_droits">
-                    <a class="footer_lien" href="conditions.php">Conditions générales du site</a>
-                    <a class="footer_lien" href="informations.php">Vos informations personnelles</a>
-                </div>
-                <span>© 2024, UniShop</span>
-            </div>            
+            <?php require_once("footer.php"); ?>
         </footer>
         <script src="./js/index.js"></script>
     </body>

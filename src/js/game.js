@@ -15,9 +15,15 @@ const resultat = document.querySelector('#result');
 const segments = document.querySelectorAll('.segment, .winning_segment'); // Tous les segments
 const totalSegments = segments.length; // Nombre total de segments
 let nbCoups = parseInt(document.querySelector('#nb_coups')?.textContent.split(': ')[1]) || 3; // Coups restants
-let lossStreak = 0; // Compteur de pertes consécutives
+const validerButton = document.createElement('button');
+validerButton.classList.add('valider');
+validerButton.textContent = "Valider";
+let hasWon = false; // Indicateur de victoire
 
 startButton.addEventListener('click', () => {
+    // Désactiver le bouton pendant que la roue tourne
+    startButton.disabled = true;
+
     // Ajout de plusieurs tours complets avant de calculer l'angle final
     const extraSpins = 5; // Nombre de tours complets supplémentaires
     const finalRotation = number + extraSpins * 360; // Calculer la rotation totale
@@ -27,38 +33,58 @@ startButton.addEventListener('click', () => {
     wheel.style.transform = "rotate(" + finalRotation + "deg)";
 
     // Calcul de l'angle final
-    const finalAngle = finalRotation % 360; // Angle final entre 0 et 360
+    const finalAngle = 0; // Angle final
     number += Math.ceil(Math.random() * 1000); // Préparation de l'angle suivant
 
     // Calcul de l'indice du segment gagnant
     const segmentAngle = 360 / totalSegments; // Angle de chaque segment
-    Math.floor(finalAngle / segmentAngle); // Index du segment final
 
     setTimeout(() => {
-        // **Nouvelle logique pour un tirage équitable**
-        const randomValue = Math.random();
-        const shouldWin = lossStreak >= 2 || randomValue < 0.5; // 50% de chance de gagner ou garantie après 2 pertes
+        const segmentIndex = Math.floor(finalAngle / segmentAngle); // Index du segment final
+        const shouldWin = segments[segmentIndex]; // Vérifier si le segment est gagnant
 
-        if (shouldWin) {
-            lossStreak = 0; // Réinitialiser le compteur de pertes
+         // Déterminer si le joueur gagne de manière aléatoire
+         const winProbability = 0.5; // Probabilité de gagner (50%)
+         const randomWin = Math.random() < winProbability;
+
+        if (shouldWin.classList.contains('winning_segment') && !hasWon && randomWin) {
+            hasWon = true;
             // Trouver le prochain segment gagnant
-            Array.from(segments).find(segment =>
-                segment.classList.contains('winning_segment')
-            );
-            // Simulation appel à une API ou serveur pour obtenir une promotion
-            fetch("../src/game.php")
-                .then(function(response){
+            const codePromo = 'UNI' + Math.floor(Math.random() * 100);
+            resultat.innerHTML = "Félicitations ! Vous avez gagné un code promo : <strong>" + codePromo + "</strong>";
+            startButton.disabled = true;
+            startButton.style.backgroundColor = "gray";
+            document.querySelector('.affichage_jeu').appendChild(validerButton);
+
+            validerButton.style.display = 'block';
+            validerButton.addEventListener('click', () => {
+                fetch('../src/php/insert_code.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ codePromo })
+                })
+                .then(response =>{ 
+                    if(!response.ok){
+                        throw new Error('Erreur lors de la requête !' + response.statusText);
+                    }
                     return response.json();
                 })
-                .then(function(data){
-                    console.log(data.codePromo);
-                    //resultat.textContent = 'Bravo vous avez gagné un code promo : ' + data.codePromo;
+                .then(data => {
+                    //console.log(data);
+                    resultat.innerHTML = "Code promo validé !<br>";
+                    startButton.disabled = true;
+                    startButton.style.backgroundColor = "gray";
+                    validerButton.style.display = 'none';
                 })
-                .catch(error => {
-                    resultat.textContent = ' Erreur lors de la récupération de la promotion.';
-                });
+                .catch(error => console.error(error));
+            });
+        } else if (hasWon) {
+            resultat.textContent = "Vous avez déjà gagné ! Vous ne pouvez pas gagner deux fois.";
+            startButton.disabled = true;
+            startButton.style.backgroundColor = "gray";
         } else {
-            lossStreak++; // Augmenter le compteur de pertes
             resultat.textContent = "Vous avez perdu. Réessayez !";
         }
 
@@ -66,11 +92,42 @@ startButton.addEventListener('click', () => {
         nbCoups--;
         document.querySelector('#nb_coups').textContent = 'Nombre de coups restants : ' + nbCoups;
 
-        // Vérification si l'utilisateur a épuisé ses coups
-        if (nbCoups === 0) {
-            startButton.disabled = true;
-            startButton.style.backgroundColor = "gray";
-            resultat.innerHTML += "<br>Plus de coups disponibles. Revenez demain !";
-        }
+        fetch('../src/php/update_coups.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ nbCoups })
+        })
+        .then(response =>{
+            if(!response.ok){
+                throw new Error('Erreur lors de la requête !' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(data => {
+            //console.log(data);
+            if(nbCoups > 0 && !hasWon){
+                startButton.disabled = false;
+            }
+            else if(hasWon){
+                startButton.disabled = true;
+                startButton.style.backgroundColor = "gray";
+            }
+            else{
+                resultat.innerHTML += "<br>Vous avez épuisé tous vos coups. Réessayez plus tard.";
+                startButton.disabled = true;
+            }
+        })
+        .catch(error => console.error(error));
     }, 4000); // Attente pour terminer la rotation
 });
+
+
+// const mainSection = document.querySelector('.main_section');
+// if (mainSection) {
+//     document.addEventListener("DOMContentLoaded", () => {
+//         mainSection.style.marginTop = "1cm";
+//         mainSection.style.marginBottom = "1.75cm";
+//     });
+// }

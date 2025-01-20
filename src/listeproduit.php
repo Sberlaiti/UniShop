@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>liste produit</title>
     <link rel="stylesheet" href="./css/listeproduit.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -122,11 +123,9 @@
         {
             const minPrice = parseFloat(document.getElementsByClassName("min-range")[0].value);
             const maxPrice = parseFloat(document.getElementsByClassName("max-range")[0].value);
-            const order = document.getElementById("order").value;
             
-            const products = Array.from(document.querySelectorAll('.product'));
-            console.log(products);
-            
+            const products = document.querySelectorAll('.product');
+
             products.forEach(function(product) 
             {
                 const productPrice = parseFloat(product.getAttribute('data-price'));
@@ -141,77 +140,62 @@
                 }
             });
 
-            if (order === "2") 
+            temp=document.getElementById("order");
+            console.log(temp.value);
+        }
+
+        searchbar=document.querySelector("input");
+        searchbar.addEventListener('keydown', function (e) 
+        {
+            if (e.key === 'Enter') 
             {
-                products.sort((a, b) => parseFloat(b.getAttribute('data-price')) - parseFloat(a.getAttribute('data-price')));
-            } 
-            else if (order === "3") 
-            {
-                products.sort((a, b) => parseFloat(a.getAttribute('data-price')) - parseFloat(b.getAttribute('data-price')));
+                search(searchbar.value);
             }
+        });
 
-            const prodSection = document.getElementById("prod");
-            prodSection.innerHTML = "";
+        function search(e) {
+            let searchInput = e.toLowerCase();
+            const products = document.querySelectorAll('.product');
 
-            products.forEach(product => 
-            {
-                if (product.style.display !== 'none') 
-                {
-                    prodSection.appendChild(product);
+            products.forEach(function(product) {
+                const productName = product.querySelector('#namep').textContent.toLowerCase();
+
+                if (productName.includes(searchInput)) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
                 }
             });
         }
 
-        function addToCart(productId)
-        {
-            /*const counter = document.getElementById(`nbchoose_${productId}`);
-            const idUser = "3333";
-            nbSelected=counter.textContent;
+        
 
-            document.cookie = `idUser=${idUser}; path=/;`;
-            document.cookie = `nbselected=${nbSelected}; path=/;`;
-            document.cookie = `productId=${productId}; path=/;`;
-            */
+        function addToCart(productId) {
+            const counter = document.getElementById(`nbchoose_${productId}`);
+            let nbSelected = parseInt(counter.textContent);
+            const idUser = 5555;
 
-            <?php
-                /*
-                if (isset($_COOKIE['idUser'])) {
-                    $_SESSION['idUser'] = htmlspecialchars($_COOKIE['idUser']);
+            $.ajax({
+                url: 'http://localhost/unishop/src/addToCart.php',
+                type: 'POST',
+                data: {
+                    productId: productId,
+                    quantity: nbSelected,
+                    userId: idUser
+                },
+                success: function(response) {
+                    alert('Produit ajouté au panier avec succès !');
+                    console.log(response);
+                },
+                error: function(xhr, status, error) {
+                    alert('Une erreur est survenue lors de l\'ajout au panier.');
+                    console.error('Erreur :', error);
                 }
-
-                if (isset($_COOKIE['nbselected'])) {
-                    $_SESSION['nbselected'] = htmlspecialchars($_COOKIE['nbselected']);
-                }
-
-                if (isset($_COOKIE['productId'])) {
-                    $_SESSION['productId'] = htmlspecialchars($_COOKIE['productId']);
-                }
-                var_dump($_SESSION['idUser']);
-                var_dump($_SESSION['nbselected']);
-                var_dump($_SESSION['productId']);
-
-                $stmt = $connexion->prepare(
-                            "INSERT INTO panier (quantitee, idProduit, idUtilisateur) 
-                            VALUES (?, ?, ?)"
-                        );
-                    
-                        $stmt->bindValue(1, $nbselected, PDO::PARAM_INT);
-                        $stmt->bindValue(2, $productId, PDO::PARAM_INT);
-                        $stmt->bindValue(3, $idUser, PDO::PARAM_INT);
-                    
-                        $stmt->execute();
-                        */
-            ?>
+            });
         }
 
-        function addToFav(productId)
-        {
-            if (!fav.includes(productId)) 
-            {
-                fav.push(productId);
-            }
-            console.log(fav);
-        }
+
+
     </script>
     
     <section id="prod">
@@ -224,7 +208,10 @@
                 $_SESSION['selectedValue'] = htmlspecialchars($_COOKIE['selectedValue']);
             }
 
-            $query = $connexion->prepare("SELECT prix, nomProduit, lien, idProduit FROM produit JOIN image ON image.idimage = produit.idimage;");
+            $query = $connexion->prepare("SELECT produit.prix, produit.nomProduit, image.lien, produit.idProduit 
+                               FROM produit 
+                               JOIN image ON image.idimage = produit.idimage;");
+
             $query->execute();
 
             foreach ($query as $item) {
@@ -232,7 +219,7 @@
                         <section id='" . $item['idProduit'] . "' onclick='getid(this.id)'>
                             <img src='" . $item['lien'] . "' width=100px height=100px>
                             <p>" . $item['prix'] . "€</p>
-                            <p>" . $item['nomProduit'] . "</p>
+                            <p id='namep'>" . $item['nomProduit'] . "</p>
                         </section>
                         <button id='moin_" . $item['idProduit'] . "' onclick='substract(" . $item['idProduit'] . ")'>-</button>
                         <a id='nbchoose_" . $item['idProduit'] . "'>0</a>
@@ -243,11 +230,27 @@
             }
         ?>
     </section>
-
+    
     <?php
         if (isset($_COOKIE['id'])) {
             $_SESSION['id'] = htmlspecialchars($_COOKIE['id']);
         }
-    ?>   
+
+        if (isset($_COOKIE['idUser'])) {
+            $_SESSION['idUser'] = htmlspecialchars($_COOKIE['idUser']);
+        }
+               
+        if (isset($_COOKIE['nbselected'])) {
+            $_SESSION['nbselected'] = htmlspecialchars($_COOKIE['nbselected']);
+        }
+
+        if (isset($_COOKIE['productId'])) {
+            $_SESSION['productId'] = htmlspecialchars($_COOKIE['productId']);
+        }
+        //var_dump($_SESSION['idUser']);
+        //var_dump($_SESSION['nbselected']);
+        //var_dump($_SESSION['productId']);
+
+    ?>      
 </body>
 </html>

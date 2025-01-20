@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jan 10, 2025 at 12:17 PM
+-- Generation Time: Jan 10, 2025 at 07:58 PM
 -- Server version: 8.3.0
 -- PHP Version: 8.2.18
 
@@ -39,6 +39,16 @@ CREATE TABLE IF NOT EXISTS `avis` (
   KEY `fk_avis_utilisateur` (`idUtilisateur`),
   KEY `fk_avis_produit` (`idProduit`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6667 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `avis`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `categorie`
+--
 
 -- --------------------------------------------------------
 
@@ -161,7 +171,7 @@ CREATE TABLE IF NOT EXISTS `panier` (
   `idUtilisateur` int NOT NULL,
   PRIMARY KEY (`idPanier`),
   KEY `fk_panier_utilisateur` (`idUtilisateur`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=118 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -185,14 +195,21 @@ CREATE TABLE IF NOT EXISTS `produit` (
   KEY `fk_produit_image` (`idImage`),
   KEY `fk_produit_utilisateur` (`idUtilisateur`),
   KEY `fk_produit_categorie` (`IdCategorie`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `produit`
 --
 
 INSERT INTO `produit` (`idProduit`, `nomProduit`, `description`, `prix`, `delayLivraison`, `appartientVendeur`, `idImage`, `dateCreation`, `idUtilisateur`, `IdCategorie`) VALUES
-(4, 'Botte', 'Une chaussure haute', 36.3, 5, 0, 1, '2024-11-01', 1, 5);
+(4, 'Botte', 'Une chaussure haute', 1000000.3, 5, 0, 1, '2024-11-01', 1, 5),
+(11, 'Botte', 'Une chaussure haute', 36.3, 5, 0, 1, '2024-11-01', 1, 5),
+(12, 'Botte', 'Une chaussure haute', 36.3, 5, 0, 1, '2024-11-01', 1, 5),
+(13, 'Botte', 'Une chaussure haute', 36.3, 5, 0, 1, '2024-11-01', 1, 5),
+(14, 'Botte', 'Une chaussure haute', 36.3, 5, 0, 1, '2024-11-01', 1, 5),
+(15, 'Botte', 'Une chaussure haute', 36.3, 5, 0, 1, '2024-11-01', 1, 5),
+(16, 'Chat à vendre', 'Une chaussure haute', 36.3, 5, 0, 1, '2024-11-01', 1, 5),
+(17, 'Botte', 'Une chaussure haute', 36.3, 5, 0, 1, '2024-11-01', 1, 5);
 
 -- --------------------------------------------------------
 
@@ -241,7 +258,14 @@ CREATE TABLE IF NOT EXISTS `promotion` (
   `idUtilisateur` int NOT NULL,
   PRIMARY KEY (`idPromo`),
   KEY `fk_promotion_user` (`idUtilisateur`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `promotion`
+--
+
+INSERT INTO `promotion` (`idPromo`, `codePromo`, `coefficient`, `idUtilisateur`) VALUES
+(14, 'UNI15', 15.00, 3337);
 
 -- --------------------------------------------------------
 
@@ -263,16 +287,17 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `date_last_played` datetime DEFAULT NULL,
   `coupPlayed` int DEFAULT '3',
   PRIMARY KEY (`idUtilisateur`)
-) ENGINE=InnoDB AUTO_INCREMENT=3336 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3338 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `utilisateur`
 --
 
 INSERT INTO `utilisateur` (`idUtilisateur`, `nom`, `prenom`, `pseudo`, `mail`, `password`, `estVendeur`, `admin`, `date_gagnantPromo`, `date_last_played`, `coupPlayed`) VALUES
-(1, 'UniShop', 'Admin', 'admin', 'aunishop786@gmail.com', '$2y$10$NSVDfJMSV6cX0XX6cMCDMORUBkDM77q5fM6hZ.pd44l1xshYioCNq', 0, 1, NULL, NULL, 3),
+(1, 'UniShop', 'Admin', 'UniShop', 'aunishop786@gmail.com', '$2y$10$NSVDfJMSV6cX0XX6cMCDMORUBkDM77q5fM6hZ.pd44l1xshYioCNq', 0, 1, NULL, '2025-01-10 10:25:14', 0),
 (3333, 'Edward', 'David', 'eddy', 'edwarddavid@gmail.com', '36303630', 0, 0, NULL, NULL, 3),
-(3334, 'Saber', 'LAITI BEN AYYAD', 'sayber', 'abdelybouchra@gmail.com', '$2y$10$yTp3Y7.SbxVgqewAYsYUX.PivMyoKO2oe.2JGXRmAIVFuZqsK8kDa', 0, 0, NULL, NULL, 3);
+(3334, 'Saber', 'LAITI BEN AYYAD', 'sayber', 'abdelybouchra@gmail.com', '$2y$10$yTp3Y7.SbxVgqewAYsYUX.PivMyoKO2oe.2JGXRmAIVFuZqsK8kDa', 0, 0, NULL, NULL, 3),
+(3336, 'Saber', 'LAITI BEN AYYAD', 'Saber', 'saberlaitibenayyad30@gmail.com', '$2y$10$zMdHw1PWzft3vt4Nj0XWHuYjEYeh5GjLDu9MCtz/S4BngsmP06.AC', 0, 0, NULL, NULL, 3);
 
 DELIMITER $$
 --

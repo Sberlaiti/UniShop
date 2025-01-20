@@ -23,6 +23,14 @@ if (noteInput) {
 
     updateUserStars(parseFloat(noteInput.value));
 }
+const existingNote = parseFloat(noteInput.value);
+if (existingNote > 0) {
+    
+    updateUserStars(existingNote);
+    userStarsForm.forEach(star => {
+        star.style.pointerEvents = 'none';
+    });
+}
 
 const thumbnails = document.querySelectorAll('.thumbnail_list .thumbnail');
 const mainImage = document.querySelector('.main_image img');
@@ -42,3 +50,23 @@ sizeButtons.forEach(button => {
         button.classList.add('selected');
     });
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const moreOptionsButton = document.querySelector('.more_options');
+    const moreOptionsMenu = document.querySelector('.more_options_menu');
+
+    moreOptionsButton.addEventListener('click', () => {
+        moreOptionsMenu.style.display = moreOptionsMenu.style.display === 'block' ? 'none' : 'block';
+    });
+
+    // Fermer le menu si on clique en dehors
+    document.addEventListener('click', (event) => {
+        if (!moreOptionsButton.contains(event.target) && !moreOptionsMenu.contains(event.target)) {
+            moreOptionsMenu.style.display = 'none';
+        }
+    });
+});
+
+
+/*<button type="submit" name="ajout_panier" class="cart_button" id="cart_button">Ajouter au Panier</button>
+*/

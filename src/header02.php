@@ -40,7 +40,7 @@
                                 <ul>
                                     <?php
                                         foreach($result as $row){
-                                            echo "<li class='liste'><a href='produits.php?idCategorie=" . $row['idCategorie'] . "'>" . $row['nomCategorie'] . "</a></li>";
+                                            echo "<a href='produits.php?idCategorie=" . $row['idCategorie'] . "'><li class='liste'>" . $row['nomCategorie'] . "</li></a>";
                                         }
                                     ?>
                                 </ul>
@@ -65,16 +65,16 @@
                                 echo '<li><a href="login.php">Contact</a></li>';
                             }
                         ?>
-                        <li><a href="">Others</a></li>
+                        <li><a href="others.php">Others</a></li>
                     </ul>
                 </nav>
             </section>
 
             <section class="options">
-                <div class="searchBar">
-                    <input type="text" placeholder="Search...">
-                    <button><i class="fa-solid fa-magnifying-glass"></i></button>
-                </div>
+                <form action="listeproduit.php" method="GET" class="searchBar collapsed">
+                    <input type="text" name="query" placeholder="Search...">
+                    <button type="button" id="searchButton"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
 
                 
                 <div class="accountButton">
@@ -84,7 +84,7 @@
                             <p>Sign In</p>
                     <?php } else { ?>
                         <a href="profile.php">
-                            <img src="./images/italianFlag.png" alt="UserLogo"><p><?php echo $_SESSION['user']['pseudo'] ?></p>
+                            <img src="./images/italianFlag.png" alt="UserLogo"><p><?php echo $_SESSION['user']['nom'] ?></p>
                     <?php } ?>
                     </a>
                 </div>

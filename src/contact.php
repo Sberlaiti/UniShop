@@ -8,20 +8,21 @@
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\Exception;
 
+    if(!isset($_SESSION['user'])) $_SESSION['user'] = null;
+
     require './PHPMailer-master/src/Exception.php';
     require './PHPMailer-master/src/PHPMailer.php';
     require './PHPMailer-master/src/SMTP.php';
 
-    $prenom = filter_input(INPUT_POST, 'prenom', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    $nom = filter_input(INPUT_POST, 'nom', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    $objet = filter_input(INPUT_POST, 'objet', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    $message = filter_input(INPUT_POST, 'message', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-    $btn = filter_input(INPUT_POST, 'envoyer', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-
     $messageEnvoye = false;
 
-    if(isset($btn)) {
+    if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['envoyer'])){
+        $prenom = $_POST['prenom'];
+        $nom = $_POST['nom'];
+        $email = $_POST['email'];
+        $objet = $_POST['objet'];
+        $message = $_POST['message'];
+
         $mail = new PHPMailer(true);
         try {
             // Configuration du serveur SMTP
@@ -34,8 +35,9 @@
             $mail->Port = 587;
     
             // Destinataires
-            $mail->setFrom($email, $nom . ' ' . $prenom);
+            $mail->setFrom($email, $nom . ' ' . $prenom); // Adresse de l'expéditeur
             $mail->addAddress('aunishop786@gmail.com'); // Adresse de destination
+            $mail->addReplyTo($email, $nom . ' ' . $prenom); // Adresse de réponse
     
             // Contenu de l'email
             $mail->isHTML(false);
@@ -83,7 +85,7 @@
 
                         <input type="text" id="objet" name="objet" required placeholder="Title of your object"/>
 
-                        <input type="email" id="email" name="email" required placeholder="Email"/>
+                        <input type="email" id="email" name="email" required placeholder="Your email address"/>
 
                         <textarea id="message" name="message" required placeholder="Your message..."></textarea>
 
@@ -96,24 +98,7 @@
         <br>
 
         <footer>
-            <div class="return_top">
-                <p id="retourHaut">Retour en haut</p>
-            </div>
-
-            <div class="logo_langue">
-                <a href="index.php"><img src="../logos/logo-png.png" width="80" height="50" alt="Logo du site"></a>
-                <select>
-                     <option>Français</option>
-                </select>
-            </div>
-
-            <div class="droits">
-                <div id="liste_droits">
-                    <a class="footer_lien" href="conditions.php">Conditions générales du site</a>
-                    <a class="footer_lien" href="informations.php">Vos informations personnelles</a>
-                </div>
-                <span>© 2024, UniShop</span>
-            </div>            
+            <?php require_once("footer.php"); ?>
         </footer>
         <script src="./js/contact.js"></script>
     </body>

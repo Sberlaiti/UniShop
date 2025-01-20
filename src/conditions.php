@@ -179,24 +179,7 @@
         </section>
 
         <footer>
-            <div class="return_top">
-                <p id="retourHaut">Retour en haut</p>
-            </div>
-
-            <div class="logo_langue">
-                <a href="index.php"><img src="../logos/logo-png.png" width="80" height="50"></a>
-                <select>
-                    <option>Français</option>
-                </select>
-            </div>
-
-            <div class="droits">
-                <div id="liste_droits">
-                    <a class="footer_lien" href="conditions.php">Conditions générales du site</a>
-                    <a class="footer_lien" href="informations.php">Vos informations personnelles</a>
-                </div>
-                <span>© 2024, UniShop</span>
-            </div>
+            <?php require_once("footer.php"); ?>
         </footer>  
         <script src="./js/conditions.js"></script>      
     </body>

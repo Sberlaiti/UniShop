@@ -1,0 +1,94 @@
+/*Partie footer*/
+footer{
+    background-color: rgb(180, 104, 17);
+    font-weight: bold;
+}
+
+.return_top{
+    display: block;
+    text-align: center;
+    background-color: rgb(247, 132, 0);
+    color: white;
+    cursor: pointer;
+    padding: 0.2em;
+}
+
+.return_top:hover{
+    background-color: rgb(255, 255, 255);
+}
+
+.bloc_paiement{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1em;
+    background-color: rgb(252, 151, 37);
+}
+
+.bloc_image{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.img_paiement{
+    height: 32px;
+    border-radius: 8px;
+}
+
+.title_paiement{
+    margin-top: 0;
+}
+
+#liste_droits{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+select{
+    margin-left: 30px;
+    font-weight: bold;
+    background-color: #ffbf66;
+    border: 2px solid orange;
+    border-radius: 0.5cm;
+}
+
+select:focus{
+    border: 2px solid orange;
+}
+
+.return_top:hover{
+    background-color: rgb(255, 153, 0);
+    font-weight: bold;
+}
+
+.logo_langue{
+    padding: 2em;
+    background-color: rgb(252, 151, 37);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border-bottom: 2px solid rgba(128, 128, 128, 0.575);
+}
+
+.droits{
+    text-align: center;
+    padding: 1em;
+}
+
+.copyright, .footer_lien{
+    color: white;
+}
+
+.copyright{
+    margin: 0;
+}
+
+.footer_lien:hover{
+    text-decoration: underline;
+}
+/*Fin partie footer*/

@@ -127,6 +127,9 @@
             </div>
 
         <?php }
+        echo "<footer>";
+            require_once('./footer.php');
+        echo "</footer>";
     ?>
     <script src="./js/panier.js"></script>
 </body>

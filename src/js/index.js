@@ -6,7 +6,13 @@ retourhaut.addEventListener('click', function() {
         left: 0,
         behavior: 'smooth' //défilement fluide
     });
+});
 
+//Dupliquer le contenu de la catégorie
+document.addEventListener('DOMContentLoaded', () => {
+    const blocCategorie = document.querySelector('.bloc_categorie');
+    const content = blocCategorie.innerHTML;
+    blocCategorie.innerHTML += content; // Dupliquer le contenu
 });
 
 
@@ -26,21 +32,20 @@ function choixClasse() {
         section.classList.add("affichage_produit3");
     } else if (produits.length >= 2) {
         section.classList.add("affichage_produit2");
-    } else {
+    } else if (produits.length >= 1) {
         section.classList.add("affichage_produit");
     }
 }
 // Exécuter la fonction dès que le DOM est chargé
 document.addEventListener("DOMContentLoaded", choixClasse);
 
-
-//fonction qui permet de changer la classe si le nombre de catégories est supérieur ou égal à 8
-const categories = document.querySelectorAll(".categorie");
-const affichage_categories = document.querySelector(".affichage_categorie");
-const container = document.querySelector(".categorie_container");
-document.addEventListener("DOMContentLoaded", function() {
-    if(categories.length >= 8){
-        affichage_categories.classList.add("affichage_categorie2");
-        affichage_categories.classList.remove("affichage_categorie");
+// Fonction pour changer la couleur des étoiles en fonction de la note
+const userStarsForm = document.querySelectorAll('.user_star_rating_form .star');
+userStarsForm.forEach(star => {
+    const starValue = parseFloat(star.getAttribute('data-value'));
+    if (starValue <= rating) {
+        star.classList.add('filled');
+    } else {
+        star.classList.remove('filled');
     }
 });

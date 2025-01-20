@@ -1,0 +1,107 @@
+body{
+    background-color: #ffbf6627;
+    margin: 0;
+    font-family: 'RedHatDisplay-Bold', sans-serif;
+}
+
+/*Partie affichage des blocs*/
+.main_bloc{
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.bloc_affichage{
+    display: grid;
+    grid-template-areas: "div div div";
+    grid-gap: 20px;
+    margin-bottom: 15px;
+}
+
+.logo_service, .logo_compte{
+    width: 50px;
+    height: 50px;
+    border-radius: 2cm;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.logo{
+    width: 50px;
+    height: 50px;
+    display: flex;
+    margin: 0 auto;
+}
+
+.logo_compte{
+    font-size: 35px;
+    background-color: #ffbf66;
+}
+
+.bloc{
+    width: 275px;
+    border: 2px solid #6b6b6aa4;
+    border-radius: 0.2cm;
+    padding: 1em;
+}
+
+.bloc:hover{
+    border: 2px solid #ffbf66;
+    border-radius: 0.2cm;
+}
+
+.lien_service{
+    text-decoration: none;
+    color: black;
+}
+/*Fin de la partie affichage des blocs*/
+
+
+/* Partie bouton du jeu */
+.jeu_promo{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 85px;
+    height: 85px;
+    background-color: rgb(247, 132, 0);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    transition: transform 0.5s ease, background-color 0.5s ease;
+    animation: borderPulse 1s infinite;
+}
+
+.jeu_promo:hover{
+    transform: scale(1.5);
+    background-color: rgb(180, 104, 17);
+    animation-play-state: paused;
+}
+
+@keyframes borderPulse{
+    0%{
+        border: 3px solid rgb(231, 60, 60);
+        transform: translateY(0px);
+    }
+    50%{
+        border: 3px solid rgba(255, 166, 0, 0);
+        transform: translateY(-10px);
+    }
+    100%{
+        border: 3px solid rgb(231, 60, 60);
+       transform: translateY(0px);
+    }
+}
+
+.jeu_promo a{
+    color : white;
+}
+/* Fin de la partie bouton du jeu */

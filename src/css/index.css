@@ -30,12 +30,42 @@ body{
     gap: 20px;
 }
 
+.cartItems-infos-seller {
+    margin-left: 10px;
+}
+
+.cartItems-infos-seller button {
+    background-color: rgb(233, 233, 229);
+    color: #828080;
+    font-size: 10px;
+    border: none;
+    border-radius: 30px;
+    padding: 2px 7px;
+
+    cursor: pointer;
+}
+
+.infos_produit{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-top: 1em;
+}
+
 a{
     text-decoration: none;
 }
 
 .voir_plus{
     margin-top: 15px;
+}
+
+.prix_produit{
+    margin: 0;
+}
+
+#lien_produit h3{
+    margin: 0;
 }
 
 .voir_plus a{
@@ -76,51 +106,104 @@ a, #lien_produit{
     padding: 0.2em;
     border-radius: 0.2cm;
 }
+
+.average_star_rating{
+    display: flex;
+    align-items: center;
+}
+
+.star{
+    color: #3a3636;
+}
+
+.star.filled {
+    color: #f8d64e;
+}
+
+.review_count{
+    margin-left: 10px;
+    font-size: 10px;
+    color: #828080;
+}
 /* Fin partie affichage des produits */
 
 
-/*Partie affichage externe*/
-.affichage_externe{
+/* Partie bouton du jeu */
+.jeu_promo{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 85px;
+    height: 85px;
+    background-color: rgb(247, 132, 0);
+    color: white;
+    border-radius: 50%;
     display: flex;
-    flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding: 1em;
-    background-color: #ffbf66;
-    width: fit-content;
-    margin: 0 auto;
-    gap: 20px;
-    border-radius: 0.2cm;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    transition: transform 0.5s ease, background-color 0.5s ease;
+    animation: borderPulse 1s infinite;
 }
 
-.img_jeu{/* Taille de l'image du jeu*/
-    width: 250px;
-    height: 170px;
+.jeu_promo:hover{
+    transform: scale(1.5);
+    background-color: rgb(180, 104, 17);
+    animation-play-state: paused;
 }
 
-.jeu, .abonnement{
-    background-color: white;
-    padding: 0.5em;
+@keyframes borderPulse{
+    0%{
+        border: 3px solid rgb(231, 60, 60);
+        transform: translateY(0px);
+    }
+    50%{
+        border: 3px solid rgba(255, 166, 0, 0);
+        transform: translateY(-10px);
+    }
+    100%{
+        border: 3px solid rgb(231, 60, 60);
+       transform: translateY(0px);
+    }
 }
-/*Fin partie affichage externe*/
+
+.jeu_promo a{
+    color : white;
+}
+/* Fin de la partie bouton du jeu */
 
 
 /*Partie affichage des catégories*/
 .affichage_categorie{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items:  center;
-    padding: 1em;
     background-color: rgb(238, 225, 225);
+    white-space: nowrap;
+    position: relative;
+    overflow: hidden;
+    font-size: 65%;
+    margin-top: 15px;
+    padding: 10px;
 }
 
-.affichage_categorie2{
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    grid-auto-rows: auto;
-    gap: 10px;
-    background-color: rgb(238, 225, 225);
+.bloc_categorie{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: scroll 20s linear infinite;
+    white-space: nowrap;
+}
+
+.bloc_categorie:hover{
+    animation-play-state: paused;
+}
+
+@keyframes scroll{
+    0%{
+        transform: translateX(0%);
+    }
+    100%{
+        transform: translateX(-50%);
+    }
 }
 
 .title_categories{
@@ -128,25 +211,30 @@ a, #lien_produit{
 }
 
 .categorie{
+    display: inline-block;
     text-align: center;
     margin-right: 30px;
-    padding: 0.5em;
     border: 1px solid #ffbf6600;
+    padding: 1em;
 }
 
 .categorie:hover{
     border: 1px solid orange;
     border-radius: 0.2cm;
-    padding: 0.5em;
 }
 
-.image_categorie{
-    width: 160px;
-    height: 160px;
+.nom_categorie{
+    font-size: 140%;
+    margin-bottom: 0;
+}
+
+.image_categorie{/* Taille de l'image de la catégorie*/
+    width: 65px;
+    height: 65px;
     border-radius: 2cm;
 }
 
-.no_categories{
+.no_categorie{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -157,53 +245,3 @@ a, #lien_produit{
     border-radius: 0.2cm;
 }
 /*Fin partie affichage des catégories*/
-
-
-/*Partie footer*/
-footer{
-    background-color: rgb(180, 104, 17);
-}
-
-.return_top{
-    display: block;
-    text-align: center;
-    background-color: rgb(247, 132, 0);
-    color: white;
-    cursor: pointer;
-    padding: 0.2em;
-}
-
-.return_top:hover{
-    background-color: rgb(255, 255, 255);
-}
-
-select{
-    margin-left: 30px;
-}
-
-.return_top:hover{
-    background-color: rgb(255, 153, 0);
-    font-weight: bold;
-}
-
-.logo_langue{
-    padding: 2em;
-    background-color: rgb(252, 151, 37);
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
-
-.droits{
-    text-align: center;
-    padding: 2em;
-}
-
-span, .footer_lien{
-    color: white;
-}
-
-.footer_lien:hover{
-    text-decoration: underline;
-}
-/*Fin partie footer*/

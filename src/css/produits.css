@@ -7,7 +7,7 @@ body{
 .main_section{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     align-items: flex-start;
 }
 
@@ -24,7 +24,6 @@ body{
 
 /* Partie affichage des produits */
 #affichage_produit{
-    background-color: white;
     padding: 2em;
     border-radius: 0.5cm; 
     margin: 0 auto;
@@ -34,18 +33,22 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: center;
+    background-color: white;
 }
 
 .affichage_produit2{
     display: grid;
     grid-template-areas: "div div";
     gap : 20px;
+    background-color: white;
 }
 
 .affichage_produit3{
     display: grid;
-    grid-template-areas: "div div div";
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
+    background-color: white;
+    /* justify-content: center; */
 }
 
 .img_produit{/* Taille de l'image de l'article*/
@@ -58,6 +61,35 @@ a, #lien_produit{
     color: black;
 }
 
+.cartItems-infos-seller {
+    margin-left: 10px;
+}
+
+.cartItems-infos-seller button {
+    background-color: rgb(233, 233, 229);
+    color: #828080;
+    font-size: 10px;
+    border: none;
+    border-radius: 30px;
+    padding: 2px 7px;
+    cursor: pointer;
+}
+
+.infos_produit{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-top: 1em;
+}
+
+.prix_produit{
+    margin: 0;
+}
+
+#lien_produit h3{
+    margin: 0;
+}
+
 .no_produit{    
     width: 250px;
     text-align: center;
@@ -65,16 +97,77 @@ a, #lien_produit{
     background-color: orange;
     padding: 0.2em;
     border-radius: 0.2cm;
+    margin-top: 3cm;
+}
+
+.ajout_panier{
+    background-color: #ffbf66;
+    color: black;
+    border: 2px solid #ffbf66;
+    padding: 0.5em;
+    border-radius: 0.2cm;
+    cursor: pointer;
+    transition: 0.5s;
+    font-weight: bold;
+}
+
+.ajout_panier:hover{
+    background-color: orange;
+    color: white;
+    border: 2px solid orange;
+    text-decoration: underline;
+    transition: 0.5s;
+}
+
+.average_star_rating{
+    display: flex;
+    align-items: center;
+}
+
+.star{
+    color: #3a3636;
+}
+
+.star.filled {
+    color: #f8d64e;
+}
+
+.review_count{
+    margin-left: 10px;
+    font-size: 10px;
+    color: #828080;
 }
 /* Fin de la partie affichage des produits */
+
+
+/*Partie message d'ajout panier*/
+.message_panier {
+    display: none; /* Masquer par défaut */
+    background-color: #ffbf66; /* Couleur de fond */
+    color: black; /* Couleur du texte */
+    padding: 15px; /* Espacement interne */
+    position: fixed; /* Position fixe */
+    right: 20px; /* Position à droite */
+    z-index: 1000; /* Au-dessus des autres éléments */
+    border-radius: 5px; /* Coins arrondis */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* Ombre */
+    transition: opacity 0.5s ease; /* Transition pour l'opacité */
+}
+
+.message_panier.show {
+    display: block; /* Afficher le message */
+    opacity: 1; /* Opacité pleine */
+}
+/*Fin de la partie message d'ajout panier*/
+
 
 /* Partie bouton du jeu */
 .jeu_promo{
     position: fixed;
     bottom: 20px;
     right: 20px;
-    width: 130px;
-    height: 130px;
+    width: 85px;
+    height: 85px;
     background-color: rgb(247, 132, 0);
     color: white;
     border-radius: 50%;
@@ -83,65 +176,32 @@ a, #lien_produit{
     align-items: center;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
     text-align: center;
-    transition: transform 0.5s ease;
+    transition: transform 0.5s ease, background-color 0.5s ease;
+    animation: borderPulse 1s infinite;
 }
 
 .jeu_promo:hover{
-    transform: scale(1.1);
+    transform: scale(1.5);
     background-color: rgb(180, 104, 17);
+    animation-play-state: paused;
+}
+
+@keyframes borderPulse{
+    0%{
+        border: 3px solid rgb(231, 60, 60);
+        transform: translateY(0px);
+    }
+    50%{
+        border: 3px solid rgba(255, 166, 0, 0);
+        transform: translateY(-10px);
+    }
+    100%{
+        border: 3px solid rgb(231, 60, 60);
+       transform: translateY(0px);
+    }
 }
 
 .jeu_promo a{
     color : white;
 }
 /* Fin de la partie bouton du jeu */
-
-
-/*Partie footer*/
-footer{
-    background-color: rgb(180, 104, 17);
-}
-
-.return_top{
-    display: block;
-    text-align: center;
-    background-color: rgb(247, 132, 0);
-    color: white;
-    cursor: pointer;
-    padding: 0.2em;
-}
-
-.return_top:hover{
-    background-color: rgb(255, 255, 255);
-}
-
-select{
-    margin-left: 30px;
-}
-
-.return_top:hover{
-    background-color: rgb(255, 153, 0);
-    font-weight: bold;
-}
-
-.logo_langue{
-    padding: 2em;
-    background-color: rgb(252, 151, 37);
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
-
-.droits{
-    text-align: center;
-    padding: 2em;
-}
-
-span, .footer_lien{
-    color: white;
-}
-
-.footer_lien:hover{
-    text-decoration: underline;
-}
-/*Fin partie footer*/

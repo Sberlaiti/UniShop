@@ -25,14 +25,22 @@ function choixClasse() {
         section.classList.add("affichage_produit3");
     } else if (produits.length >= 2) {
         section.classList.add("affichage_produit2");
-    } else {
-        section.classList.add("affichage_produit");        
+    } else if (produits.length >= 1) {
+        section.classList.add("affichage_produit");
+    }
+
+    const noProduit = document.querySelector(".no_produit");
+    const mainSection = document.querySelector(".main_section");
+    if(noProduit){
+        mainSection.style.marginTop = "1cm";
+        mainSection.style.marginBottom = "1.75cm";
     }
 }
 // Exécuter la fonction dès que le DOM est chargé
 document.addEventListener("DOMContentLoaded", choixClasse);
 
 
+// Fonction pour changer l'url en fonction de la catégorie sélectionnée
 document.querySelectorAll('input[name="categorie"]').forEach(function(radio) {
     radio.addEventListener('change', function() {
         const idCategorie = this.value;
@@ -40,4 +48,31 @@ document.querySelectorAll('input[name="categorie"]').forEach(function(radio) {
         url.searchParams.set('idCategorie', idCategorie); // Ajoute ou met à jour le paramètre
         window.location.href = url.toString(); // Recharge la page avec la nouvelle URL
     });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const messagePanier = document.querySelector('.message_panier');
+    // Fonction pour afficher le message
+    function showMessage() {
+        if (messagePanier) {
+            messagePanier.classList.add('show');
+            setTimeout(() => {
+                messagePanier.classList.remove('show');
+            }, 3000); // Masquer après 3 secondes
+        }
+    }
+
+    // Appeler la fonction pour afficher le message (par exemple, après l'ajout au panier)
+    showMessage();
+});
+
+// Fonction pour changer la couleur des étoiles en fonction de la note
+const userStarsForm = document.querySelectorAll('.user_star_rating_form .star');
+userStarsForm.forEach(star => {
+    const starValue = parseFloat(star.getAttribute('data-value'));
+    if (starValue <= rating) {
+        star.classList.add('filled');
+    } else {
+        star.classList.remove('filled');
+    }
 });
