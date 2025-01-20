@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `avis` (
   PRIMARY KEY (`idAvis`),
   KEY `fk_avis_utilisateur` (`idUtilisateur`),
   KEY `fk_avis_produit` (`idProduit`)
-) ENGINE=InnoDB AUTO_INCREMENT=6667 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6667 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `avis`
@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `categorie` (
   `idImage` int NOT NULL,
   PRIMARY KEY (`idCategorie`),
   KEY `fk_categorie_image` (`idImage`)
-) ENGINE=InnoDB AUTO_INCREMENT=94 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=94 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `categorie`
@@ -103,7 +103,7 @@ CREATE TABLE IF NOT EXISTS `commande` (
   KEY `fk_commande_utilisateur` (`idUtilisateur`),
   KEY `fk_commande_promo` (`idPromo`),
   KEY `fk_produit_commande` (`idProduit`)
-) ENGINE=InnoDB AUTO_INCREMENT=1002 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1002 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `commande`
@@ -125,7 +125,7 @@ CREATE TABLE IF NOT EXISTS `image` (
   `idProduit` int NOT NULL,
   PRIMARY KEY (`idImage`),
   KEY `fk_image_produit` (`idProduit`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `image`
@@ -171,7 +171,7 @@ CREATE TABLE IF NOT EXISTS `panier` (
   `idUtilisateur` int NOT NULL,
   PRIMARY KEY (`idPanier`),
   KEY `fk_panier_utilisateur` (`idUtilisateur`)
-) ENGINE=InnoDB AUTO_INCREMENT=118 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=118 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -195,7 +195,7 @@ CREATE TABLE IF NOT EXISTS `produit` (
   KEY `fk_produit_image` (`idImage`),
   KEY `fk_produit_utilisateur` (`idUtilisateur`),
   KEY `fk_produit_categorie` (`IdCategorie`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `produit`
@@ -226,7 +226,7 @@ CREATE TABLE IF NOT EXISTS `produitscommande` (
   PRIMARY KEY (`idCommande`),
   KEY `fk_produitsCommande_commande` (`idCommande`),
   KEY `fk_produitsCommande_produit` (`idProduit`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -242,7 +242,7 @@ CREATE TABLE IF NOT EXISTS `produitspanier` (
   PRIMARY KEY (`idPanier`,`idProduit`),
   KEY `fk_produitsPanier_produit` (`idProduit`),
   KEY `fk_produitsPanier_panier` (`idPanier`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -258,7 +258,7 @@ CREATE TABLE IF NOT EXISTS `promotion` (
   `idUtilisateur` int NOT NULL,
   PRIMARY KEY (`idPromo`),
   KEY `fk_promotion_user` (`idUtilisateur`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `promotion`
@@ -287,7 +287,7 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `date_last_played` datetime DEFAULT NULL,
   `coupPlayed` int DEFAULT '3',
   PRIMARY KEY (`idUtilisateur`)
-) ENGINE=InnoDB AUTO_INCREMENT=3338 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3338 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `utilisateur`
@@ -303,17 +303,20 @@ DELIMITER $$
 --
 -- Events
 --
-DROP EVENT IF EXISTS `clear_promotion_date`$$
+
+SET GLOBAL event_scheduler = ON;
+
+DROP EVENT IF EXISTS `clear_promotion_date`;
 CREATE DEFINER=`root`@`localhost` EVENT `clear_promotion_date` ON SCHEDULE EVERY 1 DAY STARTS '2025-01-09 13:11:56' ON COMPLETION NOT PRESERVE ENABLE DO UPDATE utilisateur
   SET date_gagnantPromo = NULL
   WHERE date_gagnantPromo IS NOT NULL
-  AND DATE_ADD(date_gagnantPromo, INTERVAL 7 DAY) <= NOW()$$
+  AND DATE_ADD(date_gagnantPromo, INTERVAL 7 DAY) <= NOW();
 
-DROP EVENT IF EXISTS `clear_dateLastPlayed`$$
+DROP EVENT IF EXISTS `clear_dateLastPlayed`;
 CREATE DEFINER=`root`@`localhost` EVENT `clear_dateLastPlayed` ON SCHEDULE EVERY 1 DAY STARTS '2025-01-09 13:30:29' ON COMPLETION NOT PRESERVE ENABLE DO UPDATE utilisateur
     SET date_last_played = NULL
     WHERE date_last_played IS NOT NULL
-    AND DATE_ADD(date_last_played, INTERVAL 7 DAY) <= NOW()$$
+    AND DATE_ADD(date_last_played, INTERVAL 7 DAY) <= NOW();
 
 DELIMITER ;
 COMMIT;
