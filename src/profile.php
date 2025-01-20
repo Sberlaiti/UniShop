@@ -44,7 +44,7 @@
             <div class="info_Profile">
                 <div class="info_Profile_1">
                     <img src="./images/italianFlag.png" alt="UserLogo">
-                    <p><?php echo $_SESSION['user']['nom'] ?></p>
+                    <p><?php echo $_SESSION['user']['pseudo'] ?></p>
                     <button>Log Out</button>
                 </div>
                 <div class="info_Profile_2">

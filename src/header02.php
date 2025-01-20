@@ -84,7 +84,7 @@
                             <p>Sign In</p>
                     <?php } else { ?>
                         <a href="profile.php">
-                            <img src="./images/italianFlag.png" alt="UserLogo"><p><?php echo $_SESSION['user']['nom'] ?></p>
+                            <img src="./images/italianFlag.png" alt="UserLogo"><p><?php echo $_SESSION['user']['pseudo'] ?></p>
                     <?php } ?>
                     </a>
                 </div>
