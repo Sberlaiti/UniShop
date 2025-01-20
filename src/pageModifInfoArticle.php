@@ -83,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/pageArticle.css">
+    <link rel="stylesheet" href="css/pageModif.css">
     <title>Modifier les informations de l'article</title>
 </head>
 <body>
@@ -142,24 +142,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
 
     <footer>
-        <div class="return_top">
-            <p id="retourHaut">Retour en haut</p>
-        </div>
-
-        <div class="logo_langue">
-            <a href="index.php"><img src="../logos/logo-png.png" width="80" height="50" alt="Logo du site"></a>
-            <select>
-                <option>Français</option>
-            </select>
-        </div>
-
-        <div class="droits">
-            <div id="liste_droits">
-                <a class="footer_lien" href="conditions.php">Conditions générales du site</a>
-                <a class="footer_lien" href="">Vos informations personnelles</a>
-            </div>
-            <span>© 2024, UniShop</span>
-        </div>            
+        <?php require_once('footer.php')?>           
     </footer>
 </body>
 </html>

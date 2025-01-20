@@ -101,11 +101,11 @@
         }
 
         if (isset($_POST['ajout_panier'])) {
-            $requeteSQL = $pdo->prepare("INSERT INTO produitsPanier(idPanier, idProduit, quantitee) VALUES(?, ?, 1) ON DUPLICATE KEY UPDATE quantitee = quantitee + 1");
+            $requeteSQL = $pdo->prepare("INSERT INTO produitspanier(idPanier, idProduit, quantitee) VALUES(?, ?, 1) ON DUPLICATE KEY UPDATE quantitee = quantitee + 1");
             $requeteSQL->execute([$idPanier, $idProduit]);
             echo "<script>showMessage('Produit ajouté au panier');</script>";
         } else if (isset($_POST['enlever_panier'])) {
-            $requeteSQL = $pdo->prepare("DELETE FROM produitsPanier WHERE idPanier = ? AND idProduit = ?");
+            $requeteSQL = $pdo->prepare("DELETE FROM produitspanier WHERE idPanier = ? AND idProduit = ?");
             $requeteSQL->execute([$idPanier, $idProduit]);
             echo "<script>showMessage('Produit enlevé du panier');</script>";
         }
@@ -264,7 +264,7 @@
                             $idProduit = $_GET['idProduit'];
                 
                             // Vérifier si le produit est déjà dans le panier
-                            $requete = $pdo->prepare("SELECT pp.idProduit FROM produitsPanier pp JOIN panier p ON pp.idPanier = p.idPanier WHERE p.idUtilisateur = ? AND pp.idProduit = ?");
+                            $requete = $pdo->prepare("SELECT pp.idProduit FROM produitspanier pp JOIN panier p ON pp.idPanier = p.idPanier WHERE p.idUtilisateur = ? AND pp.idProduit = ?");
                             $requete->execute([$idUser, $idProduit]);
                             $produitDansPanier = $requete->fetch();
                 
@@ -289,7 +289,7 @@
                 <div class="extra_options">
                     <button class="more_options">...</button>
                     <div class="more_options_menu">
-                        <?php if ($utilisateur['estVendeur'] == 0): ?>
+                        <?php if ($utilisateur['estVendeur'] == 1): ?>
                             <button class="edit_info_button" onclick="window.location.href='pageModifInfoArticle.php?idProduit=<?php echo $_GET['idProduit']; ?>'">Modifier les infos de l'article</button>
                         <?php endif; ?>
                         <button class="view_cart_button" onclick="window.location.href='panier.php'">Voir panier</button>
