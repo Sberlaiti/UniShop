@@ -24,7 +24,7 @@ $stmt = $pdo->prepare("SELECT idUtilisateur FROM produit WHERE idProduit = ?");
 $stmt->execute([$idProduit]);
 $produit = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if ($utilisateur['estVendeur'] != 0 || $produit['idUtilisateur'] != $idUtilisateur) {
+if ($utilisateur['estVendeur'] != 1 || $produit['idUtilisateur'] != $idUtilisateur) {
     echo "Vous n'êtes pas autorisé à modifier cet article.";
     exit();
 }
