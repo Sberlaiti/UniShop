@@ -13,9 +13,9 @@
 
 
     $idProduit = $_GET['idProduit'];
-    $stmt = $pdo->prepare("SELECT nomProduit,description,prix,delayLivraison,idImage
+    $stmt = $pdo->prepare("SELECT nomProduit,description,prix,delayLivraison,idImage, prixPromotion, enPromotion
                         FROM produit 
-                        WHERE idProduit = ?");
+                        WHERE idProduit = ? AND (enPromotion = 1 OR enPromotion = 0)");
     $stmt->execute([$idProduit]);
     $produit = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -240,7 +240,11 @@
                 <?php
                     echo "<h1 class=product_name>" . htmlspecialchars($produit['nomProduit']) . "</h1>";
                     echo "<p class=product_description>". htmlspecialchars($produit['description']). "</p>";
-                    echo "<p class=product_price>". htmlspecialchars($produit['prix']). "€". "</p>";
+                    if ($produit['enPromotion'] && $produit['prixPromotion'] !== null) {
+                        echo "<p class=product_price>". htmlspecialchars($produit['prixPromotion']). "€ <del>" . htmlspecialchars($produit['prix']) . "€</del>" . "</p>";
+                    } else {
+                        echo "<p class=product_price>". htmlspecialchars($produit['prix']). "€". "</p>";
+                    }
                     echo "<p class=product_delivery>". "Delai de livraison: ". htmlspecialchars($produit['delayLivraison']). " Jours". "</p>";
                 ?>
                 

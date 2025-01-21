@@ -9,10 +9,12 @@
     error_reporting(E_ALL);
 
     //Récupération des données de la table article
-    $sql_requete = "SELECT p.idProduit, p.nomProduit, u.pseudo, p.prix, i.lien
+    $sql_requete = "SELECT p.idProduit, p.nomProduit, u.pseudo, p.prix, p.prixPromotion, p.enPromotion, i.lien, u.idUtilisateur
                     FROM produit p
                     JOIN utilisateur u ON u.idUtilisateur = p.idUtilisateur
-                    JOIN image i ON i.idImage = p.idImage";
+                    JOIN image i ON i.idImage = p.idImage
+                    WHERE p.enPromotion = 1 OR p.enPromotion = 0
+                    ORDER BY dateCreation DESC";
     $stmt = $pdo->query($sql_requete);
     $produits = $stmt->fetchAll();
 
@@ -78,8 +80,8 @@
                                 echo "<a href='pageArticle.php?idProduit=". $row_count['idProduit'] . "' id='lien_produit'>";
                                     echo "<img class='img_produit' src='" . htmlspecialchars($row_count['lien']) . "'/>";
                                     echo "<div class='infos_produit'>";
-                                        echo "<h3>" . htmlspecialchars($row_count['nomProduit']) . "</h3>";
-                                        echo "<a class='cartItems-infos-seller' href=''><button>Vendeur: " . htmlspecialchars($row_count['pseudo']). "</button></a>";
+                                        echo "<h3 class='nomProduit'>" . htmlspecialchars($row_count['nomProduit']) . "</h3>";
+                                        echo "<a class='cartItems-infos-seller' href='produits.php?idUtilisateur=" . $row_count['idUtilisateur'] ."'><button>Vendeur: " . htmlspecialchars($row_count['pseudo']). "</button></a>";
                                     echo "</div>";
                                     ?>
                                     <div class="average_star_rating">
@@ -103,7 +105,11 @@
                                         ?>
                                     </div>
                                     <?php
-                                    echo "<p class='prix_produit'>" . htmlspecialchars($row_count['prix']) . " €</p>";
+                                    if ($row_count['enPromotion'] && $row_count['prixPromotion'] !== null) {
+                                        echo "<p class='prix_produit'>" . htmlspecialchars($row_count['prixPromotion']) . " € <del>" . htmlspecialchars($row_count['prix']) . " €</del></p>";
+                                    } else {
+                                        echo "<p class='prix_produit'>" . htmlspecialchars($row_count['prix']) . " €</p>";
+                                    }
                                 echo "</a>";
                             echo "</div>";
                             $produitsAffiches++;

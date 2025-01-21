@@ -30,7 +30,7 @@
                 <div class="cartList">
                     <?php
                         foreach($panier as $produit) {
-                            $sql_requete = "SELECT * FROM produit WHERE idProduit = :idProduit";
+                            $sql_requete = "SELECT *, u.pseudo FROM produit JOIN utilisateur u ON u.idUtilisateur = produit.idUtilisateur WHERE idProduit = :idProduit";
                             $stmt = $pdo->prepare($sql_requete);
                             $stmt->execute(['idProduit' => $produit['idProduit']]);
                             $article = $stmt->fetch();
@@ -43,7 +43,7 @@
                                         <!-- Créer un lien vers la page de l'article -->
                                         <a><?php echo $article['nomProduit']; ?></a>
                                         <!-- Lier le button à la page du vendeur  -->
-                                        <a class="cartItems-infos-seller" href=""><button> Vendeur : <?php echo $article['appartientVendeur']; ?></button></a>
+                                        <a class="cartItems-infos-seller" href="produits.php?idUtilisateur=<?php echo $article['idUtilisateur']; ?>"><button> Vendeur : <?php echo $article['pseudo']; ?></button></a>
                                         <div class="cartItems-infos-name-ope">
                                                 <button class="addFavourites" data-id=<?php echo $article['idProduit']?>><i class="fa-duotone fa-solid fa-heart"></i></button>
                                                 <button class="delete" data-id=<?php echo $article['idProduit']?>><i class="fa-solid fa-trash"></i></button>
@@ -66,7 +66,14 @@
                                     
                                     <!-- Modifier le prix en fonction de la quantité -->
                                     <div class="cartItems-infos-price">
-                                        <p><?php echo $article['prix']; ?> €</p>
+                                        <p><?php
+                                            if($article['enPromotion'] && $article['prixPromotion'] !== null) {
+                                                echo $article['prixPromotion'] . "€ <del>" . $article['prix'] . "€</del>";
+                                            }
+                                            else {
+                                            echo $article['prix'] . "€"; 
+                                            } ?> 
+                                        </p>
                                         <div class="amount">
                                             <button class="minus" data-id=<?php echo $article['idProduit']?>>-</button>
                                             <?php
@@ -87,11 +94,16 @@
                         <?php 
                             $total = 0;
                             foreach($panier as $produit) {
-                                $sql_requete = "SELECT * FROM produit WHERE idProduit = :idProduit";
+                                $sql_requete = "SELECT * FROM produit WHERE idProduit = :idProduit AND (enPromotion = 1 OR enPromotion = 0)";
                                 $stmt = $pdo->prepare($sql_requete);
                                 $stmt->execute(['idProduit' => $produit['idProduit']]);
                                 $article = $stmt->fetch();
-                                $total += $article['prix'] * $produit['quantitee'];
+                                if($article['enPromotion'] && $article['prixPromotion'] !== null) {
+                                    $total = $article['prixPromotion'] * $produit['quantitee'];
+                                }
+                                else {
+                                    $total = $article['prix'] * $produit['quantitee'];
+                                }
                             }
                             echo "<p>Sous-total : </p> 
                                     <p>".$total." €</p>";

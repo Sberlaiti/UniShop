@@ -27,7 +27,7 @@
 
             <div class="affichage">
                 <h1 id="cgu">Conditions générales d'utilisation - UniShop</h1>
-                <p>Dernière mise à jour le ...</p>
+                <p>Dernière mise à jour le 15/12/2024</p>
 
                 <p>Bienvenue sur UniShop</p>
                 <p>UniShop est un site de vente en ligne qui propose une gamme variée de produits disponibles à la vente en ligne. 

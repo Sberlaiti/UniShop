@@ -15,7 +15,7 @@
         $userId = $_SESSION['user']['idUtilisateur'];
 
         try{
-            $sql_requete = $pdo->prepare("INSERT INTO promotion (codePromo, coefficient, idUtilisateur) VALUES (?, 15.00, ?)");
+            $sql_requete = $pdo->prepare("INSERT INTO promotion (codePromo, coefficient, idUtilisateur, dateGagnant) VALUES (?, 15.00, ?, NOW())");
             $sql_requete->execute([$codePromo, $userId]);
             
             //Update de la date de la dernière promotion gagnée
