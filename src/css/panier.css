@@ -202,9 +202,14 @@
     flex-direction: column;
 
     margin-top: 60px;
-    margin-bottom: 3.68cm;
+    margin-bottom: 5.17cm;
 }
 
 .container_emptyCart > img {
     width: 200px;
+}
+
+del{
+    color: #828080;
+    font-size: 75%;
 }

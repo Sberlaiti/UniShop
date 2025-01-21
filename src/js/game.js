@@ -122,12 +122,3 @@ startButton.addEventListener('click', () => {
         .catch(error => console.error(error));
     }, 4000); // Attente pour terminer la rotation
 });
-
-
-// const mainSection = document.querySelector('.main_section');
-// if (mainSection) {
-//     document.addEventListener("DOMContentLoaded", () => {
-//         mainSection.style.marginTop = "1cm";
-//         mainSection.style.marginBottom = "1.75cm";
-//     });
-// }

@@ -6,7 +6,6 @@ retourhaut.addEventListener('click', function() {
         left: 0,
         behavior: 'smooth' //défilement fluide
     });
-
 });
 
 //modification de la classe pour l'affichage des produits
@@ -33,11 +32,21 @@ function choixClasse() {
     const mainSection = document.querySelector(".main_section");
     if(noProduit){
         mainSection.style.marginTop = "1cm";
-        mainSection.style.marginBottom = "1.75cm";
+        mainSection.style.marginBottom = "3.23cm";
     }
 }
 // Exécuter la fonction dès que le DOM est chargé
-document.addEventListener("DOMContentLoaded", choixClasse);
+if(!document.querySelector(".produitUser")){
+    document.addEventListener("DOMContentLoaded", choixClasse);
+}
+
+// const produitUser = document.querySelector(".produitUser");
+// if(produitUser && document.querySelector(".no_produit")){
+//     produitUser.style.display = "block";
+//     document.querySelector(".no_produit").style.marginTop = "0";
+//     produitUser.style.marginTop = "3.5cm";
+//     produitUser.style.marginBottom = "5.2cm";
+// }
 
 
 // Fonction pour changer l'url en fonction de la catégorie sélectionnée

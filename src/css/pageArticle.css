@@ -115,11 +115,18 @@ body {
     padding: 10px;
     border-radius: 8px;
     text-align: center;
+    width: 250px;
 }
 
 .product_description {
     font-size: 16px;
     color: gray;
+    width: 260px;
+}
+
+del{
+    color: #828080;
+    font-size: 75%;
 }
 
 .product_price {
