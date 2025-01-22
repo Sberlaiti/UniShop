@@ -27,7 +27,6 @@
     } 
 
 
-
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['payment_button'])) {
         $paymentMethod = $_POST['selectedPaymentMethod'] ?? 'creditCard';
     

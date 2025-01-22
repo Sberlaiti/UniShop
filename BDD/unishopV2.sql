@@ -93,24 +93,24 @@ INSERT INTO `categorie` (`idCategorie`, `nomCategorie`, `idImage`) VALUES
 DROP TABLE IF EXISTS `commande`;
 CREATE TABLE IF NOT EXISTS `commande` (
   `idCommande` int NOT NULL AUTO_INCREMENT,
+  `idUtilisateur` int NOT NULL,
   `dateAchat` date NOT NULL,
   `adresse` varchar(130) NOT NULL,
   `telephone` varchar(15) NOT NULL,
-  `idUtilisateur` int NOT NULL,
   `idPromo` int DEFAULT NULL,
-  `idProduit` int NOT NULL,
+  `totale` double DEFAULT NULL,
+  `modePaiement` varchar(130) DEFAULT NULL,
   PRIMARY KEY (`idCommande`),
   KEY `fk_commande_utilisateur` (`idUtilisateur`),
-  KEY `fk_commande_promo` (`idPromo`),
-  KEY `fk_produit_commande` (`idProduit`)
+  KEY `fk_commande_promo` (`idPromo`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1002 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `commande`
 --
 
-INSERT INTO `commande` (`idCommande`, `dateAchat`, `adresse`, `telephone`, `idUtilisateur`, `idPromo`, `idProduit`) VALUES
-(1001, '2024-11-11', '123 Rue de Paris', '1234567890', 3333, NULL, 0);
+INSERT INTO `commande` (`idCommande`, `idUtilisateur`, `dateAchat`, `adresse`, `telephone`, `idPromo`, `totale`, `modePaiement`) VALUES
+(1001, 3333, '2024-11-11', '123 Rue de Paris', '1234567890', NULL, 10000, 'Carte bancaire');
 
 -- --------------------------------------------------------
 
@@ -227,6 +227,14 @@ CREATE TABLE IF NOT EXISTS `produitscommande` (
   KEY `fk_produitsCommande_commande` (`idCommande`),
   KEY `fk_produitsCommande_produit` (`idProduit`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+--
+-- Dumping data for table `produit`
+--
+
+INSERT INTO `produitscommande` (`idProduit`, `idCommande`, `quantitee`, `prixUnitaire`) VALUES
+(4, 1001, 1, 1000000.3);
 
 -- --------------------------------------------------------
 
