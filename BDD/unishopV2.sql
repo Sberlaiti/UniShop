@@ -40,15 +40,6 @@ CREATE TABLE IF NOT EXISTS `avis` (
   KEY `fk_avis_produit` (`idProduit`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6667 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `avis`
---
-
--- --------------------------------------------------------
-
---
--- Table structure for table `categorie`
---
 
 -- --------------------------------------------------------
 
@@ -269,6 +260,8 @@ INSERT INTO `produitcategorie` (`idProduit`, `idCategorie`) VALUES
 (3, 7),
 (9, 7);
 
+-- --------------------------------------------------------
+
 --
 -- Table structure for table `produitscommande`
 --
@@ -286,7 +279,7 @@ CREATE TABLE IF NOT EXISTS `produitscommande` (
 
 
 --
--- Dumping data for table `produit`
+-- Dumping data for table `produitscommande`
 --
 
 INSERT INTO `produitscommande` (`idProduit`, `idCommande`, `quantitee`, `prixUnitaire`) VALUES
@@ -307,6 +300,16 @@ CREATE TABLE IF NOT EXISTS `produitspanier` (
   KEY `fk_produitsPanier_produit` (`idProduit`),
   KEY `fk_produitsPanier_panier` (`idPanier`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `produitspanier`
+--
+
+INSERT INTO `produitspanier` (`idProduit`, `idPanier`, `quantitee`) VALUES
+(1, 118, 1),
+(2, 118, 1),
+(3, 118, 1);
+
 
 -- --------------------------------------------------------
 
@@ -360,6 +363,8 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
 
 INSERT INTO `utilisateur` (`idUtilisateur`, `nom`, `prenom`, `pseudo`, `mail`, `password`, `estVendeur`, `admin`, `date_gagnantPromo`, `date_last_played`, `coupPlayed`) VALUES
 (1, 'UniShop', 'Admin', 'UniShop', 'aunishop786@gmail.com', '$2y$10$NSVDfJMSV6cX0XX6cMCDMORUBkDM77q5fM6hZ.pd44l1xshYioCNq', 0, 1, NULL, NULL, 3)
+
+-- --------------------------------------------------------
 
 DELIMITER $$
 --

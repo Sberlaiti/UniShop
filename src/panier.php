@@ -30,39 +30,42 @@
                 <div class="cartList">
                     <?php
                         foreach($panier as $produit) {
-                            $sql_requete = "SELECT *, u.pseudo FROM produit JOIN utilisateur u ON u.idUtilisateur = produit.idUtilisateur WHERE idProduit = :idProduit";
+                            $sql_requete = "SELECT * FROM produit WHERE idProduit = :idProduit";
                             $stmt = $pdo->prepare($sql_requete);
                             $stmt->execute(['idProduit' => $produit['idProduit']]);
                             $article = $stmt->fetch();
                     ?>
                             <div class="cartItems">
                                 <img src="./images/frenchFlag.png" alt="Image de l'article">
+                                <!-- Deplacer le prix et le bouton en bas -->
                                 <div class="cartItems-infos">
                                     <!-- Créer javascript pour ajouter au favoris et supprimer du panier -->
                                     <div class="cartItems-infos-name">
                                         <!-- Créer un lien vers la page de l'article -->
                                         <a><?php echo $article['nomProduit']; ?></a>
-                                        <!-- Lier le button à la page du vendeur  -->
-                                        <a class="cartItems-infos-seller" href="produits.php?idUtilisateur=<?php echo $article['idUtilisateur']; ?>"><button> Vendeur : <?php echo $article['pseudo']; ?></button></a>
+                                        
+                                        <?php
+                                            if ($article['idUtilisateur'] == 1) {
+                                                $pseudo_Vendeur = "Unishop";
+                                            } else {
+                                                $sql_requete = "SELECT pseudo FROM utilisateur WHERE idUtilisateur = :idUtilisateur";
+                                                $stmt = $pdo->prepare($sql_requete);
+                                                $stmt->execute(['idUtilisateur' => $article['idUtilisateur']]);
+                                                $pseudo_Vendeur = $stmt->fetch();
+
+                                            }
+                                        ?>
+                                        
+                                        <a class="cartItems-infos-seller" href="produits.php?idUtilisateur=<?php echo $article['idUtilisateur']; ?>"><button> Vendeur : <?php echo $pseudo_Vendeur; ?></button></a>
                                         <div class="cartItems-infos-name-ope">
                                                 <button class="addFavourites" data-id=<?php echo $article['idProduit']?>><i class="fa-duotone fa-solid fa-heart"></i></button>
                                                 <button class="delete" data-id=<?php echo $article['idProduit']?>><i class="fa-solid fa-trash"></i></button>
                                         </div>
                                     </div>
                     
-                                    <p class="description"><?php echo $article['description']; ?></p>
+                                    <!-- <p class="description"><?php echo $article['description']; ?></p> -->
                                     
                                     <!-- Verifier la disponibilité du produit -->
-                                    <div class="productOptions"> 
-                                        <p >Taille : </p>
-                                        <select name="" id="productOptions">
-                                            <option value="1"> XS</option>
-                                            <option value="2">S</option>
-                                            <option value="3">M</option>
-                                            <option value="4">L</option>
-                                            <option value="5">XL</option>
-                                        </select>
-                                    </div>
                                     
                                     <!-- Modifier le prix en fonction de la quantité -->
                                     <div class="cartItems-infos-price">
@@ -94,16 +97,17 @@
                         <?php 
                             $total = 0;
                             foreach($panier as $produit) {
-                                $sql_requete = "SELECT * FROM produit WHERE idProduit = :idProduit AND (enPromotion = 1 OR enPromotion = 0)";
+                                $sql_requete = "SELECT * FROM produit WHERE idProduit = :idProduit";
                                 $stmt = $pdo->prepare($sql_requete);
                                 $stmt->execute(['idProduit' => $produit['idProduit']]);
                                 $article = $stmt->fetch();
-                                if($article['enPromotion'] && $article['prixPromotion'] !== null) {
-                                    $total = $article['prixPromotion'] * $produit['quantitee'];
+                                
+                                if ($article['enPromotion'] && $article['prixPromotion'] !== null) {
+                                    $total += $article['prixPromotion'] * $produit['quantitee'];
+                                } else {
+                                    $total += $article['prix'] * $produit['quantitee'];
                                 }
-                                else {
-                                    $total = $article['prix'] * $produit['quantitee'];
-                                }
+                                
                             }
                             echo "<p>Sous-total : </p> 
                                     <p>".$total." €</p>";
@@ -136,13 +140,20 @@
                         </form>
                     </div>
                 </div>
+
+                <div class="cartSummery_DiscountCode">
+                    <form action="apply_discount.php" method="POST">
+                        <label for="discount_code">Code de réduction :</label>
+                        <input type="text" id="discount_code" name="discount_code" placeholder="Entrez votre code">
+                        <button type="submit">Appliquer</button>
+                    </form>
+                </div>
             </div>
 
-        <?php }
-        echo "<footer>";
-            require_once('./footer.php');
-        echo "</footer>";
-    ?>
+        <?php } ?>
+        <footer>
+            <?php require_once('./footer.php'); ?>
+        </footer>
     <script src="./js/panier.js"></script>
 </body>
 </html>
