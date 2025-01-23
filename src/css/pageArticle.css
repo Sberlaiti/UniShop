@@ -203,7 +203,7 @@ body {
 }
 
 .cart_button:hover {
-    background-color: #e6b93f; /* Couleur du thème actuel au survol */
+    background-color: #e69500; /* Couleur du thème actuel au survol */
 }
 
 .cart_button_delete {
@@ -218,57 +218,19 @@ body {
 .extra_options {
     position: relative;
 }
-
-.more_options {
-    padding: 10px;
+.edit_info_button {
+    background-color: #f0c14b; /* Couleur orange */
+    color: white;
     border: none;
-    background-color: #6c757d;
-    color: rgb(19, 18, 18);
-    border-radius: 5px;
+    border-radius: 5px; /* Bord arrondi */
+    padding: 10px 20px;
+    font-size: 14px;
     cursor: pointer;
-}
-
-.more_options:hover {
-    background-color: #5a6268;
-}
-
-.more_options_menu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-}
-
-.more_options_menu button {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    border: none;
-    background: none;
-    text-align: left;
-    cursor: pointer;
-}
-
-.more_options_menu button:hover {
-    background-color: #f0f0f0;
-}
-.more_options, .share_button, .favorite_button {
-    padding: 8px 12px;
-    font-size: 16px;
-    cursor: pointer;
-    background-color: #f9f9f9;
-    border: 1px solid #ccc;
-    border-radius: 5px; 
     transition: background-color 0.3s ease;
 }
 
-.more_options:hover, .share_button:hover, .favorite_button:hover {
-    background-color: #e0e0e0;
+.edit_info_button:hover {
+    background-color: #e69500; /* Couleur orange foncée */
 }
 
 /* Styles pour les commentaires */

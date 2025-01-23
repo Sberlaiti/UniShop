@@ -7,13 +7,13 @@
 
     
 
-    $stmt = $pdo->prepare("SELECT estVendeur FROM utilisateur WHERE idUtilisateur = ?");
+    $stmt = $pdo->prepare("SELECT idUtilisateur,estVendeur FROM utilisateur WHERE idUtilisateur = ?");
     $stmt->execute([$idUtilisateur]);
     $utilisateur = $stmt->fetch(PDO::FETCH_ASSOC);
 
 
     $idProduit = $_GET['idProduit'];
-    $stmt = $pdo->prepare("SELECT nomProduit,description,prix,delayLivraison,idImage
+    $stmt = $pdo->prepare("SELECT nomProduit,description,prix,delayLivraison,idImage,idUtilisateur
                         FROM produit 
                         WHERE idProduit = ?");
     $stmt->execute([$idProduit]);
@@ -121,6 +121,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/pageArticle.css">
     <title><?php echo htmlspecialchars($produit['nomProduit']); ?></title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class = "page_content">
@@ -158,7 +159,9 @@
                                 echo "<!-- Classe appliquée: star $filled -->";
                             }
                         ?>
-                        <span class="note_moyenne"><?php echo number_format($noteMoyenne, 1); ?></span>
+                        <?php if ($noteMoyenne > 0): ?>
+                            <span class="note_moyenne"><?php echo number_format($noteMoyenne, 1); ?></span>
+                        <?php endif; ?>
                     </div>
                     <div class="review_bar"></div>
                         <div class="comments">
@@ -287,15 +290,11 @@
                 
                 ?>                       
                 <div class="extra_options">
-                    <button class="more_options">...</button>
-                    <div class="more_options_menu">
-                        <?php if ($utilisateur['estVendeur'] == 1): ?>
-                            <button class="edit_info_button" onclick="window.location.href='pageModifInfoArticle.php?idProduit=<?php echo $_GET['idProduit']; ?>'">Modifier les infos de l'article</button>
-                        <?php endif; ?>
-                        <button class="view_cart_button" onclick="window.location.href='panier.php'">Voir panier</button>
-                        <!-- Ajoutez d'autres options ici -->
-                    </div>
-                    <button class="share_button">Partager</button>
+                    <?php if ($utilisateur['estVendeur'] == 1 && $utilisateur['idUtilisateur'] == $produit['idUtilisateur']): ?>
+                        <button class="edit_info_button" onclick="window.location.href='pageModifInfoArticle.php?idProduit=<?php echo $_GET['idProduit']; ?>'">
+                            <i class="fa-solid fa-pen-to-square"></i> Modifier les infos de l'article
+                        </button>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
