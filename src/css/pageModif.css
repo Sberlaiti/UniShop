@@ -1,0 +1,231 @@
+/* Styles spécifiques pour pageModifInfoArticle.php */
+@import url('../fonts/RedHatDisplay_Complete/Fonts/WEB/css/red-hat-display.css');
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Red Hat Display', sans-serif;
+}
+.container {
+    max-width: 1400px; 
+    margin: 20px auto;
+    background-color: rgb(255, 192, 120);;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 30px; 
+}
+
+header {
+    font-size: 30px;
+}
+
+header > a {
+    font-family: 'RedHatDisplay-Bold', sans-serif;
+    color: #000;
+    text-decoration: none;
+}
+
+h1 {
+    max-width: 1400px; /* Même largeur maximale que le conteneur */
+    margin: 20px auto 0 auto; /* Centrer le h1 et ajouter une marge en haut */
+    padding: 0 30px; /* Ajouter un padding pour aligner avec le conteneur */
+    font-size: 2em; /* Taille de police pour le h1 */
+    color: #333; /* Couleur du texte */
+    font-family: 'RedHatDisplay-Bold', sans-serif;
+}
+
+.formulaire {
+    display: grid;
+    grid-template-columns: 1fr 2fr; /* Informations à droite, image à gauche */
+    gap: 40px;
+}
+
+.formulaire label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+}
+
+.formulaire input[type="text"],
+.formulaire input[type="number"],
+.formulaire textarea,
+.formulaire input[type="file"],
+#promo_section input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: #f9f9f9;
+}
+
+textarea {
+    resize: vertical;
+    height: 120px;
+}
+
+.promo_button {
+    background-color: #ffa500; /* Couleur orange */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px; /* Ajouter un espace au-dessus du bouton */
+}
+
+.promo_button:hover {
+    background-color: #e69500; /* Couleur orange foncée */
+}
+.button {
+    grid-column: 1 / -1;
+    text-align: center;
+    margin-top: 40px;
+}
+
+.Modif_button {
+    background-color: #f0c14b;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.Modif_button:hover {
+    background-color: #e69500;
+}
+.cancel_button {
+    background-color: #dc3545; /* Couleur rouge */
+    color: white;
+    border: none;
+    border-radius: 5px; /* Bord arrondi */
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cancel_button:hover {
+    background-color: #c82333; /* Couleur rouge foncée */
+}
+
+.image {
+    align-self: start;
+}
+/* Styles pour le tableau des images */
+.image table {
+    width: 100%; /* Augmenter la largeur de la table à 100% de son conteneur */
+    border-collapse: collapse; /* Pour que les bordures ne se chevauchent pas */
+    margin-bottom: 20px; /* Ajouter de l'espace en bas du tableau */
+    table-layout: fixed; /* Fixer la mise en page de la table */
+    border: 1px solid #ffa500
+}
+
+.image table th, .image table td {
+    padding: 10px; /* Ajouter de l'espace à l'intérieur des cellules */
+    border: 4px solid #ffa500; ; /* Ajouter des bordures aux cellules */
+    text-align: left; /* Aligner le texte à gauche */
+    word-wrap: break-word; /* Permettre le retour à la ligne pour le contenu long */
+}
+
+.image table th {
+    background-color: #f9f9f9; /* Couleur de fond pour les en-têtes */
+    font-weight: bold; /* Mettre en gras les en-têtes */
+}
+
+.image table td img {
+    display: block;
+    margin: 0 auto; /* Centrer les images */
+}
+
+.image table td input[type="file"] {
+    width: calc(100% - 20px); /* Réduire la largeur du champ de fichier pour éviter le dépassement */
+    padding: 10px; /* Ajouter de l'espace à l'intérieur du champ de fichier */
+    margin: 10px 0;
+}
+
+.confirm_button {
+    background-color: #ffa500; /* Couleur orange */
+    color: white;
+    border: none;
+    border-radius: 5px; /* Bord arrondi */
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.confirm_button:hover {
+    background-color: #e69500; /* Couleur orange foncée */
+}
+
+/* Styles pour la modale */
+/* Styles pour la modale */
+.modal {
+    display: none; /* Masquer la modale par défaut */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+    font-family: 'RedHatDisplay-Bold', sans-serif;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 10px;
+}
+
+.close {
+    color: #fff;
+    background-color: #ffa500; /* Couleur orange */
+    border: none;
+    border-radius: 50%; /* Bord arrondi */
+    padding: 5px 10px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    float: right;
+    margin-top: -10px;
+    margin-right: -10px;
+}
+p strong{
+    color:rgb(252, 151, 37)
+}
+.close:hover,
+.close:focus {
+    background-color: #e69500; /* Couleur orange foncée */
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.confirm_button {
+    background-color: #ffa500; /* Couleur orange */
+    color: white;
+    border: none;
+    border-radius: 5px; /* Bord arrondi */
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.confirm_button:hover {
+    background-color: #e69500; /* Couleur orange foncée */
+}

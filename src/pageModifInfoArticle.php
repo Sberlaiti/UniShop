@@ -20,11 +20,11 @@ $stmt = $pdo->prepare("SELECT estVendeur FROM utilisateur WHERE idUtilisateur = 
 $stmt->execute([$idUtilisateur]);
 $utilisateur = $stmt->fetch(PDO::FETCH_ASSOC);
 
-$stmt = $pdo->prepare("SELECT idUtilisateur FROM produit WHERE idProduit = ?");
+$stmt = $pdo->prepare("SELECT idUtilisateur, nomProduit FROM produit WHERE idProduit = ?");
 $stmt->execute([$idProduit]);
 $produit = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if ($utilisateur['estVendeur'] != 0 || $produit['idUtilisateur'] != $idUtilisateur) {
+if ($utilisateur['estVendeur'] != 1 || $produit['idUtilisateur'] != $idUtilisateur) {
     echo "Vous n'êtes pas autorisé à modifier cet article.";
     exit();
 }
@@ -34,7 +34,7 @@ $requeteImages->execute([$idProduit]);
 $images = $requeteImages->fetchAll();
 
 // Récupérer les informations actuelles de l'article
-$stmt = $pdo->prepare("SELECT nomProduit, description, prix, delayLivraison, idImage FROM produit WHERE idProduit = ?");
+$stmt = $pdo->prepare("SELECT nomProduit, description, prix, delayLivraison, idImage, prixPromotion,enPromotion FROM produit WHERE idProduit = ?");
 $stmt->execute([$idProduit]);
 $article = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -43,10 +43,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $description = $_POST['description'];
     $prix = $_POST['prix'];
     $delayLivraison = $_POST['delayLivraison'];
-
-    // Mettre à jour les autres informations de l'article
-    $stmt = $pdo->prepare("UPDATE produit SET nomProduit = ?, description = ?, prix = ?, delayLivraison = ? WHERE idProduit = ?");
-    $stmt->execute([$nomProduit, $description, $prix, $delayLivraison, $idProduit]);
+    $prixPromotion = $_POST['prixPromotion'];
+    $enPromotion = ($prixPromotion > 0 && $prixPromotion < $prix) ? 1 : 0;
+    $prixPromotion = ($prixPromotion > 0 && $prixPromotion < $prix) ? $prixPromotion : null;
+    
+    $stmt = $pdo->prepare("UPDATE produit SET nomProduit = ?, description = ?, prix = ?, delayLivraison = ?, prixPromotion = ?, enPromotion = ? WHERE idProduit = ?");
+    $stmt->execute([$nomProduit, $description, $prix, $delayLivraison, $prixPromotion, $enPromotion, $idProduit]);
 
     // Vérifier si de nouvelles images ont été uploadées
     foreach ($_FILES['images']['tmp_name'] as $index => $tmpName) {
@@ -76,6 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit(); 
 }
 
+
 ?>
 
 <!DOCTYPE html>
@@ -83,18 +86,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/pageArticle.css">
-    <title>Modifier les informations de l'article</title>
+    <link rel="stylesheet" href="css/pageModif.css">
+    <link rel="icon" href="../logos/logo-png.png" type="image/icon">
+    <title><?php echo htmlspecialchars($produit['nomProduit']); ?></title>
 </head>
 <body>
     <header>
-        <a class="accueil" href="index.php">&larr;</a>
+        <a class="accueil" href="index.php">Revenir à l'acceuil</a>
     </header>
 
-    <h1>Modifier les informations de l'article</h1>
+    <h1>Modifier les informations de: <?php echo htmlspecialchars($produit['nomProduit']); ?></h1>
 
     <div class="container">
-        <form method="post" enctype="multipart/form-data" class="formulaire">
+        <form id="modifForm" method="post" enctype="multipart/form-data" class="formulaire">
             <div class="image">
                 <label for="images">Images du produit (5 maximum) :</label>
                 <table>
@@ -107,7 +111,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <?php echo htmlspecialchars($image['idImage']); ?>
                             </td>
                             <td>
-                                <input type="file" name="images[<?php echo $index; ?>]" accept="images/*">
+                                <input type="file" name="images[<?php echo $index; ?>]" accept="images/*" class="input_button">
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -129,37 +133,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 <label for="prix">Prix :</label>
                 <input type="number" id="prix" name="prix" value="<?php echo htmlspecialchars($article['prix']); ?>" required>
-
+                <span id="priceError" style="color: red; display: none;">Le prix doit etre positive.</span>
                 <label for="delayLivraison">Délai de livraison (jours) :</label>
                 <input type="number" id="delayLivraison" name="delayLivraison" value="<?php echo htmlspecialchars($article['delayLivraison']); ?>" required>
+                
+                <button type="button" class="promo_button" onclick="showPromoInput()">Ajouter promo</button>
+
+                <div id="promo_section" style="display: <?php echo ($article['enPromotion'] == 1) ? 'block' : 'none'; ?>;">
+                    <label for="prixPromotion">Prix Promotion :</label>
+                    <input type="number" id="prixPromotion" name="prixPromotion" value="<?php echo htmlspecialchars($article['prixPromotion'] ?? 0); ?>" oninput="checkPromotionPrice()">
+                    <span id="promotionError" style="color: red; display: none;">Le prix promotionnel doit être inférieur au prix normal et positive.</span>
+                </div>
 
                 <div class="button">
-                    <button type="submit">Modification du produit terminé</button>
+                    <button type="submit" class="Modif_button" onclick="showConfirmation(event)">Modification du produit terminé</button>
+                </div>
+                <div class="button">
+                    <button type="button" class="cancel_button" onclick="window.location.href='pageArticle.php?idProduit=<?php echo $_GET['idProduit']; ?>'">Annuler</button>
                 </div>
             </div>
         </form>
     </div>
     
 
+    <!-- Modale de confirmation -->
+    <div id="confirmationModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Confirmation des modifications</h2>
+            <p><strong>Nom du produit :</strong> <span id="confirmNomProduit"></span></p>
+            <p><strong>Description :</strong> <span id="confirmDescription"></span></p>
+            <p><strong>Prix :</strong> <span id="confirmPrix"></span></p>
+            <p><strong>Délai de livraison :</strong> <span id="confirmDelayLivraison"></span></p>
+            <p><strong>Prix Promotionnel :</strong> <span id="confirmPrixPromotion"></span></p>
+            <button type="button" onclick="submitForm()" class="confirm_button">Confirmer</button>
+        </div>
+    </div>
+
     <footer>
-        <div class="return_top">
-            <p id="retourHaut">Retour en haut</p>
-        </div>
-
-        <div class="logo_langue">
-            <a href="index.php"><img src="../logos/logo-png.png" width="80" height="50" alt="Logo du site"></a>
-            <select>
-                <option>Français</option>
-            </select>
-        </div>
-
-        <div class="droits">
-            <div id="liste_droits">
-                <a class="footer_lien" href="conditions.php">Conditions générales du site</a>
-                <a class="footer_lien" href="">Vos informations personnelles</a>
-            </div>
-            <span>© 2024, UniShop</span>
-        </div>            
+        <?php require_once('footer.php')?>           
     </footer>
+
+    <script src="./js/confirmModif.js"></script>
 </body>
 </html>

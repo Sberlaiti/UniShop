@@ -182,7 +182,9 @@ del{
     align-items: center;
     width: 100%;
 }
-
+#cart_form{
+    margin:0
+}
 .buy_button, .cart_button,.cart_button_delete  {
     padding: 10px 15px;
     font-size: 16px;
@@ -208,7 +210,7 @@ del{
 }
 
 .cart_button:hover {
-    background-color: #e6b93f; /* Couleur du thème actuel au survol */
+    background-color: #e69500; /* Couleur du thème actuel au survol */
 }
 
 .cart_button_delete {
@@ -223,57 +225,19 @@ del{
 .extra_options {
     position: relative;
 }
-
-.more_options {
-    padding: 10px;
+.edit_info_button {
+    background-color: #f0c14b; /* Couleur orange */
+    color: white;
     border: none;
-    background-color: #6c757d;
-    color: rgb(19, 18, 18);
-    border-radius: 5px;
+    border-radius: 5px; /* Bord arrondi */
+    padding: 10px 20px;
+    font-size: 14px;
     cursor: pointer;
-}
-
-.more_options:hover {
-    background-color: #5a6268;
-}
-
-.more_options_menu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-}
-
-.more_options_menu button {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    border: none;
-    background: none;
-    text-align: left;
-    cursor: pointer;
-}
-
-.more_options_menu button:hover {
-    background-color: #f0f0f0;
-}
-.more_options, .share_button, .favorite_button {
-    padding: 8px 12px;
-    font-size: 16px;
-    cursor: pointer;
-    background-color: #f9f9f9;
-    border: 1px solid #ccc;
-    border-radius: 5px; 
     transition: background-color 0.3s ease;
 }
 
-.more_options:hover, .share_button:hover, .favorite_button:hover {
-    background-color: #e0e0e0;
+.edit_info_button:hover {
+    background-color: #e69500; /* Couleur orange foncée */
 }
 
 /* Styles pour les commentaires */
@@ -406,95 +370,6 @@ del{
     z-index: 1000;
 }
 
-/* Styles spécifiques pour pageModifInfoArticle.php */
-.container {
-    max-width: 1400px; 
-    margin: 20px auto;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    padding: 30px; 
-}
-
-.formulaire {
-    display: grid;
-    grid-template-columns: 1fr 2fr; /* Informations à droite, image à gauche */
-    gap: 40px;
-}
-
-.formulaire label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
-    color: #333;
-}
-
-.formulaire input[type="text"],
-.formulaire input[type="number"],
-.formulaire textarea,
-.formulaire input[type="file"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 14px;
-    background-color: #f9f9f9;
-}
-
-textarea {
-    resize: vertical;
-    height: 120px;
-}
-
-.button {
-    grid-column: 1 / -1;
-    text-align: center;
-}
-
-.button button {
-    background-color: #28a745;
-    color: #fff;
-    padding: 10px 20px;
-    font-size: 16px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.button button:hover {
-    background-color: #218838;
-}
-
-.image {
-    align-self: start;
-}
-/* Styles pour le tableau des images */
-.image table {
-    width: 100%;
-    border-collapse: collapse; /* Pour que les bordures ne se chevauchent pas */
-    margin-bottom: 20px; /* Ajouter de l'espace en bas du tableau */
-}
-
-.image table th, .image table td {
-    padding: 10px; /* Ajouter de l'espace à l'intérieur des cellules */
-    border: 1px solid #ccc; /* Ajouter des bordures aux cellules */
-    text-align: left; /* Aligner le texte à gauche */
-}
-
-.image table th {
-    background-color: #f9f9f9; /* Couleur de fond pour les en-têtes */
-    font-weight: bold; /* Mettre en gras les en-têtes */
-}
-
-.image table td img {
-    display: block;
-    margin: 0 auto; /* Centrer les images */
-}
-
-.image table td input[type="file"] {
-    width: 100%; /* Faire en sorte que le champ de fichier prenne toute la largeur */
-}
 
 
 /* Responsive design */
