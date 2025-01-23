@@ -34,7 +34,7 @@ $requeteImages->execute([$idProduit]);
 $images = $requeteImages->fetchAll();
 
 // Récupérer les informations actuelles de l'article
-$stmt = $pdo->prepare("SELECT nomProduit, description, prix, delayLivraison, idImage FROM produit WHERE idProduit = ?");
+$stmt = $pdo->prepare("SELECT nomProduit, description, prix, delayLivraison, idImage, prixPromotion,enPromotion FROM produit WHERE idProduit = ?");
 $stmt->execute([$idProduit]);
 $article = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -43,10 +43,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $description = $_POST['description'];
     $prix = $_POST['prix'];
     $delayLivraison = $_POST['delayLivraison'];
-
-    // Mettre à jour les autres informations de l'article
-    $stmt = $pdo->prepare("UPDATE produit SET nomProduit = ?, description = ?, prix = ?, delayLivraison = ? WHERE idProduit = ?");
-    $stmt->execute([$nomProduit, $description, $prix, $delayLivraison, $idProduit]);
+    $prixPromotion = $_POST['prixPromotion'];
+    $enPromotion = ($prixPromotion > 0 && $prixPromotion < $prix) ? 1 : 0;
+    $prixPromotion = ($prixPromotion > 0 && $prixPromotion < $prix) ? $prixPromotion : null;
+    
+    $stmt = $pdo->prepare("UPDATE produit SET nomProduit = ?, description = ?, prix = ?, delayLivraison = ?, prixPromotion = ?, enPromotion = ? WHERE idProduit = ?");
+    $stmt->execute([$nomProduit, $description, $prix, $delayLivraison, $prixPromotion, $enPromotion, $idProduit]);
 
     // Vérifier si de nouvelles images ont été uploadées
     foreach ($_FILES['images']['tmp_name'] as $index => $tmpName) {
@@ -75,6 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header("Location: pageArticle.php?idProduit=$idProduit");
     exit(); 
 }
+
 
 ?>
 
@@ -130,12 +133,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 <label for="prix">Prix :</label>
                 <input type="number" id="prix" name="prix" value="<?php echo htmlspecialchars($article['prix']); ?>" required>
-
+                <span id="priceError" style="color: red; display: none;">Le prix doit etre positive.</span>
                 <label for="delayLivraison">Délai de livraison (jours) :</label>
                 <input type="number" id="delayLivraison" name="delayLivraison" value="<?php echo htmlspecialchars($article['delayLivraison']); ?>" required>
+                
+                <button type="button" class="promo_button" onclick="showPromoInput()">Ajouter promo</button>
+
+                <div id="promo_section" style="display: <?php echo ($article['enPromotion'] == 1) ? 'block' : 'none'; ?>;">
+                    <label for="prixPromotion">Prix Promotion :</label>
+                    <input type="number" id="prixPromotion" name="prixPromotion" value="<?php echo htmlspecialchars($article['prixPromotion'] ?? 0); ?>" oninput="checkPromotionPrice()">
+                    <span id="promotionError" style="color: red; display: none;">Le prix promotionnel doit être inférieur au prix normal et positive.</span>
+                </div>
 
                 <div class="button">
-                    <button type="submit" class="Modif_button" onclick="showConfirmation()">Modification du produit terminé</button>
+                    <button type="submit" class="Modif_button" onclick="showConfirmation(event)">Modification du produit terminé</button>
                 </div>
                 <div class="button">
                     <button type="button" class="cancel_button" onclick="window.location.href='pageArticle.php?idProduit=<?php echo $_GET['idProduit']; ?>'">Annuler</button>
@@ -154,6 +165,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <p><strong>Description :</strong> <span id="confirmDescription"></span></p>
             <p><strong>Prix :</strong> <span id="confirmPrix"></span></p>
             <p><strong>Délai de livraison :</strong> <span id="confirmDelayLivraison"></span></p>
+            <p><strong>Prix Promotionnel :</strong> <span id="confirmPrixPromotion"></span></p>
             <button type="button" onclick="submitForm()" class="confirm_button">Confirmer</button>
         </div>
     </div>

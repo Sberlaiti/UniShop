@@ -67,6 +67,3 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-
-/*<button type="submit" name="ajout_panier" class="cart_button" id="cart_button">Ajouter au Panier</button>
-*/

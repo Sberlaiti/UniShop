@@ -13,7 +13,7 @@
 
 
     $idProduit = $_GET['idProduit'];
-    $stmt = $pdo->prepare("SELECT nomProduit,description,prix,delayLivraison,idImage,idUtilisateur
+    $stmt = $pdo->prepare("SELECT nomProduit,description,prix,delayLivraison,idImage,idUtilisateur,enPromotion,prixPromotion
                         FROM produit 
                         WHERE idProduit = ?");
     $stmt->execute([$idProduit]);
@@ -244,7 +244,11 @@
                 <?php
                     echo "<h1 class=product_name>" . htmlspecialchars($produit['nomProduit']) . "</h1>";
                     echo "<p class=product_description>". htmlspecialchars($produit['description']). "</p>";
-                    echo "<p class=product_price>". htmlspecialchars($produit['prix']). "€". "</p>";
+                    if ($produit['enPromotion'] && $produit['prixPromotion'] !== null) {
+                        echo "<p class=product_price>". htmlspecialchars($produit['prixPromotion']). "€ <del>" . htmlspecialchars($produit['prix']) . "€</del>" . "</p>";
+                    } else {
+                        echo "<p class=product_price>". htmlspecialchars($produit['prix']). "€". "</p>";
+                    }
                     echo "<p class=product_delivery>". "Delai de livraison: ". htmlspecialchars($produit['delayLivraison']). " Jours". "</p>";
                 ?>
             
@@ -277,8 +281,7 @@
 
                 <div class="extra_options">
                     <?php
-                        if (isset($_SESSION['user']['idUtilisateur'])) {
-                            $utilisateur = $_SESSION['user'];
+                        if($idUtilisateur){
                             if ($utilisateur['estVendeur'] == 1 && $utilisateur['idUtilisateur'] == $produit['idUtilisateur']) {
                                 echo '<button class="edit_info_button" onclick="window.location.href=\'pageModifInfoArticle.php?idProduit=' . $_GET['idProduit'] . '\'">';
                                 echo '<i class="fa-solid fa-pen-to-square"></i> Modifier les infos de l\'article';
