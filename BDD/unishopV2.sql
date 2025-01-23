@@ -86,8 +86,8 @@ CREATE TABLE IF NOT EXISTS `commande` (
   `idCommande` int NOT NULL AUTO_INCREMENT,
   `idUtilisateur` int NOT NULL,
   `dateAchat` date NOT NULL,
-  `adresse` varchar(130) NOT NULL,
-  `telephone` varchar(15) NOT NULL,
+  `adresse` varchar(130) DEFAULT NULL,
+  `telephone` varchar(15) DEFAULT NULL,
   `idPromo` int DEFAULT NULL,
   `totale` double DEFAULT NULL,
   `modePaiement` varchar(130) DEFAULT NULL,
@@ -272,7 +272,7 @@ CREATE TABLE IF NOT EXISTS `produitscommande` (
   `idCommande` int NOT NULL,
   `quantitee` int NOT NULL,
   `prixUnitaire` double NOT NULL,
-  PRIMARY KEY (`idCommande`),
+  PRIMARY KEY (`idCommande`, `idProduit`),
   KEY `fk_produitsCommande_commande` (`idCommande`),
   KEY `fk_produitsCommande_produit` (`idProduit`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

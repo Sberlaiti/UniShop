@@ -7,5 +7,6 @@
 </head>
 <body>
     <p>Paiement confirmé, vous recevrez votre commande prochainement</p>
+    <a href="index.php">Retour à l'accueil</a>
 </body>
 </html>

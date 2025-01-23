@@ -26,24 +26,27 @@
         }
     } 
 
+    require_once('createOrder.php');
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['payment_button'])) {
         $paymentMethod = $_POST['selectedPaymentMethod'] ?? 'creditCard';
     
         switch ($paymentMethod) {
             case 'applePay':
+                place_order($pdo, 'applePay', $_SESSION['total']);
                 header('Location: paiementConfirme.php');
                 break;
     
             case 'googlePay':
+                place_order($pdo, 'googlePay', $_SESSION['total']);
                 header('Location: paiementConfirme.php');
                 break;
     
             case 'paypal':
+                place_order($pdo, 'paypal', $_SESSION['total']);
                 header('Location: paiementConfirme.php');
                 break;
-    
-            case 'creditCard':
+
             default:
                 $payment_error = verif_card($_POST['cardName'], $_POST['cardNumber'], $_POST['cardDate'], $_POST['cardCVV']);
                 break;

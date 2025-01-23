@@ -5,7 +5,13 @@
 
     require_once('./header02.php');
     require_once('./php/fetchCart.php');
+    require_once('./php/verify_promoCode.php');
     $panier = get_cart($pdo);
+
+    $coefficient = 0;
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['discount_code'])) {
+        $coefficient = verify_promoCode($pdo, $_SESSION['user']['idUtilisateur'], $_POST['discount_code']);
+    }
 
 ?>
 
@@ -36,13 +42,21 @@
                             $article = $stmt->fetch();
                     ?>
                             <div class="cartItems">
-                                <img src="./images/frenchFlag.png" alt="Image de l'article">
+                                <?php 
+                                    $sql_requete = "SELECT lien FROM image WHERE idImage = :idImage";
+                                    $stmt = $pdo->prepare($sql_requete);
+                                    $stmt->execute(['idImage' => $article['idImage']]);
+                                    $image = $stmt->fetch();
+
+                                    echo "<img src='".$image['lien']."' alt='Image de l'article'>";
+                                ?>
                                 <!-- Deplacer le prix et le bouton en bas -->
                                 <div class="cartItems-infos">
                                     <!-- Créer javascript pour ajouter au favoris et supprimer du panier -->
                                     <div class="cartItems-infos-name">
                                         <!-- Créer un lien vers la page de l'article -->
-                                        <a><?php echo $article['nomProduit']; ?></a>
+
+                                        <?php echo "<a href='pageArticle.php?idProduit=".$article['idProduit']."'>".$article['nomProduit']."</a>"; ?>
                                         
                                         <?php
                                             if ($article['idUtilisateur'] == 1) {
@@ -63,11 +77,10 @@
                                         </div>
                                     </div>
                     
-                                    <!-- <p class="description"><?php echo $article['description']; ?></p> -->
+                                    <p class="description"><?php echo $article['description']; ?></p>
                                     
                                     <!-- Verifier la disponibilité du produit -->
                                     
-                                    <!-- Modifier le prix en fonction de la quantité -->
                                     <div class="cartItems-infos-price">
                                         <p><?php
                                             if($article['enPromotion'] && $article['prixPromotion'] !== null) {
@@ -80,7 +93,6 @@
                                         <div class="amount">
                                             <button class="minus" data-id=<?php echo $article['idProduit']?>>-</button>
                                             <?php
-                                                // Afficher la quantité de l'article
                                                 echo "<p>".$produit['quantitee']."</p>";
                                             ?>
                                             <button class="plus" data-id=<?php echo $article['idProduit']?>>+</button>
@@ -121,13 +133,19 @@
 
                     <div class="cartSummery_Promo">
                         <p>Économisé : </p>
-                        <p> - 18%</p>
+                        <p><?php 
+                            if ($coefficient > 0) {
+                                echo $coefficient. " %";
+                            } else {
+                                echo "Aucun code de réduction appliqué";
+                            }
+                        ?></p>
                     </div>
 
                     <div class="cartSummery_Total">
                         <p>Total : </p>
                         <p><?php 
-                            $total = $total - ($total * 0.18);
+                            $total = $total - ($total * ($coefficient / 100));
                             $total = number_format($total, 2);
                             echo $total; 
                             ?> €</p>
@@ -142,7 +160,7 @@
                 </div>
 
                 <div class="cartSummery_DiscountCode">
-                    <form action="apply_discount.php" method="POST">
+                    <form method="POST">
                         <label for="discount_code">Code de réduction :</label>
                         <input type="text" id="discount_code" name="discount_code" placeholder="Entrez votre code">
                         <button type="submit">Appliquer</button>
