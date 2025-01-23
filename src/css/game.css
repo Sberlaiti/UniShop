@@ -37,15 +37,11 @@ body {
 
 .pointer{
     position: absolute;
-    top: 27%;
+    top: 29%;
     left: 50%;
     transform: translateX(-50%);
     color: red;
-}
-
-.pointer::before{
-    content: '\1F817';
-    font-size: 50px;
+    font-size: 40px;
 }
 
 #point{

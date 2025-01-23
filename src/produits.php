@@ -219,7 +219,7 @@
             $stmt->execute(['idUtilisateur' => $idUser]);
             $produitsUser = $stmt->fetchAll();
             ?>
-            <a href="produits.php" class="retour"><i class="fas fa-arrow-left"></i> Retour</a>
+            <a href="produits.php" class="retour"><i class="fas fa-arrow-left"></i> Liste des produits</a>
             <section class="produitUser">
                 <?php
                     if(count($produitsUser) > 0){
