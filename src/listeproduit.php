@@ -15,6 +15,27 @@
             require("header02.php");
             $connexion = new PDO('mysql:host=localhost;dbname=unishop', 'root', '');
             $connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            if (isset($_SESSION['user']['idUtilisateur'])) {
+            $userId = $_SESSION['user']['idUtilisateur'];
+
+            $query = $connexion->prepare("SELECT idPanier FROM panier WHERE idUtilisateur = :userId");
+            $query->bindParam(':userId', $userId, PDO::PARAM_INT);
+            $query->execute();
+            $result = $query->fetch(PDO::FETCH_ASSOC);
+
+            if ($result) {
+            $cartId = $result['idPanier'];
+            } else {
+            $insertQuery = $connexion->prepare("INSERT INTO panier (idUtilisateur) VALUES (:userId)");
+            $insertQuery->bindParam(':userId', $userId, PDO::PARAM_INT);
+            $insertQuery->execute();
+
+            $cartId = $connexion->lastInsertId();
+            }
+            } else {
+            $cartId = null;
+            }
         ?>
     </section>
 
@@ -32,9 +53,8 @@
         </select>-->
         <br><label for="oder">ordre :</label>
         <select id="order" name="order">
-            <option value="1">aucun</option>
-            <option value="2">decroissant</option>
-            <option value="3">croissant</option>
+            <option value="1">decroissant</option>
+            <option value="2">croissant</option>
         </select>
         
         <?php
@@ -167,13 +187,23 @@
                 }
             });
         }
-
-        
+       
+        <?php if (isset($_SESSION['user']['idUtilisateur'])): ?>
+        const idUser = <?php echo json_encode($_SESSION['user']['idUtilisateur']); ?>;
+        <?php else: ?>
+        const idUser = null;
+        <?php endif; ?>
+        <?php if (isset($cartId)): ?>
+        const idCart = <?php echo json_encode($cartId); ?>;
+        <?php else: ?>
+        const idCart = null;
+        <?php endif; ?>
 
         function addToCart(productId) {
             const counter = document.getElementById(`nbchoose_${productId}`);
             let nbSelected = parseInt(counter.textContent);
-            const idUser = 5555;
+            idUser;
+            idCart;
 
             $.ajax({
                 url: 'http://localhost/unishop/src/addToCart.php',
@@ -181,8 +211,10 @@
                 data: {
                     productId: productId,
                     quantity: nbSelected,
-                    userId: idUser
+                    userId: idUser,
+                    cartId: idCart
                 },
+                
                 success: function(response) {
                     alert('Produit ajouté au panier avec succès !');
                     console.log(response);
@@ -193,9 +225,6 @@
                 }
             });
         }
-
-
-
     </script>
     
     <section id="prod">

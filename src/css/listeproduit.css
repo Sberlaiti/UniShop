@@ -6,12 +6,12 @@ body
 
 .product
 {
-    width: 355px;
-    height: 440px;
+    width: 365px;
+    height: 460px;
     border: 2px solid black;
     border-radius: 10px;
     margin: 10px 0px 0px 10px;
-    background-color: lightgrey;
+    background-color: #F7AF60;
 }
 
 button
