@@ -370,6 +370,8 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `prenom` varchar(130) NOT NULL,
   `pseudo` varchar(130) NOT NULL,
   `mail` varchar(400) NOT NULL,
+  `adresse` varchar(130) DEFAULT NULL,
+  `telephone` varchar(15) DEFAULT NULL,
   `password` varchar(255) NOT NULL,
   `estVendeur` tinyint(1) NOT NULL DEFAULT '0',
   `admin` tinyint(1) NOT NULL DEFAULT '0',
