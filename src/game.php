@@ -78,7 +78,7 @@
                 }
             ?>
             <div id="point"></div>
-            <div class='pointer'></div>
+            <div class='pointer'><i class="fa fa-arrow-down"></i></div>
             <div class='wheel' id='wheel'>
                 <div class="winning_segment" id="one">Gagnant</div>
                 <div class="segment" id="two">Perdant</div>

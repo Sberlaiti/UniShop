@@ -152,6 +152,11 @@ del{
     color: #828080;
     font-size: 60%;
 }
+
+.retour:hover{
+    color: orange;
+    text-decoration: underline;
+}
 /* Fin de la partie affichage des produits */
 
 
