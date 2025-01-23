@@ -37,7 +37,7 @@
     $images = $stmt->fetchAll(PDO::FETCH_COLUMN);
     
     $stmt = $pdo->prepare("
-    SELECT utilisateur.nom, avis.contenu, avis.idAvis, avis.note
+    SELECT utilisateur.nom, avis.contenu, avis.idAvis, avis.note, avis.dateCreation, avis.idUtilisateur
     FROM avis
     JOIN utilisateur ON avis.idUtilisateur = utilisateur.idUtilisateur
     WHERE avis.idProduit = ?
@@ -54,7 +54,7 @@
         $note = $_POST['note'];
     
         
-        $stmt = $pdo->prepare("INSERT INTO avis (idProduit, idUtilisateur, contenu, note) VALUES (?, ?, ?, ?)");
+        $stmt = $pdo->prepare("INSERT INTO avis (idProduit, idUtilisateur, contenu, note, dateCreation) VALUES (?, ?, ?, ?, NOW())");
         $stmt->execute([$idProduit, $idUtilisateur, $nouveauAvis, $note]);
     
         
@@ -175,20 +175,20 @@
                                 <?php foreach ($avis as $avisItem): ?>
                                     <div class="comment">
                                         <strong class="author">
-                                            </i><?php echo htmlspecialchars($avisItem['nom']); ?>
+                                            <?php echo htmlspecialchars($avisItem['nom']); ?>
                                             <div class="user_star_rating">
                                                 <?php
                                                     // Afficher les étoiles en fonction de la note de l'utilisateur
                                                     for ($i = 1; $i <= 5; $i++) {
-                                                        $filled = $i <= $noteExistant ? 'filled' : '';
+                                                        $filled = $i <= $avisItem['note'] ? 'filled' : '';
                                                         echo "<span class='star $filled' data-value='$i'>&#9733;</span>";
-                                                        echo "<!-- Classe appliquée: star $filled -->";
                                                     }
                                                 ?>
                                             </div>
                                         </strong>
                                         <p class="comment_text"><?php echo htmlspecialchars($avisItem['contenu']); ?></p>
-                                        <?php if ($_SESSION['user']['idUtilisateur'] == $idUtilisateur && isset($avisItem['idAvis'])): ?>
+                                        <p class="comment_date">Posté le : <?php echo htmlspecialchars($avisItem['dateCreation']); ?></p>
+                                        <?php if ($idUtilisateur && $_SESSION['user']['idUtilisateur'] == $avisItem['idUtilisateur']): ?>
                                             <div class="del_button">
                                                 <form action="" method="POST">
                                                     <input type="hidden" name="idAvis" value="<?php echo htmlspecialchars($avisItem['idAvis']); ?>">
