@@ -284,6 +284,7 @@ del{
     color: #000;
     font-family: 'Red Hat Display', sans-serif;
     margin-right: 10px;
+    margin-left: 10px; 
 }
 
 .comment_text {
