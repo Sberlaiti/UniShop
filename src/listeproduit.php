@@ -52,9 +52,9 @@
             ?>
         </select>-->
         <br><label for="oder">ordre :</label>
-        <select id="order" name="order">
-            <option value="1">decroissant</option>
-            <option value="2">croissant</option>
+        <select id="order" name="order" onchange="sortProducts()">
+            <option value="2">decroissant</option>
+            <option value="3">croissant</option>
         </select>
         
         <?php
@@ -99,6 +99,32 @@
                 val--;
                 counter.textContent = val;
             }
+        }
+
+        function sortProducts() {
+            const order = document.getElementById('order').value;
+            const products = Array.from(document.querySelectorAll('.product'));
+
+            if (order === '1') {
+            console.log("Aucun tri appliqué");
+            return;
+            }
+
+            products.sort((a, b) => {
+            const priceA = parseFloat(a.getAttribute('data-price'));
+            const priceB = parseFloat(b.getAttribute('data-price'));
+
+            if (order === '2') {
+            return priceA - priceB;
+            } else if (order === '3') {
+            return priceB - priceA;
+            }
+            });
+
+            const container = document.getElementById('prod');
+            container.innerHTML = '';
+
+            products.forEach(product => container.appendChild(product));
         }
 
         function categorie(j) {
