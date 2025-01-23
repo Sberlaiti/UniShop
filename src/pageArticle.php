@@ -13,11 +13,7 @@
 
 
     $idProduit = $_GET['idProduit'];
-<<<<<<< HEAD
-    $stmt = $pdo->prepare("SELECT nomProduit,description,prix,delayLivraison,idImage, prixPromotion, enPromotion
-=======
     $stmt = $pdo->prepare("SELECT nomProduit,description,prix,delayLivraison,idImage,idUtilisateur,enPromotion,prixPromotion
->>>>>>> page_article
                         FROM produit 
                         WHERE idProduit = ? AND (enPromotion = 1 OR enPromotion = 0)");
     $stmt->execute([$idProduit]);
