@@ -49,6 +49,10 @@
 
             default:
                 $payment_error = verif_card($_POST['cardName'], $_POST['cardNumber'], $_POST['cardDate'], $_POST['cardCVV']);
+                if ($payment_error >= 0) {
+                    place_order($pdo, 'creditCard', $_SESSION['total']);
+                    header('Location: paiementConfirme.php');
+                }
                 break;
         }
     }
