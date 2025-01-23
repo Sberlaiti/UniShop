@@ -70,7 +70,7 @@
                                             }
                                         ?>
                                         
-                                        <a class="cartItems-infos-seller" href="produits.php?idUtilisateur=<?php echo $article['idUtilisateur']; ?>"><button> Vendeur : <?php echo $pseudo_Vendeur; ?></button></a>
+                                        <a class="cartItems-infos-seller" href="produits.php?idUtilisateur=<?php echo $article['idUtilisateur']; ?>"><button> Vendeur : <?php echo $pseudo_Vendeur['pseudo']; ?></button></a>
                                         <div class="cartItems-infos-name-ope">
                                                 <button class="addFavourites" data-id=<?php echo $article['idProduit']?>><i class="fa-duotone fa-solid fa-heart"></i></button>
                                                 <button class="delete" data-id=<?php echo $article['idProduit']?>><i class="fa-solid fa-trash"></i></button>
