@@ -40,15 +40,6 @@ CREATE TABLE IF NOT EXISTS `avis` (
   KEY `fk_avis_produit` (`idProduit`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6667 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `avis`
---
-
--- --------------------------------------------------------
-
---
--- Table structure for table `categorie`
---
 
 -- --------------------------------------------------------
 
@@ -93,24 +84,24 @@ INSERT INTO `categorie` (`idCategorie`, `nomCategorie`, `idImage`) VALUES
 DROP TABLE IF EXISTS `commande`;
 CREATE TABLE IF NOT EXISTS `commande` (
   `idCommande` int NOT NULL AUTO_INCREMENT,
+  `idUtilisateur` int NOT NULL,
   `dateAchat` date NOT NULL,
   `adresse` varchar(130) NOT NULL,
   `telephone` varchar(15) NOT NULL,
-  `idUtilisateur` int NOT NULL,
   `idPromo` int DEFAULT NULL,
-  `idProduit` int NOT NULL,
+  `totale` double DEFAULT NULL,
+  `modePaiement` varchar(130) DEFAULT NULL,
   PRIMARY KEY (`idCommande`),
   KEY `fk_commande_utilisateur` (`idUtilisateur`),
-  KEY `fk_commande_promo` (`idPromo`),
-  KEY `fk_produit_commande` (`idProduit`)
+  KEY `fk_commande_promo` (`idPromo`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1002 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `commande`
 --
 
-INSERT INTO `commande` (`idCommande`, `dateAchat`, `adresse`, `telephone`, `idUtilisateur`, `idPromo`, `idProduit`) VALUES
-(1001, '2024-11-11', '123 Rue de Paris', '1234567890', 3333, NULL, 0);
+INSERT INTO `commande` (`idCommande`, `idUtilisateur`, `dateAchat`, `adresse`, `telephone`, `idPromo`, `totale`, `modePaiement`) VALUES
+(1001, 3333, '2024-11-11', '123 Rue de Paris', '1234567890', NULL, 10000, 'Carte bancaire');
 
 -- --------------------------------------------------------
 
@@ -132,12 +123,12 @@ CREATE TABLE IF NOT EXISTS `image` (
 --
 
 INSERT INTO `image` (`idImage`, `lien`, `idProduit`) VALUES
-(1, './images/animaux.jpg', 4),
-(2, './images/telephonie.jpg', 4),
-(3, '../articles/preview-2.jpeg', 4),
-(4, '../articles/preview-5.jpeg', 4),
-(5, '../articles/preview-4.jpeg', 4),
-(6, '../articles/preview-3.jpeg', 4),
+(1, './images/animaux.jpg', 0),
+(2, './images/telephonie.jpg', 0),
+(3, '../articles/preview-2.jpeg', 0),
+(4, '../articles/preview-5.jpeg', 0),
+(5, '../articles/preview-4.jpeg', 0),
+(6, '../articles/preview-3.jpeg', 0),
 (7, '../articles/preview.jpeg', 0),
 (8, '../articles/preview-6.jpeg', 0),
 (9, '../articles/preview-7.jpeg', 0),
@@ -157,7 +148,35 @@ INSERT INTO `image` (`idImage`, `lien`, `idProduit`) VALUES
 (23, './images/jeux.jpg', 0),
 (24, './images/livre.jpg', 0),
 (25, './images/parfum.jpg', 0),
-(26, './images/sneaker.jpeg', 0);
+(26, './images/sneaker.jpeg', 0),
+(28, '../articles/chaiseGaming1.jpg', 3),
+(29, '../articles/chaiseGaming2.jpg', 3),
+(30, '../articles/chaiseGaming3.jpg', 3),
+(31, '../articles/chaiseGaming4.jpg', 3),
+(32, '../articles/chaiseGaming5.jpg', 3),
+(33, '../articles/souris1.jpg', 1),
+(34, '../articles/souris2.jpg', 1),
+(35, '../articles/souris3.jpg', 1),
+(36, '../articles/souris4.jpg', 1),
+(37, '../articles/souris5.jpg', 1),
+(38, '../articles/nourriture1.jpg', 2),
+(39, '../articles/nourriture2.jpg', 2),
+(40, '../articles/nourriture3.jpg', 2),
+(41, '../articles/nourriture3.jpg', 2),
+(42, '../articles/nourriture4.jpg', 2),
+(43, '../articles/iphone1.jpg', 6),
+(44, '../articles/iphone2.jpg', 6),
+(45, '../articles/iphone3.jpg', 6),
+(46, '../articles/iphone4.jpg', 6),
+(47, '../articles/spiderman1.jpg', 4),
+(48, '../articles/spiderman2.jpg', 4),
+(49, '../articles/spiderman3.jpg', 4),
+(50, '../articles/spiderman4.jpg', 4),
+(51, '../articles/spiderman5.jpg', 4),
+(52, '../articles/horizon1.jpg', 5),
+(53, '../articles/horizon2.jpg', 5),
+(54, '../articles/horizon3.jpg', 5),
+(55, '../articles/horizon4.jpg', 5);
 
 -- --------------------------------------------------------
 
@@ -182,13 +201,14 @@ CREATE TABLE IF NOT EXISTS `panier` (
 DROP TABLE IF EXISTS `produit`;
 CREATE TABLE IF NOT EXISTS `produit` (
   `idProduit` int NOT NULL AUTO_INCREMENT,
-  `nomProduit` varchar(130) NOT NULL,
-  `description` varchar(500) NOT NULL,
-  `prix` double NOT NULL,
+  `nomProduit` varchar(130) COLLATE utf8mb4_general_ci NOT NULL,
+  `description` varchar(500) COLLATE utf8mb4_general_ci NOT NULL,
+  `prix` double(10,2) NOT NULL,
+  `prixPromotion` double(5,2) DEFAULT NULL,
   `delayLivraison` int NOT NULL,
-  `appartientVendeur` tinyint(1) NOT NULL,
+  `enPromotion` tinyint(1) NOT NULL DEFAULT '0',
   `idImage` int NOT NULL,
-  `dateCreation` date DEFAULT NULL,
+  `dateCreation` date NOT NULL,
   `idUtilisateur` int NOT NULL,
   `IdCategorie` int NOT NULL,
   PRIMARY KEY (`idProduit`),
@@ -201,15 +221,44 @@ CREATE TABLE IF NOT EXISTS `produit` (
 -- Dumping data for table `produit`
 --
 
-INSERT INTO `produit` (`idProduit`, `nomProduit`, `description`, `prix`, `delayLivraison`, `appartientVendeur`, `idImage`, `dateCreation`, `idUtilisateur`, `IdCategorie`) VALUES
-(4, 'Botte', 'Une chaussure haute', 1000000.3, 5, 0, 1, '2024-11-01', 1, 5),
-(11, 'Botte', 'Une chaussure haute', 36.3, 5, 0, 1, '2024-11-01', 1, 5),
-(12, 'Botte', 'Une chaussure haute', 36.3, 5, 0, 1, '2024-11-01', 1, 5),
-(13, 'Botte', 'Une chaussure haute', 36.3, 5, 0, 1, '2024-11-01', 1, 5),
-(14, 'Botte', 'Une chaussure haute', 36.3, 5, 0, 1, '2024-11-01', 1, 5),
-(15, 'Botte', 'Une chaussure haute', 36.3, 5, 0, 1, '2024-11-01', 1, 5),
-(16, 'Chat à vendre', 'Une chaussure haute', 36.3, 5, 0, 1, '2024-11-01', 1, 5),
-(17, 'Botte', 'Une chaussure haute', 36.3, 5, 0, 1, '2024-11-01', 1, 5);
+INSERT INTO `produit` (`idProduit`, `nomProduit`, `description`, `prix`, `prixPromotion`, `delayLivraison`, `enPromotion`, `idImage`, `dateCreation`, `idUtilisateur`, `IdCategorie`) VALUES
+(1, 'Logitech G203 Souris Gaming ', 'Capteur 8 000 PPP: le capteur gaming répond précisément à vos mouvements. Personnalisez les paramètres avec le logiciel gaming Logitech G HUB en fonction de la sensibilité que vous souhaitez et passez facilement d\'une résolution à l\'autre, parmi 5 paramètres\r\n- LIGHTSYNC RVB coloré: jouez en couleur avec notre technologie LIGHTSYNC RVB la plus vibrante, grâce à des effets de vagues personnalisables sur environ 16,8 millions de couleurs. Installez le logiciel Logitech G HUB pour choisir parmi d', 44.99, NULL, 5, 0, 33, '2025-01-20', 1, 11),
+(2, 'Franklin – Nourriture pour Chien Stérilisé', 'Voilà la recette idéale pour les chiens en quête d’équilibre! Au menu : du poulet, une viande complète riche en protéines pour avoir la pêche, des fruits et des légumes pour faire le plein de vitamines, des minéraux et des prébiotiques pour renforcer la santé intestinale.\r\n- 70% DE POULET : une protéine de grande qualité pour ses muscles de carnivore, permettant un bon équilibre nutritionnel\r\n- UN TAUX DE PROTÉINES ÉLEVÉ : Des croquettes chien complètes et hautement digestibles avec un taux de', 24.90, NULL, 5, 0, 38, '2025-01-20', 1, 1),
+(3, 'GTPLAYER Chaise Gaming', 'Matériaux de haute qualité : La chaise gaming est recouverte d\'un tissu doux au lieu de cuir. Le tissu technique a un aspect unique, présente des caractéristiques telles que la résistance à l\'usure, aux rayures, à l\'eau et aux alcalis, et est également ignifuge, imperméable et respirant. La performance anti-âge est excellente et la durée de vie du produit du chiffon technique peut atteindre 5 à 10 ans.\n- Accoudoirs réglables : Les bras de chaise gaming s\'adaptent bien même en position allongé', 159.99, 90.98, 5, 1, 28, '2025-01-20', 1, 11),
+(4, 'Sony, Marvel\'s Spider-Man 2 PS5', 'Jeu PS5 d\'action : Jouez avec deux Spider-Man (Peter Parker et Miles Morales), affrontez de nouveaux ennemis et partez à l’aventure dans un New York de Marvel plus vaste que jamais (nouveaux quartiers, nouveaux lieux)\nDes graphismes éblouissants en 4K et en HDR reproduits avec un incroyable souci de détail jusqu\'aux reflets sur les bâtiments\nDes sensations inédites grâce au retour haptique et aux gâchettes adaptatives de votre manette DualSense : ressentez chaque coup que vous portez ou chaque t', 79.99, 50.99, 5, 1, 47, '2025-01-22', 1, 9),
+(5, 'Sony, Horizon Forbidden West PS5', 'Jeu PS5 de rôle et d\'action-aventure dans un immense monde ouvert aussi sublime que menaçant, avec des personnages éclectiques et saisissants au coeur d\'une histoire riche en émotions\r\nUn univers fait de forêts verdoyantes et de villes subermgées réhaussé par des graphismes éblouissants en 4K et en HDR : un souci du détail incroyable des brins d\'herbe jusqu\'au sommet des montagnes\r\nExpérience de jeu intense grâce au retour haptique et aux gâchettes adaptatives de votre manette DualSense PS5 : re', 39.90, NULL, 5, 0, 52, '2025-01-21', 1, 9),
+(6, 'Apple iPhone 16 (128 Go) - Noir', 'COMMANDE DE L’APPAREIL PHOTO. LE CONTRÔLE À PORTÉE DE MAIN – Commande de l’appareil photo vous offre un accès plus rapide aux outils photo et vidéo, tels que le zoom ou la profondeur de champ, pour vous permettre de prendre la photo parfaite en un temps record.\r\nSI PRÈS, MÊME DE LOIN – La caméra ultra grand-angle améliorée, avec mise au point automatique, vous permet de prendre des photos et des vidéos macro extrêmement détaillées. Utilisez la caméra Fusion 48 Mpx pour des images haute résolutio', 919.00, NULL, 5, 0, 43, '2025-01-21', 1, 3),
+(7, 'Veste UniShop', 'Veste simple pour soutenir notre marque.', 39.99, NULL, 5, 0, 7, '2025-01-01', 1, 4),
+(8, 'Stylo UniShop - Noir', 'Stylo noir de la marque UniShop pour soutenir notre marque.', 1.00, NULL, 5, 0, 3, '2025-01-03', 1, 4),
+(9, 'Clé USB UniShop - 32 Go USB 3.2', 'Clé USB en USB 3.2 avec un stockage de 32 Go de la marque UniShop pour soutenir notre marque.', 5.99, 1.50, 5, 1, 6, '2025-01-03', 1, 4),
+(10, 'Tapis de souris UniShop', 'Tapis de souris UniShop d\'un diamètre de 10 cm pour soutenir notre marque.', 0.50, NULL, 5, 0, 5, '2025-01-01', 1, 4),
+(11, 'Tee-Shirt UniShop - Noir', 'Tee-Shirt UniShop noir avec taille : XS - X - L - S - M pour soutenir notre marque.', 10.50, NULL, 5, 0, 4, '2025-01-04', 1, 4),
+(12, 'Casquette UniShop - Blanc', 'Casquette UniShop blanche pour soutenir notre marque.', 5.99, NULL, 5, 0, 8, '2025-01-05', 1, 4),
+(13, 'Sac UniShop - Blanc', 'Sac blanc UniShop pour ranger ses affaires de course ou ses affaires de cours pour soutenir notre marque.', 1.00, NULL, 5, 0, 9, '2025-01-02', 1, 4);
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `produitcategorie`
+--
+
+DROP TABLE IF EXISTS `produitcategorie`;
+CREATE TABLE IF NOT EXISTS `produitcategorie` (
+  `idProduit` int NOT NULL,
+  `idCategorie` int NOT NULL,
+  PRIMARY KEY (`idProduit`,`idCategorie`),
+  KEY `idCategorie` (`idCategorie`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `produitcategorie`
+--
+
+INSERT INTO `produitcategorie` (`idProduit`, `idCategorie`) VALUES
+(1, 7),
+(3, 7),
+(9, 7);
 
 -- --------------------------------------------------------
 
@@ -228,6 +277,14 @@ CREATE TABLE IF NOT EXISTS `produitscommande` (
   KEY `fk_produitsCommande_produit` (`idProduit`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+
+--
+-- Dumping data for table `produitscommande`
+--
+
+INSERT INTO `produitscommande` (`idProduit`, `idCommande`, `quantitee`, `prixUnitaire`) VALUES
+(4, 1001, 1, 1000000.3);
+
 -- --------------------------------------------------------
 
 --
@@ -244,6 +301,16 @@ CREATE TABLE IF NOT EXISTS `produitspanier` (
   KEY `fk_produitsPanier_panier` (`idPanier`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `produitspanier`
+--
+
+INSERT INTO `produitspanier` (`idProduit`, `idPanier`, `quantitee`) VALUES
+(1, 118, 1),
+(2, 118, 1),
+(3, 118, 1);
+
+
 -- --------------------------------------------------------
 
 --
@@ -253,8 +320,9 @@ CREATE TABLE IF NOT EXISTS `produitspanier` (
 DROP TABLE IF EXISTS `promotion`;
 CREATE TABLE IF NOT EXISTS `promotion` (
   `idPromo` int NOT NULL AUTO_INCREMENT,
-  `codePromo` varchar(5) NOT NULL,
+  `codePromo` varchar(5) COLLATE utf8mb4_general_ci NOT NULL,
   `coefficient` double(5,2) NOT NULL,
+  `dateGagnant` datetime NOT NULL,
   `idUtilisateur` int NOT NULL,
   PRIMARY KEY (`idPromo`),
   KEY `fk_promotion_user` (`idUtilisateur`)
@@ -294,29 +362,34 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
 --
 
 INSERT INTO `utilisateur` (`idUtilisateur`, `nom`, `prenom`, `pseudo`, `mail`, `password`, `estVendeur`, `admin`, `date_gagnantPromo`, `date_last_played`, `coupPlayed`) VALUES
-(1, 'UniShop', 'Admin', 'UniShop', 'aunishop786@gmail.com', '$2y$10$NSVDfJMSV6cX0XX6cMCDMORUBkDM77q5fM6hZ.pd44l1xshYioCNq', 0, 1, NULL, '2025-01-10 10:25:14', 0),
-(3333, 'Edward', 'David', 'eddy', 'edwarddavid@gmail.com', '36303630', 0, 0, NULL, NULL, 3),
-(3334, 'Saber', 'LAITI BEN AYYAD', 'sayber', 'abdelybouchra@gmail.com', '$2y$10$yTp3Y7.SbxVgqewAYsYUX.PivMyoKO2oe.2JGXRmAIVFuZqsK8kDa', 0, 0, NULL, NULL, 3),
-(3336, 'Saber', 'LAITI BEN AYYAD', 'Saber', 'saberlaitibenayyad30@gmail.com', '$2y$10$zMdHw1PWzft3vt4Nj0XWHuYjEYeh5GjLDu9MCtz/S4BngsmP06.AC', 0, 0, NULL, NULL, 3);
+(1, 'UniShop', 'Admin', 'UniShop', 'aunishop786@gmail.com', '$2y$10$NSVDfJMSV6cX0XX6cMCDMORUBkDM77q5fM6hZ.pd44l1xshYioCNq', 0, 1, NULL, NULL, 3)
+
+-- --------------------------------------------------------
 
 DELIMITER $$
 --
 -- Events
 --
+DROP EVENT IF EXISTS `clearCoups`
+CREATE DEFINER=`root`@`localhost` EVENT `clearCoups` ON SCHEDULE EVERY 1 WEEK STARTS '2025-01-10 21:04:23' ON COMPLETION NOT PRESERVE ENABLE DO UPDATE utilisateur
+    SET coupPlayed = 3
+    WHERE DATEDIFF(NOW(), date_last_played) >= 7;
 
-SET GLOBAL event_scheduler = ON;
-
-DROP EVENT IF EXISTS `clear_promotion_date`;
+DROP EVENT IF EXISTS `clear_promotion_date`
 CREATE DEFINER=`root`@`localhost` EVENT `clear_promotion_date` ON SCHEDULE EVERY 1 DAY STARTS '2025-01-09 13:11:56' ON COMPLETION NOT PRESERVE ENABLE DO UPDATE utilisateur
   SET date_gagnantPromo = NULL
   WHERE date_gagnantPromo IS NOT NULL
   AND DATE_ADD(date_gagnantPromo, INTERVAL 7 DAY) <= NOW();
 
-DROP EVENT IF EXISTS `clear_dateLastPlayed`;
+DROP EVENT IF EXISTS `clear_dateLastPlayed`
 CREATE DEFINER=`root`@`localhost` EVENT `clear_dateLastPlayed` ON SCHEDULE EVERY 1 DAY STARTS '2025-01-09 13:30:29' ON COMPLETION NOT PRESERVE ENABLE DO UPDATE utilisateur
     SET date_last_played = NULL
     WHERE date_last_played IS NOT NULL
     AND DATE_ADD(date_last_played, INTERVAL 7 DAY) <= NOW();
+
+DROP EVENT IF EXISTS `clearPromotion`
+CREATE DEFINER=`root`@`localhost` EVENT `clearPromotion` ON SCHEDULE EVERY 1 HOUR STARTS '2025-01-21 18:36:32' ON COMPLETION NOT PRESERVE ENABLE DO DELETE FROM promotion WHERE TIMESTAMPDIFF(HOUR, dateGagnant, NOW()) >=24;
+
 
 DELIMITER ;
 COMMIT;
