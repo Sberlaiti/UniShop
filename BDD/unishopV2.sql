@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jan 21, 2025 at 05:47 PM
+-- Generation Time: Jan 10, 2025 at 07:58 PM
 -- Server version: 8.3.0
 -- PHP Version: 8.2.18
 
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `avis`;
 CREATE TABLE IF NOT EXISTS `avis` (
   `idAvis` int NOT NULL AUTO_INCREMENT,
-  `contenu` varchar(500) COLLATE utf8mb4_general_ci NOT NULL,
+  `contenu` varchar(500) NOT NULL,
   `dateCreation` date NOT NULL,
   `idUtilisateur` int NOT NULL,
   `idProduit` int NOT NULL,
@@ -38,7 +38,8 @@ CREATE TABLE IF NOT EXISTS `avis` (
   PRIMARY KEY (`idAvis`),
   KEY `fk_avis_utilisateur` (`idUtilisateur`),
   KEY `fk_avis_produit` (`idProduit`)
-) ENGINE=InnoDB AUTO_INCREMENT=6670 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6667 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 
 -- --------------------------------------------------------
 
@@ -49,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `avis` (
 DROP TABLE IF EXISTS `categorie`;
 CREATE TABLE IF NOT EXISTS `categorie` (
   `idCategorie` int NOT NULL AUTO_INCREMENT,
-  `nomCategorie` varchar(130) COLLATE utf8mb4_general_ci NOT NULL,
+  `nomCategorie` varchar(130) NOT NULL,
   `idImage` int NOT NULL,
   PRIMARY KEY (`idCategorie`),
   KEY `fk_categorie_image` (`idImage`)
@@ -83,17 +84,24 @@ INSERT INTO `categorie` (`idCategorie`, `nomCategorie`, `idImage`) VALUES
 DROP TABLE IF EXISTS `commande`;
 CREATE TABLE IF NOT EXISTS `commande` (
   `idCommande` int NOT NULL AUTO_INCREMENT,
-  `dateAchat` date NOT NULL,
-  `adresse` varchar(130) COLLATE utf8mb4_general_ci NOT NULL,
-  `telephone` varchar(15) COLLATE utf8mb4_general_ci NOT NULL,
   `idUtilisateur` int NOT NULL,
+  `dateAchat` date NOT NULL,
+  `adresse` varchar(130) NOT NULL,
+  `telephone` varchar(15) NOT NULL,
   `idPromo` int DEFAULT NULL,
-  `idProduit` int NOT NULL,
+  `totale` double DEFAULT NULL,
+  `modePaiement` varchar(130) DEFAULT NULL,
   PRIMARY KEY (`idCommande`),
   KEY `fk_commande_utilisateur` (`idUtilisateur`),
-  KEY `fk_commande_promo` (`idPromo`),
-  KEY `fk_produit_commande` (`idProduit`)
+  KEY `fk_commande_promo` (`idPromo`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1002 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `commande`
+--
+
+INSERT INTO `commande` (`idCommande`, `idUtilisateur`, `dateAchat`, `adresse`, `telephone`, `idPromo`, `totale`, `modePaiement`) VALUES
+(1001, 3333, '2024-11-11', '123 Rue de Paris', '1234567890', NULL, 10000, 'Carte bancaire');
 
 -- --------------------------------------------------------
 
@@ -104,11 +112,11 @@ CREATE TABLE IF NOT EXISTS `commande` (
 DROP TABLE IF EXISTS `image`;
 CREATE TABLE IF NOT EXISTS `image` (
   `idImage` int NOT NULL AUTO_INCREMENT,
-  `lien` varchar(1000) COLLATE utf8mb4_general_ci NOT NULL,
+  `lien` varchar(1000) NOT NULL,
   `idProduit` int NOT NULL,
   PRIMARY KEY (`idImage`),
   KEY `fk_image_produit` (`idProduit`)
-) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `image`
@@ -182,14 +190,7 @@ CREATE TABLE IF NOT EXISTS `panier` (
   `idUtilisateur` int NOT NULL,
   PRIMARY KEY (`idPanier`),
   KEY `fk_panier_utilisateur` (`idUtilisateur`)
-) ENGINE=InnoDB AUTO_INCREMENT=121 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `panier`
---
-
-INSERT INTO `panier` (`idPanier`, `idUtilisateur`) VALUES
-(120, 1);
+) ENGINE=InnoDB AUTO_INCREMENT=118 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -214,7 +215,7 @@ CREATE TABLE IF NOT EXISTS `produit` (
   KEY `fk_produit_image` (`idImage`),
   KEY `fk_produit_utilisateur` (`idUtilisateur`),
   KEY `fk_produit_categorie` (`IdCategorie`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `produit`
@@ -234,6 +235,7 @@ INSERT INTO `produit` (`idProduit`, `nomProduit`, `description`, `prix`, `prixPr
 (11, 'Tee-Shirt UniShop - Noir', 'Tee-Shirt UniShop noir avec taille : XS - X - L - S - M pour soutenir notre marque.', 10.50, NULL, 5, 0, 4, '2025-01-04', 1, 4),
 (12, 'Casquette UniShop - Blanc', 'Casquette UniShop blanche pour soutenir notre marque.', 5.99, NULL, 5, 0, 8, '2025-01-05', 1, 4),
 (13, 'Sac UniShop - Blanc', 'Sac blanc UniShop pour ranger ses affaires de course ou ses affaires de cours pour soutenir notre marque.', 1.00, NULL, 5, 0, 9, '2025-01-02', 1, 4);
+
 
 -- --------------------------------------------------------
 
@@ -275,6 +277,14 @@ CREATE TABLE IF NOT EXISTS `produitscommande` (
   KEY `fk_produitsCommande_produit` (`idProduit`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+
+--
+-- Dumping data for table `produitscommande`
+--
+
+INSERT INTO `produitscommande` (`idProduit`, `idCommande`, `quantitee`, `prixUnitaire`) VALUES
+(4, 1001, 1, 1000000.3);
+
 -- --------------------------------------------------------
 
 --
@@ -291,6 +301,16 @@ CREATE TABLE IF NOT EXISTS `produitspanier` (
   KEY `fk_produitsPanier_panier` (`idPanier`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `produitspanier`
+--
+
+INSERT INTO `produitspanier` (`idProduit`, `idPanier`, `quantitee`) VALUES
+(1, 118, 1),
+(2, 118, 1),
+(3, 118, 1);
+
+
 -- --------------------------------------------------------
 
 --
@@ -306,7 +326,14 @@ CREATE TABLE IF NOT EXISTS `promotion` (
   `idUtilisateur` int NOT NULL,
   PRIMARY KEY (`idPromo`),
   KEY `fk_promotion_user` (`idUtilisateur`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `promotion`
+--
+
+INSERT INTO `promotion` (`idPromo`, `codePromo`, `coefficient`, `idUtilisateur`) VALUES
+(14, 'UNI15', 15.00, 3337);
 
 -- --------------------------------------------------------
 
@@ -317,11 +344,11 @@ CREATE TABLE IF NOT EXISTS `promotion` (
 DROP TABLE IF EXISTS `utilisateur`;
 CREATE TABLE IF NOT EXISTS `utilisateur` (
   `idUtilisateur` int NOT NULL AUTO_INCREMENT,
-  `nom` varchar(130) COLLATE utf8mb4_general_ci NOT NULL,
-  `prenom` varchar(130) COLLATE utf8mb4_general_ci NOT NULL,
-  `pseudo` varchar(130) COLLATE utf8mb4_general_ci NOT NULL,
-  `mail` varchar(400) COLLATE utf8mb4_general_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `nom` varchar(130) NOT NULL,
+  `prenom` varchar(130) NOT NULL,
+  `pseudo` varchar(130) NOT NULL,
+  `mail` varchar(400) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `estVendeur` tinyint(1) NOT NULL DEFAULT '0',
   `admin` tinyint(1) NOT NULL DEFAULT '0',
   `date_gagnantPromo` datetime DEFAULT NULL,
@@ -335,8 +362,9 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
 --
 
 INSERT INTO `utilisateur` (`idUtilisateur`, `nom`, `prenom`, `pseudo`, `mail`, `password`, `estVendeur`, `admin`, `date_gagnantPromo`, `date_last_played`, `coupPlayed`) VALUES
-(1, 'UniShop', 'Admin', 'UniShop', 'aunishop786@gmail.com', '$2y$10$NSVDfJMSV6cX0XX6cMCDMORUBkDM77q5fM6hZ.pd44l1xshYioCNq', 0, 1, NULL, NULL, 3),
-(2, 'Saber', 'LAITI BEN AYYAD', 'sayber', 'abdelybouchra@gmail.com', '$2y$10$yTp3Y7.SbxVgqewAYsYUX.PivMyoKO2oe.2JGXRmAIVFuZqsK8kDa', 0, 0, NULL, NULL, 3);
+(1, 'UniShop', 'Admin', 'UniShop', 'aunishop786@gmail.com', '$2y$10$NSVDfJMSV6cX0XX6cMCDMORUBkDM77q5fM6hZ.pd44l1xshYioCNq', 0, 1, NULL, NULL, 3);
+
+-- --------------------------------------------------------
 
 DELIMITER $$
 --
@@ -361,6 +389,7 @@ CREATE DEFINER=`root`@`localhost` EVENT `clear_dateLastPlayed` ON SCHEDULE EVERY
 
 DROP EVENT IF EXISTS `clearPromotion`
 CREATE DEFINER=`root`@`localhost` EVENT `clearPromotion` ON SCHEDULE EVERY 1 HOUR STARTS '2025-01-21 18:36:32' ON COMPLETION NOT PRESERVE ENABLE DO DELETE FROM promotion WHERE TIMESTAMPDIFF(HOUR, dateGagnant, NOW()) >=24;
+
 
 DELIMITER ;
 COMMIT;
