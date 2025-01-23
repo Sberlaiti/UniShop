@@ -6,7 +6,7 @@
     
 
     
-
+    
     $stmt = $pdo->prepare("SELECT idUtilisateur,estVendeur FROM utilisateur WHERE idUtilisateur = ?");
     $stmt->execute([$idUtilisateur]);
     $utilisateur = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -240,15 +240,14 @@
             </div>
 
             <div class="product_details">
+
                 <?php
                     echo "<h1 class=product_name>" . htmlspecialchars($produit['nomProduit']) . "</h1>";
                     echo "<p class=product_description>". htmlspecialchars($produit['description']). "</p>";
                     echo "<p class=product_price>". htmlspecialchars($produit['prix']). "€". "</p>";
                     echo "<p class=product_delivery>". "Delai de livraison: ". htmlspecialchars($produit['delayLivraison']). " Jours". "</p>";
                 ?>
-                
-                
-
+            
                 <div class="product_sizes">
                     <button class="size">XS</button>
                     <button class="size">S</button>
@@ -258,43 +257,35 @@
                 </div>
 
                 <div class="action_buttons">
-                    <button class="buy_button" onclick="window.location.href='paiement.php'">Acheter</button>
-                    <form action="" method="POST" id="cart_form">
-                        <input type="hidden" name="idProduit" value="<?php echo htmlspecialchars($_GET['idProduit']); ?>">
-                        <?php
+                    <?php
                         if (isset($_SESSION['user']['idUtilisateur'])) {
-                            $idUser = $_SESSION['user']['idUtilisateur'];
-                            $idProduit = $_GET['idProduit'];
-                
-                            // Vérifier si le produit est déjà dans le panier
-                            $requete = $pdo->prepare("SELECT pp.idProduit FROM produitspanier pp JOIN panier p ON pp.idPanier = p.idPanier WHERE p.idUtilisateur = ? AND pp.idProduit = ?");
-                            $requete->execute([$idUser, $idProduit]);
-                            $produitDansPanier = $requete->fetch();
-                
-                            if ($produitDansPanier) {
-                                // Si le produit est dans le panier, afficher le bouton "Enlever du Panier"
-                                echo '<button type="submit" name="enlever_panier" class="cart_button_delete" id="cart_button">Enlever du Panier</button>';
-                            } else {
-                                // Si le produit n'est pas dans le panier, afficher le bouton "Ajouter au Panier"
-                                echo '<button type="submit" name="ajout_panier" class="cart_button" id="cart_button">Ajouter au Panier</button>';
-                            }
+                            // Afficher les boutons "Acheter" et "Ajouter au Panier" si l'utilisateur est connecté
+                            echo '<button class="buy_button" onclick="window.location.href=\'paiement.php\'">Acheter</button>';
+                            echo '<form action="" method="POST" id="cart_form">';
+                            echo '<input type="hidden" name="idProduit" value="' . htmlspecialchars($_GET['idProduit']) . '">';
+                            echo '<button type="submit" name="ajout_panier" class="cart_button" id="cart_button">Ajouter au Panier</button>';
+                            echo '</form>';
                         } else {
-                            // Si l'utilisateur n'est pas connecté, afficher un message ou rediriger vers la page de connexion
-                            echo '<button type="button" class="cart_button" onclick="window.location.href=\'login.php\'">Connectez-vous pour ajouter au panier</button>';
+                            // Rediriger l'utilisateur non connecté vers la page de connexion
+                            echo '<button class="buy_button" onclick="window.location.href=\'login.php\'">Acheter</button>';
+                            echo '<button class="cart_button" onclick="window.location.href=\'login.php\'">Ajouter au Panier</button>';
                         }
-                        ?>
-                    </form>
+                    ?>
                 </div>
+
                 <div id="message_panier" class="message_panier"></div>
-                <?php
-                
-                ?>                       
+
                 <div class="extra_options">
-                    <?php if ($utilisateur['estVendeur'] == 1 && $utilisateur['idUtilisateur'] == $produit['idUtilisateur']): ?>
-                        <button class="edit_info_button" onclick="window.location.href='pageModifInfoArticle.php?idProduit=<?php echo $_GET['idProduit']; ?>'">
-                            <i class="fa-solid fa-pen-to-square"></i> Modifier les infos de l'article
-                        </button>
-                    <?php endif; ?>
+                    <?php
+                        if (isset($_SESSION['user']['idUtilisateur'])) {
+                            $utilisateur = $_SESSION['user'];
+                            if ($utilisateur['estVendeur'] == 1 && $utilisateur['idUtilisateur'] == $produit['idUtilisateur']) {
+                                echo '<button class="edit_info_button" onclick="window.location.href=\'pageModifInfoArticle.php?idProduit=' . $_GET['idProduit'] . '\'">';
+                                echo '<i class="fa-solid fa-pen-to-square"></i> Modifier les infos de l\'article';
+                                echo '</button>';
+                            }
+                        }
+                    ?>
                 </div>
             </div>
         </div>
