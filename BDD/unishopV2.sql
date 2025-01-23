@@ -40,7 +40,29 @@ CREATE TABLE IF NOT EXISTS `avis` (
   KEY `fk_avis_produit` (`idProduit`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6667 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-
+INSERT INTO `avis` (`idAvis`, `contenu`, `dateCreation`, `idUtilisateur`, `idProduit`, `note`) VALUES
+(1, 'Excellente souris gaming, très réactive et confortable. Je recommande vivement !', '2025-01-22', 1, 1, 5),
+(2, 'Bon produit, mais le logiciel pourrait être un peu plus intuitif.', '2025-01-21', 2, 1, 4),
+(3, 'Mon chien adore ces croquettes ! Très bonne qualité.', '2025-01-22', 1, 2, 5),
+(4, 'Le prix est correct, mais mon chien ne semble pas trop apprécier le goût.', '2025-01-21', 2, 2, 3),
+(5, 'Chaise très confortable et bien conçue. Montage facile.', '2025-01-22', 1, 3, 5),
+(6, 'Les accoudoirs ne sont pas très solides. Déçu.', '2025-01-21', 2, 3, 2),
+(7, 'Un chef-d’œuvre de jeu vidéo ! Graphismes et gameplay incroyables.', '2025-01-22', 1, 4, 5),
+(8, 'Un peu trop cher pour le contenu proposé.', '2025-01-21', 2, 4, 3),
+(9, 'Très beau jeu avec une histoire captivante. Valeur sûre.', '2025-01-22', 1, 5, 5),
+(10, 'Les graphismes sont superbes, mais le gameplay manque de variété.', '2025-01-21', 2, 5, 4),
+(11, 'L’iPhone 16 est tout simplement incroyable, surtout l’appareil photo.', '2025-01-22', 1, 6, 5),
+(12, 'Le téléphone est bon, mais beaucoup trop cher.', '2025-01-21', 2, 6, 3),
+(13, 'Très bonne qualité, je recommande cette veste.', '2025-01-22', 1, 7, 5),
+(14, 'Veste simple mais efficace pour son prix.', '2025-01-21', 2, 7, 4),
+(15, 'Stylo pratique et bien conçu pour son prix.', '2025-01-22', 1, 8, 5),
+(16, 'Un stylo classique, rien d’extraordinaire.', '2025-01-21', 2, 8, 3),
+(17, 'Clé USB rapide et fiable. Très bon rapport qualité/prix.', '2025-01-22', 1, 9, 5),
+(18, 'Bonne capacité de stockage, mais un peu lente.', '2025-01-21', 2, 9, 3),
+(19, 'Très bon tapis de souris, agréable à utiliser.', '2025-01-22', 1, 10, 5),
+(20, 'Tapis simple mais efficace pour son prix.', '2025-01-21', 2, 10, 4),
+(21, 'Tee-shirt confortable et bien coupé.', '2025-01-22', 1, 11, 5),
+(22, 'Bonne qualité, mais la taille ne correspond pas.', '2025-01-21', 2, 11, 3);
 -- --------------------------------------------------------
 
 --
@@ -222,12 +244,12 @@ CREATE TABLE IF NOT EXISTS `produit` (
 --
 
 INSERT INTO `produit` (`idProduit`, `nomProduit`, `description`, `prix`, `prixPromotion`, `delayLivraison`, `enPromotion`, `idImage`, `dateCreation`, `idUtilisateur`, `IdCategorie`) VALUES
-(1, 'Logitech G203 Souris Gaming ', 'Capteur 8 000 PPP: le capteur gaming répond précisément à vos mouvements. Personnalisez les paramètres avec le logiciel gaming Logitech G HUB en fonction de la sensibilité que vous souhaitez et passez facilement d\'une résolution à l\'autre, parmi 5 paramètres\r\n- LIGHTSYNC RVB coloré: jouez en couleur avec notre technologie LIGHTSYNC RVB la plus vibrante, grâce à des effets de vagues personnalisables sur environ 16,8 millions de couleurs. Installez le logiciel Logitech G HUB pour choisir parmi d', 44.99, NULL, 5, 0, 33, '2025-01-20', 1, 11),
-(2, 'Franklin – Nourriture pour Chien Stérilisé', 'Voilà la recette idéale pour les chiens en quête d’équilibre! Au menu : du poulet, une viande complète riche en protéines pour avoir la pêche, des fruits et des légumes pour faire le plein de vitamines, des minéraux et des prébiotiques pour renforcer la santé intestinale.\r\n- 70% DE POULET : une protéine de grande qualité pour ses muscles de carnivore, permettant un bon équilibre nutritionnel\r\n- UN TAUX DE PROTÉINES ÉLEVÉ : Des croquettes chien complètes et hautement digestibles avec un taux de', 24.90, NULL, 5, 0, 38, '2025-01-20', 1, 1),
-(3, 'GTPLAYER Chaise Gaming', 'Matériaux de haute qualité : La chaise gaming est recouverte d\'un tissu doux au lieu de cuir. Le tissu technique a un aspect unique, présente des caractéristiques telles que la résistance à l\'usure, aux rayures, à l\'eau et aux alcalis, et est également ignifuge, imperméable et respirant. La performance anti-âge est excellente et la durée de vie du produit du chiffon technique peut atteindre 5 à 10 ans.\n- Accoudoirs réglables : Les bras de chaise gaming s\'adaptent bien même en position allongé', 159.99, 90.98, 5, 1, 28, '2025-01-20', 1, 11),
-(4, 'Sony, Marvel\'s Spider-Man 2 PS5', 'Jeu PS5 d\'action : Jouez avec deux Spider-Man (Peter Parker et Miles Morales), affrontez de nouveaux ennemis et partez à l’aventure dans un New York de Marvel plus vaste que jamais (nouveaux quartiers, nouveaux lieux)\nDes graphismes éblouissants en 4K et en HDR reproduits avec un incroyable souci de détail jusqu\'aux reflets sur les bâtiments\nDes sensations inédites grâce au retour haptique et aux gâchettes adaptatives de votre manette DualSense : ressentez chaque coup que vous portez ou chaque t', 79.99, 50.99, 5, 1, 47, '2025-01-22', 1, 9),
-(5, 'Sony, Horizon Forbidden West PS5', 'Jeu PS5 de rôle et d\'action-aventure dans un immense monde ouvert aussi sublime que menaçant, avec des personnages éclectiques et saisissants au coeur d\'une histoire riche en émotions\r\nUn univers fait de forêts verdoyantes et de villes subermgées réhaussé par des graphismes éblouissants en 4K et en HDR : un souci du détail incroyable des brins d\'herbe jusqu\'au sommet des montagnes\r\nExpérience de jeu intense grâce au retour haptique et aux gâchettes adaptatives de votre manette DualSense PS5 : re', 39.90, NULL, 5, 0, 52, '2025-01-21', 1, 9),
-(6, 'Apple iPhone 16 (128 Go) - Noir', 'COMMANDE DE L’APPAREIL PHOTO. LE CONTRÔLE À PORTÉE DE MAIN – Commande de l’appareil photo vous offre un accès plus rapide aux outils photo et vidéo, tels que le zoom ou la profondeur de champ, pour vous permettre de prendre la photo parfaite en un temps record.\r\nSI PRÈS, MÊME DE LOIN – La caméra ultra grand-angle améliorée, avec mise au point automatique, vous permet de prendre des photos et des vidéos macro extrêmement détaillées. Utilisez la caméra Fusion 48 Mpx pour des images haute résolutio', 919.00, NULL, 5, 0, 43, '2025-01-21', 1, 3),
+(1, 'Logitech G203 Souris Gaming ', 'Capteur 8 000 PPP: le capteur gaming répond précisément à vos mouvements. Personnalisez les paramètres avec le logiciel gaming Logitech G HUB en fonction de la sensibilité que vous souhaitez et passez facilement d\'une résolution à l\'autre, parmi 5 paramètres\r\n- LIGHTSYNC RVB coloré: jouez en couleur avec notre technologie LIGHTSYNC RVB la plus vibrante, grâce à des effets de vagues personnalisables sur environ 16,8 millions de couleurs. Installez le logiciel Logitech G HUB pour choisir parmi d', 44.99, NULL, 5, 0, 33, '2025-01-20', 3339, 11),
+(2, 'Franklin – Nourriture pour Chien Stérilisé', 'Voilà la recette idéale pour les chiens en quête d’équilibre! Au menu : du poulet, une viande complète riche en protéines pour avoir la pêche, des fruits et des légumes pour faire le plein de vitamines, des minéraux et des prébiotiques pour renforcer la santé intestinale.\r\n- 70% DE POULET : une protéine de grande qualité pour ses muscles de carnivore, permettant un bon équilibre nutritionnel\r\n- UN TAUX DE PROTÉINES ÉLEVÉ : Des croquettes chien complètes et hautement digestibles avec un taux de', 24.90, NULL, 5, 0, 38, '2025-01-20', 3339, 1),
+(3, 'GTPLAYER Chaise Gaming', 'Matériaux de haute qualité : La chaise gaming est recouverte d\'un tissu doux au lieu de cuir. Le tissu technique a un aspect unique, présente des caractéristiques telles que la résistance à l\'usure, aux rayures, à l\'eau et aux alcalis, et est également ignifuge, imperméable et respirant. La performance anti-âge est excellente et la durée de vie du produit du chiffon technique peut atteindre 5 à 10 ans.\n- Accoudoirs réglables : Les bras de chaise gaming s\'adaptent bien même en position allongé', 159.99, 90.98, 5, 1, 28, '2025-01-20', 3340, 11),
+(4, 'Sony, Marvel\'s Spider-Man 2 PS5', 'Jeu PS5 d\'action : Jouez avec deux Spider-Man (Peter Parker et Miles Morales), affrontez de nouveaux ennemis et partez à l’aventure dans un New York de Marvel plus vaste que jamais (nouveaux quartiers, nouveaux lieux)\nDes graphismes éblouissants en 4K et en HDR reproduits avec un incroyable souci de détail jusqu\'aux reflets sur les bâtiments\nDes sensations inédites grâce au retour haptique et aux gâchettes adaptatives de votre manette DualSense : ressentez chaque coup que vous portez ou chaque t', 79.99, 50.99, 5, 1, 47, '2025-01-22', 3340, 9),
+(5, 'Sony, Horizon Forbidden West PS5', 'Jeu PS5 de rôle et d\'action-aventure dans un immense monde ouvert aussi sublime que menaçant, avec des personnages éclectiques et saisissants au coeur d\'une histoire riche en émotions\r\nUn univers fait de forêts verdoyantes et de villes subermgées réhaussé par des graphismes éblouissants en 4K et en HDR : un souci du détail incroyable des brins d\'herbe jusqu\'au sommet des montagnes\r\nExpérience de jeu intense grâce au retour haptique et aux gâchettes adaptatives de votre manette DualSense PS5 : re', 39.90, NULL, 5, 0, 52, '2025-01-21', 3340, 9),
+(6, 'Apple iPhone 16 (128 Go) - Noir', 'COMMANDE DE L’APPAREIL PHOTO. LE CONTRÔLE À PORTÉE DE MAIN – Commande de l’appareil photo vous offre un accès plus rapide aux outils photo et vidéo, tels que le zoom ou la profondeur de champ, pour vous permettre de prendre la photo parfaite en un temps record.\r\nSI PRÈS, MÊME DE LOIN – La caméra ultra grand-angle améliorée, avec mise au point automatique, vous permet de prendre des photos et des vidéos macro extrêmement détaillées. Utilisez la caméra Fusion 48 Mpx pour des images haute résolutio', 919.00, NULL, 5, 0, 43, '2025-01-21', 3340, 3),
 (7, 'Veste UniShop', 'Veste simple pour soutenir notre marque.', 39.99, NULL, 5, 0, 7, '2025-01-01', 1, 4),
 (8, 'Stylo UniShop - Noir', 'Stylo noir de la marque UniShop pour soutenir notre marque.', 1.00, NULL, 5, 0, 3, '2025-01-03', 1, 4),
 (9, 'Clé USB UniShop - 32 Go USB 3.2', 'Clé USB en USB 3.2 avec un stockage de 32 Go de la marque UniShop pour soutenir notre marque.', 5.99, 1.50, 5, 1, 6, '2025-01-03', 1, 4),
@@ -362,7 +384,10 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
 --
 
 INSERT INTO `utilisateur` (`idUtilisateur`, `nom`, `prenom`, `pseudo`, `mail`, `password`, `estVendeur`, `admin`, `date_gagnantPromo`, `date_last_played`, `coupPlayed`) VALUES
-(1, 'UniShop', 'Admin', 'UniShop', 'aunishop786@gmail.com', '$2y$10$NSVDfJMSV6cX0XX6cMCDMORUBkDM77q5fM6hZ.pd44l1xshYioCNq', 0, 1, NULL, NULL, 3);
+(1, 'UniShop', 'Admin', 'UniShop', 'aunishop786@gmail.com', '$2y$10$NSVDfJMSV6cX0XX6cMCDMORUBkDM77q5fM6hZ.pd44l1xshYioCNq', 0, 1, NULL, NULL, 3),
+(3338, 'Chil', 'Benin', 'Bchil', 'beniChil@gmail.com', '$2y$10$RTMXYe34uwrbuNR7Q7xMAuPTjbDKumSbG3S/yglK.mL0AXjhUVhL.', 0, 0, NULL, NULL, 3),
+(3339, 'Arice', 'Louman', 'superAcheteur', 'a01Louman@gmail.com', '$2y$10$553Pjtj0uHOY/G1Wd/kwo.H.tMbGkGNr4.wAdedv3qHTk6u5RHasW', 1, 0, NULL, NULL, 3),
+(3340, 'Rob', 'Collin', 'Collin', 'collinB@gmail.com', '$2y$10$DfB6O7cmi4rS6dYOvW6/gOMdXi.OXhgCQNZTmO9da2HL2uPg/YARu', 1, 0, NULL, NULL, 3);
 
 -- --------------------------------------------------------
 
