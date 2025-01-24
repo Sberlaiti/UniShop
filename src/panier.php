@@ -59,17 +59,16 @@
                                         <?php echo "<a href='pageArticle.php?idProduit=".$article['idProduit']."'>".$article['nomProduit']."</a>"; ?>
                                         
                                         <?php
-                                            if ($article['idUtilisateur'] == 1) {
-                                                $pseudo_Vendeur = "Unishop";
-                                            } else {
                                                 $sql_requete = "SELECT pseudo FROM utilisateur WHERE idUtilisateur = :idUtilisateur";
                                                 $stmt = $pdo->prepare($sql_requete);
                                                 $stmt->execute(['idUtilisateur' => $article['idUtilisateur']]);
                                                 $pseudo_Vendeur = $stmt->fetch();
 
-                                            }
                                         ?>
                                         
+
+                            
+
                                         <a class="cartItems-infos-seller" href="produits.php?idUtilisateur=<?php echo $article['idUtilisateur']; ?>"><button> Vendeur : <?php echo $pseudo_Vendeur['pseudo']; ?></button></a>
                                         <div class="cartItems-infos-name-ope">
                                                 <button class="addFavourites" data-id=<?php echo $article['idProduit']?>><i class="fa-duotone fa-solid fa-heart"></i></button>
