@@ -33,14 +33,14 @@ startButton.addEventListener('click', () => {
     wheel.style.transform = "rotate(" + finalRotation + "deg)";
 
     // Calcul de l'angle final
-    const finalAngle = 0; // Angle final
+    const finalAngle = finalRotation % 360; // Angle final
     number += Math.ceil(Math.random() * 1000); // Préparation de l'angle suivant
 
     // Calcul de l'indice du segment gagnant
     const segmentAngle = 360 / totalSegments; // Angle de chaque segment
 
     setTimeout(() => {
-        const segmentIndex = Math.floor(finalAngle / segmentAngle); // Index du segment final
+        const segmentIndex = Math.floor((360 - finalAngle) / segmentAngle) % totalSegments; // Index du segment final
         const shouldWin = segments[segmentIndex]; // Vérifier si le segment est gagnant
 
          // Déterminer si le joueur gagne de manière aléatoire
