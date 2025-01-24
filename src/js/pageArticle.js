@@ -63,8 +63,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Fermer le menu si on clique en dehors
     document.addEventListener('click', (event) => {
-        if (!moreOptionsButton.contains(event.target) && !moreOptionsMenu.contains(event.target)) {
-            moreOptionsMenu.style.display = 'none';
+        if(moreOptionsButton && moreOptionsMenu){
+            if (!moreOptionsButton.contains(event.target) && !moreOptionsMenu.contains(event.target)) {
+                moreOptionsMenu.style.display = 'none';
+            }
         }
     });
 });

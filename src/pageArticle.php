@@ -256,7 +256,7 @@
                     <?php
                         if (isset($_SESSION['user']['idUtilisateur'])) {
                             // Afficher les boutons "Acheter" et "Ajouter au Panier" si l'utilisateur est connecté
-                            echo '<form action="paiement.php" method="POST">';
+                            echo '<form action="paiement.php" method="POST" id="cart_form">';
                             echo '<input type="hidden" name="idProduit" value="' . htmlspecialchars($produit['idProduit']) . '">';
                             echo '<input type="hidden" name="prix" value="' . ($produit['enPromotion'] && $produit['prixPromotion'] !== null ? htmlspecialchars($produit['prixPromotion']) : htmlspecialchars($produit['prix'])) . '">';
                             echo '<button type="submit" class="buy_button">Acheter</button>';
