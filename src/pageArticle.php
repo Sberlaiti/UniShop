@@ -46,6 +46,26 @@
     $avis = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idProduit']) && isset($_POST['prix'])) {
+        $_SESSION['total'] = $_POST['prix'];
+
+        $sql_requete = $pdo->prepare("SELECT idPanier FROM panier WHERE idUtilisateur = :idUtilisateur");
+        $sql_requete->execute(['idUtilisateur' => $_SESSION['user']['idUtilisateur']]);
+        $idPanier = $sql_requete->fetch()['idPanier'];
+
+        $sql_requete = $pdo->prepare("DELETE FROM produitspanier WHERE idPanier = :idPanier");
+        $sql_requete->execute(['idPanier' => $idPanier]);
+
+        $sql_requete = $pdo->prepare("INSERT INTO produitspanier (idPanier, idProduit, quantitee) VALUES (:idPanier, :idProduit, 1)");
+        $sql_requete->execute([
+            'idPanier' => $idPanier,
+            'idProduit' => $_POST['idProduit']
+        ]);
+
+        header("Location: paiement.php");
+    }
+
+
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['new_comment'])) {
         
         $nouveauAvis = $_POST['new_comment'];
@@ -256,14 +276,14 @@
                     <?php
                         if (isset($_SESSION['user']['idUtilisateur'])) {
                             // Afficher les boutons "Acheter" et "Ajouter au Panier" si l'utilisateur est connecté
-                            echo '<form action="paiement.php" method="POST" id="cart_form">';
-                            echo '<input type="hidden" name="idProduit" value="' . htmlspecialchars($produit['idProduit']) . '">';
-                            echo '<input type="hidden" name="prix" value="' . ($produit['enPromotion'] && $produit['prixPromotion'] !== null ? htmlspecialchars($produit['prixPromotion']) : htmlspecialchars($produit['prix'])) . '">';
-                            echo '<button type="submit" class="buy_button">Acheter</button>';
+                            echo '<form method="POST" id="cart_form">';
+                            echo    '<input type="hidden" name="idProduit" value="' . htmlspecialchars($produit['idProduit']) . '">';
+                            echo    '<input type="hidden" name="prix" value="' . ($produit['enPromotion'] && $produit['prixPromotion'] !== null ? htmlspecialchars($produit['prixPromotion']) : htmlspecialchars($produit['prix'])) . '">';
+                            echo    '<button type="submit" class="buy_button">Acheter</button>';
                             echo '</form>';
                             echo '<form action="" method="POST" id="cart_form">';
-                            echo '<input type="hidden" name="idProduit" value="' . htmlspecialchars($_GET['idProduit']) . '">';
-                            echo '<button type="submit" name="ajout_panier" class="cart_button" id="cart_button">Ajouter au Panier</button>';
+                            echo    '<input type="hidden" name="idProduit" value="' . htmlspecialchars($_GET['idProduit']) . '">';
+                            echo    '<button type="submit" name="ajout_panier" class="cart_button" id="cart_button">Ajouter au Panier</button>';
                             echo '</form>';
                         } else {
                             // Rediriger l'utilisateur non connecté vers la page de connexion
