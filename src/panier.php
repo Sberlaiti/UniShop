@@ -154,18 +154,19 @@
                     <div class="cartSummery_Button">
                         <form action="paiement.php" method="POST">
                             <input type="hidden" name="total" value="<?php echo $total; ?>">
-                            <a href="./paiement.php"><button class="cartInfos_Paiement">Paiement</button></a>
+                            <a href="./paiement.php"><button class="cartInfos_Paiement">Payer</button></a>
                         </form>
                     </div>
-                </div>
 
-                <div class="cartSummery_DiscountCode">
+                    <div class="cartSummery_DiscountCode">
                     <form method="POST">
-                        <label for="discount_code">Code de réduction :</label>
+                        <label for="discount_code">Ajouter un code de réduction</label>
                         <input type="text" id="discount_code" name="discount_code" placeholder="Entrez votre code">
                         <button type="submit">Appliquer</button>
                     </form>
                 </div>
+                </div>
+
             </div>
 
         <?php } ?>

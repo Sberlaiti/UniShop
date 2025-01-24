@@ -152,6 +152,7 @@
 }
 
 .cartSummery {
+    max-height: 320px;
     display: flex;
     flex-direction: column;
     border-radius: 15px;
@@ -194,6 +195,37 @@
     padding: 10px 20px;
     cursor: pointer;
 }
+
+.cartSummery_DiscountCode > form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.cartSummery_DiscountCode > form > input {
+    width: 200px;
+    height: 30px;
+    border: 1px solid #727272a8;
+    border-radius: 5px;
+    padding: 0px 10px;
+    margin: 10px 0px;
+}
+
+.cartSummery_DiscountCode > form > input:focus {
+    border: 1px solid #EA6615;
+}
+
+.cartSummery_DiscountCode > form > button {
+    background-color: #ffbf66;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    border: none;
+    padding: 10px 20px;
+    transition: 0.5s;
+}
+
 
 .container_emptyCart {
     display: flex;
