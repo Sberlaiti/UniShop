@@ -36,7 +36,6 @@ body{
 
 .cartItems-infos-seller {
     margin-left: 5px;
-    transition: background-color 0.5s ease;
 }
 
 .cartItems-infos-seller button:hover{
@@ -52,7 +51,7 @@ body{
     border: none;
     border-radius: 30px;
     padding: 2px 7px;
-
+    transition: background-color 0.5s ease;
     cursor: pointer;
 }
 
