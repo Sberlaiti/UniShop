@@ -42,27 +42,16 @@ CREATE TABLE IF NOT EXISTS `avis` (
 
 INSERT INTO `avis` (`idAvis`, `contenu`, `dateCreation`, `idUtilisateur`, `idProduit`, `note`) VALUES
 (1, 'Excellente souris gaming, très réactive et confortable. Je recommande vivement !', '2025-01-22', 1, 1, 5),
-(2, 'Bon produit, mais le logiciel pourrait être un peu plus intuitif.', '2025-01-21', 2, 1, 4),
 (3, 'Mon chien adore ces croquettes ! Très bonne qualité.', '2025-01-22', 1, 2, 5),
-(4, 'Le prix est correct, mais mon chien ne semble pas trop apprécier le goût.', '2025-01-21', 2, 2, 3),
 (5, 'Chaise très confortable et bien conçue. Montage facile.', '2025-01-22', 1, 3, 5),
-(6, 'Les accoudoirs ne sont pas très solides. Déçu.', '2025-01-21', 2, 3, 2),
 (7, 'Un chef-d’œuvre de jeu vidéo ! Graphismes et gameplay incroyables.', '2025-01-22', 1, 4, 5),
-(8, 'Un peu trop cher pour le contenu proposé.', '2025-01-21', 2, 4, 3),
 (9, 'Très beau jeu avec une histoire captivante. Valeur sûre.', '2025-01-22', 1, 5, 5),
-(10, 'Les graphismes sont superbes, mais le gameplay manque de variété.', '2025-01-21', 2, 5, 4),
 (11, 'L’iPhone 16 est tout simplement incroyable, surtout l’appareil photo.', '2025-01-22', 1, 6, 5),
-(12, 'Le téléphone est bon, mais beaucoup trop cher.', '2025-01-21', 2, 6, 3),
 (13, 'Très bonne qualité, je recommande cette veste.', '2025-01-22', 1, 7, 5),
-(14, 'Veste simple mais efficace pour son prix.', '2025-01-21', 2, 7, 4),
 (15, 'Stylo pratique et bien conçu pour son prix.', '2025-01-22', 1, 8, 5),
-(16, 'Un stylo classique, rien d’extraordinaire.', '2025-01-21', 2, 8, 3),
 (17, 'Clé USB rapide et fiable. Très bon rapport qualité/prix.', '2025-01-22', 1, 9, 5),
-(18, 'Bonne capacité de stockage, mais un peu lente.', '2025-01-21', 2, 9, 3),
 (19, 'Très bon tapis de souris, agréable à utiliser.', '2025-01-22', 1, 10, 5),
-(20, 'Tapis simple mais efficace pour son prix.', '2025-01-21', 2, 10, 4),
-(21, 'Tee-shirt confortable et bien coupé.', '2025-01-22', 1, 11, 5),
-(22, 'Bonne qualité, mais la taille ne correspond pas.', '2025-01-21', 2, 11, 3);
+(21, 'Tee-shirt confortable et bien coupé.', '2025-01-22', 1, 11, 5);
 -- --------------------------------------------------------
 
 --
@@ -213,6 +202,13 @@ CREATE TABLE IF NOT EXISTS `panier` (
   PRIMARY KEY (`idPanier`),
   KEY `fk_panier_utilisateur` (`idUtilisateur`)
 ) ENGINE=InnoDB AUTO_INCREMENT=118 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+INSERT INTO panier (idPanier, idUtilisateur) VALUES
+(1, 3338),
+(2, 3339),
+(3, 3340);
+
+
 
 -- --------------------------------------------------------
 
