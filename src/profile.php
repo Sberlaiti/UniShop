@@ -53,7 +53,8 @@
                 <div class="info_Profile_1">
                     <img src="./images/italianFlag.png" alt="UserLogo">
                     <p><?php echo $_SESSION['user']['pseudo'] ?></p>
-                    <button>Log Out</button>
+                    
+                    <button class="logout">Log Out</button>
                 </div>
 
                 <hr>
