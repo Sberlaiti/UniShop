@@ -386,7 +386,7 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
 --
 
 INSERT INTO `utilisateur` (`idUtilisateur`, `nom`, `prenom`, `pseudo`, `mail`, `password`, `estVendeur`, `admin`, `date_gagnantPromo`, `date_last_played`, `coupPlayed`) VALUES
-(1, 'UniShop', 'Admin', 'UniShop', 'aunishop786@gmail.com', '$2y$10$NSVDfJMSV6cX0XX6cMCDMORUBkDM77q5fM6hZ.pd44l1xshYioCNq', 0, 1, NULL, NULL, 3),
+(1, 'UniShop', 'Admin', 'UniShop', 'aunishop786@gmail.com', '$2y$10$NSVDfJMSV6cX0XX6cMCDMORUBkDM77q5fM6hZ.pd44l1xshYioCNq', 1, 1, NULL, NULL, 3),
 (3338, 'Chil', 'Benin', 'Bchil', 'beniChil@gmail.com', '$2y$10$RTMXYe34uwrbuNR7Q7xMAuPTjbDKumSbG3S/yglK.mL0AXjhUVhL.', 0, 0, NULL, NULL, 3),
 (3339, 'Arice', 'Louman', 'superAcheteur', 'a01Louman@gmail.com', '$2y$10$553Pjtj0uHOY/G1Wd/kwo.H.tMbGkGNr4.wAdedv3qHTk6u5RHasW', 1, 0, NULL, NULL, 3),
 (3340, 'Rob', 'Collin', 'Collin', 'collinB@gmail.com', '$2y$10$DfB6O7cmi4rS6dYOvW6/gOMdXi.OXhgCQNZTmO9da2HL2uPg/YARu', 1, 0, NULL, NULL, 3);
