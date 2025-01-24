@@ -54,7 +54,7 @@
         $idPanier = $sql_requete->fetch();
 
         $sql_requete = $pdo->prepare("DELETE FROM produitspanier WHERE idPanier = :idPanier");
-        $sql_requete->execute(['idPanier' => $idPanier]);
+        $sql_requete->execute(['idPanier' => $idPanier['idPanier']]);
 
         $sql_requete = $pdo->prepare("INSERT INTO produitspanier (idPanier, idProduit, quantitee) VALUES (:idPanier, :idProduit, 1)");
         $sql_requete->execute([
