@@ -98,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <h1>Modifier les informations de: <?php echo htmlspecialchars($produit['nomProduit']); ?></h1>
 
     <div class="container">
-        <form id="modifForm" method="post" enctype="multipart/form-data" class="formulaire">
+        <form id="modifForm" method="POST" enctype="multipart/form-data" class="formulaire">
             <div class="image">
                 <label for="images">Images du produit (5 maximum) :</label>
                 <table>
