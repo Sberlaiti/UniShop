@@ -13,7 +13,7 @@
 
 
     $idProduit = $_GET['idProduit'];
-    $stmt = $pdo->prepare("SELECT nomProduit,description,prix,delayLivraison,idImage,idUtilisateur,enPromotion,prixPromotion
+    $stmt = $pdo->prepare("SELECT idProduit,nomProduit,description,prix,delayLivraison,idImage,idUtilisateur,enPromotion,prixPromotion
                         FROM produit 
                         WHERE idProduit = ? AND (enPromotion = 1 OR enPromotion = 0)");
     $stmt->execute([$idProduit]);
@@ -256,7 +256,11 @@
                     <?php
                         if (isset($_SESSION['user']['idUtilisateur'])) {
                             // Afficher les boutons "Acheter" et "Ajouter au Panier" si l'utilisateur est connecté
-                            echo '<button class="buy_button" onclick="window.location.href=\'paiement.php\'">Acheter</button>';
+                            echo '<form action="paiement.php" method="POST">';
+                            echo '<input type="hidden" name="idProduit" value="' . htmlspecialchars($produit['idProduit']) . '">';
+                            echo '<input type="hidden" name="prix" value="' . ($produit['enPromotion'] && $produit['prixPromotion'] !== null ? htmlspecialchars($produit['prixPromotion']) : htmlspecialchars($produit['prix'])) . '">';
+                            echo '<button type="submit" class="buy_button">Acheter</button>';
+                            echo '</form>';
                             echo '<form action="" method="POST" id="cart_form">';
                             echo '<input type="hidden" name="idProduit" value="' . htmlspecialchars($_GET['idProduit']) . '">';
                             echo '<button type="submit" name="ajout_panier" class="cart_button" id="cart_button">Ajouter au Panier</button>';
