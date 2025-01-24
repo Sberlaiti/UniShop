@@ -48,17 +48,17 @@
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idProduit']) && isset($_POST['prix'])) {
         $_SESSION['total'] = $_POST['prix'];
-
+        
         $sql_requete = $pdo->prepare("SELECT idPanier FROM panier WHERE idUtilisateur = :idUtilisateur");
         $sql_requete->execute(['idUtilisateur' => $_SESSION['user']['idUtilisateur']]);
-        $idPanier = $sql_requete->fetch()['idPanier'];
+        $idPanier = $sql_requete->fetch();
 
         $sql_requete = $pdo->prepare("DELETE FROM produitspanier WHERE idPanier = :idPanier");
         $sql_requete->execute(['idPanier' => $idPanier]);
 
         $sql_requete = $pdo->prepare("INSERT INTO produitspanier (idPanier, idProduit, quantitee) VALUES (:idPanier, :idProduit, 1)");
         $sql_requete->execute([
-            'idPanier' => $idPanier,
+            'idPanier' => $idPanier['idPanier'],
             'idProduit' => $_POST['idProduit']
         ]);
 

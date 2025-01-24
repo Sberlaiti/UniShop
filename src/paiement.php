@@ -80,9 +80,9 @@
                     <p><?php 
                         if (isset($_POST['total']) && $_POST['total'] != null) {
                             $_SESSION['total'] = $_POST['total'];
-                            echo $_SESSION['total'];
+                            echo $_SESSION['total'] . " €";
                         } else {
-                            echo $_SESSION['total'];
+                            echo $_SESSION['total'] . " €";
                         }
                     ?></p>
                 </div>

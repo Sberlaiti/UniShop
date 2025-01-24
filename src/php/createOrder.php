@@ -51,8 +51,8 @@
             ]);
         }
 
-        // On supprime le panier
-        $stmt = $pdo->prepare("DELETE FROM panier WHERE idPanier = :idPanier");
+        // On supprime les produits du panier
+        $stmt = $pdo->prepare("DELETE FROM produitspanier WHERE idPanier = :idPanier");
         $stmt->execute(['idPanier' => $idPanier]);
 
     }
