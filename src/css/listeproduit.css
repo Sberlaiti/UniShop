@@ -6,21 +6,62 @@ body
 
 .product
 {
-    width: 365px;
-    height: 460px;
-    border: 2px solid black;
-    border-radius: 10px;
+    width: 275px;
     margin: 10px 0px 0px 10px;
-    background-color: #F7AF60;
+    background-color: #ffffff;
+    padding-bottom: 10px;
+    font-family: 'RedHatDisplay-Bold', sans-serif;
+    border-radius: 5px;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.product img {
+    display: block;
+    margin: 0 auto;
+    margin-top: 10px;
+    border-bottom: solid #ff9500;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.temp
+{
+    background-color: rgb(255, 255, 255);
+    display:flex;
+    flex-wrap: wrap;
+    margin-right: 4em;
+    border-radius: 10px;
+}
+
+.product:hover
+{
+    background-color: rgb(226, 222, 222);
+    border-radius: 5px;
+}
+
+.plmn
+{
+    margin-bottom: 10px;
+}
+
+.plmn :first-child
+{
+    padding: 0px 9px 0px 9px;
+    margin-right: 5px;
+}
+
+.plmn :nth-child(3)
+{
+    padding: 0px 7px 0px 7px;
 }
 
 button
 {
-    background-color: white;
+    background-color: #ffbf66;
     border:none;
-    border-radius: 10px;
+    border-radius: 5px;
+    border-bottom: solid #ff9500;
     font-size: 22px;
-    font-family: "Gill Sans", sans-serif;
+    font-family: 'RedHatDisplay-Bold', sans-serif;
     margin-left: 5px;
 }
 
@@ -32,15 +73,16 @@ p
 button:hover
 {
     background-color: #EA6615;
+    border-bottom: solid #bf4a02;
 }
 
 img
 {
-    height: 12em;
-    width: 100%;
-    border-bottom: 3px solid black;
-    border-top-left-radius: 9px;
-    border-top-right-radius: 9px;
+    height: 10em;
+    width: 10em;
+    border-radius: 10px;
+    margin-left: 10px;
+    margin-top: 10px;
 }
 
 select
@@ -56,9 +98,9 @@ label
     margin-top: 10px;
 }
 
-.product button:first-of-type
+#bcart
 {
-    width: 25px;
+    width: 9em;
 }
 
 #prod
@@ -67,23 +109,17 @@ label
     display:flex;
     flex-wrap: wrap;
     font-size: 22px;
-    font-family: "Gill Sans", sans-serif;
+    font-family: 'RedHatDisplay-Bold', sans-serif;
 }
 
 #filtre
 {
     grid-column: 1 / 2;
     font-size: 22px;
-    font-family: "Gill Sans", sans-serif;
+    font-family: 'RedHatDisplay-Bold', sans-serif;
 }
 
 #header
 {
     grid-column: 1 / 3;
-}
-
-#filtre button:last-child
-{
-    border: 2px solid black;
-    margin: 0px;
 }

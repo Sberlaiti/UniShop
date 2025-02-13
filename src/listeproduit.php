@@ -195,6 +195,7 @@
         {
             if (e.key === 'Enter') 
             {
+                e.preventDefault();
                 search(searchbar.value);
             }
         });
@@ -269,20 +270,24 @@
 
             $query->execute();
 
+            echo"<div class='temp'>";
             foreach ($query as $item) {
                 echo "<div class='product' data-price='" . $item['prix'] . "'>
                         <section id='" . $item['idProduit'] . "' onclick='getid(this.id)'>
                             <img src='" . $item['lien'] . "' width=100px height=100px>
-                            <p>" . $item['prix'] . "€</p>
                             <p id='namep'>" . $item['nomProduit'] . "</p>
+                            <p>" . $item['prix'] . "€</p>
                         </section>
-                        <button id='moin_" . $item['idProduit'] . "' onclick='substract(" . $item['idProduit'] . ")'>-</button>
-                        <a id='nbchoose_" . $item['idProduit'] . "'>0</a>
-                        <button id='plus_" . $item['idProduit'] . "' onclick='add(" . $item['idProduit'] . ")'>+</button>
-                        <button onclick='addToCart(" . $item['idProduit'] . ")'>🛒 Ajouter au panier</button>
+                        <section class='plmn'>
+                            <button id='moin_" . $item['idProduit'] . "' onclick='substract(" . $item['idProduit'] . ")'>-</button>
+                            <a id='nbchoose_" . $item['idProduit'] . "'>0</a>
+                            <button id='plus_" . $item['idProduit'] . "' onclick='add(" . $item['idProduit'] . ")'>+</button>
+                        </section>
+                        <button id='bcart' onclick='addToCart(" . $item['idProduit'] . ")'>Ajouter au panier</button>
                         <button onclick='addToFav(" . $item['idProduit'] . ")'>♡</button>
                       </div>";
             }
+            echo"</div>";
         ?>
     </section>
     
