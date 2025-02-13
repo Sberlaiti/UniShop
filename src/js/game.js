@@ -40,7 +40,7 @@ startButton.addEventListener('click', () => {
     const segmentAngle = 360 / totalSegments; // Angle de chaque segment
 
     setTimeout(() => {
-        const segmentIndex = Math.floor((360 - finalAngle) / segmentAngle) % totalSegments; // Index du segment final
+        const segmentIndex = Math.floor((360 - finalAngle + (segmentAngle / 2)) / segmentAngle) % totalSegments; // Index du segment final
         const shouldWin = segments[segmentIndex]; // Vérifier si le segment est gagnant
 
          // Déterminer si le joueur gagne de manière aléatoire

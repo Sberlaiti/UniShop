@@ -44,7 +44,8 @@
     </head>
 
     <body>
-        <section class="affichage_categorie">            
+        <section class="affichage_categorie">
+            <button class="position" id="left"><i class="fa fa-arrow-left"></i></button>
             <div class="bloc_categorie">
             <?php
                 //Affichage des catégories
@@ -63,6 +64,7 @@
                 }
             ?>
             </div>
+            <button class="position" id="right"><i class="fa fa-arrow-right"></i></button>
         </section>
 
         <div class="title_categories">
@@ -79,10 +81,8 @@
                             echo "<div class='produit'>";
                                 echo "<a href='pageArticle.php?idProduit=". $row_count['idProduit'] . "' id='lien_produit'>";
                                     echo "<img class='img_produit' src='" . htmlspecialchars($row_count['lien']) . "'/>";
-                                    echo "<div class='infos_produit'>";
-                                        echo "<h3 class='nomProduit'>" . htmlspecialchars($row_count['nomProduit']) . "</h3>";
-                                        echo "<a class='cartItems-infos-seller' href='produits.php?idUtilisateur=" . $row_count['idUtilisateur'] ."'><button>Vendeur: " . htmlspecialchars($row_count['pseudo']). "</button></a>";
-                                    echo "</div>";
+                                    echo "<a class='cartItems-infos-seller' href='produits.php?idUtilisateur=" . $row_count['idUtilisateur'] ."'><button>Vendeur: " . htmlspecialchars($row_count['pseudo']). "</button></a>";
+                                    echo "<h3 class='nomProduit'>" . htmlspecialchars($row_count['nomProduit']) . "</h3>";
                                     ?>
                                     <div class="average_star_rating">
                                         <?php
