@@ -4,7 +4,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-require_once('./connection/pdo-conn.php');
+require_once('./connection/pdo-conn_iut.php');
 
 // Vérifier que l'utilisateur est connecté
 if (!isset($_SESSION['user']['idUtilisateur'])) {

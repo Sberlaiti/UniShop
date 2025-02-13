@@ -252,13 +252,7 @@
                     echo "<p class=product_delivery>". "Delai de livraison: ". htmlspecialchars($produit['delayLivraison']). " Jours". "</p>";
                 ?>
             
-                <div class="product_sizes">
-                    <button class="size">XS</button>
-                    <button class="size">S</button>
-                    <button class="size">M</button>
-                    <button class="size">L</button>
-                    <button class="size">XL</button>
-                </div>
+                
 
                 <div class="action_buttons">
                     <?php

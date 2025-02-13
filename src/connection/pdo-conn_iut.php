@@ -1,7 +1,7 @@
 <?php 
-    $dbname = "p2311763";
-    $dbuser = "p2311763";
-    $dbpassword = "728965";
+    $dbname = "p2301446";
+    $dbuser = "p2301446";
+    $dbpassword = "719724";
     $dbhost = "iutdoua-web.univ-lyon1.fr";
 
     try {
