@@ -38,11 +38,12 @@ body {
 
 .pointer{
     position: absolute;
-    top: -1%;
+    top: 0%;
     left: 50%;
     transform: translateX(-50%);
     color: red;
     font-size: 40px;
+    z-index: 10;
 }
 
 .wheel{

@@ -29,8 +29,8 @@
 
                 <div class="nav">
                     <a href="others.php" class="retour"><i class="fas fa-arrow-left"></i> Others</a>
-                    <i class="breadcrumbs__crumb breadcrumbs__crumb--divider"></i>
-                    <span>Conditions générales d'utilisation</span>
+                    <span>&gt;</spac>
+                    <span class="titre_cond">Conditions générales d'utilisation</span>
                 </div>
 
                 <h1 id="cgu">Conditions générales d'utilisation - UniShop</h1>

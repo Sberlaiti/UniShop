@@ -24,32 +24,31 @@ startButton.addEventListener('click', () => {
     // Désactiver le bouton pendant que la roue tourne
     startButton.disabled = true;
 
-    // Ajout de plusieurs tours complets avant de calculer l'angle final
-    const extraSpins = 5; // Nombre de tours complets supplémentaires
-    const finalRotation = number + extraSpins * 360; // Calculer la rotation totale
+    // Rotation de la roue : ajouter 5 tours complets (5 * 360 degrés) + un angle aléatoire
+    const finalRotation = number + 1800; // 5 tours complets
 
-    // Rotation de la roue
+    // Appliquer la rotation de la roue
     wheel.style.transition = 'transform 4s ease-out';
     wheel.style.transform = "rotate(" + finalRotation + "deg)";
 
-    // Calcul de l'angle final
-    const finalAngle = finalRotation % 360; // Angle final
+    // Calcul de l'angle final (position réelle sur la roue)
+    const finalAngle = finalRotation % 360; // Angle final entre 0 et 360 degrés
     number += Math.ceil(Math.random() * 1000); // Préparation de l'angle suivant
 
     // Calcul de l'indice du segment gagnant
-    const segmentAngle = 360 / totalSegments; // Angle de chaque segment
+    const segmentAngle = 360 / totalSegments; // Angle attribué à chaque segment
 
     setTimeout(() => {
         const segmentIndex = Math.floor((360 - finalAngle + (segmentAngle / 2)) / segmentAngle) % totalSegments; // Index du segment final
         const shouldWin = segments[segmentIndex]; // Vérifier si le segment est gagnant
 
-         // Déterminer si le joueur gagne de manière aléatoire
-         const winProbability = 0.5; // Probabilité de gagner (50%)
-         const randomWin = Math.random() < winProbability;
+        // Déterminer si le joueur gagne de manière aléatoire
+        const winProbability = 0.5; // Probabilité de gagner (50%)
+        const randomWin = Math.random() < winProbability;
 
         if (shouldWin.classList.contains('winning_segment') && !hasWon && randomWin) {
             hasWon = true;
-            // Trouver le prochain segment gagnant
+            // Générer un code promo aléatoire
             const codePromo = 'UNI' + Math.floor(Math.random() * 100);
             resultat.innerHTML = "Félicitations ! Vous avez gagné un code promo : <strong>" + codePromo + "</strong>";
             startButton.disabled = true;
@@ -65,14 +64,14 @@ startButton.addEventListener('click', () => {
                     },
                     body: JSON.stringify({ codePromo })
                 })
-                .then(response =>{ 
+                .then(response => { 
                     if(!response.ok){
-                        throw new Error('Erreur lors de la requête !' + response.statusText);
+                        throw new Error('Erreur lors de la requête ! ' + response.statusText);
                     }
                     return response.json();
                 })
                 .then(data => {
-                    //console.log(data);
+                    // Affichage du message de validation
                     resultat.innerHTML = "Code promo validé !<br>";
                     startButton.disabled = true;
                     startButton.style.backgroundColor = "gray";
@@ -99,14 +98,13 @@ startButton.addEventListener('click', () => {
             },
             body: JSON.stringify({ nbCoups })
         })
-        .then(response =>{
+        .then(response => {
             if(!response.ok){
-                throw new Error('Erreur lors de la requête !' + response.statusText);
+                throw new Error('Erreur lors de la requête ! ' + response.statusText);
             }
             return response.json();
         })
         .then(data => {
-            //console.log(data);
             if(nbCoups > 0 && !hasWon){
                 startButton.disabled = false;
             }
@@ -120,5 +118,5 @@ startButton.addEventListener('click', () => {
             }
         })
         .catch(error => console.error(error));
-    }, 4000); // Attente pour terminer la rotation
+    }, 4000); // Attente de 4 secondes pour terminer la rotation
 });
