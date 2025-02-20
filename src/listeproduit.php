@@ -40,7 +40,7 @@
     </section>
 
     <section id="filtre">
-        <label for="filtre">Filtres</label>
+        <label for="filtre">Filtres:</label>
         <!--<select id="select" name="option" onchange="categorie(this)">
             <?php
                 $query = $connexion->prepare("SELECT idCategorie, nomCategorie FROM categorie");
@@ -51,7 +51,7 @@
                 }
             ?>
         </select>-->
-        <br><label for="oder">ordre :</label>
+        <br><label for="order">ordre :</label>
         <select id="order" name="order" onchange="sortProducts()">
             <option value="2">decroissant</option>
             <option value="3">croissant</option>
@@ -62,10 +62,12 @@
             $query->execute();
             $minmax = $query->fetch(PDO::FETCH_ASSOC);
             
-            echo "<p><label id='outputmin'>Prix min: " . $minmax['min'] . "</label>";
-            echo "<br><input type='range' class='min-range' min='" . $minmax['min'] . "' max='" . $minmax['max'] . "' value='" . $minmax['min'] . "' step='0.01' onchange='getMin()'>";
-            echo "<br><label id='outputmax'>Prix max: " . $minmax['max'] . "</label>";
-            echo "<br><input type='range' class='max-range' min='" . $minmax['min'] . "' max='" . $minmax['max'] . "' value='" . $minmax['max'] . "' step='0.01' onchange='getMax()'><p>";
+            echo "<p><label id='outputmin'>Prix min:</label>";
+            echo "<input type='number' min='" . $minmax['min'] . "' id='inputmin' placeholder='" . $minmax['min'] . "'></input>";
+            echo "<br><input type='range' id='slidermin' class='min-range' min='" . $minmax['min'] . "' max='" . $minmax['max'] . "' value='" . $minmax['min'] . "' step='0.01' onchange='getMin()'>";
+            echo "<br><label id='outputmax'>Prix max:</label>";
+            echo "<input type='number' max='" . $minmax['max'] . "' id='inputmax' placeholder='" . $minmax['max'] . "'></input>";
+            echo "<br><input type='range' id='slidermax' class='max-range' min='" . $minmax['min'] . "' max='" . $minmax['max'] . "' value='" . $minmax['max'] . "' step='0.01' onchange='getMax()'><p>";
         ?>
         
         <button onclick="applyFilters()">Appliquer les filtre</button>
@@ -133,6 +135,19 @@
             alert(selectedValue);
         }
 
+        document.getElementById("inputmin").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                applyMin();
+            }
+        });
+
+        function applyMin()
+        {
+            let inputElement = document.getElementById('inputmin');
+            let value = inputElement.value || inputElement.getAttribute('placeholder');
+            document.getElementById("slidermin").value=value;
+        }
+
         function getMin() 
         {
             let elementsmin = document.getElementsByClassName("min-range")[0];
@@ -146,7 +161,21 @@
                 elementsmin.value = maxValue;
             }
 
-            document.getElementById('outputmin').innerHTML = 'Prix min: ' + parseFloat(elementsmin.value).toFixed(2);
+            document.getElementById('inputmin').placeholder = parseFloat(elementsmin.value).toFixed(2);
+            document.getElementById('inputmin').value = "";
+        }
+
+        document.getElementById("inputmax").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                applyMax();
+            }
+        });
+
+        function applyMax()
+        {
+            let inputElement = document.getElementById('inputmax');
+            let value = inputElement.value || inputElement.getAttribute('placeholder');
+            document.getElementById("slidermax").value=value;
         }
 
         function getMax() 
@@ -162,7 +191,8 @@
                 elementsmax.value = minValue;
             }
 
-            document.getElementById('outputmax').innerHTML = 'Prix max: ' + parseFloat(elementsmax.value).toFixed(2);
+            document.getElementById('inputmax').placeholder = parseFloat(elementsmax.value).toFixed(2);
+            document.getElementById('inputmax').value = "";
         }
 
         function applyFilters() 

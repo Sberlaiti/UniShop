@@ -98,6 +98,36 @@ label
     margin-top: 10px;
 }
 
+label[for="filtre"]
+{
+    margin-left: 10px;
+}
+
+label[for="order"]
+{
+    margin-left: 10px;
+}
+
+#inputmin, #inputmax
+{
+    margin-left: 10px;
+    border: none;
+    background-color: transparent;
+    width: 6em;
+    font-family: 'RedHatDisplay-Bold', sans-serif;
+    font-size: 20px;
+}
+
+#inputmin::placeholder, #inputmax::placeholder
+{
+    color: black;
+}
+
+#outputmin, #outputmax, .min-range, .max-range
+{
+    margin-left: 5px;
+}
+
 #bcart
 {
     width: 9em;
