@@ -18,49 +18,65 @@
         $nomProduit = $_POST['nomProduit'];
         $prix = $_POST['prix'];
         $description = $_POST['description'];
+        $delayLivraison = $_POST['delayLivraison'];
         $categorie = $_POST['categorie'];
-
         $prixPromotion = $_POST['prixPromotion'];
 
-        // Gérer le téléchargement de l'image
-        $image_name = basename($_FILES['image']['name']);
+        $images = $_FILES['images'];
 
-        if(isset($_FILES['image']) && $_FILES['image']['error'] == 0){
-            $cible = "../articles/"; // Dossier de destination
-            $cible_file = $cible . $image_name; // Chemin de destination avec un id unique
+        // Insérer le produit dans la table des produits
+        if ($prixPromotion == null) {
+            $sqlProduct = "INSERT INTO produit (nomProduit, prix, description, idCategorie, dateCreation, idUtilisateur, delayLivraison) VALUES(?, ?, ?, ?, NOW(), ?, ?)";
+            $stmtProduct = $pdo->prepare($sqlProduct);
+            $stmtProduct->execute([$nomProduit, $prix, $description, $categorie, $_SESSION['user']['idUtilisateur'], $delayLivraison]);
+        } else {
+            $sqlProduct = "INSERT INTO produit (nomProduit, prix, prixPromotion, description, idCategorie, dateCreation, idUtilisateur, enPromotion, delayLivraison) VALUES(?, ?, ?, ?, ?, NOW(), ?, 1, ?)";
+            $stmtProduct = $pdo->prepare($sqlProduct);
+            $stmtProduct->execute([$nomProduit, $prix, $prixPromotion, $description, $categorie, $_SESSION['user']['idUtilisateur'], $delayLivraison]);
+        }
 
-            // Vérification du type de fichier
-            $imageFileType = strtolower(pathinfo($cible_file, PATHINFO_EXTENSION));
-            $allowed_type = ['jpg', 'jpeg', 'png'];
-            if(!in_array($imageFileType, $allowed_type)) {
-                echo "Fichier non accepté.";
-            } else {
-                if(move_uploaded_file($_FILES['image']['tmp_name'], $cible_file)) {
-                    // Insérer l'image dans la table des images
-                    $sqlImage = "INSERT INTO image (lien) VALUES(?)";
-                    $stmtImage = $pdo->prepare($sqlImage);
-                    $stmtImage->execute([$cible_file]);
-                    
-                    // Récupérer l'ID de l'image insérée
-                    $imageId = $pdo->lastInsertId();
+        // Récupérer l'ID du produit inséré
+        $produitId = $pdo->lastInsertId();
 
-                    // Insérer le produit dans la table des produits
-                    if($prixPromotion == null){
-                        $sqlProduct = "INSERT INTO produit (nomProduit, prix, description, idCategorie, idImage, dateCreation, idUtilisateur) VALUES(?, ?, ?, ?, ?, NOW(), ?)";
-                        $stmtProduct = $pdo->prepare($sqlProduct);
-                        $stmtProduct->execute([$nomProduit, $prix, $description, $categorie, $imageId, $_SESSION['user']['idUtilisateur']]);
+        for($i = 0; $i < count($images['name']); $i++){
+            $image_name = basename($images['name'][$i]);
+
+            if ($images['error'][$i] == 0) {
+                $cible = "../articles/"; // Dossier de destination
+                $cible_file = $cible . $image_name; // Chemin de destination avec un id unique
+    
+                // Vérification du type de fichier
+                $imageFileType = strtolower(pathinfo($cible_file, PATHINFO_EXTENSION));
+                $allowed_type = ['jpg', 'jpeg', 'png'];
+                if (!in_array($imageFileType, $allowed_type)) {
+                    echo "Fichier non accepté.";
+                } 
+                else {
+                    if (move_uploaded_file($images['tmp_name'][$i], $cible_file)) {
+                        // Insérer l'image dans la table des images
+                        $sqlImage = "INSERT INTO image (lien, idProduit) VALUES(?, ?)";
+                        $stmtImage = $pdo->prepare($sqlImage);
+                        $stmtImage->execute([$cible_file, $produitId]);
+                    } else {
+                        echo "Erreur lors du téléchargement de l'image.";
                     }
-                    else{
-                        $sqlProduct = "INSERT INTO produit (nomProduit, prix, prixPromotion, description, idCategorie, idImage, dateCreation, idUtilisateur, enPromotion) VALUES(?, ?, ?, ?, ?, ?, NOW(), ?, 1)";
-                        $stmtProduct = $pdo->prepare($sqlProduct);
-                        $stmtProduct->execute([$nomProduit, $prix, $prixPromotion, $description, $categorie, $imageId, $_SESSION['user']['idUtilisateur']]);
-                    }
-                }
-                else{
-                    echo "Erreur";
                 }
             }
         }
+
+        $idImage = $pdo->lastInsertId();
+
+        if($idImage != null){
+            $sql = "UPDATE produit SET idImage = ? WHERE idProduit = ?";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$idImage, $produitId]);
+        }
+
+        //Stockage du message de confirmation
+        $_SESSION['message'] = "Le produit a été créé avec succès.";
+
+        header("Location: ./index.php");
+        exit();
     }
 ?>
 <!DOCTYPE html>
@@ -73,61 +89,72 @@
     </head>
 
     <body>
-        <h1 class="title_autres">Création d'un produit</h1>
         <?php
             if($utilisateur['estVendeur'] == 1){
                 ?>
-                <section class="main_bloc">
-                    
+                <p id="description">INFORMATION : Vous devez ajouter au plus 3 images pour le produit à vendre et vous pouvez en ajouter jusqu'à 5.</p>
+                <?php
+            }
+        ?>
+        <section class="main_bloc">
+            <h1 class="title_autres">Création d'un produit</h1>
+        <?php
+            if($utilisateur['estVendeur'] == 1){
+                ?>                    
                     <div class="bloc_affichage">
                         <form action="creation.php" method="POST" enctype="multipart/form-data">
-                            <div class="bloc">
-                                <label for="nomProduit">Nom du produit</label>
-                                <input type="text" id="nomProduit" name="nomProduit" required>
-                            </div>
-
-                            <div class="bloc">
-                                <label for="prix">Prix</label>
-                                <input type="number" id="prix" name="prix" required>
-                            </div>
+                            <input type="text" id="nomProduit" name="nomProduit" class="input" placeholder="Nom du produit" required>
+                            
+                            <input type="number" id="prix" name="prix" class="input" placeholder="Prix du produit" required>
+                            <span id="priceError" style="color: red; display: none;">Le prix promotionnel doit être inférieur au prix normal et positive.</span>
 
                             <?php
                                 if($utilisateur['admin'] == 1){
                                     ?>
-                                    <div class="bloc">
-                                        <label for="prixPromotion">Prix en promotion</label>
-                                        <input type="number" id="prixPromotion" name="prixPromotion">
-                                    </div>
+                                    <input type="number" id="prixPromotion" name="prixPromotion" placeholder="Prix du produit en promotion (optionnel)" class="input">
+                                    <span id="promotionError" style="color: red; display: none;">Le prix promotionnel doit être inférieur au prix normal et positive.</span>
                                     <?php
                                 }
                             ?>
+            
+                            <textarea id="message" name="description" required placeholder="Description du produit"></textarea>
 
-                            <div class="bloc">
-                                <label for="description">Description</label>
-                                <textarea id="description" name="description" required></textarea>
-                            </div>
+                            <input type="number" id="delayLivraison" name="delayLivraison" class="input" placeholder="Délai de livraison" required>
 
-                            <div class="bloc">
-                                <label for="categorie">Catégorie</label>
-                                <select id="categorie" name="categorie" required>
+                            <select id="categorie" name="categorie" required>
+                                <?php
+                                    $sql = "SELECT idCategorie, nomCategorie FROM categorie";
+                                    $stmt = $pdo->query($sql);
+                                    $categories = $stmt->fetchAll();
+
+                                    foreach($categories as $categorie){
+                                        echo "<option value='" . $categorie['idCategorie'] . "'>" . $categorie['nomCategorie'] . "</option>";
+                                    }
+                                ?>
+                            </select>
+                                
+                            <input type="file" id="image" name="images[]" class="inputImage" required multiple>
+                            
+                            <button type="submit" class="envoyer">Créer produit</button>
+
+                            <div id="confirmationModal" class="modal">
+                                <div class="modal-content">
+                                    <span class="close">&times;</span>
+                                    <h2>Êtes-vous sur des informations du produit ?</h2>
+                                    <p><strong>Nom du produit :</strong> <span id="confirmNomProduit"></span></p>
+                                    <p><strong>Description :</strong> <span id="confirmDescription"></span></p>
+                                    <p><strong>Prix :</strong> <span id="confirmPrix"></span></p>
+                                    <p><strong>Délai de livraison :</strong> <span id="confirmDelayLivraison"></span></p>
                                     <?php
-                                        $sql = "SELECT idCategorie, nomCategorie FROM categorie";
-                                        $stmt = $pdo->query($sql);
-                                        $categories = $stmt->fetchAll();
-
-                                        foreach($categories as $categorie){
-                                            echo "<option value='" . $categorie['idCategorie'] . "'>" . $categorie['nomCategorie'] . "</option>";
+                                        if($utilisateur['admin'] == 1 && isset($_POST['prixPromotion'])){
+                                            ?>
+                                            <p><strong>Prix Promotionnel :</strong> <span id="confirmPrixPromotion"></span></p>
+                                            <?php
                                         }
                                     ?>
-                                </select>
+                                    <button type="submit" name="creation" class="confirm_button">Confirmer</button>
+                                </div>
                             </div>
-
-                            <div class="bloc">
-                                <label for="image">Image</label>
-                                <input type="file" id="image" name="image" required>
-                            </div>
-                            
-                            <button type="submit" name="creation">Créer produit</button>
                         </form>
                     </div>
                 </section>
@@ -136,5 +163,11 @@
                 echo "<h1>Vous n'êtes pas autorisé à accéder à cette page.</h1>";
             }
         ?>
+
+        <footer>
+            <?php require_once("footer.php"); ?>
+        </footer>
+
+        <script src="./js/creation.js"></script>
     </body>
 </html>

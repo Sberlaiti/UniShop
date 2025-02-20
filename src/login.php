@@ -27,7 +27,7 @@
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
         $pseudo = $_POST['pseudo'];
     
-        switch (createUser($firstname, $lastname, $email, $password, $pseudo, $pdo)) {
+        switch (createUser($lastname, $firstname, $email, $password, $pseudo, $pdo)) {
             case -1:
                 $signUP_error = -1;
                 break;

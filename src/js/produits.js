@@ -40,14 +40,6 @@ if(!document.querySelector(".produitUser")){
     document.addEventListener("DOMContentLoaded", choixClasse);
 }
 
-// const produitUser = document.querySelector(".produitUser");
-// if(produitUser && document.querySelector(".no_produit")){
-//     produitUser.style.display = "block";
-//     document.querySelector(".no_produit").style.marginTop = "0";
-//     produitUser.style.marginTop = "3.5cm";
-//     produitUser.style.marginBottom = "5.2cm";
-// }
-
 
 // Fonction pour changer l'url en fonction de la catégorie sélectionnée
 document.querySelectorAll('input[name="categorie"]').forEach(function(radio) {

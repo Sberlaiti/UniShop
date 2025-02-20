@@ -44,6 +44,15 @@
     </head>
 
     <body>
+        <?php
+            // Afficher le message de confirmation s'il existe
+            if(isset($_SESSION['message'])){
+                echo "<div class='confirmation_message'>" . $_SESSION['message'] . "</div>";
+                // Supprimer le message de confirmation de la session
+                unset($_SESSION['message']);
+            }
+        ?>
+
         <section class="affichage_categorie">
             <button class="position" id="left"><i class="fa fa-arrow-left"></i></button>
             <div class="bloc_categorie">

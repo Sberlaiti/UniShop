@@ -80,3 +80,20 @@ document.addEventListener('DOMContentLoaded', () => {
         blocCategorie.scrollLeft += 300;
     });
 });
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const messagePanier = document.querySelector('.confirmation_message');
+    // Fonction pour afficher le message
+    function showMessage() {
+        if (messagePanier) {
+            messagePanier.classList.add('show');
+            setTimeout(() => {
+                messagePanier.classList.remove('show');
+            }, 3000); // Masquer après 3 secondes
+        }
+    }
+
+    // Appeler la fonction pour afficher le message (par exemple, après l'ajout au panier)
+    showMessage();
+});
