@@ -23,6 +23,15 @@ body
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
+.product input
+{
+    border: none;
+    font-family: 'RedHatDisplay-Bold', sans-serif;
+    text-align: center;
+    font-size: 22px;
+    width: 50px;
+}
+
 .temp
 {
     background-color: rgb(255, 255, 255);
@@ -152,4 +161,10 @@ label[for="order"]
 #header
 {
     grid-column: 1 / 3;
+}
+
+input[type="number"]::-webkit-inner-spin-button, 
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }

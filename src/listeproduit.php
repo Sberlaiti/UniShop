@@ -52,7 +52,7 @@
             ?>
         </select>-->
         <br><label for="order">ordre :</label>
-        <select id="order" name="order" onchange="sortProducts()">
+        <select id="order" name="order">
             <option value="2">decroissant</option>
             <option value="3">croissant</option>
         </select>
@@ -87,19 +87,19 @@
 
         function add(productId) {
             const counter = document.getElementById(`nbchoose_${productId}`);
-            let val = parseInt(counter.textContent);
+            let val = parseInt(counter.value);
             if (val < 99) {
                 val++;
-                counter.textContent = val;
+                counter.value = val; // Mettre à jour la valeur
             }
         }
 
         function substract(productId) {
             const counter = document.getElementById(`nbchoose_${productId}`);
-            let val = parseInt(counter.textContent);
+            let val = parseInt(counter.value);
             if (val > 0) {
                 val--;
-                counter.textContent = val;
+                counter.value = val;
             }
         }
 
@@ -218,6 +218,8 @@
 
             temp=document.getElementById("order");
             console.log(temp.value);
+
+            sortProducts();
         }
 
         searchbar=document.querySelector("input");
@@ -258,7 +260,13 @@
 
         function addToCart(productId) {
             const counter = document.getElementById(`nbchoose_${productId}`);
-            let nbSelected = parseInt(counter.textContent);
+            let nbSelected = parseInt(counter.value);
+            if (nbSelected < 0) {
+                nbSelected=0;
+            }
+            if (nbSelected > 99) {
+                nbSelected=99;
+            }
             idUser;
             idCart;
 
@@ -300,24 +308,25 @@
 
             $query->execute();
 
-            echo"<div class='temp'>";
-            foreach ($query as $item) {
-                echo "<div class='product' data-price='" . $item['prix'] . "'>
-                        <section id='" . $item['idProduit'] . "' onclick='getid(this.id)'>
-                            <img src='" . $item['lien'] . "' width=100px height=100px>
-                            <p id='namep'>" . $item['nomProduit'] . "</p>
-                            <p>" . $item['prix'] . "€</p>
-                        </section>
-                        <section class='plmn'>
-                            <button id='moin_" . $item['idProduit'] . "' onclick='substract(" . $item['idProduit'] . ")'>-</button>
-                            <a id='nbchoose_" . $item['idProduit'] . "'>0</a>
-                            <button id='plus_" . $item['idProduit'] . "' onclick='add(" . $item['idProduit'] . ")'>+</button>
-                        </section>
-                        <button id='bcart' onclick='addToCart(" . $item['idProduit'] . ")'>Ajouter au panier</button>
-                        <button onclick='addToFav(" . $item['idProduit'] . ")'>♡</button>
-                      </div>";
-            }
-            echo"</div>";
+            echo "<div class='temp'>";
+                foreach ($query as $item) {
+                    echo "<div class='product' data-price='" . $item['prix'] . "' onclick='getid(this.id)'>
+                            <section id='" . $item['idProduit'] . "'>
+                                <img src='" . $item['lien'] . "' width=100px height=100px>
+                                <p id='namep'>" . $item['nomProduit'] . "</p>
+                                <p>" . $item['prix'] . "€</p>
+                            </section>
+                            <section class='plmn'>
+                                <button id='moin_" . $item['idProduit'] . "' onclick='event.stopPropagation(); substract(" . $item['idProduit'] . ")'>-</button>
+                                <input type='number' id='nbchoose_" . $item['idProduit'] . "' value='0' min='0' max='99' onclick='event.stopPropagation()'>
+                                <button id='plus_" . $item['idProduit'] . "' onclick='event.stopPropagation(); add(" . $item['idProduit'] . ")'>+</button>
+                            </section>
+                            <button id='bcart' onclick='event.stopPropagation(); addToCart(" . $item['idProduit'] . ")'>Ajouter au panier</button>
+                        </div>";
+                }
+            echo "</div>";
+
+
         ?>
     </section>
     
