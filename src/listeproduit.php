@@ -51,7 +51,7 @@
                 }
             ?>
         </select>-->
-        <br><label for="order">ordre :</label>
+        <br><label for="order">Prix :</label>
         <select id="order" name="order">
             <option value="2">decroissant</option>
             <option value="3">croissant</option>
@@ -90,7 +90,7 @@
             let val = parseInt(counter.value);
             if (val < 99) {
                 val++;
-                counter.value = val; // Mettre à jour la valeur
+                counter.value = val;
             }
         }
 
@@ -217,9 +217,9 @@
             });
 
             temp=document.getElementById("order");
-            console.log(temp.value);
 
             sortProducts();
+            localStorage.removeItem("searchQuery");
         }
 
         searchbar=document.querySelector("input");
@@ -290,6 +290,16 @@
                 }
             });
         }
+        
+        //attent que la page soit charger pour executer ces ligne
+        document.addEventListener("DOMContentLoaded", function () {
+            console.log(localStorage.getItem('searchQuery'));
+            
+            if (localStorage.getItem('searchQuery') !== null) {
+                search(localStorage.getItem('searchQuery'));
+            }
+        });
+
     </script>
     
     <section id="prod">
