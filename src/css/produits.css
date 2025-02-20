@@ -25,7 +25,7 @@ body{
 /* Partie affichage des produits */
 #affichage_produit{
     padding: 2em;
-    border-radius: 0.5cm; 
+    border-radius: 0.5cm;
     margin: 0 auto;
 }
 
@@ -52,6 +52,8 @@ body{
 
 .nomProduit{
     width: 150px;
+    margin-bottom: 0;
+    margin-top: 10px;
 }
 
 .img_produit{/* Taille de l'image de l'article*/
@@ -65,7 +67,7 @@ a, #lien_produit{
 }
 
 .cartItems-infos-seller {
-    margin-left: 5px;
+    margin-top: 5px;
 }
 
 .cartItems-infos-seller button:hover{
@@ -85,15 +87,9 @@ a, #lien_produit{
     transition: background-color 0.5s ease;
 }
 
-.infos_produit{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding-top: 1em;
-}
-
 .prix_produit{
     margin: 0;
+    margin-top: auto;
 }
 
 #lien_produit h3{
@@ -119,6 +115,7 @@ a, #lien_produit{
     cursor: pointer;
     transition: 0.5s;
     font-weight: bold;
+    margin-top: auto;
 }
 
 .ajout_panier:hover{
@@ -129,9 +126,15 @@ a, #lien_produit{
     transition: 0.5s;
 }
 
+.produit{
+    display: flex;
+    flex-direction: column;
+}
+
 .average_star_rating{
     display: flex;
     align-items: center;
+    margin-top: auto;
 }
 
 .star{
@@ -146,6 +149,8 @@ a, #lien_produit{
     margin-left: 10px;
     font-size: 10px;
     color: #828080;
+    margin-bottom: 0;
+    margin-top: 0;
 }
 
 del{

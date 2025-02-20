@@ -30,6 +30,12 @@
             </div>
 
             <div class="affichage">
+
+                <div class="nav">                    
+                    <a href="others.php" class="retour"><i class="fas fa-arrow-left"></i> Others</a>
+                    <span>&gt;</spac>
+                    <span class="titre_cond">Vos informations personnelles</span>
+                </div>
                 <h1>Vos informations personnelles - UniShop</h1>
                 <p>Chez UniShop, nous attachons une grande importance à la confidentialité et à la protection de vos informations personnelles. 
                     Que vous soyez acheteur ou vendeur particulier sur notre plateforme, nous nous engageons à garantir la sécurité et la transparence concernant l’utilisation de vos données.

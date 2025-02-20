@@ -44,7 +44,17 @@
     </head>
 
     <body>
-        <section class="affichage_categorie">            
+        <?php
+            // Afficher le message de confirmation s'il existe
+            if(isset($_SESSION['message'])){
+                echo "<div class='confirmation_message'>" . $_SESSION['message'] . "</div>";
+                // Supprimer le message de confirmation de la session
+                unset($_SESSION['message']);
+            }
+        ?>
+
+        <section class="affichage_categorie">
+            <button class="position" id="left"><i class="fa fa-arrow-left"></i></button>
             <div class="bloc_categorie">
             <?php
                 //Affichage des catégories
@@ -63,6 +73,7 @@
                 }
             ?>
             </div>
+            <button class="position" id="right"><i class="fa fa-arrow-right"></i></button>
         </section>
 
         <div class="title_categories">
@@ -80,11 +91,16 @@
                             echo "<div class='infos'>";
                                 echo "<a href='pageArticle.php?idProduit=". $row_count['idProduit'] . "' id='lien_produit'>";
                                     echo "<img class='img_produit' src='" . htmlspecialchars($row_count['lien']) . "'/>";
+<<<<<<< HEAD
                                     echo "<div class='infos_produits01'>";
                                         echo "<a class='cartItems-infos-seller' href='produits.php?idUtilisateur=" . $row_count['idUtilisateur'] ."'><button>Vendeur: " . htmlspecialchars($row_count['pseudo']). "</button></a>";
                                         echo "<h3 class='nomProduit'>" . htmlspecialchars($row_count['nomProduit']) . "</h3>";
                                         echo "</div>";
                                         echo "</div>";
+=======
+                                    echo "<a class='cartItems-infos-seller' href='produits.php?idUtilisateur=" . $row_count['idUtilisateur'] ."'><button>Vendeur: " . htmlspecialchars($row_count['pseudo']). "</button></a>";
+                                    echo "<h3 class='nomProduit'>" . htmlspecialchars($row_count['nomProduit']) . "</h3>";
+>>>>>>> saber
                                     ?>
                                     <div class="infos_produits02">
                                         <div class="average_star_rating">

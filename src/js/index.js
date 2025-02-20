@@ -49,3 +49,51 @@ userStarsForm.forEach(star => {
         star.classList.remove('filled');
     }
 });
+
+// Fonction pour le déplacement des catégories
+document.addEventListener('DOMContentLoaded', () => {
+    const affichageCategorie = document.querySelector('.affichage_categorie');
+    const left = document.querySelector('#left');
+    const right = document.querySelector('#right');
+    const blocCategorie = document.querySelector('.bloc_categorie');
+
+    const content = blocCategorie.innerHTML;
+    blocCategorie.innerHTML += content; // Dupliquer le contenu
+
+    affichageCategorie.addEventListener('mouseover', () => {
+        left.style.display = 'block';
+        right.style.display = 'block';
+        blocCategorie.style.animationPlayState = 'paused'; // Arrêter l'animation
+    });
+
+    affichageCategorie.addEventListener('mouseout', () => {
+        left.style.display = 'none';
+        right.style.display = 'none';
+        blocCategorie.style.animationPlayState = 'running'; // Reprendre l'animation
+    });
+
+    left.addEventListener('click', () => {
+        blocCategorie.scrollLeft -= 300;
+    });
+
+    right.addEventListener('click', () => {
+        blocCategorie.scrollLeft += 300;
+    });
+});
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const messagePanier = document.querySelector('.confirmation_message');
+    // Fonction pour afficher le message
+    function showMessage() {
+        if (messagePanier) {
+            messagePanier.classList.add('show');
+            setTimeout(() => {
+                messagePanier.classList.remove('show');
+            }, 3000); // Masquer après 3 secondes
+        }
+    }
+
+    // Appeler la fonction pour afficher le message (par exemple, après l'ajout au panier)
+    showMessage();
+});

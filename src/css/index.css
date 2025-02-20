@@ -4,6 +4,26 @@ body{
     font-family: 'RedHatDisplay-Bold', sans-serif;
 }
 
+/* Partie affichage du message de confirmation */
+.confirmation_message {
+    display: none; /* Masquer par défaut */
+    background-color: #ffbf66; /* Couleur de fond */
+    color: black; /* Couleur du texte */
+    padding: 15px; /* Espacement interne */
+    position: fixed; /* Position fixe */
+    right: 20px; /* Position à droite */
+    z-index: 1000; /* Au-dessus des autres éléments */
+    border-radius: 5px; /* Coins arrondis */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* Ombre */
+    transition: opacity 0.5s ease; /* Transition pour l'opacité */
+}
+
+.confirmation_message.show {
+    display: block; /* Afficher le message */
+    opacity: 1; /* Opacité pleine */
+}
+/* Fin de la partie affichage du message de confirmation */
+
 /* Partie affichage des produits */
 #affichage_produit{
     background-color: white;
@@ -40,10 +60,21 @@ body{
 
 .nomProduit{
     width: 150px;
+    margin-bottom: 0;
+    margin-top: 10px;
+}
+
+.produit{
+    display: flex;
+    flex-direction: column;
 }
 
 .cartItems-infos-seller {
+<<<<<<< HEAD
     margin-bottom: 10px;
+=======
+    margin-top: 5px;
+>>>>>>> saber
 }
 
 .cartItems-infos-seller button:hover{
@@ -79,6 +110,7 @@ a{
 
 .prix_produit{
     margin: 0;
+    margin-top: auto;
 }
 
 #lien_produit h3{
@@ -128,6 +160,7 @@ a, #lien_produit{
 .average_star_rating{
     display: flex;
     align-items: center;
+    margin-top: auto;
 }
 
 .star{
@@ -142,6 +175,8 @@ a, #lien_produit{
     margin-left: 10px;
     font-size: 10px;
     color: #828080;
+    margin-bottom: 0;
+    margin-top: 0;
 }
 
 del{
@@ -213,7 +248,7 @@ del{
     justify-content: center;
     align-items: center;
     animation: scroll 20s linear infinite;
-    white-space: nowrap;
+    scroll-behavior: smooth;
 }
 
 .bloc_categorie:hover{
@@ -225,7 +260,7 @@ del{
         transform: translateX(0%);
     }
     100%{
-        transform: translateX(-50%);
+        transform: translateX(-100%);
     }
 }
 
@@ -270,5 +305,31 @@ del{
     background-color: orange;
     padding: 1em;
     border-radius: 0.2cm;
+}
+
+.position{
+    position: absolute;
+    display: none;
+    background-color: orange;
+    border: none;
+    border-radius: 2cm;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 1em;
+    cursor: pointer;
+    z-index: 10; /*Pour que le bouton soit au dessus des autres éléments*/
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.position:hover{
+    background-color: #ffbf66;
+}
+
+#left{
+    left: 5px;
+}
+
+#right{
+    right: 5px;
 }
 /*Fin partie affichage des catégories*/

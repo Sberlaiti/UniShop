@@ -84,6 +84,38 @@
                         <p>Consultez les droits sur les informations personnelles dont vous disposez.</p>
                     </div>
                 </a>
+
+                <?php
+                    if($_SESSION['user'] != null){
+                        $requete = "SELECT estVendeur, admin FROM utilisateur WHERE idUtilisateur = ?";
+                        $stmt = $pdo->prepare($requete);
+                        $stmt->execute([$_SESSION['user']['idUtilisateur']]);
+                        $utilisateur = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                        if($utilisateur['admin'] == 1 || $utilisateur['estVendeur'] == 1){
+                            ?>
+                            <a class="lien_service" href="creation.php">
+                                <div class="bloc">
+                                    <img src="./images/conditions.png" alt="Contact" class="logo">
+                                    <h3>Création d'un produit</h3>
+                                    <p>Consultez les droits sur les informations personnelles dont vous disposez.</p>
+                                </div>
+                            </a>
+                            <?php
+                        }
+                    }
+                    else{
+                        ?>
+                        <a class="lien_service" href="login.php">
+                                <div class="bloc">
+                                    <img src="./images/conditions.png" alt="Contact" class="logo">
+                                    <h3>Création d'un produit</h3>
+                                    <p>Consultez les droits sur les informations personnelles dont vous disposez.</p>
+                                </div>
+                            </a>
+                        <?php
+                    }
+                ?>
             </div>
         </section>
 

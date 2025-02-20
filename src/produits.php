@@ -66,7 +66,6 @@
     </head>
 
     <body>
-        <br>
         <?php if (!isset($_GET['idUtilisateur'])){ ?>
             <section class="main_section">
                 <section id="liste_categories">
@@ -97,8 +96,6 @@
                     ?>
                 </section>
 
-                <br>
-
                 <section class="affichage_produit affichage_produit2 affichage_produit3" id="affichage_produit">
                     <?php
                         if(isset($_GET['idCategorie']) && $_GET['idCategorie'] != "0"){
@@ -125,14 +122,12 @@
                         }
 
                         if(count($produits) > 0){
-                            foreach($produits as $row_count){              
+                            foreach($produits as $row_count){
                                 echo "<div class='produit'>";
                                     echo "<a href='pageArticle.php?idProduit=". $row_count['idProduit'] . "' id='lien_produit'>";
                                         echo "<img class='img_produit' src='" . htmlspecialchars($row_count['lien']) . "'/>";
-                                        echo "<div class='infos_produit'>";
-                                            echo "<h3 class='nomProduit'>" . htmlspecialchars($row_count['nomProduit']) . "</h3>";
-                                            echo "<a class='cartItems-infos-seller' href='produits.php?idUtilisateur=". $row_count['idUtilisateur']."'><button>Vendeur: " . htmlspecialchars($row_count['pseudo']). "</button></a>";
-                                        echo "</div>";
+                                        echo "<a class='cartItems-infos-seller' href='produits.php?idUtilisateur=". $row_count['idUtilisateur']."'><button>Vendeur: " . htmlspecialchars($row_count['pseudo']). "</button></a>";
+                                        echo "<h3 class='nomProduit'>" . htmlspecialchars($row_count['nomProduit']) . "</h3>";
                                         ?>
                                         <div class="average_star_rating">
                                             <?php
