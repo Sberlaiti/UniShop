@@ -28,16 +28,8 @@ body{
 #affichage_produit{
     background-color: white;
     justify-self: center;
-    padding: 10px 35px 10px 35px;
+    padding: 2em;
     border-radius: 0.5cm;
-}
-
-.produit {  
-    height: 340px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 20px;
 }
 
 .affichage_produit{
@@ -55,7 +47,7 @@ body{
 .affichage_produit3{
     display: grid;
     grid-template-areas: "div div div";
-    gap: 30px;
+    gap: 20px;
 }
 
 .nomProduit{
@@ -90,10 +82,11 @@ body{
     cursor: pointer;
 }
 
-.infos_produits01{
+.infos_produit{
     display: flex;
-    flex-direction: column;
-    margin-top: 10px;
+    flex-direction: row;
+    align-items: center;
+    padding-top: 1em;
 }
 
 a{
@@ -101,7 +94,7 @@ a{
 }
 
 .voir_plus{
-    margin-bottom: 15px;
+    margin-top: 15px;
 }
 
 .prix_produit{
@@ -280,10 +273,6 @@ del{
 .nom_categorie{
     font-size: 140%;
     margin-bottom: 0;
-}
-
-.nomProduit {
-    margin: 0px
 }
 
 .image_categorie{/* Taille de l'image de la catégorie*/
