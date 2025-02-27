@@ -38,7 +38,7 @@
                         ?>
                         <div class="bloc">
                             <a class="lien_service" href="login.php">
-                                <i class="logo_service fa-user"></i>
+                                <i class="fa-solid fa-user logo_compte"></i>
                                 <h3>Mon compte</h3>
                                 <p>Consultez votre profil et vos informations personnelles.</p>
                             </a>
@@ -96,24 +96,13 @@
                             ?>
                             <a class="lien_service" href="creation.php">
                                 <div class="bloc">
-                                    <img src="./images/conditions.png" alt="Contact" class="logo">
+                                    <img src="../logos/logo-png.png" alt="Contact" class="logo_service">
                                     <h3>Création d'un produit</h3>
-                                    <p>Consultez les droits sur les informations personnelles dont vous disposez.</p>
+                                    <p>Rejoignez-nous et commencez à vendre vos produits dès aujourd'hui !</p>
                                 </div>
                             </a>
                             <?php
                         }
-                    }
-                    else{
-                        ?>
-                        <a class="lien_service" href="login.php">
-                                <div class="bloc">
-                                    <img src="./images/conditions.png" alt="Contact" class="logo">
-                                    <h3>Création d'un produit</h3>
-                                    <p>Consultez les droits sur les informations personnelles dont vous disposez.</p>
-                                </div>
-                            </a>
-                        <?php
                     }
                 ?>
             </div>

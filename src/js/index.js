@@ -50,46 +50,49 @@ userStarsForm.forEach(star => {
     }
 });
 
-// Fonction pour le déplacement des catégories
+// Fonction pour le déplacement des catégories ne fonctionne pas
+// document.addEventListener('DOMContentLoaded', () => {
+//     const affichageCategorie = document.querySelector('.affichage_categorie');
+//     const left = document.getElementById('left');
+//     const right = document.getElementById('right');
+//     const blocCategorie = document.querySelector('.bloc_categorie');
+
+//     affichageCategorie.addEventListener('mouseover', () => {
+//         left.style.display = 'flex';
+//         right.style.display = 'flex';
+//         blocCategorie.style.animationPlayState = 'paused'; // Arrêter l'animation
+//     });
+
+//     affichageCategorie.addEventListener('mouseout', () => {
+//         left.style.display = 'none';
+//         right.style.display = 'none';
+//         blocCategorie.style.animationPlayState = 'running'; // Reprendre l'animation
+//     });
+
+//     left.addEventListener('click', () => {
+//         blocCategorie.scrollBy({
+//             left: -200,
+//             behavior: 'smooth'
+//         })
+//     });
+
+//     right.addEventListener('click', () => {
+//         blocCategorie.scrollBy({
+//             left: 200,
+//             behavior: 'smooth'
+//         })
+//     });
+// });
+
+
 document.addEventListener('DOMContentLoaded', () => {
-    const affichageCategorie = document.querySelector('.affichage_categorie');
-    const left = document.querySelector('#left');
-    const right = document.querySelector('#right');
-    const blocCategorie = document.querySelector('.bloc_categorie');
-
-    const content = blocCategorie.innerHTML;
-    blocCategorie.innerHTML += content; // Dupliquer le contenu
-
-    affichageCategorie.addEventListener('mouseover', () => {
-        left.style.display = 'block';
-        right.style.display = 'block';
-        blocCategorie.style.animationPlayState = 'paused'; // Arrêter l'animation
-    });
-
-    affichageCategorie.addEventListener('mouseout', () => {
-        left.style.display = 'none';
-        right.style.display = 'none';
-        blocCategorie.style.animationPlayState = 'running'; // Reprendre l'animation
-    });
-
-    left.addEventListener('click', () => {
-        blocCategorie.scrollLeft -= 300;
-    });
-
-    right.addEventListener('click', () => {
-        blocCategorie.scrollLeft += 300;
-    });
-});
-
-
-document.addEventListener('DOMContentLoaded', () => {
-    const messagePanier = document.querySelector('.confirmation_message');
+    const messageProduit = document.querySelector('.confirmation_message');
     // Fonction pour afficher le message
     function showMessage() {
-        if (messagePanier) {
-            messagePanier.classList.add('show');
+        if (messageProduit) {
+            messageProduit.classList.add('show');
             setTimeout(() => {
-                messagePanier.classList.remove('show');
+                messageProduit.classList.remove('show');
             }, 3000); // Masquer après 3 secondes
         }
     }

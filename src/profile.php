@@ -16,6 +16,11 @@
     <title>Profile</title>
 </head>
 <body>
+    <div class="nav">
+        <a href="others.php" class="retour"><i class="fas fa-arrow-left"></i> Others</a>
+        <span>&gt;</spac>
+        <span class="titre_cond">Profil</span>
+    </div>
     <div class="container_Profile">
         <?php if($_SESSION['user'] != null) { ?>
         <div class="container_Menu">

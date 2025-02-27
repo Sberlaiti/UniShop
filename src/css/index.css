@@ -223,6 +223,8 @@ del{
 
 /*Partie affichage des catégories*/
 .affichage_categorie{
+    display: flex;
+    align-items: center;
     background-color: rgb(238, 225, 225);
     white-space: nowrap;
     position: relative;
@@ -234,10 +236,8 @@ del{
 
 .bloc_categorie{
     display: flex;
-    justify-content: center;
-    align-items: center;
     animation: scroll 20s linear infinite;
-    scroll-behavior: smooth;
+    min-width: max-content;
 }
 
 .bloc_categorie:hover{
@@ -245,11 +245,11 @@ del{
 }
 
 @keyframes scroll{
-    0%{
-        transform: translateX(0%);
+    from {
+        transform: translateX(0);
     }
-    100%{
-        transform: translateX(-100%);
+    to {
+        transform: translateX(-50%);
     }
 }
 
@@ -263,6 +263,7 @@ del{
     margin-right: 30px;
     border: 1px solid #ffbf6600;
     padding: 1em;
+    transition: 0.3s;
 }
 
 .categorie:hover{
