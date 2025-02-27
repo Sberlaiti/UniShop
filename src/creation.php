@@ -105,21 +105,21 @@
                         <form action="creation.php" method="POST" enctype="multipart/form-data">
                             <input type="text" id="nomProduit" name="nomProduit" class="input" placeholder="Nom du produit" required>
                             
-                            <input type="number" id="prix" name="prix" class="input" placeholder="Prix du produit" required>
+                            <input type="number" id="prix" name="prix" class="input" min="0" placeholder="Prix du produit" required>
                             <span id="priceError" style="color: red; display: none;">Le prix promotionnel doit être inférieur au prix normal et positive.</span>
 
                             <?php
                                 if($utilisateur['admin'] == 1){
                                     ?>
-                                    <input type="number" id="prixPromotion" name="prixPromotion" placeholder="Prix du produit en promotion (optionnel)" class="input">
+                                    <input type="number" id="prixPromotion" name="prixPromotion" min="0" placeholder="Prix du produit en promotion (optionnel)" class="input">
                                     <span id="promotionError" style="color: red; display: none;">Le prix promotionnel doit être inférieur au prix normal et positive.</span>
                                     <?php
                                 }
                             ?>
-            
-                            <textarea id="message" name="description" required placeholder="Description du produit"></textarea>
 
-                            <input type="number" id="delayLivraison" name="delayLivraison" class="input" placeholder="Délai de livraison" required>
+                            <input type="number" id="delayLivraison" name="delayLivraison" class="input" min="0" placeholder="Délai de livraison" required>
+
+                            <textarea id="message" name="description" required placeholder="Description du produit"></textarea>
 
                             <select id="categorie" name="categorie" required>
                                 <?php
