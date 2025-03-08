@@ -20,12 +20,18 @@
         $description = $_POST['description'];
         $delayLivraison = $_POST['delayLivraison'];
         $categorie = $_POST['categorie'];
-        $prixPromotion = $_POST['prixPromotion'];
+        $prixPromotion = isset($_POST['prixPromotion']) && !empty($_POST['prixPromotion']) ? $_POST['prixPromotion'] : null;
 
         $images = $_FILES['images'];
 
+        if (count($images['name']) > 5) {
+            echo "Vous ne pouvez télécharger que 5 images maximum.";
+            exit();
+        }
+        
+
         // Insérer le produit dans la table des produits
-        if ($prixPromotion == null) {
+        if ($prixPromotion === null) {
             $sqlProduct = "INSERT INTO produit (nomProduit, prix, description, idCategorie, dateCreation, idUtilisateur, delayLivraison) VALUES(?, ?, ?, ?, NOW(), ?, ?)";
             $stmtProduct = $pdo->prepare($sqlProduct);
             $stmtProduct->execute([$nomProduit, $prix, $description, $categorie, $_SESSION['user']['idUtilisateur'], $delayLivraison]);
@@ -38,6 +44,7 @@
         // Récupérer l'ID du produit inséré
         $produitId = $pdo->lastInsertId();
 
+        $firstImageId = null;
         for($i = 0; $i < count($images['name']); $i++){
             $image_name = basename($images['name'][$i]);
 
@@ -57,6 +64,11 @@
                         $sqlImage = "INSERT INTO image (lien, idProduit) VALUES(?, ?)";
                         $stmtImage = $pdo->prepare($sqlImage);
                         $stmtImage->execute([$cible_file, $produitId]);
+
+                        // Récupérer l'ID de la première image insérée
+                        if ($firstImageId === null) {
+                            $firstImageId = $pdo->lastInsertId();
+                        }
                     } else {
                         echo "Erreur lors du téléchargement de l'image.";
                     }
@@ -64,18 +76,16 @@
             }
         }
 
-        $idImage = $pdo->lastInsertId();
-
-        if($idImage != null){
+        if($firstImageId !== null){
             $sql = "UPDATE produit SET idImage = ? WHERE idProduit = ?";
             $stmt = $pdo->prepare($sql);
-            $stmt->execute([$idImage, $produitId]);
+            $stmt->execute([$firstImageId, $produitId]);
         }
 
         //Stockage du message de confirmation
         $_SESSION['message'] = "Le produit a été créé avec succès.";
 
-        header("Location: index.php");
+        header("Location: ./index.php");
         exit();
     }
 ?>
@@ -135,7 +145,7 @@
                                 
                             <input type="file" id="image" name="images[]" class="inputImage" required multiple>
                             
-                            <button type="button" class="envoyer">Créer produit</button>
+                            <button type="submit" class="envoyer">Créer produit</button>
 
                             <div id="confirmationModal" class="modal">
                                 <div class="modal-content">
@@ -152,7 +162,7 @@
                                             <?php
                                         }
                                     ?>
-                                    <button type="button" name="creation" class="confirm_button">Confirmer</button>
+                                    <button type="submit" name="creation" class="confirm_button">Confirmer</button>
                                 </div>
                             </div>
                         </form>

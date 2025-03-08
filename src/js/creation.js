@@ -45,6 +45,14 @@ function showPromoInput() {
     document.getElementById('promo_section').style.display = 'block';
 }
 
+document.getElementById("image").addEventListener("change", function () {
+    if (this.files.length > 5) {
+        alert("Vous ne pouvez télécharger que 5 images maximum.");
+        this.value = ""; // Réinitialise le champ
+    }
+});
+
+
 function checkPromotionPrice() {
     var prix = parseFloat(document.getElementById('prix').value);
     var prixPromotionElement = document.getElementById('prixPromotion');
