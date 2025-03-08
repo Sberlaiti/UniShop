@@ -1,0 +1,32 @@
+
+***************************************************************************************
+Vidéo de projet SAE - Année 2024-2025
+---------------------------------------------------------------------------------------
+
+Titre du projet : 
+UniShop
+
+Nom/prénom du tuteur :
+Cristophe JALOUX
+
+
+Nom/prénom des membres du groupe : 
+LAITI BEN AYYAD Saber
+EL HABACHI Ilyas
+TROTOBAS Quentin
+RANDRIANOMENJANAHARY Andry
+
+
+Brève description du projet :
+Site de vente et de revente en ligne qui permet aux utilisateurs
+d'acheter ce dont ils souhaitent.
+
+
+Nom de fichier de la vidéo :
+SAE_3_2024_UniShop_SB_IH_QT_AR_CJ.mp4
+
+
+Durée de la vidéo : 
+3:00
+
+

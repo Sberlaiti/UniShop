@@ -350,9 +350,6 @@ CREATE TABLE IF NOT EXISTS `promotion` (
 -- Dumping data for table `promotion`
 --
 
-INSERT INTO `promotion` (`idPromo`, `codePromo`, `coefficient`, `idUtilisateur`) VALUES
-(14, 'UNI15', 15.00, 3337);
-
 -- --------------------------------------------------------
 
 --

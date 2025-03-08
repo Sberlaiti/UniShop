@@ -21,7 +21,7 @@ function showConfirmation(event) {
     document.getElementById('confirmPrix').innerText = document.getElementById('prix').value;
     document.getElementById('confirmDelayLivraison').innerText = document.getElementById('delayLivraison').value;
 
-    if(document.getElementById('prixPromotion').value != "") {
+    if(document.getElementById('prixPromotion')) {
         document.getElementById('confirmPrixPromotion').innerText = document.getElementById('prixPromotion').value;
     }
     // Afficher la modale
@@ -37,7 +37,7 @@ document.querySelector('.close').addEventListener('click', closeModal);
 
 function submitForm() {
     // Soumettre le formulaire
-    document.getElementById('modifForm').submit();
+    document.getElementById('creationForm').submit();
 }
 document.querySelector('.confirm_button').addEventListener('click', submitForm);
 
@@ -47,10 +47,11 @@ function showPromoInput() {
 
 function checkPromotionPrice() {
     var prix = parseFloat(document.getElementById('prix').value);
-    var prixPromotion = parseFloat(document.getElementById('prixPromotion').value);
+    var prixPromotionElement = document.getElementById('prixPromotion');
     var promotionError = document.getElementById('promotionError');
 
-    if(prixPromotion != null){
+    if (prixPromotionElement) {
+        var prixPromotion = parseFloat(prixPromotionElement.value);
         if (prixPromotion >= prix || prixPromotion < 0) {
             promotionError.style.display = 'inline';
             return false; // Prix promotionnel non valide
@@ -58,6 +59,8 @@ function checkPromotionPrice() {
             promotionError.style.display = 'none';
             return true; // Prix promotionnel valide
         }
+    } else {
+        return true; // Pas de prix promotionnel, donc valide
     }
 }
 

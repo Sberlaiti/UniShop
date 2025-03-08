@@ -75,7 +75,7 @@
         //Stockage du message de confirmation
         $_SESSION['message'] = "Le produit a été créé avec succès.";
 
-        header("Location: ./index.php");
+        header("Location: index.php");
         exit();
     }
 ?>
@@ -102,17 +102,17 @@
             if($utilisateur['estVendeur'] == 1){
                 ?>                    
                     <div class="bloc_affichage">
-                        <form action="creation.php" method="POST" enctype="multipart/form-data">
+                        <form id="creationForm" action="creation.php" method="POST" enctype="multipart/form-data">
                             <input type="text" id="nomProduit" name="nomProduit" class="input" placeholder="Nom du produit" required>
                             
                             <input type="number" id="prix" name="prix" class="input" min="0" placeholder="Prix du produit" required>
-                            <span id="priceError" style="color: red; display: none;">Le prix promotionnel doit être inférieur au prix normal et positive.</span>
+                            <span id="priceError" style="color: red; display: none;">Le prix doit être inférieur au prix normal et positif.</span>
 
                             <?php
                                 if($utilisateur['admin'] == 1){
                                     ?>
                                     <input type="number" id="prixPromotion" name="prixPromotion" min="0" placeholder="Prix du produit en promotion (optionnel)" class="input">
-                                    <span id="promotionError" style="color: red; display: none;">Le prix promotionnel doit être inférieur au prix normal et positive.</span>
+                                    <span id="promotionError" style="color: red; display: none;">Le prix promotionnel doit être inférieur au prix normal et positif.</span>
                                     <?php
                                 }
                             ?>
@@ -135,7 +135,7 @@
                                 
                             <input type="file" id="image" name="images[]" class="inputImage" required multiple>
                             
-                            <button type="submit" class="envoyer">Créer produit</button>
+                            <button type="button" class="envoyer">Créer produit</button>
 
                             <div id="confirmationModal" class="modal">
                                 <div class="modal-content">
@@ -146,13 +146,13 @@
                                     <p><strong>Prix :</strong> <span id="confirmPrix"></span></p>
                                     <p><strong>Délai de livraison :</strong> <span id="confirmDelayLivraison"></span></p>
                                     <?php
-                                        if($utilisateur['admin'] == 1 && isset($_POST['prixPromotion'])){
+                                        if($utilisateur['admin'] == 1){
                                             ?>
                                             <p><strong>Prix Promotionnel :</strong> <span id="confirmPrixPromotion"></span></p>
                                             <?php
                                         }
                                     ?>
-                                    <button type="submit" name="creation" class="confirm_button">Confirmer</button>
+                                    <button type="button" name="creation" class="confirm_button">Confirmer</button>
                                 </div>
                             </div>
                         </form>
