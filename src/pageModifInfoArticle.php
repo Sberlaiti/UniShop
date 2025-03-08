@@ -108,9 +108,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <img src="<?php echo htmlspecialchars($image['lien']); ?>" alt="Image produit" width="100">
                             </td>
                             <td>
-                                <?php echo htmlspecialchars($image['idImage']); ?>
-                            </td>
-                            <td>
                                 <input type="file" name="images[<?php echo $index; ?>]" accept="images/*" class="input_button">
                             </td>
                         </tr>
