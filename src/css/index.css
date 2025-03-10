@@ -4,20 +4,32 @@ body{
     font-family: 'RedHatDisplay-Bold', sans-serif;
 }
 
+/* Partie affichage du message de confirmation */
+.confirmation_message {
+    display: none; /* Masquer par défaut */
+    background-color: #ffbf66; /* Couleur de fond */
+    color: black; /* Couleur du texte */
+    padding: 15px; /* Espacement interne */
+    position: fixed; /* Position fixe */
+    right: 20px; /* Position à droite */
+    z-index: 1000; /* Au-dessus des autres éléments */
+    border-radius: 5px; /* Coins arrondis */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* Ombre */
+    transition: opacity 0.5s ease; /* Transition pour l'opacité */
+}
+
+.confirmation_message.show {
+    display: block; /* Afficher le message */
+    opacity: 1; /* Opacité pleine */
+}
+/* Fin de la partie affichage du message de confirmation */
+
 /* Partie affichage des produits */
 #affichage_produit{
     background-color: white;
     justify-self: center;
-    padding: 10px 35px 10px 35px;
+    padding: 2em;
     border-radius: 0.5cm;
-}
-
-.produit {  
-    height: 340px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 20px;
 }
 
 .affichage_produit{
@@ -35,15 +47,22 @@ body{
 .affichage_produit3{
     display: grid;
     grid-template-areas: "div div div";
-    gap: 30px;
+    gap: 20px;
 }
 
 .nomProduit{
     width: 150px;
+    margin-bottom: 0;
+    margin-top: 10px;
+}
+
+.produit{
+    display: flex;
+    flex-direction: column;
 }
 
 .cartItems-infos-seller {
-    margin-bottom: 10px;
+    margin-top: 5px;
 }
 
 .cartItems-infos-seller button:hover{
@@ -63,10 +82,11 @@ body{
     cursor: pointer;
 }
 
-.infos_produits01{
+.infos_produit{
     display: flex;
-    flex-direction: column;
-    margin-top: 10px;
+    flex-direction: row;
+    align-items: center;
+    padding-top: 1em;
 }
 
 a{
@@ -74,11 +94,12 @@ a{
 }
 
 .voir_plus{
-    margin-bottom: 15px;
+    margin-top: 15px;
 }
 
 .prix_produit{
     margin: 0;
+    margin-top: auto;
 }
 
 #lien_produit h3{
@@ -128,6 +149,7 @@ a, #lien_produit{
 .average_star_rating{
     display: flex;
     align-items: center;
+    margin-top: auto;
 }
 
 .star{
@@ -142,6 +164,8 @@ a, #lien_produit{
     margin-left: 10px;
     font-size: 10px;
     color: #828080;
+    margin-bottom: 0;
+    margin-top: 0;
 }
 
 del{
@@ -199,6 +223,8 @@ del{
 
 /*Partie affichage des catégories*/
 .affichage_categorie{
+    display: flex;
+    align-items: center;
     background-color: rgb(238, 225, 225);
     white-space: nowrap;
     position: relative;
@@ -210,10 +236,8 @@ del{
 
 .bloc_categorie{
     display: flex;
-    justify-content: center;
-    align-items: center;
     animation: scroll 20s linear infinite;
-    white-space: nowrap;
+    min-width: max-content;
 }
 
 .bloc_categorie:hover{
@@ -221,10 +245,10 @@ del{
 }
 
 @keyframes scroll{
-    0%{
-        transform: translateX(0%);
+    from {
+        transform: translateX(0);
     }
-    100%{
+    to {
         transform: translateX(-50%);
     }
 }
@@ -239,6 +263,7 @@ del{
     margin-right: 30px;
     border: 1px solid #ffbf6600;
     padding: 1em;
+    transition: 0.3s;
 }
 
 .categorie:hover{
@@ -249,10 +274,6 @@ del{
 .nom_categorie{
     font-size: 140%;
     margin-bottom: 0;
-}
-
-.nomProduit {
-    margin: 0px
 }
 
 .image_categorie{/* Taille de l'image de la catégorie*/
@@ -270,5 +291,31 @@ del{
     background-color: orange;
     padding: 1em;
     border-radius: 0.2cm;
+}
+
+.position{
+    position: absolute;
+    display: none;
+    background-color: orange;
+    border: none;
+    border-radius: 2cm;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 1em;
+    cursor: pointer;
+    z-index: 10; /*Pour que le bouton soit au dessus des autres éléments*/
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.position:hover{
+    background-color: #ffbf66;
+}
+
+#left{
+    left: 5px;
+}
+
+#right{
+    right: 5px;
 }
 /*Fin partie affichage des catégories*/

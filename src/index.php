@@ -44,7 +44,17 @@
     </head>
 
     <body>
-        <section class="affichage_categorie">            
+        <?php
+            // Afficher le message de confirmation s'il existe
+            if(isset($_SESSION['message'])){
+                echo "<div class='confirmation_message'>" . $_SESSION['message'] . "</div>";
+                // Supprimer le message de confirmation de la session
+                unset($_SESSION['message']);
+            }
+        ?>
+
+        <section class="affichage_categorie">
+            <button class="position" id="left"><i class="fa fa-arrow-left"></i></button>
             <div class="bloc_categorie">
             <?php
                 //Affichage des catégories
@@ -63,6 +73,7 @@
                 }
             ?>
             </div>
+            <button class="position" id="right"><i class="fa fa-arrow-right"></i></button>
         </section>
 
         <div class="title_categories">
@@ -77,46 +88,37 @@
                     foreach($produits as $row_count){
                         if($produitsAffiches < $maxProduits){              
                             echo "<div class='produit'>";
-                            echo "<div class='infos'>";
                                 echo "<a href='pageArticle.php?idProduit=". $row_count['idProduit'] . "' id='lien_produit'>";
                                     echo "<img class='img_produit' src='" . htmlspecialchars($row_count['lien']) . "'/>";
-                                    echo "<div class='infos_produits01'>";
-                                        echo "<a class='cartItems-infos-seller' href='produits.php?idUtilisateur=" . $row_count['idUtilisateur'] ."'><button>Vendeur: " . htmlspecialchars($row_count['pseudo']). "</button></a>";
-                                        echo "<h3 class='nomProduit'>" . htmlspecialchars($row_count['nomProduit']) . "</h3>";
-                                        echo "</div>";
-                                        echo "</div>";
+                                    echo "<a class='cartItems-infos-seller' href='produits.php?idUtilisateur=" . $row_count['idUtilisateur'] ."'><button>Vendeur: " . htmlspecialchars($row_count['pseudo']). "</button></a>";
+                                    echo "<h3 class='nomProduit'>" . htmlspecialchars($row_count['nomProduit']) . "</h3>";
                                     ?>
-                                    <div class="infos_produits02">
-                                        <div class="average_star_rating">
-                                            <?php
-                                            $avisProduit = array_filter($avis, function($row_avis) use ($row_count) {
-                                                return $row_avis['idProduit'] == $row_count['idProduit'];
-                                            });
-
-                                            $nombreAvis = count($avisProduit);                                    
-                                            $noteMoyenne = 0;
-                                            if ($nombreAvis > 0) {
-                                                $totalNotes = array_sum(array_column($avisProduit, 'note'));
-                                                $noteMoyenne = $totalNotes / $nombreAvis;
-                                            }
-                                            
-                                            for ($i = 1; $i <= 5; $i++) {
-                                                $filled = $i <= $noteMoyenne ? 'filled' : '';
-                                                echo "<span class='star $filled' data-value='$i'>&#9733;</span>";
-                                            }
-                                            echo "<p class='review_count'>" . $nombreAvis . ' avis' . "</p>";
-                                            ?>
-                                        </div>
+                                    <div class="average_star_rating">
                                         <?php
-                                            if ($row_count['enPromotion'] && $row_count['prixPromotion'] !== null) {
-                                                echo "<p class='prix_produit'>" . htmlspecialchars($row_count['prixPromotion']) . " € <del>" . htmlspecialchars($row_count['prix']) . " €</del></p>";
-                                            } else {
-                                                echo "<p class='prix_produit'>" . htmlspecialchars($row_count['prix']) . " €</p>";
-                                            }
+                                        $avisProduit = array_filter($avis, function($row_avis) use ($row_count) {
+                                            return $row_avis['idProduit'] == $row_count['idProduit'];
+                                        });
+
+                                        $nombreAvis = count($avisProduit);                                    
+                                        $noteMoyenne = 0;
+                                        if ($nombreAvis > 0) {
+                                            $totalNotes = array_sum(array_column($avisProduit, 'note'));
+                                            $noteMoyenne = $totalNotes / $nombreAvis;
+                                        }
+                                        
+                                        for ($i = 1; $i <= 5; $i++) {
+                                            $filled = $i <= $noteMoyenne ? 'filled' : '';
+                                            echo "<span class='star $filled' data-value='$i'>&#9733;</span>";
+                                        }
+                                        echo "<p class='review_count'>" . $nombreAvis . ' avis' . "</p>";
                                         ?>
                                     </div>
-                                    
                                     <?php
+                                    if ($row_count['enPromotion'] && $row_count['prixPromotion'] !== null) {
+                                        echo "<p class='prix_produit'>" . htmlspecialchars($row_count['prixPromotion']) . " € <del>" . htmlspecialchars($row_count['prix']) . " €</del></p>";
+                                    } else {
+                                        echo "<p class='prix_produit'>" . htmlspecialchars($row_count['prix']) . " €</p>";
+                                    }
                                 echo "</a>";
                             echo "</div>";
                             $produitsAffiches++;

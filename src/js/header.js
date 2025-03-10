@@ -2,7 +2,15 @@ const searchBar = document.querySelector('.searchBar');
 const searchButton = document.getElementById('searchButton');
 const searchInput = searchBar.querySelector('input[name="query"]');
 
-searchButton.addEventListener('click', function() {
+searchButton.addEventListener('click', handleSearch);
+searchInput.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        handleSearch();
+    }
+});
+
+function handleSearch() {
     if (searchBar.classList.contains('collapsed')) {
         searchBar.classList.remove('collapsed');
         searchBar.classList.add('expanded');
@@ -17,7 +25,8 @@ searchButton.addEventListener('click', function() {
             searchInput.style.display = 'none';
         }
     }
-});
+    localStorage.setItem("searchQuery", searchInput.value);
+}
 
 searchInput.addEventListener('blur', function() {
     if (searchInput.value.trim() === '') {

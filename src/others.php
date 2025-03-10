@@ -38,7 +38,7 @@
                         ?>
                         <div class="bloc">
                             <a class="lien_service" href="login.php">
-                                <i class="logo_service fa-user"></i>
+                                <i class="fa-solid fa-user logo_compte"></i>
                                 <h3>Mon compte</h3>
                                 <p>Consultez votre profil et vos informations personnelles.</p>
                             </a>
@@ -84,6 +84,27 @@
                         <p>Consultez les droits sur les informations personnelles dont vous disposez.</p>
                     </div>
                 </a>
+
+                <?php
+                    if($_SESSION['user'] != null){
+                        $requete = "SELECT estVendeur, admin FROM utilisateur WHERE idUtilisateur = ?";
+                        $stmt = $pdo->prepare($requete);
+                        $stmt->execute([$_SESSION['user']['idUtilisateur']]);
+                        $utilisateur = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                        if($utilisateur['admin'] == 1 || $utilisateur['estVendeur'] == 1){
+                            ?>
+                            <a class="lien_service" href="creation.php">
+                                <div class="bloc">
+                                    <img src="../logos/logo-png.png" alt="Contact" class="logo_service">
+                                    <h3>Création d'un produit</h3>
+                                    <p>Rejoignez-nous et commencez à vendre vos produits dès aujourd'hui !</p>
+                                </div>
+                            </a>
+                            <?php
+                        }
+                    }
+                ?>
             </div>
         </section>
 

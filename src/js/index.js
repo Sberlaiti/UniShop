@@ -49,3 +49,54 @@ userStarsForm.forEach(star => {
         star.classList.remove('filled');
     }
 });
+
+// Fonction pour le déplacement des catégories ne fonctionne pas
+// document.addEventListener('DOMContentLoaded', () => {
+//     const affichageCategorie = document.querySelector('.affichage_categorie');
+//     const left = document.getElementById('left');
+//     const right = document.getElementById('right');
+//     const blocCategorie = document.querySelector('.bloc_categorie');
+
+//     affichageCategorie.addEventListener('mouseover', () => {
+//         left.style.display = 'flex';
+//         right.style.display = 'flex';
+//         blocCategorie.style.animationPlayState = 'paused'; // Arrêter l'animation
+//     });
+
+//     affichageCategorie.addEventListener('mouseout', () => {
+//         left.style.display = 'none';
+//         right.style.display = 'none';
+//         blocCategorie.style.animationPlayState = 'running'; // Reprendre l'animation
+//     });
+
+//     left.addEventListener('click', () => {
+//         blocCategorie.scrollBy({
+//             left: -200,
+//             behavior: 'smooth'
+//         })
+//     });
+
+//     right.addEventListener('click', () => {
+//         blocCategorie.scrollBy({
+//             left: 200,
+//             behavior: 'smooth'
+//         })
+//     });
+// });
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const messageProduit = document.querySelector('.confirmation_message');
+    // Fonction pour afficher le message
+    function showMessage() {
+        if (messageProduit) {
+            messageProduit.classList.add('show');
+            setTimeout(() => {
+                messageProduit.classList.remove('show');
+            }, 3000); // Masquer après 3 secondes
+        }
+    }
+
+    // Appeler la fonction pour afficher le message (par exemple, après l'ajout au panier)
+    showMessage();
+});

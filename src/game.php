@@ -18,8 +18,6 @@
     </head>
 
     <body>
-        <br>
-
         <?php
             if (isset($_SESSION['user'])) {
                 $stmt = $pdo->prepare("SELECT date_gagnantPromo, date_last_played, coupPlayed FROM utilisateur WHERE idUtilisateur = ?");
@@ -77,7 +75,6 @@
                     echo "<p id='nb_coups'>Nombre de coups restants : " . $_SESSION['nb_coups'] ."</p>";
                 }
             ?>
-            <div id="point"></div>
             <div class='pointer'><i class="fa fa-arrow-down"></i></div>
             <div class='wheel' id='wheel'>
                 <div class="winning_segment" id="one">Gagnant</div>
