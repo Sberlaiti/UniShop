@@ -1,7 +1,7 @@
 <?php 
     $dbname = "unishop";
     $dbuser = "root";
-    $dbpassword = "";
+    $dbpassword = "root";
     $dbhost = "localhost";
 
     try {
