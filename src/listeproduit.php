@@ -320,6 +320,7 @@
 
             echo "<div class='temp'>";
                 foreach ($query as $item) {
+                    echo "<a href='pageArticle.php?idProduit=" . $item['idProduit'] . "'>";
                     echo "<div class='product' data-price='" . $item['prix'] . "' onclick='getid(this.id)'>
                             <section id='" . $item['idProduit'] . "'>
                                 <img src='" . $item['lien'] . "' width=100px height=100px>
@@ -333,6 +334,7 @@
                             </section>
                             <button id='bcart' onclick='event.stopPropagation(); addToCart(" . $item['idProduit'] . ")'>Ajouter au panier</button>
                         </div>";
+                    echo "</a>";
                 }
             echo "</div>";
 
